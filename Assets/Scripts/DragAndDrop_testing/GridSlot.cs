@@ -6,32 +6,56 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class GridSlot : MonoBehaviour
 {
+    [SerializeField] private bool _isFilled = false;
+    private RobberDragger _robberDragger;
     private Robber _robber;
-
-    private void Start()
-    {
-        if (_robber != null)
-        {
-            PlaceRobberInCellCenter(_robber);
-        }
-    }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Robber robber))
+        if(other.gameObject.TryGetComponent(out RobberDragger robberDragger) && _isFilled == false)
         {
-            if (robber.IsDraggingNow == false)
+            robberDragger.SetLastParentTransform(transform);
+            
+            if (robberDragger.IsDraggingNow == false)
             {
-                _robber = robber;
-                PlaceRobberInCellCenter(robber);
+                _robberDragger = robberDragger;
+                _isFilled = true;
+                PlaceRobberInCellCenter(robberDragger);
             }
         }
     }
 
-    private void PlaceRobberInCellCenter(Robber robber)
+    private void OnTriggerEnter(Collider other)
     {
-        robber.transform.SetParent(gameObject.transform);
-        robber.transform.position = transform.position;
-        Debug.Log("Robber placed in center");
+        if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
+        {
+            _robber = _robberDragger.GetComponent<Robber>();
+
+            if (_robber.Level == externalRobber.Level)
+            {
+                CombineRobbers(externalRobber);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out RobberDragger robber))
+        {
+            _robberDragger = null;
+            _isFilled = false;
+        }
+    }
+
+    private void PlaceRobberInCellCenter(RobberDragger robberDragger)
+    {
+        robberDragger.transform.SetParent(gameObject.transform);
+        robberDragger.transform.position = transform.position;
+    }
+
+    private void CombineRobbers(Robber externalRobberDragger)
+    {
+        externalRobberDragger.gameObject.SetActive(false);
+        _robber.UpgradeLevel();
     }
 }

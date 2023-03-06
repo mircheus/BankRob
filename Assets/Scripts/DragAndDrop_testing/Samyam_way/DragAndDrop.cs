@@ -38,7 +38,7 @@ public class DragAndDrop : MonoBehaviour
 
               if (Physics.Raycast(ray, out hit, 10000f, _draggableLayer))
               {
-                     bool isDraggable = hit.transform.gameObject.TryGetComponent(out DraggableItem draggableItem);
+                     bool isDraggable = hit.transform.gameObject.TryGetComponent(out IDrag iDragComponent);
                      
                      if (hit.collider != null && isDraggable)
                      {

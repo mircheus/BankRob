@@ -25,16 +25,9 @@ public class PlayerController : MonoBehaviour
         _playerControls.Land.Jump.performed += Jump;
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
         Vector2 move = _playerControls.Land.Move.ReadValue<Vector2>();
-        // Debug.Log(move);
-        // _playerControls.Land.Jump.ReadValue<float>();
 
         if (_playerControls.Land.Jump.triggered)
         {
