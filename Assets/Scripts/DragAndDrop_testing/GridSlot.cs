@@ -7,7 +7,9 @@ using UnityEngine;
 public class GridSlot : MonoBehaviour
 {
     [SerializeField] private bool _isFilled = false;
+    [SerializeField] private Transform _downTarget;
     private RobberDragger _robberDragger;
+    private RobberMovement _robberMovement;
     private Robber _robber;
 
     public bool IsFilled => _isFilled;
@@ -22,8 +24,10 @@ public class GridSlot : MonoBehaviour
             if (robberDragger.IsDraggingNow == false)
             {
                 _robberDragger = robberDragger;
-                _isFilled = true;
+                _robber = _robberDragger.GetComponent<Robber>();
+                SetDownTargetForRobber(_downTarget);
                 PlaceRobberInCellCenter(robberDragger);
+                _isFilled = true;
             }
         }
     }
@@ -32,8 +36,6 @@ public class GridSlot : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
-            _robber = _robberDragger.GetComponent<Robber>();
-
             if (_robber.Level == externalRobber.Level)
             {
                 CombineRobbers(externalRobber);
@@ -52,13 +54,20 @@ public class GridSlot : MonoBehaviour
 
     private void PlaceRobberInCellCenter(RobberDragger robberDragger)
     {
-        robberDragger.transform.SetParent(gameObject.transform);
-        robberDragger.transform.position = transform.position;
+        Transform robberTransform = robberDragger.transform;
+        robberTransform.SetParent(gameObject.transform);
+        robberTransform.position = transform.position;
     }
 
     private void CombineRobbers(Robber externalRobberDragger)
     {
         externalRobberDragger.gameObject.SetActive(false);
         _robber.UpgradeLevel();
+    }
+
+    private void SetDownTargetForRobber(Transform downTarget)
+    {
+        _robberMovement = _robber.GetComponent<RobberMovement>();
+        _robberMovement.SetDownTarget(downTarget);
     }
 }

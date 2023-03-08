@@ -28,6 +28,7 @@ public class DragAndDrop : MonoBehaviour
 
        private void OnDisable()
        {
+              _mouseClick.performed -= MousePressed;
               _mouseClick.Disable();
        }
 

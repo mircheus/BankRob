@@ -7,9 +7,9 @@ public class RobberMovement : MonoBehaviour
 {
     [SerializeField] private WallCrusher _wallCrusher;
     [SerializeField] float _fallingSpeed = 5f;
-    [SerializeField] private Transform _downTarget;
+    private Transform _downTarget;
     private Vector3 _upOffsetVector = new Vector3(0, .5f, 0);
-    private Vector3 _currentTarget;
+    [SerializeField] private Vector3 _currentTarget;
     private Wall _currentWall;
     private float _currentSpeed;
     
@@ -35,6 +35,12 @@ public class RobberMovement : MonoBehaviour
     private void Update()
     {
         MoveIn(_currentTarget);
+    }
+
+    public void SetDownTarget(Transform target)
+    {
+        _downTarget = target;
+        _currentTarget = target.position;
     }
     
     private void MoveIn(Vector3 target)

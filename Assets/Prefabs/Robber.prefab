@@ -201,8 +201,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4947b81884f60db47bf05d7c0306ae22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _downTarget: {fileID: 0}
   _wallCrusher: {fileID: 887301900}
+  _fallingSpeed: 10
+  _currentTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &887301904
 MonoBehaviour:
   m_ObjectHideFlags: 0
