@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2517699160118381705}
   - component: {fileID: 2572099226778060351}
   - component: {fileID: 5952660520522667083}
-  m_Layer: 5
+  - component: {fileID: 1986728213}
+  m_Layer: 0
   m_Name: Inventory Slot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,8 +86,21 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4438834766722295217}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 6, y: 6, z: 6}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1986728213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4438834766722295217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa51affe9c4357348bfad94af765afdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isFilled: 0

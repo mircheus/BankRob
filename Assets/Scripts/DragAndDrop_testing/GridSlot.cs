@@ -10,6 +10,9 @@ public class GridSlot : MonoBehaviour
     private RobberDragger _robberDragger;
     private Robber _robber;
 
+    public bool IsFilled => _isFilled;
+    public Robber Robber => _robber;
+    
     private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.TryGetComponent(out RobberDragger robberDragger) && _isFilled == false)
