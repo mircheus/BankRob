@@ -27,7 +27,6 @@ public class Shop : MonoBehaviour
     {
         var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
         
-        
         for (int i = 0; i < _slots.Count; i++)
         {
             if (_slots[i].IsFilled == false)

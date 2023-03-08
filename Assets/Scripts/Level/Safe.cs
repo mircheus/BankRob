@@ -13,6 +13,7 @@ public class Safe : MonoBehaviour
         if (other.TryGetComponent(out Robber robber))
         {
             Robbed?.Invoke();
+            Debug.Log("Safe is robbed!");
         }
     }
 }

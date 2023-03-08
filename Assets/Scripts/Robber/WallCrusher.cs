@@ -32,4 +32,9 @@ public class WallCrusher : MonoBehaviour
         _wallToCrush.ApplyDamage(_damage);
         Debug.Log($"damage = {_damage}");
     }
+
+    public void IncreaseDamage(int level)
+    {
+        _damage *= level;
+    }
 }

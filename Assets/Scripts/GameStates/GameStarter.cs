@@ -12,8 +12,6 @@ public class GameStarter : MonoBehaviour
     
     public void StartRob()
     {
-        RobStarted?.Invoke();
-        
         foreach (var slot in _slots)
         {
             if (slot.IsFilled)
@@ -22,5 +20,8 @@ public class GameStarter : MonoBehaviour
                 Debug.Log("Activated");
             }
         }
+
+        _dragAndDrop.enabled = false;
+        RobStarted?.Invoke();
     }
 }

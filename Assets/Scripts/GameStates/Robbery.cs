@@ -9,6 +9,8 @@ public class Robbery : MonoBehaviour
     [SerializeField] private int _targetQuantity;
     [SerializeField] private List<Safe> _safes = new List<Safe>();
 
+    private List<Robber> _robbers;
+
     private int _safesRobbed = 0;
 
     public event UnityAction BankRobbed;

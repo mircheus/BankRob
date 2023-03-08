@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Wall : MonoBehaviour
 {
     [SerializeField] private int _health;
+    
     public event UnityAction Destroyed;
 
     private void OnEnable()
