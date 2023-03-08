@@ -11,15 +11,15 @@ public class MenuDisabler : MonoBehaviour
 
     private void OnEnable()
     {
-        _gameStarter.RobStarted += DisableMenu;
+        _gameStarter.RobStarted += DisablePreparingMenu;
     }
 
     private void OnDisable()
     {
-        _gameStarter.RobStarted -= DisableMenu;
+        _gameStarter.RobStarted -= DisablePreparingMenu;
     }
 
-    private void DisableMenu()
+    private void DisablePreparingMenu()
     {
         _menu.SetActive(false);
     }

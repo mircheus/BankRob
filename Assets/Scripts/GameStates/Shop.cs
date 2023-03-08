@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private List<GridSlot> _slots;
+    [SerializeField] private List<Slot> _slots;
     [SerializeField] private Robber _robberPrefab;
     [SerializeField] private RobbersPool _robbersPool;
     

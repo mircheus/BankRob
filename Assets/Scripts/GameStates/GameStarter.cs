@@ -5,7 +5,8 @@ using UnityEngine.Events;
 
 public class GameStarter : MonoBehaviour
 {
-    [SerializeField] private List<GridSlot> _slots;
+    [SerializeField] private List<Slot> _slots;
+    [SerializeField] private DragAndDrop _dragAndDrop;
 
     public event UnityAction RobStarted;
     

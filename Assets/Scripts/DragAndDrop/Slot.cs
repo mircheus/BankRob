@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class GridSlot : MonoBehaviour
+public class Slot : MonoBehaviour
 {
     [SerializeField] private bool _isFilled = false;
     [SerializeField] private Transform _downTarget;
