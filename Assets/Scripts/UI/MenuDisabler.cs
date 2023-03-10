@@ -6,21 +6,27 @@ using UnityEngine;
 
 public class MenuDisabler : MonoBehaviour
 {
-    [SerializeField] private GameStarter _gameStarter;
+    [SerializeField] private RobStarter robStarter;
     [SerializeField] private GameObject _menu;
-
+    [SerializeField] private GameObject _warningPanel;
+    
     private void OnEnable()
     {
-        _gameStarter.RobStarted += DisablePreparingMenu;
+        robStarter.Started += DisablePreparingMenu;
     }
 
     private void OnDisable()
     {
-        _gameStarter.RobStarted -= DisablePreparingMenu;
+        robStarter.Started -= DisablePreparingMenu;
     }
 
     private void DisablePreparingMenu()
     {
         _menu.SetActive(false);
+    }
+
+    public void DisableWarningMenu()
+    {
+        _warningPanel.SetActive(false);
     }
 }

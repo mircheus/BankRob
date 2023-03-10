@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Safe : MonoBehaviour
+public class Vault : MonoBehaviour
 {
     public event UnityAction Robbed;
     
@@ -13,7 +13,7 @@ public class Safe : MonoBehaviour
         if (other.TryGetComponent(out Robber robber))
         {
             Robbed?.Invoke();
-            Debug.Log("Safe is robbed!");
+            Debug.Log("Vault is robbed!");
         }
     }
 }

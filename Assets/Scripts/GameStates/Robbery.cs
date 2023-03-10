@@ -7,40 +7,43 @@ using UnityEngine.Events;
 public class Robbery : MonoBehaviour
 {
     [SerializeField] private int _targetQuantity;
-    [SerializeField] private List<Safe> _safes = new List<Safe>();
-
-    private List<Robber> _robbers;
-
-    private int _safesRobbed = 0;
+    [SerializeField] private List<Vault> _vaults = new List<Vault>();
+    
+    private int _robbedVaultsCounter = 0;
 
     public event UnityAction BankRobbed;
+    public event UnityAction RobbedVaultsCounterChanged;
+
+    public int TargetQuantity => _targetQuantity;
+    public int RobbedVaultsCounter => _robbedVaultsCounter;
 
     private void OnEnable()
     {
-        foreach (var safe in _safes)
+        foreach (var vault in _vaults)
         {
-            safe.Robbed += CountRobbedSafe;
+            vault.Robbed += CountRobbedSafe;
         }
     }
 
     private void OnDisable()
     {
-        foreach (var safe in _safes)
+        foreach (var vault in _vaults)
         {
-            safe.Robbed -= CountRobbedSafe;
+            vault.Robbed -= CountRobbedSafe;
         }
     }
 
     private void Start()
     {
-        _safesRobbed = 0;
+        _robbedVaultsCounter = 0;
     }
 
     private void CountRobbedSafe()
     {
-        _safesRobbed++;
-        
-        if (IsTargetReached(_safesRobbed))
+        _robbedVaultsCounter++;
+        RobbedVaultsCounterChanged?.Invoke();
+
+        if (IsTargetReached(_robbedVaultsCounter))
         {
             BankRobbed?.Invoke();
         }

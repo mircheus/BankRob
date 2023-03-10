@@ -5,13 +5,11 @@ using UnityEngine;
 
 public class RobberDragger : MonoBehaviour, IDrag
 {
-    private List<Color> _levelColors = new List<Color>() { Color.yellow , Color.green, Color.blue};
     private Rigidbody _rigidbody;
     private bool _isDraggingNow = false;
     private Transform _lastParent;
 
     public bool IsDraggingNow => _isDraggingNow;
-
     
     private void Start()
     {

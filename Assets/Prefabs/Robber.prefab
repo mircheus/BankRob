@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7289179811757942650}
   - component: {fileID: 7289179811757942533}
   - component: {fileID: 7289179811757942532}
-  - component: {fileID: 7289179811757942651}
   - component: {fileID: 7289179811757942649}
   - component: {fileID: 887301901}
   - component: {fileID: 887301902}
+  - component: {fileID: 7289179811757942651}
   - component: {fileID: 887301898}
   - component: {fileID: 887301899}
   - component: {fileID: 887301900}
@@ -92,18 +92,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7289179811757942651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7289179811757942534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d49c2dfc6b66b16439cee7f6db2125a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &7289179811757942649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,6 +141,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7289179811757942651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289179811757942534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49c2dfc6b66b16439cee7f6db2125a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &887301898
 MonoBehaviour:
   m_ObjectHideFlags: 0

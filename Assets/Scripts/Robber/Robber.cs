@@ -5,6 +5,7 @@ using UnityEngine;
 public class Robber : MonoBehaviour
 {
     private List<Color> _levelColors = new List<Color>() { Color.yellow , Color.green, Color.blue};
+    private Color[] _colors = new[] { Color.yellow, Color.green, Color.blue };
     private int _level = 0;
     private Material _material;
     private RobberMovement _robberMovement;
@@ -23,9 +24,12 @@ public class Robber : MonoBehaviour
     
     public void UpgradeLevel()
     {
-        _level++;
-        _material.color = _levelColors[_level];
-        _wallCrusher.IncreaseDamage(_level);
+        if (_level + 1 < _levelColors.Count)
+        {
+            _level++;
+            _material.color = _levelColors[_level];
+            _wallCrusher.IncreaseDamage(_level);
+        }
     }
 
     public void ActivateMovement()

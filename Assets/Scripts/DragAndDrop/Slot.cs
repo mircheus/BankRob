@@ -9,7 +9,6 @@ public class Slot : MonoBehaviour
     [SerializeField] private bool _isFilled = false;
     [SerializeField] private Transform _downTarget;
     private RobberDragger _robberDragger;
-    private RobberMovement _robberMovement;
     private Robber _robber;
 
     public bool IsFilled => _isFilled;
@@ -25,7 +24,7 @@ public class Slot : MonoBehaviour
             {
                 _robberDragger = robberDragger;
                 _robber = _robberDragger.GetComponent<Robber>();
-                SetDownTargetForRobber(_downTarget);
+                SetDownTargetForRobber(_robber);
                 PlaceRobberInCellCenter(robberDragger);
                 _isFilled = true;
             }
@@ -45,7 +44,7 @@ public class Slot : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.TryGetComponent(out RobberDragger robber))
+        if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
         {
             _robberDragger = null;
             _isFilled = false;
@@ -65,9 +64,8 @@ public class Slot : MonoBehaviour
         _robber.UpgradeLevel();
     }
 
-    private void SetDownTargetForRobber(Transform downTarget)
+    private void SetDownTargetForRobber(Robber robber)
     {
-        _robberMovement = _robber.GetComponent<RobberMovement>();
-        _robberMovement.SetDownTarget(downTarget);
+        robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget);
     }
 }

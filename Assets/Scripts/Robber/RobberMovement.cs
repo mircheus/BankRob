@@ -7,22 +7,19 @@ public class RobberMovement : MonoBehaviour
 {
     [SerializeField] private WallCrusher _wallCrusher;
     [SerializeField] float _fallingSpeed = 5f;
-    private Transform _downTarget;
-    private Vector3 _upOffsetVector = new Vector3(0, .5f, 0);
     [SerializeField] private Vector3 _currentTarget;
+    private Transform _downTarget;
     private Wall _currentWall;
     private float _currentSpeed;
     
     
     private void OnEnable()
     {
-        // _wallCrusher.WallCollided += SetTarget;
         _wallCrusher.WallCollided += StopMoving;
     }
 
     private void OnDisable()
     {
-        // _wallCrusher.WallCollided -= SetTarget;
         _wallCrusher.WallCollided -= StopMoving;
     }
 
@@ -34,7 +31,7 @@ public class RobberMovement : MonoBehaviour
     
     private void Update()
     {
-        MoveIn(_currentTarget);
+        MoveTo(_currentTarget);
     }
 
     public void SetDownTarget(Transform target)
@@ -43,7 +40,7 @@ public class RobberMovement : MonoBehaviour
         _currentTarget = target.position;
     }
     
-    private void MoveIn(Vector3 target)
+    private void MoveTo(Vector3 target)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, _currentSpeed * Time.deltaTime);
 
@@ -52,12 +49,7 @@ public class RobberMovement : MonoBehaviour
             _currentTarget = _downTarget.position;
         }
     }
-
-    private void SetTarget()
-    {
-        _currentTarget = transform.position + _upOffsetVector;
-    }
-
+    
     private void StopMoving(Wall wall)
     {
         _currentSpeed = 0f;

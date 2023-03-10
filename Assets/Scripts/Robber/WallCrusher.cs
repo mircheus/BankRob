@@ -28,9 +28,7 @@ public class WallCrusher : MonoBehaviour
 
     public void Attack()
     {
-        // wall.ApplyDamage(_damage);
         _wallToCrush.ApplyDamage(_damage);
-        Debug.Log($"damage = {_damage}");
     }
 
     public void IncreaseDamage(int level)
