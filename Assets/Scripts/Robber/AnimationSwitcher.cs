@@ -24,6 +24,5 @@ public class AnimationSwitcher : MonoBehaviour
    private void PlayAttackAnimation(Wall wall)
    {
       _animator.Play(_punch);
-      Debug.Log("Attack animation");
    }
 }
