@@ -6,11 +6,13 @@ using UnityEngine.Events;
 
 public class WallCrusher : MonoBehaviour
 {
-    public event UnityAction<Wall> WallCollided;
     private int _damage;
     private Wall _wallToCrush;
 
-    public Wall WallToCrush => _wallToCrush;
+    public event UnityAction WallCollided;
+    public event UnityAction WallDestroyed;
+
+    // public Wall WallToCrush => _wallToCrush;
     
     private void Start()
     {
@@ -22,7 +24,8 @@ public class WallCrusher : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Wall wall))
         {
             _wallToCrush = wall;
-            WallCollided?.Invoke(wall);
+            _wallToCrush.Destroyed += OnWallDestroyed;
+            WallCollided?.Invoke();
         }
     }
 
@@ -34,5 +37,10 @@ public class WallCrusher : MonoBehaviour
     public void IncreaseDamage(int level)
     {
         _damage *= level;
+    }
+
+    public void OnWallDestroyed()
+    {
+        WallDestroyed?.Invoke();
     }
 }

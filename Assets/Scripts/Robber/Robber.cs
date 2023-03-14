@@ -10,16 +10,18 @@ public class Robber : MonoBehaviour
     private Material _material;
     private RobberMovement _robberMovement;
     private WallCrusher _wallCrusher;
+    private AnimationSwitcher _animationSwitcher;
     
     public int Level => _level;
 
     private void Start()
     {
-        _material = GetComponent<MeshRenderer>().material;
-        _material.color = _levelColors[_level];
+        // _material = GetComponent<MeshRenderer>().material;
+        // _material.color = _levelColors[_level];
         _robberMovement = GetComponent<RobberMovement>();
         _robberMovement.enabled = false;
         _wallCrusher = GetComponent<WallCrusher>();
+        _animationSwitcher = GetComponent<AnimationSwitcher>();
     }
     
     public void UpgradeLevel()
@@ -27,7 +29,7 @@ public class Robber : MonoBehaviour
         if (_level + 1 < _levelColors.Count)
         {
             _level++;
-            _material.color = _levelColors[_level];
+            // _material.color = _levelColors[_level];
             _wallCrusher.IncreaseDamage(_level);
         }
     }
@@ -35,5 +37,6 @@ public class Robber : MonoBehaviour
     public void ActivateMovement()
     {
         _robberMovement.enabled = true;
+        _animationSwitcher.PlayAttackAnimation();
     }
 }

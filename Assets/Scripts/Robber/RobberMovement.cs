@@ -50,16 +50,16 @@ public class RobberMovement : MonoBehaviour
         }
     }
     
-    private void StopMoving(Wall wall)
+    private void StopMoving()
     {
         _currentSpeed = 0f;
-        _currentWall = wall;
-        _currentWall.Destroyed += StartMoving;
+        // _currentWall = wall;
+        _wallCrusher.WallDestroyed += StartMoving;
     }
 
     private void StartMoving()
     {
         _currentSpeed = _fallingSpeed;
-        _currentWall.Destroyed -= StartMoving;
+        _wallCrusher.WallDestroyed -= StartMoving;
     }
 }

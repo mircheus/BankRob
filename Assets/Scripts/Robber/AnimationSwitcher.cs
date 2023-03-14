@@ -3,17 +3,24 @@ using UnityEngine;
 public class AnimationSwitcher : MonoBehaviour
 {
    [SerializeField] private WallCrusher _wallCrusher;
+   
    private Animator _animator;
-   private int _punch = Animator.StringToHash("attack");
+   private int _attack = Animator.StringToHash("Attack");
+   private int _attackingWall = Animator.StringToHash("AttackingWall");
+   
    
    private void OnEnable()
    {
-      _wallCrusher.WallCollided += PlayAttackAnimation;
+      // _wallCrusher.WallCollided += PlayAttackAnimation;
+      _wallCrusher.WallCollided += SwitchToAttackState;
+      _wallCrusher.WallDestroyed += SwitchToFallState;
    }
 
    private void OnDisable()
    {
-      _wallCrusher.WallCollided -= PlayAttackAnimation;
+      // _wallCrusher.WallCollided -= PlayAttackAnimation;
+      _wallCrusher.WallCollided -= SwitchToAttackState;
+      _wallCrusher.WallDestroyed -= SwitchToFallState;
    }
 
    private void Start()
@@ -21,8 +28,18 @@ public class AnimationSwitcher : MonoBehaviour
       _animator = GetComponent<Animator>();
    }
 
-   private void PlayAttackAnimation(Wall wall)
+   public void PlayAttackAnimation()
    {
-      _animator.Play(_punch);
+      _animator.Play(_attack);
+   }
+
+   private void SwitchToAttackState()
+   {
+      _animator.SetBool(_attackingWall, true);
+   }
+
+   private void SwitchToFallState()
+   {
+      _animator.SetBool(_attackingWall, false);
    }
 }
