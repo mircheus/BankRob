@@ -42,5 +42,6 @@ public class WallCrusher : MonoBehaviour
     public void OnWallDestroyed()
     {
         WallDestroyed?.Invoke();
+        _wallToCrush.Destroyed -= OnWallDestroyed;
     }
 }

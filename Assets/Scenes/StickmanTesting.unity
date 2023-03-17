@@ -548,10 +548,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4465486622584202226, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 7b6ab5ca7d2fede4c97ed2542c9313ec, type: 2}
     - target: {fileID: 4465486622593552452, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
       propertyPath: m_Name
       value: Stickman_robber
