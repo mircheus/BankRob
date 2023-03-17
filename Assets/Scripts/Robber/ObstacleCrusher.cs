@@ -6,7 +6,7 @@ public class ObstacleCrusher : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
+        if (collision.gameObject.TryGetComponent(out Roof obstacle))
         {
             collision.gameObject.SetActive(false);
         }
