@@ -18,6 +18,7 @@ public class Robber : MonoBehaviour
     {
         // _material = GetComponent<MeshRenderer>().material;
         // _material.color = _levelColors[_level];
+        _material = GetComponentInChildren<SkinnedMeshRenderer>().material;
         _robberMovement = GetComponent<RobberMovement>();
         _robberMovement.enabled = false;
         _wallCrusher = GetComponent<WallCrusher>();
