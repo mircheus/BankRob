@@ -11,18 +11,18 @@ public class PlayerData
     public int Money => _money;
     public int Keys => _keys;
 
-    public PlayerData(PlayerData data)
-    {
-        _money = data.Money;
-        _keys = data.Keys;
-    }
+    // public PlayerData(PlayerData data)
+    // {
+    //     _money = data.Money;
+    //     _keys = data.Keys;
+    // }
 
-    public PlayerData()
-    {
-        _money = 0;
-        _keys = 0;
-    }
-    
+    // public PlayerData()
+    // {
+    //     _money = 0;
+    //     _keys = 0;
+    // }
+    //
     public void IncrementMoney()
     {
         _money += 100;
