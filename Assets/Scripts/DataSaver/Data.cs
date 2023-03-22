@@ -16,14 +16,4 @@ public class Data
         _money = money;
         _keys = keys;
     }
-    
-    public void IncrementMoney()
-    {
-        _money++;
-    }
-
-    public void IncrementKeys()
-    {
-        _keys++;
-    }
 }

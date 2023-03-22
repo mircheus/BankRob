@@ -10,22 +10,22 @@ public class DataManagerDISABLED : MonoBehaviour
 {
     [SerializeField] private TMP_Text _inputField;
     
-    private PlayerData _playerStats = new PlayerData();
+    private PlayerData _stats = new PlayerData();
     private JsonDataServiceEXAMPLE _dataServiceExample = new JsonDataServiceEXAMPLE();
     private bool _encryptionEnabled = false;
 
     // public event UnityAction DataUpdated;
         
-    public PlayerData PlayerStats => _playerStats;
+    public PlayerData Stats => _stats;
 
     private void Start()
     {
-        Debug.Log(_playerStats == null);
+        Debug.Log(_stats == null);
     }
 
     public void SerializeJson()
     {
-        if (_dataServiceExample.SaveData("/TestData.json", _playerStats, _encryptionEnabled))
+        if (_dataServiceExample.SaveData("/TestData.json", _stats, _encryptionEnabled))
         {
             Debug.Log("File successfully saved!");
         }
@@ -37,9 +37,9 @@ public class DataManagerDISABLED : MonoBehaviour
 
     public void DeserializeJson()
     {
-        PlayerData playerData = _dataServiceExample.LoadData<PlayerData>("/TestData.json", _encryptionEnabled);
-        _playerStats = playerData;
-        _inputField.text = JsonConvert.SerializeObject(playerData, Formatting.Indented);
+        PlayerData data = _dataServiceExample.LoadData<PlayerData>("/TestData.json", _encryptionEnabled);
+        _stats = data;
+        _inputField.text = JsonConvert.SerializeObject(data, Formatting.Indented);
         // DataUpdated?.Invoke();
     }
  

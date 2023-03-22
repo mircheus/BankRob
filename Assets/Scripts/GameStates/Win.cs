@@ -6,7 +6,7 @@ using UnityEngine;
 public class Win : MonoBehaviour
 {
     [SerializeField] private List<Slot> _slots;
-    [SerializeField] private PlayerData playerData;
+    [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
 
     private void OnEnable()
@@ -23,7 +23,10 @@ public class Win : MonoBehaviour
     {
         foreach (var slot in _slots)
         {
-            playerData.UnsubscribeFromKeyCollector(slot);
+            if (slot.IsFilled)
+            {
+                _playerData.UnsubscribeFromKeyCollector(slot);
+            }
         }
     }
 }
