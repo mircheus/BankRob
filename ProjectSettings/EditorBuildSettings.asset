@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainDemoLevel.unity
     guid: 82a81d4ebcdb90740bdbe4d4e2cb0d93
   - enabled: 1
-    path: Assets/Scenes/DataSaver.unity
-    guid: e319fc58841aaf84c8386baaf5637803
+    path: Assets/Scenes/DataSaver_inGameTest.unity
+    guid: f4a2e0571f996b546902b6d57e4c6651
   m_configObjects: {}

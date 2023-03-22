@@ -8,16 +8,20 @@ public class DataReflector : MonoBehaviour
 {
     [SerializeField] private TMP_Text _moneyField;
     [SerializeField] private TMP_Text _keysField;
-    [SerializeField] private DataManager dataManager;
+    [SerializeField] private DataManager _dataManager;
 
+    [SerializeField] private PlayerData _playerData;
+    
     private void OnEnable()
     {
-        dataManager.DataUpdated += OnDataUpdated;
+        // _dataManager.DataUpdated += OnDataUpdated;
+        _playerData.DataUpdated += OnDataUpdated;
     }
 
     private void OnDisable()
     {
-        dataManager.DataUpdated -= OnDataUpdated;
+        // _dataManager.DataUpdated -= OnDataUpdated;
+        _playerData.DataUpdated -= OnDataUpdated;
     }
 
     private void Start()
@@ -28,7 +32,8 @@ public class DataReflector : MonoBehaviour
     
     private void OnDataUpdated()
     {
-        _moneyField.text = Convert.ToString(dataManager.CurrentData.Money);
-        _keysField.text = Convert.ToString(dataManager.CurrentData.Keys);
+        // _moneyField.text = Convert.ToString(_dataManager.CurrentData.Money);
+        // _keysField.text = Convert.ToString(_dataManager.CurrentData.Keys);
+        _keysField.text = Convert.ToString(_playerData.KeysAmount);
     }
 }

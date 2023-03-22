@@ -21,7 +21,7 @@ public class Robbery : MonoBehaviour
     {
         foreach (var vault in _vaults)
         {
-            vault.Robbed += CountRobbedSafe;
+            vault.Robbed += CountRobbedVaults;
         }
     }
 
@@ -29,7 +29,7 @@ public class Robbery : MonoBehaviour
     {
         foreach (var vault in _vaults)
         {
-            vault.Robbed -= CountRobbedSafe;
+            vault.Robbed -= CountRobbedVaults;
         }
     }
 
@@ -38,7 +38,7 @@ public class Robbery : MonoBehaviour
         _robbedVaultsCounter = 0;
     }
 
-    private void CountRobbedSafe()
+    private void CountRobbedVaults()
     {
         _robbedVaultsCounter++;
         RobbedVaultsCounterChanged?.Invoke();

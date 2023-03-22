@@ -45,13 +45,13 @@ public class DataManagerDISABLED : MonoBehaviour
  
     public void IncrementMoney()
     {
-        _playerStats.IncrementMoney();
+        // _playerStats.IncrementMoney();
         // DataUpdated?.Invoke();
     }
 
     public void IncrementKeys()
     {
-        _playerStats.IncrementKeys();
+        // _playerStats.IncrementKeys();
         // DataUpdated?.Invoke();
     }
 }

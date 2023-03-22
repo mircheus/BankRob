@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlayerData
+public class PlayerDataDISABLED
 {
     private int _money;
     private int _keys;

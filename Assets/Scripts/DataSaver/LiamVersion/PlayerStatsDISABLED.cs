@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats : MonoBehaviour
+public class PlayerStatsDISABLED : MonoBehaviour
 {
     [SerializeField] private int _money;
     [SerializeField] private int _keysQuantity;

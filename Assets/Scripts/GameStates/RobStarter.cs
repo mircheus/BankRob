@@ -10,6 +10,7 @@ public class RobStarter : MonoBehaviour
     [SerializeField] private DragAndDrop _dragAndDrop;
     [SerializeField] private Preparing _preparing;
     [SerializeField] private Robbery _robbery;
+    [SerializeField] private PlayerData playerData;
 
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
@@ -33,6 +34,7 @@ public class RobStarter : MonoBehaviour
             if (slot.IsFilled)
             {
                 slot.GetComponentInChildren<Robber>().ActivateMovement();
+                playerData.SubscribeToKeyCollector(slot);
             }
         }
 
