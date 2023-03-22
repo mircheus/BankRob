@@ -5,16 +5,25 @@ using UnityEngine;
 
 public class Data
 {
-    public int Money;
-    public int Keys;
+    private int _money;
+    private int _keys;
+    
+    public int Money => _money;
+    public int Keys => _keys;
 
+    public Data(int money, int keys)
+    {
+        _money = money;
+        _keys = keys;
+    }
+    
     public void IncrementMoney()
     {
-        Money++;
+        _money++;
     }
 
     public void IncrementKeys()
     {
-        Keys++;
+        _keys++;
     }
 }

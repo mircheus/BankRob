@@ -4,7 +4,7 @@ using System.Net;
 using Newtonsoft.Json;
 using UnityEngine;
 // C:\Users\mirch\AppData\LocalLow\DefaultCompany\BankRob
-public class JsonDataService : IDataService
+public class JsonDataServiceEXAMPLE
 {
     public bool SaveData<T>(string RelativePath, T Data, bool Encrypted)
     {

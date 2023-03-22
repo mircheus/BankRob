@@ -328,8 +328,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 31967471}
-        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+      - m_Target: {fileID: 827953197}
+        m_TargetAssemblyTypeName: DataService, Assembly-CSharp
         m_MethodName: IncrementMoney
         m_Mode: 1
         m_Arguments:
@@ -889,9 +889,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 31967471}
-        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
-        m_MethodName: DeserializeJson
+      - m_Target: {fileID: 827953197}
+        m_TargetAssemblyTypeName: DataService, Assembly-CSharp
+        m_MethodName: LoadData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1431,9 +1431,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 31967471}
-        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
-        m_MethodName: SerializeJson
+      - m_Target: {fileID: 827953197}
+        m_TargetAssemblyTypeName: DataService, Assembly-CSharp
+        m_MethodName: SaveData
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2050,7 +2050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moneyField: {fileID: 220014587}
   _keysField: {fileID: 830563108}
-  _dataManager: {fileID: 31967471}
+  _dataService: {fileID: 827953197}
 --- !u!4 &1442108004
 Transform:
   m_ObjectHideFlags: 0
@@ -2150,8 +2150,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 31967471}
-        m_TargetAssemblyTypeName: DataManager, Assembly-CSharp
+      - m_Target: {fileID: 827953197}
+        m_TargetAssemblyTypeName: DataService, Assembly-CSharp
         m_MethodName: IncrementKeys
         m_Mode: 1
         m_Arguments:

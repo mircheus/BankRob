@@ -6,15 +6,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DataManager : MonoBehaviour
+public class DataManagerDISABLED : MonoBehaviour
 {
     [SerializeField] private TMP_Text _inputField;
     
     private PlayerData _playerStats = new PlayerData();
-    private JsonDataService _dataService = new JsonDataService();
+    private JsonDataServiceEXAMPLE _dataServiceExample = new JsonDataServiceEXAMPLE();
     private bool _encryptionEnabled = false;
 
-    public event UnityAction DataUpdated;
+    // public event UnityAction DataUpdated;
         
     public PlayerData PlayerStats => _playerStats;
 
@@ -25,7 +25,7 @@ public class DataManager : MonoBehaviour
 
     public void SerializeJson()
     {
-        if (_dataService.SaveData("/TestData.json", _playerStats, _encryptionEnabled))
+        if (_dataServiceExample.SaveData("/TestData.json", _playerStats, _encryptionEnabled))
         {
             Debug.Log("File successfully saved!");
         }
@@ -37,21 +37,21 @@ public class DataManager : MonoBehaviour
 
     public void DeserializeJson()
     {
-        PlayerData playerData = _dataService.LoadData<PlayerData>("/TestData.json", _encryptionEnabled);
+        PlayerData playerData = _dataServiceExample.LoadData<PlayerData>("/TestData.json", _encryptionEnabled);
         _playerStats = playerData;
         _inputField.text = JsonConvert.SerializeObject(playerData, Formatting.Indented);
-        DataUpdated?.Invoke();
+        // DataUpdated?.Invoke();
     }
  
     public void IncrementMoney()
     {
         _playerStats.IncrementMoney();
-        DataUpdated?.Invoke();
+        // DataUpdated?.Invoke();
     }
 
     public void IncrementKeys()
     {
         _playerStats.IncrementKeys();
-        DataUpdated?.Invoke();
+        // DataUpdated?.Invoke();
     }
 }
