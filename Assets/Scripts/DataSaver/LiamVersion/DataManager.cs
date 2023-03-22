@@ -38,10 +38,11 @@ public class DataManager : MonoBehaviour
     public void DeserializeJson()
     {
         PlayerData playerData = _dataService.LoadData<PlayerData>("/TestData.json", _encryptionEnabled);
+        _playerStats = playerData;
         _inputField.text = JsonConvert.SerializeObject(playerData, Formatting.Indented);
         DataUpdated?.Invoke();
     }
-
+ 
     public void IncrementMoney()
     {
         _playerStats.IncrementMoney();

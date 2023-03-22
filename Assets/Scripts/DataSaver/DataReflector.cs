@@ -9,6 +9,8 @@ public class DataReflector : MonoBehaviour
     [SerializeField] private TMP_Text _moneyField;
     [SerializeField] private TMP_Text _keysField;
     [SerializeField] private DataManager _dataManager;
+    // [SerializeField] private Data _data;
+    // [SerializeField] private DataService dataService;
 
     private void OnEnable()
     {
@@ -25,7 +27,15 @@ public class DataReflector : MonoBehaviour
         _moneyField.text = Convert.ToString(-1);
         _keysField.text = Convert.ToString(-1);
     }
-    
+
+    private void Update()
+    {
+        // _moneyField.text = Convert.ToString(_data.Money);
+        // _moneyField.text = Convert.ToString(dataService.Data.Money);
+        // _keysField.text = Convert.ToString(dataService.Data.Keys);
+        // _keysField.text = Convert.ToString(_data.Keys);
+    }
+
     private void OnDataUpdated()
     {
         _moneyField.text = Convert.ToString(_dataManager.PlayerStats.Money);

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SaveObject : MonoBehaviour
+public class SaveObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int Money;
+    public int Keys;
 
-    // Update is called once per frame
-    void Update()
+    public SaveObject(int money, int keys)
     {
-        
+        Money = money;
+        Keys = keys;
     }
 }
