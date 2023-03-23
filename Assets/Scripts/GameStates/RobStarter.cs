@@ -11,6 +11,9 @@ public class RobStarter : MonoBehaviour
     [SerializeField] private Preparing _preparing;
     [SerializeField] private Robbery _robbery;
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private GameObject _downCollider;
+
+    private Robber _savedRobber;
 
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
@@ -35,10 +38,17 @@ public class RobStarter : MonoBehaviour
             {
                 slot.GetComponentInChildren<Robber>().ActivateMovement();
                 _playerData.SubscribeToKeyCollector(slot);
+                _savedRobber = slot.GetComponentInChildren<Robber>();
+                _downCollider.SetActive(false);
             }
         }
 
         _dragAndDrop.enabled = false;
         Started?.Invoke();
+    }
+
+    public Robber PickRobber()
+    {
+        return _savedRobber;
     }
 }

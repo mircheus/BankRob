@@ -11,9 +11,15 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-
+    
+    // DEBUG SCENES LIST
     public void LoadDataSaverScene()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void LoadCameraFollowScene()
+    {
+        SceneManager.LoadScene(2);
     }
 }
