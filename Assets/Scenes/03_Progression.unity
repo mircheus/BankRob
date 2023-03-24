@@ -3236,6 +3236,9 @@ MonoBehaviour:
   _obstacle: {fileID: 5109311959491378681, guid: 735142e53181bf943bb908a29af28e9b, type: 3}
   _obstacles:
   - {fileID: 1318356890226982696, guid: 38f089bdbe3121642a5dfc1c77e51c06, type: 3}
+  - {fileID: 7539588824183370169, guid: 5f63d2bb7a844114194a403ad933c1cf, type: 3}
+  - {fileID: 5109311959491378681, guid: 735142e53181bf943bb908a29af28e9b, type: 3}
+  - {fileID: 175498546217067950, guid: 29cd157582b08104fa238532aa8175a6, type: 3}
 --- !u!1001 &1141520054
 PrefabInstance:
   m_ObjectHideFlags: 0

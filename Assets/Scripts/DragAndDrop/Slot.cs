@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class Slot : MonoBehaviour
 {
     [SerializeField] private Transform _downTarget;
+    
     private RobberDragger _robberDragger;
     private Robber _robber;
     private bool _isFilled;
