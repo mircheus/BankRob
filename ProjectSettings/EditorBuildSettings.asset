@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/02_CameraFollow.unity
     guid: 327f3eb6fa51ef3468a72da1b536267b
+  - enabled: 1
+    path: Assets/Scenes/03_Progression.unity
+    guid: 64f789c2e40c3c44a9b0e8e614aa390e
   m_configObjects: {}

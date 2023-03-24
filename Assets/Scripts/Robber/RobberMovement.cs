@@ -5,22 +5,24 @@ using UnityEngine;
 
 public class RobberMovement : MonoBehaviour
 {
-    [SerializeField] private WallCrusher _wallCrusher;
+    [SerializeField] private ObstacleCrusher _obstacleCrusher;
     [SerializeField] float _fallingSpeed = 5f;
+    
+    [Header("Debug")]
     [SerializeField] private Vector3 _currentTarget;
+    
     private Transform _downTarget;
-    private Wall _currentWall;
+    private Obstacle _currentObstacle;
     private float _currentSpeed;
-    
-    
+
     private void OnEnable()
     {
-        _wallCrusher.WallCollided += StopMoving;
+        _obstacleCrusher.ObstacleCollided += StopMoving;
     }
 
     private void OnDisable()
     {
-        _wallCrusher.WallCollided -= StopMoving;
+        _obstacleCrusher.ObstacleCollided -= StopMoving;
     }
 
     private void Start()
@@ -54,12 +56,12 @@ public class RobberMovement : MonoBehaviour
     {
         _currentSpeed = 0f;
         // _currentWall = wall;
-        _wallCrusher.WallDestroyed += StartMoving;
+        _obstacleCrusher.ObstacleDestroyed += StartMoving;
     }
 
     private void StartMoving()
     {
         _currentSpeed = _fallingSpeed;
-        _wallCrusher.WallDestroyed -= StartMoving;
+        _obstacleCrusher.ObstacleDestroyed -= StartMoving;
     }
 }

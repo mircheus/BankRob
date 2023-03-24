@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AnimationSwitcher : MonoBehaviour
 {
-   [SerializeField] private WallCrusher _wallCrusher;
+   [SerializeField] private ObstacleCrusher obstacleCrusher;
    
    private Animator _animator;
    private int _attack = Animator.StringToHash("Attack");
@@ -12,15 +12,15 @@ public class AnimationSwitcher : MonoBehaviour
    private void OnEnable()
    {
       // _wallCrusher.WallCollided += PlayAttackAnimation;
-      _wallCrusher.WallCollided += SwitchToAttackState;
-      _wallCrusher.WallDestroyed += SwitchToFallState;
+      obstacleCrusher.ObstacleCollided += SwitchToAttackState;
+      obstacleCrusher.ObstacleDestroyed += SwitchToFallState;
    }
 
    private void OnDisable()
    {
       // _wallCrusher.WallCollided -= PlayAttackAnimation;
-      _wallCrusher.WallCollided -= SwitchToAttackState;
-      _wallCrusher.WallDestroyed -= SwitchToFallState;
+      obstacleCrusher.ObstacleCollided -= SwitchToAttackState;
+      obstacleCrusher.ObstacleDestroyed -= SwitchToFallState;
    }
 
    private void Start()

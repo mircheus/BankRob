@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Robber : MonoBehaviour
 {
@@ -8,10 +9,10 @@ public class Robber : MonoBehaviour
     
     private List<Color> _levelColors = new List<Color>() { Color.yellow , Color.green, Color.blue};
     private Color[] _colors = new[] { Color.yellow, Color.green, Color.blue };
-    private int _level = 0;
+    private int _level = 1;
     private Material _material;
     private RobberMovement _robberMovement;
-    private WallCrusher _wallCrusher;
+    private ObstacleCrusher _obstacleCrusher;
     private AnimationSwitcher _animationSwitcher;
     
     public int Level => _level;
@@ -34,7 +35,7 @@ public class Robber : MonoBehaviour
         _robberMovement = GetComponent<RobberMovement>();
         _keyCollector = GetComponent<KeyCollector>();
         _robberMovement.enabled = false;
-        _wallCrusher = GetComponent<WallCrusher>();
+        _obstacleCrusher = GetComponent<ObstacleCrusher>();
         _animationSwitcher = GetComponent<AnimationSwitcher>();
     }
     
@@ -44,7 +45,7 @@ public class Robber : MonoBehaviour
         {
             _level++;
             // _material.color = _levelColors[_level];
-            _wallCrusher.IncreaseDamage(_level);
+            _obstacleCrusher.IncreaseDamage(_level);
         }
     }
 

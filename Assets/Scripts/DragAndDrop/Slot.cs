@@ -2,17 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Slot : MonoBehaviour
 {
-    [SerializeField] private bool _isFilled = false;
     [SerializeField] private Transform _downTarget;
     private RobberDragger _robberDragger;
     private Robber _robber;
-
+    private bool _isFilled;
+    
     public bool IsFilled => _isFilled;
     public Robber Robber => _robber;
+
+    public event UnityAction RobbersCombined;
     
     private void OnTriggerStay(Collider other)
     {
@@ -51,6 +54,11 @@ public class Slot : MonoBehaviour
         }
     }
 
+    public void Unfill()
+    {
+        _isFilled = false;
+    }
+
     private void PlaceRobberInCellCenter(RobberDragger robberDragger)
     {
         Transform robberTransform = robberDragger.transform;
@@ -62,6 +70,7 @@ public class Slot : MonoBehaviour
     {
         externalRobberDragger.gameObject.SetActive(false);
         _robber.UpgradeLevel();
+        RobbersCombined?.Invoke();
     }
 
     private void SetDownTargetForRobber(Robber robber)

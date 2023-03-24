@@ -773,7 +773,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4465486622593552452}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 28.44, y: 9.888002, z: 21.53}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
@@ -787,7 +787,7 @@ Transform:
   - {fileID: 4465486622593715242}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4465486622584202226
 Animator:
   serializedVersion: 4
@@ -886,7 +886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4947b81884f60db47bf05d7c0306ae22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallCrusher: {fileID: 4465486622584202230}
+  _obstacleCrusher: {fileID: 4465486622584202230}
   _fallingSpeed: 8
   _currentTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &4465486622584202224
@@ -913,7 +913,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac196ceac2605c4a947b8d0c65457e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wallCrusher: {fileID: 4465486622584202230}
+  obstacleCrusher: {fileID: 4465486622584202230}
 --- !u!114 &7867976086493687918
 MonoBehaviour:
   m_ObjectHideFlags: 0

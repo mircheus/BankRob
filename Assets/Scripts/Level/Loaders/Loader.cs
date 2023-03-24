@@ -19,10 +19,10 @@ public class Loader : MonoBehaviour
 
     protected virtual void Start()
     {
-        ArrangeObjects(_floorQuantity, _obstacle);
+        ArrangeObjects(_floorQuantity);
     }
 
-    private void ArrangeObjects(int floorQuantity, GameObject gameObject)
+    private void ArrangeObjects(int floorQuantity)
     {
         Vector3 position = transform.position;
         Vector3 horizontalOffset = new Vector3(_horizontalStep, 0, 0);
@@ -35,7 +35,7 @@ public class Loader : MonoBehaviour
             for (int j = 0; j < ColumnsQuantity; j++)
             {
                 currentOffset = parent.position + horizontalOffset * j + verticalOffset * i;
-                GenerateObjectInPosition(currentOffset, gameObject, parent);
+                GenerateObjectInPosition(currentOffset, parent);
             }
         }
     }
@@ -45,8 +45,8 @@ public class Loader : MonoBehaviour
         _floorQuantity = GetComponentInParent<Generator>().FloorsQuantity;
     }
 
-    protected virtual void GenerateObjectInPosition(Vector3 position, GameObject gameObject, Transform parent)
+    protected virtual void GenerateObjectInPosition(Vector3 position, Transform parent)
     {
-        Instantiate(gameObject, position, Quaternion.identity, parent);
+        Instantiate(_obstacle, position, Quaternion.identity, parent);
     }
 }

@@ -21,11 +21,11 @@ public class DataManager : MonoBehaviour
 
         if (_jsonDataService.SaveData(_relativePath, dataToSave, _isEncrypted))
         {
-            Debug.Log("Success");
+            // Debug.Log("Success");
         }
         else
         {
-            Debug.Log("ERROR");
+            // Debug.Log("ERROR");
         }
     }
 

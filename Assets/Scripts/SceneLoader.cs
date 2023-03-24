@@ -22,4 +22,9 @@ public class SceneLoader : MonoBehaviour
     {
         SceneManager.LoadScene(2);
     }
+
+    public void LoadProgressionScene()
+    {
+        SceneManager.LoadScene(3);
+    }
 }
