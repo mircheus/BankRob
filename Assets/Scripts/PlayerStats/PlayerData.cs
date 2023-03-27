@@ -10,14 +10,16 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Preparing _preparing;
     [SerializeField] private DataManager _dataManager;
 
-    [Header("DEBUG")]
+    [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
     [SerializeField] private int _moneyAmount;
+    [SerializeField] private int _completedLevelsCounter;
 
     public event UnityAction DataUpdated;
     
     public int KeysAmount => _keysAmount;
     public int MoneyAmount => _moneyAmount;
+    public int CompletedLevelsCounter => _completedLevelsCounter;
 
     private void OnEnable()
     {
@@ -44,21 +46,32 @@ public class PlayerData : MonoBehaviour
     private void OnKeyCollected()
     {
         _keysAmount++;
-        _moneyAmount += 6;
         DataUpdated?.Invoke();
     }
 
     private void OnPreparing()
     {
-        Data loadedData = _dataManager.LoadData();
-        _moneyAmount = loadedData.Money;
-        _keysAmount = loadedData.Keys;
-        DataUpdated?.Invoke();
+        LoadDataFromFile();
     }
 
     private void OnBankRobbed()
     {
-        Data dataToSave = new Data(_moneyAmount, _keysAmount);
+        _moneyAmount += _robbery.MoneyRewardAmount;
+        SavePlayerStats();
+    }
+
+    private void LoadDataFromFile()
+    {
+        Data loadedData = _dataManager.LoadData();
+        _moneyAmount = loadedData.Money;
+        _keysAmount = loadedData.Keys;
+        _completedLevelsCounter = loadedData.CompletedLevelsCounter;
+        DataUpdated?.Invoke();
+    }
+
+    private void SavePlayerStats()
+    {
+        Data dataToSave = new Data(_moneyAmount, _keysAmount, ++_completedLevelsCounter); 
         _dataManager.SaveData(dataToSave);
     }
 }

@@ -8,6 +8,7 @@ public class DataReflector : MonoBehaviour
 {
     [SerializeField] private TMP_Text _moneyField;
     [SerializeField] private TMP_Text _keysField;
+    [SerializeField] private TMP_Text _levelCounterField;
     [SerializeField] private DataManager _dataManager;
     [SerializeField] private PlayerData _playerData;
     
@@ -27,11 +28,13 @@ public class DataReflector : MonoBehaviour
     {
         _moneyField.text = Convert.ToString(-1);
         _keysField.text = Convert.ToString(-1);
+        _levelCounterField.text = Convert.ToString(-1);
     }
     
     private void OnPlayerDataUpdated()
     {
         _keysField.text = Convert.ToString(_playerData.KeysAmount);
         _moneyField.text = Convert.ToString(_playerData.MoneyAmount);
+        _levelCounterField.text = Convert.ToString(_playerData.CompletedLevelsCounter);
     }
 }
