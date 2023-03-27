@@ -20,9 +20,7 @@ public class ObstacleLoader : Loader
         if (Random.Range(0, 2) == 1)
         {
             int randomIndex = Random.Range(0, _obstacles.Length);
-            // Instantiate(_obstacles[randomIndex], position, Quaternion.identity, parent);
             Instantiate(_obstacles[randomIndex], position, Quaternion.identity, parent);
-            // Instantiate(_obstacles[randomIndex], position, Quaternion.AngleAxis(180, Vector3.up), parent);
         }
     }
 }

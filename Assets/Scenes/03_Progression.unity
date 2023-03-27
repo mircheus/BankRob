@@ -1935,7 +1935,7 @@ MonoBehaviour:
   - {fileID: 305425012}
   - {fileID: 1741412648}
   - {fileID: 1823815879}
-  _robberPrefab: {fileID: 4465486622584202228, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
+  _robberPrefab: {fileID: 644682270929793510, guid: 3b70ed25417117344a5cd190548c2626, type: 3}
   _robbersPool: {fileID: 1036505768}
 --- !u!114 &655858499 stripped
 MonoBehaviour:
