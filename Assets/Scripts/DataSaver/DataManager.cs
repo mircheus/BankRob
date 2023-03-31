@@ -8,7 +8,7 @@ public class DataManager : MonoBehaviour
 {
     private JsonDataService _jsonDataService = new JsonDataService();
     // private Data _currentData = new Data(0, 0);
-    private string _relativePath = "/savegame.json";
+    private string _relativePath = "/progression_testing.json";
     private bool _isEncrypted = false;
     
     // public event UnityAction DataUpdated;

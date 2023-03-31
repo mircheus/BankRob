@@ -5261,7 +5261,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 634059095}
         m_TargetAssemblyTypeName: Shop, Assembly-CSharp
-        m_MethodName: BuyRobber
+        m_MethodName: PlaceRobber
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

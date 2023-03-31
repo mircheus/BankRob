@@ -33,6 +33,11 @@ public class PlayerData : MonoBehaviour
         _preparing.PreparingStarted -= OnPreparing;
     }
 
+    public void PayForRobber(int money)
+    {
+        _moneyAmount -= money;
+    }
+    
     public void SubscribeToKeyCollector(Slot slot)
     {
         slot.GetComponentInChildren<KeyCollector>().KeyCollected += OnKeyCollected;
@@ -46,7 +51,7 @@ public class PlayerData : MonoBehaviour
     private void OnKeyCollected()
     {
         _keysAmount++;
-        DataUpdated?.Invoke();
+        DataUpdated?.Invoke(); // DEBUG REFLECTOR
     }
 
     private void OnPreparing()

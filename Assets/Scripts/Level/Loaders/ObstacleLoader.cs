@@ -7,20 +7,32 @@ using Random = UnityEngine.Random;
 public class ObstacleLoader : Loader
 {
     [SerializeField] private protected GameObject[] _obstacles;
-    
-    protected override void GetFloorQuantity()
-    {
-        base.GetFloorQuantity();
+    private readonly List<Vector3> _possibleKeyPositions = new List<Vector3>();
 
-        _floorQuantity--;
+    public List<Vector3> PossibleKeyPositions => _possibleKeyPositions;
+
+    protected override void SetFloorQuantity(int floorQuantity)
+    {
+        _floorQuantity = floorQuantity - 1;
     }
 
-    protected override void GenerateObjectInPosition(Vector3 position, Transform parent)
+    protected override void SetCursorIn(Vector3 position, Transform parent)
+    {
+        if (TryGenerateObjectInPosition(position, parent) == false)
+        {
+            _possibleKeyPositions.Add(position);
+        }
+    }
+
+    protected override bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
     {
         if (Random.Range(0, 2) == 1)
         {
             int randomIndex = Random.Range(0, _obstacles.Length);
             Instantiate(_obstacles[randomIndex], position, Quaternion.identity, parent);
+            return true;
         }
+
+        return false;
     }
 }

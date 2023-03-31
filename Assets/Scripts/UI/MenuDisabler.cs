@@ -6,18 +6,20 @@ using UnityEngine;
 
 public class MenuDisabler : MonoBehaviour
 {
-    [SerializeField] private RobStarter robStarter;
+    [SerializeField] private RobStarter _robStarter;
     [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _warningPanel;
+    [SerializeField] private GameObject _notEnoughMoneyPanel;
+    [SerializeField] private GameObject _allSlotsBusyPanel;
     
     private void OnEnable()
     {
-        robStarter.Started += DisablePreparingMenu;
+        _robStarter.Started += DisablePreparingMenu;
     }
 
     private void OnDisable()
     {
-        robStarter.Started -= DisablePreparingMenu;
+        _robStarter.Started -= DisablePreparingMenu;
     }
 
     private void DisablePreparingMenu()
@@ -28,5 +30,15 @@ public class MenuDisabler : MonoBehaviour
     public void DisableWarningMenu()
     {
         _warningPanel.SetActive(false);
+    }
+
+    public void DisableNotEnoughMoneyMenu()
+    {
+        _notEnoughMoneyPanel.SetActive(false);
+    }
+    
+    public void DisableAllSlotsBusy()
+    {
+        _allSlotsBusyPanel.SetActive(false);
     }
 }

@@ -9,44 +9,54 @@ public class Loader : MonoBehaviour
     
     [SerializeField] private protected GameObject _obstacle; // переименовать 
     private protected int _floorQuantity;
-    private float _horizontalStep = 7.5f;
+    private float _horizontalStep = -7.5f;
     private protected int _verticalStep = -9;
+    private bool[,] _buildingGrid;
+    
+    // [Header("DEBUG")]
+    // [SerializeField] private List<Vector3> _potentialKeyPositions;
 
-    private void Awake()
+    // public List<Vector3> PotentialKeyPositions => _potentialKeyPositions;
+    // public bool[,] BuildingGrid => _buildingGrid;
+    
+    public void ArrangeObjects(int floorQuantity)
     {
-        GetFloorQuantity();
-    }
-
-    protected virtual void Start()
-    {
-        ArrangeObjects(_floorQuantity);
-    }
-
-    private void ArrangeObjects(int floorQuantity)
-    {
+        SetFloorQuantity(floorQuantity);
         Vector3 position = transform.position;
         Vector3 horizontalOffset = new Vector3(_horizontalStep, 0, 0);
         Vector3 verticalOffset = new Vector3(0, _verticalStep, 0);
         Vector3 currentOffset = new Vector3();
         Transform parent = transform;
         
-        for (int i = 0; i < floorQuantity; i++)
+        for (int i = 0; i < _floorQuantity; i++)
         {
             for (int j = 0; j < ColumnsQuantity; j++)
             {
                 currentOffset = parent.position + horizontalOffset * j + verticalOffset * i;
-                GenerateObjectInPosition(currentOffset, parent);
+                SetCursorIn(currentOffset, parent);
             }
         }
     }
 
-    protected virtual void GetFloorQuantity()
+    protected virtual void SetCursorIn(Vector3 position, Transform parent) // WORKAROUND METHOD NAME
     {
-        _floorQuantity = GetComponentInParent<Generator>().FloorsQuantity;
+        TryGenerateObjectInPosition(position, parent);
     }
 
-    protected virtual void GenerateObjectInPosition(Vector3 position, Transform parent)
+    protected virtual void SetFloorQuantity(int floorQuantity)
+    {
+        _floorQuantity = floorQuantity;
+    }
+
+    protected virtual bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
     {
         Instantiate(_obstacle, position, Quaternion.identity, parent);
+        return true;
     }
+    
+    // protected virtual void GenerateObjectInPosition(Vector3 position, Transform parent)
+    // {
+    //     Instantiate(_obstacle, position, Quaternion.identity, parent);
+    //     // return true;
+    // }
 }

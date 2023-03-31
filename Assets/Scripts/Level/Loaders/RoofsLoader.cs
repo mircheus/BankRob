@@ -8,11 +8,15 @@ public class RoofsLoader : Loader
     
     private float _groundOffset;
 
-    protected override void Start()
+    // protected override void Start()
+    // {
+    //     base.Start();
+    // }
+
+    public void GenerateFloor()
     {
         CalculateFloorOffset();
         SetFloor();
-        base.Start();
     }
     
     private void CalculateFloorOffset()
