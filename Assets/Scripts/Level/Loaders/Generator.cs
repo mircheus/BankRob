@@ -13,11 +13,15 @@ public class Generator : MonoBehaviour
 
     [SerializeField] private RoofsLoader _roofsLoader;
     [SerializeField] private KeyLoader _keyLoader;
+    [SerializeField] private WallsFxPool _wallsFxPool;
     
     private bool[,] _obstaclesGrid; // может через неё сделать 
-    
+    private Vector3[] _obstaclesPositions;
+    private List<Obstacle> _obstacles;
+
     public int FloorsQuantity => _floorsQuantity;
     public bool[,] ObstaclesGrid => _obstaclesGrid;
+    public List<Obstacle> Obstacles => _obstacles;
 
     private void Start()
     {
@@ -27,5 +31,12 @@ public class Generator : MonoBehaviour
         _obstacleLoader.ArrangeObjects(_floorsQuantity);
         List<Vector3> keyPositions = _obstacleLoader.PossibleKeyPositions;
         _keyLoader.ArrangeKeys(keyPositions);
+        // _obstacles = _obstacleLoader.Obstacles;
+        _wallsFxPool.SubscribeFxPool(_obstacles);
+    }
+
+    private void OnDisable()
+    {
+        
     }
 }

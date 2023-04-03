@@ -21,9 +21,9 @@ public class ObstacleCrusher : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Obstacle wall))
+        if (collision.gameObject.TryGetComponent(out Obstacle obstacle))
         {
-            _obstacleToCrush = wall;
+            _obstacleToCrush = obstacle;
             _obstacleToCrush.Destroyed += OnObstacleDestroyed;
             ObstacleCollided?.Invoke();
         }
@@ -39,7 +39,7 @@ public class ObstacleCrusher : MonoBehaviour
         _damage *= level;
     }
 
-    public void OnObstacleDestroyed()
+    public void OnObstacleDestroyed(Vector3 position)
     {
         ObstacleDestroyed?.Invoke();
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;

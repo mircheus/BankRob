@@ -11,11 +11,15 @@ public class Obstacle : MonoBehaviour
     // [SerializeField] private GameObject _undamagedForm;
     // [SerializeField] private GameObject _damagedForm;
     [SerializeField] private GameObject[] _damagedForms;
+    [SerializeField] private ParticleSystem _damageFX;
+    [SerializeField] private ParticleSystem _destroyFX;
+    [SerializeField] private float _destroyDelay;
 
     private int _damageFormsAmount;
     private int _currentDamage = 0;
+    private BoxCollider _boxCollider;
     
-    public event UnityAction Destroyed;
+    public event UnityAction<Vector3> Destroyed;
 
     private void OnEnable()
     {
@@ -37,18 +41,20 @@ public class Obstacle : MonoBehaviour
     public void ApplyDamage(int damage)
     {
         _health -= damage;
-        // SwitchToDamagedForm();
         NextDamageForm();
+        _damageFX.Play();
         
         if (_health <= 0)
         {
-            Destroyed?.Invoke();
+            Destroyed?.Invoke(transform.position);
         }
     }
 
-    private void OnDestroyed()
+    private void OnDestroyed(Vector3 position)
     {
         gameObject.SetActive(false);
+        // _destroyFX.Play();
+        // StartCoroutine(DisableAfterSomeTime());
     }
 
     private void InitializeUndamagedForm()
@@ -65,12 +71,6 @@ public class Obstacle : MonoBehaviour
         // _damagedForm.SetActive(false); // для одной damage формы
     }
 
-    // private void SwitchToDamagedForm()
-    // {
-    //     // _undamagedForm.SetActive(false);
-    //     _damagedForm.SetActive(true);
-    // }
-
     private void NextDamageForm()
     {
         if (_currentDamage + 1 < _damageFormsAmount)
@@ -79,5 +79,12 @@ public class Obstacle : MonoBehaviour
             _currentDamage++;
             _damagedForms[_currentDamage].SetActive(true);
         }
+    }
+
+    private IEnumerator DisableAfterSomeTime()
+    {
+        yield return new WaitForSeconds(_destroyDelay);
+        Debug.Log("Waited destroy delay");
+        gameObject.SetActive(false);
     }
 }
