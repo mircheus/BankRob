@@ -5,6 +5,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static System.Net.WebUtility;
 
 public class Shop : MonoBehaviour
 {
@@ -12,22 +13,26 @@ public class Shop : MonoBehaviour
     [SerializeField] private Robber _robberPrefab;
     [SerializeField] private RobbersPool _robbersPool;
     [SerializeField] private PlayerData _playerData;
+    
     [Header("Shop settings")]
     [SerializeField] private int _robberPrice;
+    [SerializeField] private int _poolCapacity;
     
     private List<Robber> _robbers = new List<Robber>();
+    private bool IsEnoughMoney => _playerData.MoneyAmount >= _robberPrice;
 
     public event UnityAction NotEnoughMoney;
     public event UnityAction AllSlotsBusy;
     
     private void Start()
     {
-        InstantiateRobbers(_slots.Length);
+        InstantiateRobbers(_poolCapacity);
     }
 
     public void TryBuyRobber()
     {
-        if (_playerData.MoneyAmount >= _robberPrice)
+        // if (_playerData.MoneyAmount >= _robberPrice)
+        if (IsEnoughMoney)
         {
             if (IsAnySlotAvailable())
             {

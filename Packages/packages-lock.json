@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.agava.webutility": {
+      "version": "https://github.com/forcepusher/com.agava.webutility.git#2.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "547838c97590eacc47490a4137e54c7882b38f30"
+    },
+    "com.agava.yandexgames": {
+      "version": "https://github.com/forcepusher/com.agava.yandexgames.git#11.2.1",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "93cd4254e13830886ba1c2b3054481844372140c"
+    },
     "com.unity.cinemachine": {
       "version": "2.8.9",
       "depth": 0,
@@ -43,7 +57,7 @@
         "com.unity.editorcoroutines": "1.0.0",
         "com.unity.performance.profile-analyzer": "1.1.1",
         "com.unity.test-framework": "1.1.31",
-        "com.unity.testtools.codecoverage": "1.2.2"
+        "com.unity.testtools.codecoverage": "1.0.1"
       }
     },
     "com.unity.ide.rider": {
@@ -124,7 +138,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.testtools.codecoverage": {
-      "version": "1.2.2",
+      "version": "1.0.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {

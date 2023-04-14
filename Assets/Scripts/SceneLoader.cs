@@ -23,7 +23,7 @@ public class SceneLoader : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void LoadProgressionScene()
+    public void LoadFxTestingScene()
     {
         SceneManager.LoadScene(3);
     }

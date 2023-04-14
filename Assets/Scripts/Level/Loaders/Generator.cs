@@ -32,7 +32,7 @@ public class Generator : MonoBehaviour
         List<Vector3> keyPositions = _obstacleLoader.PossibleKeyPositions;
         _keyLoader.ArrangeKeys(keyPositions);
         // _obstacles = _obstacleLoader.Obstacles;
-        _wallsFxPool.SubscribeFxPool(_obstacles);
+        // _wallsFxPool.SubscribeFxPool(_obstacles);
     }
 
     private void OnDisable()

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class ObstacleLoader : Loader
 {
     [SerializeField] private protected Obstacle[] _obstacles;
+    
     private readonly List<Vector3> _possibleKeyPositions = new List<Vector3>();
     private List<Obstacle> _obstaclesList = new List<Obstacle>();
 

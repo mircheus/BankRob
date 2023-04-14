@@ -36,6 +36,7 @@ public class Obstacle : MonoBehaviour
         _damageFormsAmount = _damagedForms.Length;
         _currentDamage = 0;
         InitializeUndamagedForm();
+        _boxCollider = GetComponent<BoxCollider>();
     }
 
     public void ApplyDamage(int damage)
@@ -52,9 +53,11 @@ public class Obstacle : MonoBehaviour
 
     private void OnDestroyed(Vector3 position)
     {
-        gameObject.SetActive(false);
-        // _destroyFX.Play();
-        // StartCoroutine(DisableAfterSomeTime());
+        // gameObject.SetActive(false);
+        _destroyFX.Play();
+        _boxCollider.isTrigger = true;
+        _damagedForms[_currentDamage].SetActive(false);
+        StartCoroutine(DisableAfterSomeTime());
     }
 
     private void InitializeUndamagedForm()
