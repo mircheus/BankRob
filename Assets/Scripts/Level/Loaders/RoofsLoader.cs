@@ -5,13 +5,16 @@ using UnityEngine;
 public class RoofsLoader : Loader
 {
     [SerializeField] private Ground _ground;
-    
-    private float _groundOffset;
+    [SerializeField] private Material _evenMaterial;
+    [SerializeField] private Material _oddMaterial;
 
-    // protected override void Start()
-    // {
-    //     base.Start();
-    // }
+    private float _groundOffset;
+    private int _counter;
+
+    private void Start()
+    {
+        _counter = 1;
+    }
 
     public void GenerateFloor()
     {
@@ -28,5 +31,23 @@ public class RoofsLoader : Loader
     {
         Vector3 offset = new Vector3(0, _groundOffset, 0);
         _ground.transform.position = offset;
+    }
+
+    protected override bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
+    {
+        if ((_counter % 2) == 0)
+        {
+            GameObject roof = Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
+            roof.GetComponentInChildren<MeshRenderer>().material = _evenMaterial;
+            _counter++;
+        }
+        else
+        {
+            GameObject roof = Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
+            roof.GetComponentInChildren<MeshRenderer>().material = _oddMaterial;
+            _counter++;
+        }
+        
+        return true;
     }
 }

@@ -25,7 +25,7 @@ public class Win : MonoBehaviour
         {
             if (slot.IsFilled)
             {
-                _playerData.UnsubscribeFromKeyCollector(slot);
+                _playerData.UnsubscribeFromKeyCollector(slot.Robber);
             }
         }
     }

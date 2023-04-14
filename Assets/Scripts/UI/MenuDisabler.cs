@@ -11,6 +11,7 @@ public class MenuDisabler : MonoBehaviour
     [SerializeField] private GameObject _warningPanel;
     [SerializeField] private GameObject _notEnoughMoneyPanel;
     [SerializeField] private GameObject _allSlotsBusyPanel;
+    [SerializeField] private GameObject _robbersGrid;
     
     private void OnEnable()
     {
@@ -25,6 +26,7 @@ public class MenuDisabler : MonoBehaviour
     private void DisablePreparingMenu()
     {
         _menu.SetActive(false);
+        _robbersGrid.SetActive(false);
     }
 
     public void DisableWarningMenu()

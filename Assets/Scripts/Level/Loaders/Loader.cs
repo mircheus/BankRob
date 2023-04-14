@@ -12,17 +12,7 @@ public class Loader : MonoBehaviour
     private float _horizontalStep = -7.5f;
     private protected int _verticalStep = -9;
     private bool[,] _buildingGrid;
-    // private List<Vector3> _obstaclePositions = new List<Vector3>();
-    // private List<GameObject> _obstacles = new List<GameObject>();
 
-    // public List<GameObject> Obstacles => _obstacles;
-
-    // [Header("DEBUG")]
-    // [SerializeField] private List<Vector3> _potentialKeyPositions;
-
-    // public List<Vector3> PotentialKeyPositions => _potentialKeyPositions;
-    // public bool[,] BuildingGrid => _buildingGrid;
-    
     public void ArrangeObjects(int floorQuantity)
     {
         SetFloorQuantity(floorQuantity);

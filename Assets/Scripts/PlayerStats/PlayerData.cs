@@ -38,14 +38,14 @@ public class PlayerData : MonoBehaviour
         _moneyAmount -= money;
     }
     
-    public void SubscribeToKeyCollector(Slot slot)
+    public void SubscribeToKeyCollector(Robber robber)
     {
-        slot.GetComponentInChildren<KeyCollector>().KeyCollected += OnKeyCollected;
+        robber.GetComponent<KeyCollector>().KeyCollected += OnKeyCollected;
     }
 
-    public void UnsubscribeFromKeyCollector(Slot slot)
+    public void UnsubscribeFromKeyCollector(Robber robber) 
     {
-        slot.GetComponentInChildren<KeyCollector>().KeyCollected -= OnKeyCollected;
+        robber.GetComponent<KeyCollector>().KeyCollected -= OnKeyCollected;
     }
 
     private void OnKeyCollected()

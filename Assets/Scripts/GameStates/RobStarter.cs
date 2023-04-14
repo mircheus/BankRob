@@ -36,9 +36,10 @@ public class RobStarter : MonoBehaviour
         {
             if (slot.IsFilled)
             {
-                slot.GetComponentInChildren<Robber>().ActivateMovement();
-                _playerData.SubscribeToKeyCollector(slot);
-                _savedRobber = slot.GetComponentInChildren<Robber>();
+                slot.Robber.ActivateMovement();
+                _playerData.SubscribeToKeyCollector(slot.Robber);
+                _savedRobber = slot.Robber;
+                slot.Robber.transform.SetParent(null, true);
                 _downCollider.SetActive(false);
             }
         }
