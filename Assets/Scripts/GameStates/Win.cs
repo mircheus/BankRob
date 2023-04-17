@@ -28,5 +28,5 @@ public class Win : MonoBehaviour
                 _playerData.UnsubscribeFromKeyCollector(slot.Robber);
             }
         }
-    }
+    } 
 }
