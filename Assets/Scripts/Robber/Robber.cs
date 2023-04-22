@@ -9,6 +9,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _bodyMesh;
     [SerializeField] private SkinnedMeshRenderer _sweaterMesh;
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
+    [SerializeField] private GameObject _axe;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
     
     private int _level = 1;
@@ -57,6 +58,7 @@ public class Robber : MonoBehaviour
     public void ActivateMovement()
     {
         _robberMovement.enabled = true;
+        _axe.SetActive(true);
         _animationSwitcher.PlayAttackAnimation();
     }
 

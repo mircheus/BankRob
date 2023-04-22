@@ -61,6 +61,11 @@ public class Slot : MonoBehaviour
         _isFilled = false;
     }
 
+    public void PlaceNewRobber(Robber robber)
+    {
+        PlaceRobberInCellCenter(robber.GetComponent<RobberDragger>());
+    }
+
     private void PlaceRobberInCellCenter(RobberDragger robberDragger)
     {
         Transform robberTransform = robberDragger.transform;

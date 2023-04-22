@@ -57,8 +57,8 @@ public class Shop : MonoBehaviour
         {
             if (_slots[i].IsFilled == false)
             {
-                robber.transform.position = _slots[i].transform.position;
                 robber.gameObject.SetActive(true);
+                _slots[i].PlaceNewRobber(robber);
             }
         }
     }

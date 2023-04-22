@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4465486622584202228, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
+      propertyPath: _axe
+      value: 
+      objectReference: {fileID: 1280748468018563988}
     - target: {fileID: 4465486622593552452, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
       propertyPath: m_Name
       value: Robber_Stickman_kickaxe Variant
@@ -73,6 +77,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PickAxeV1
       objectReference: {fileID: 0}
+    - target: {fileID: 2651747729594002529, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3424765613553645275, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -119,3 +127,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
+--- !u!1 &1280748468018563988 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2651747729594002529, guid: fcdb12c0011022649b9ec1569d29917d, type: 3}
+  m_PrefabInstance: {fileID: 3822086520223393781}
+  m_PrefabAsset: {fileID: 0}
