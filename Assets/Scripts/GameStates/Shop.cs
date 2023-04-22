@@ -31,7 +31,6 @@ public class Shop : MonoBehaviour
 
     public void TryBuyRobber()
     {
-        // if (_playerData.MoneyAmount >= _robberPrice)
         if (IsEnoughMoney)
         {
             if (IsAnySlotAvailable())

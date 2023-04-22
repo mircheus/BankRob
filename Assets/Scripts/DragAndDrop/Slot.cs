@@ -12,6 +12,7 @@ public class Slot : MonoBehaviour
     private RobberDragger _robberDragger;
     private Robber _robber;
     private bool _isFilled;
+    private Vector3 _offset = new Vector3(0f, -3.5f, 0);
     
     public bool IsFilled => _isFilled;
     public Robber Robber => _robber;
@@ -64,7 +65,7 @@ public class Slot : MonoBehaviour
     {
         Transform robberTransform = robberDragger.transform;
         robberTransform.SetParent(gameObject.transform);
-        robberTransform.position = transform.position;
+        robberTransform.position = transform.position + _offset;
     }
 
     private void CombineRobbers(Robber externalRobberDragger)
