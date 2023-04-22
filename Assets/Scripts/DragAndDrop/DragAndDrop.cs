@@ -6,23 +6,17 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 public class DragAndDrop : MonoBehaviour
-{ 
-       [SerializeField] private InputAction _mouseClick;
-       [SerializeField] private InputAction _touch;
+{
+       [SerializeField] private InputAction _press;
+       [SerializeField] private InputAction _screenPosition;
        [SerializeField] private float _dragPhysicsSpeed = 10;
        [SerializeField] private float _dragSpeed;
        [SerializeField] private LayerMask _draggableLayer;
-
-       [Header("Tutor Try")] 
-       [SerializeField] private InputAction _press;
-       [SerializeField] private InputAction _screenPosition;
-       
 
        private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
        private Vector3 _velocity = Vector3.zero;
        private Camera _mainCamera;
        private bool _isDragging = false;
-       private InputAction.CallbackContext _currentContext;
 
        private void Awake()
        {
@@ -47,18 +41,8 @@ public class DragAndDrop : MonoBehaviour
 
        private void TouchPressed(InputAction.CallbackContext context)
        {
-              Vector2 touchPosition = _screenPosition.ReadValue<Vector2>();
-              Ray ray = _mainCamera.ScreenPointToRay(touchPosition);
-              SendRay(ray);
-       }
-
-       private void TouchReleased(InputAction.CallbackContext context)
-       {
-              _isDragging = false;
-       }
-
-       private void SendRay(Ray ray)
-       {
+              Ray ray = _mainCamera.ScreenPointToRay(_screenPosition.ReadValue<Vector2>());
+ 
               if (Physics.Raycast(ray, out RaycastHit hit, 10000f, _draggableLayer))
               {
                      bool isDraggable = hit.transform.gameObject.TryGetComponent(out IDrag iDragComponent);
@@ -67,7 +51,12 @@ public class DragAndDrop : MonoBehaviour
                      {
                             StartCoroutine(DragUpdate(hit.collider.gameObject));
                      }
-              }         
+              }   
+       }
+
+       private void TouchReleased(InputAction.CallbackContext context)
+       {
+              _isDragging = false;
        }
        
        private IEnumerator DragUpdate(GameObject clickedObject)
