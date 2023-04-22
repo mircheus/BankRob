@@ -59,6 +59,7 @@ public class Shop : MonoBehaviour
             {
                 robber.gameObject.SetActive(true);
                 _slots[i].PlaceNewRobber(robber);
+                break;
             }
         }
     }

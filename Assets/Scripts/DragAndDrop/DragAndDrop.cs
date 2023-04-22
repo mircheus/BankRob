@@ -86,6 +86,7 @@ public class DragAndDrop : MonoBehaviour
                      {
                             Vector3 tempRay = ray.GetPoint(initialDistance);
                             Vector3 target = new Vector3(tempRay.x, tempRay.y, initialCoordinateZ);
+                            target += _offsetVector;
                             // clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, ray.GetPoint(initialDistance), ref _velocity, _mouseDragSpeed);
                             clickedObject.transform.position = Vector3.SmoothDamp(clickedObject.transform.position, target, ref _velocity, _dragSpeed);
                             yield return null;

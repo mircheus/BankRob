@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(BoxCollider))]
 public class Slot : MonoBehaviour
 {
     [SerializeField] private Transform _downTarget;
-    
+
+    private Image _image;
     private RobberDragger _robberDragger;
     private Robber _robber;
     private bool _isFilled;
@@ -24,7 +26,8 @@ public class Slot : MonoBehaviour
         if(other.gameObject.TryGetComponent(out RobberDragger robberDragger) && _isFilled == false)
         {
             robberDragger.SetLastParentTransform(transform);
-            
+            Debug.Log("stay");
+
             if (robberDragger.IsDraggingNow == false)
             {
                 _robberDragger = robberDragger;
