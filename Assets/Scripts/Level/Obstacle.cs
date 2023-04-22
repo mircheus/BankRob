@@ -64,7 +64,7 @@ public class Obstacle : MonoBehaviour
     {
         // _undamagedForm.SetActive(true);
         _damagedForms[0].SetActive(true);
-        Debug.Log("point");
+        // Debug.Log("point");
 
         for (int i = 1; i < _damagedForms.Length; i++)
         {
