@@ -22,34 +22,36 @@ public class LevelGenerator : MonoBehaviour
     private bool[,] _obstaclesGrid; // может через неё сделать 
     private Vector3[] _obstaclesPositions;
     private List<Obstacle> _obstacles;
+    private int _obstaclesLevel;
 
     public int FloorsQuantity => _floorsQuantity;
+    public int ObstaclesLevel => _obstaclesLevel;
     public bool[,] ObstaclesGrid => _obstaclesGrid;
     public List<Obstacle> Obstacles => _obstacles;
 
     private void OnEnable()
     {
-        // _playerData.DataLoaded += OnDataLoaded;
         _progression.LevelParametersPrepared += OnLevelParametersPrepared;
     }
 
     private void OnDisable()
     {
-        // _playerData.DataLoaded -= OnDataLoaded;
         _progression.LevelParametersPrepared -= OnLevelParametersPrepared;
     }
 
     private void OnLevelParametersPrepared()
     {
         _floorsQuantity = _progression.FloorsQuantity;
-        Debug.Log(_floorsQuantity);
-        _obstaclesGrid = new bool[_floorsQuantity, ColumnsQuantity];
+        _obstaclesLevel = _progression.ObstaclesLevel;
+        
         _roofsLoader.ArrangeObjects(_floorsQuantity);
         _roofsLoader.GenerateFloor();
+        
+        _obstaclesGrid = new bool[_floorsQuantity, ColumnsQuantity];
+        _obstacleLoader.SetObstaclesLevel(_obstaclesLevel);
         _obstacleLoader.ArrangeObjects(_floorsQuantity);
         List<Vector3> keyPositions = _obstacleLoader.PossibleKeyPositions;
+        
         _keyLoader.ArrangeKeys(keyPositions);
     }
-    
-    // private void SetLevelParameters(int floorsQuantity, int )
 }

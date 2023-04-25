@@ -9,7 +9,8 @@ public class ObstacleLoader : Loader
     
     private readonly List<Vector3> _possibleKeyPositions = new List<Vector3>();
     private List<Obstacle> _obstaclesList = new List<Obstacle>();
-
+    private int _obstaclesLevel;
+    
     public List<Vector3> PossibleKeyPositions => _possibleKeyPositions;
 
     protected override void SetFloorQuantity(int floorQuantity)
@@ -29,11 +30,16 @@ public class ObstacleLoader : Loader
     {
         if (Random.Range(0, 2) == 1)
         {
-            int randomIndex = Random.Range(0, _obstacles.Length);
+            int randomIndex = Random.Range(0, _obstaclesLevel);
             Instantiate(_obstacles[randomIndex], position, Quaternion.identity, parent);
             return true;
         }
 
         return false;
+    }
+
+    public void SetObstaclesLevel(int obstaclesLevel)
+    {
+        _obstaclesLevel = obstaclesLevel;
     }
 }

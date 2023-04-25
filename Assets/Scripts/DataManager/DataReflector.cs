@@ -10,7 +10,8 @@ public class DataReflector : MonoBehaviour
     [SerializeField] private TMP_Text _keysField;
     [SerializeField] private TMP_Text _levelCounterField;
     [SerializeField] private TMP_Text _floors;
-    
+    [SerializeField] private TMP_Text _obstaclesLevel;
+
     [Header("Data Sources")]
     [SerializeField] private DataManager _dataManager;
     [SerializeField] private PlayerData _playerData;
@@ -41,5 +42,6 @@ public class DataReflector : MonoBehaviour
         _moneyField.text = Convert.ToString(_playerData.MoneyAmount);
         _levelCounterField.text = Convert.ToString(_playerData.CompletedLevelsCounter);
         _floors.text = Convert.ToString(_levelGenerator.FloorsQuantity);
+        _obstaclesLevel.text = Convert.ToString(_levelGenerator.ObstaclesLevel);
     }
 }
