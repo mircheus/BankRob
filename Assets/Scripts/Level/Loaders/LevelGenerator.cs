@@ -51,7 +51,8 @@ public class LevelGenerator : MonoBehaviour
         _obstacleLoader.SetObstaclesLevel(_obstaclesLevel);
         _obstacleLoader.ArrangeObjects(_floorsQuantity);
         List<Vector3> keyPositions = _obstacleLoader.PossibleKeyPositions;
-        
+
+        _keyLoader.SetKeysQuantity(_progression.KeysQuantity);
         _keyLoader.ArrangeKeys(keyPositions);
     }
 }

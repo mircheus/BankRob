@@ -13,9 +13,11 @@ public class Progression : MonoBehaviour
     private int _levelsCounter;
     private int _floorsQuantity;
     private int _obstaclesLevel;
+    private int _keysQuantity;
 
     public int ObstaclesLevel => _obstaclesLevel;
     public int FloorsQuantity => _floorsQuantity;
+    public int KeysQuantity => _keysQuantity;
 
     private void OnEnable()
     {
@@ -38,6 +40,7 @@ public class Progression : MonoBehaviour
         int levelsPassed = _playerData.CompletedLevelsCounter;
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed);
         _obstaclesLevel = SetObstaclesLevel(levelsPassed);
+        _keysQuantity = SetKeysQuantity(levelsPassed);
     }
     
     private int CalculateFloorsQuantity(int levelsPassed) // DRAFT mechanic of progression
@@ -82,5 +85,15 @@ public class Progression : MonoBehaviour
         }
 
         return -1;
+    }
+
+    private int SetKeysQuantity(int levelsPassed) // DRAFT mechanic of progression
+    {
+        if (levelsPassed >= 3)
+        {
+            return 2;
+        }
+
+        return 0;
     }
 }

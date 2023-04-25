@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEditor;
 using UnityEngine;
 
 public class KeyLoader : Loader
 {
     [SerializeField] private protected Key _keyPrefab;
-    [SerializeField] private int _keysAmount;
+    private int _keysAmount;
     
     public void ArrangeKeys(List<Vector3> positions)
     {
@@ -28,5 +29,10 @@ public class KeyLoader : Loader
         }
 
         return false;
+    }
+
+    public void SetKeysQuantity(int keysQuantity)
+    {
+        _keysAmount = keysQuantity;
     }
 }
