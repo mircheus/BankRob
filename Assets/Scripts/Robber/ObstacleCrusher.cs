@@ -36,7 +36,8 @@ public class ObstacleCrusher : MonoBehaviour
 
     public void IncreaseDamage(int level)
     {
-        _damage *= level;
+        _damage += 2;
+        Debug.Log($"currentDamage: {_damage}");
     }
 
     public void OnObstacleDestroyed(Vector3 position)
