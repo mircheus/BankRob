@@ -16,6 +16,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _completedLevelsCounter;
 
     public event UnityAction DataUpdated;
+    public event UnityAction DataLoaded;
     
     public int KeysAmount => _keysAmount;
     public int MoneyAmount => _moneyAmount;
@@ -36,6 +37,7 @@ public class PlayerData : MonoBehaviour
     public void PayForRobber(int money)
     {
         _moneyAmount -= money;
+        DataUpdated?.Invoke();
     }
     
     public void SubscribeToKeyCollector(Robber robber)
@@ -48,6 +50,15 @@ public class PlayerData : MonoBehaviour
         robber.GetComponent<KeyCollector>().KeyCollected -= OnKeyCollected;
     }
 
+    public void ResetPlayerData()
+    {
+        _keysAmount = 0;
+        _moneyAmount = 100;
+        _completedLevelsCounter = 0;
+        SavePlayerStats();
+        DataUpdated?.Invoke();
+    }
+
     private void OnKeyCollected()
     {
         _keysAmount++;
@@ -56,7 +67,9 @@ public class PlayerData : MonoBehaviour
 
     private void OnPreparing()
     {
+        Debug.Log("OnPreparing invoked");
         LoadDataFromFile();
+        DataLoaded?.Invoke();
     }
 
     private void OnBankRobbed()
@@ -76,7 +89,8 @@ public class PlayerData : MonoBehaviour
 
     private void SavePlayerStats()
     {
-        Data dataToSave = new Data(_moneyAmount, _keysAmount, ++_completedLevelsCounter); 
+        _completedLevelsCounter++;
+        Data dataToSave = new Data(_moneyAmount, _keysAmount, _completedLevelsCounter); 
         _dataManager.SaveData(dataToSave);
     }
 }

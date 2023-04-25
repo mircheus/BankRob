@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: _axe
       value: 
       objectReference: {fileID: 1280748468018563988}
+    - target: {fileID: 4465486622584202231, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
+      propertyPath: _fallingSpeed
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4465486622593552452, guid: 0bd404c58c27fd54a83a8c1301da6dba, type: 3}
       propertyPath: m_Name
       value: Robber_Stickman_kickaxe Variant
