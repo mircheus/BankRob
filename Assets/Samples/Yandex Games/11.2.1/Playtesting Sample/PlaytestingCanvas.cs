@@ -129,7 +129,7 @@ namespace Agava.YandexGames.Samples
 
         public void OnGetPlayerDataButtonClick()
         {
-            PlayerAccount.GetPlayerData((data) => _cloudSaveDataInputField.text = data);
+            PlayerAccount.GetPlayerData((data)=> _cloudSaveDataInputField.text = data);
         }
 
         public void OnGetDeviceTypeButtonClick()
