@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Agava.YandexGames;
 
 public class PlayerData : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _keysAmount;
     [SerializeField] private int _moneyAmount;
     [SerializeField] private int _completedLevelsCounter;
-
+    [SerializeField] private int _allMoneyCounter;
+    
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
     
@@ -55,6 +57,7 @@ public class PlayerData : MonoBehaviour
         _keysAmount = 0;
         _moneyAmount = 100;
         _completedLevelsCounter = 0;
+        _allMoneyCounter = 0;
         SavePlayerStats();
         DataUpdated?.Invoke();
     }
@@ -75,6 +78,15 @@ public class PlayerData : MonoBehaviour
     private void OnBankRobbed()
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
+        _allMoneyCounter += _robbery.MoneyRewardAmount;
+        
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (PlayerAccount.IsAuthorized)
+        {
+            Leaderboard.SetScore("Money", _allMoneyCounter); // Magic STRING
+        }
+#endif
+        
         SavePlayerStats();
     }
 

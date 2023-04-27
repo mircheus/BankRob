@@ -57,7 +57,7 @@ public class Progression : MonoBehaviour
         {
             return 5;
         }
-        else if (levelsPassed >= 10 && levelsPassed < 15)
+        else if (levelsPassed >= 10)
         {
             return 6;
         }
@@ -79,7 +79,7 @@ public class Progression : MonoBehaviour
         {
             return 3;
         }
-        else if (levelsPassed >= 10 && levelsPassed < 15)
+        else if (levelsPassed >= 10)
         {
             return 4;
         }

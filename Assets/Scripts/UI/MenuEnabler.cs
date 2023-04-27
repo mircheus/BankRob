@@ -15,6 +15,7 @@ public class MenuEnabler : MonoBehaviour
     [SerializeField] private GameObject _warningPanel;
     [SerializeField] private GameObject _notEnoughMoneyPanel;
     [SerializeField] private GameObject _allSlotsBusyPanel;
+    [SerializeField] private GameObject _leaderboard;
 
     private void OnEnable()
     {
@@ -65,5 +66,10 @@ public class MenuEnabler : MonoBehaviour
     private void ShowAllSlotsBusy()
     {
         _allSlotsBusyPanel.SetActive(true);
+    }
+
+    public void EnableLeaderboard()
+    {
+        _leaderboard.SetActive(true);
     }
 }

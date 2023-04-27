@@ -12,6 +12,7 @@ public class MenuDisabler : MonoBehaviour
     [SerializeField] private GameObject _notEnoughMoneyPanel;
     [SerializeField] private GameObject _allSlotsBusyPanel;
     [SerializeField] private GameObject _robbersGrid;
+    [SerializeField] private GameObject _leaderboard;
     
     private void OnEnable()
     {
@@ -42,5 +43,10 @@ public class MenuDisabler : MonoBehaviour
     public void DisableAllSlotsBusy()
     {
         _allSlotsBusyPanel.SetActive(false);
+    }
+
+    public void DisableLeaderboard()
+    {
+        _leaderboard.SetActive(false);
     }
 }
