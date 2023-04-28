@@ -5,6 +5,8 @@ using Agava.YandexGames;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Windows;
+using File = System.IO.File;
 
 public class DataManager : MonoBehaviour
 {
@@ -41,6 +43,13 @@ public class DataManager : MonoBehaviour
         {
             // Debug.Log("ERROR");
         }
+    }
+
+    public bool IsLoadDataPersists()
+    {
+        string path = Application.persistentDataPath + _relativePath;
+
+        return File.Exists(path);
     }
 
     public Data LoadData()

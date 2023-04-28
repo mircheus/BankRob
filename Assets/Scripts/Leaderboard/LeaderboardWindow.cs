@@ -21,7 +21,7 @@ public class LeaderboardWindow : MonoBehaviour
     private string _leaderboardName = "Money";
     private int _playerScore = 0;
 
-    private void Start()
+    private void OnEnable()
     {
         OpenYandexLeaderboard();
     }

@@ -16,7 +16,7 @@ public class Robbery : MonoBehaviour
     public event UnityAction RobbedVaultsCounterChanged;
 
     public int TargetQuantity => _targetQuantity;
-    public int MoneyRewardAmount => _moneyRewardAmount;
+    public int MoneyRewardAmount => _moneyRewardAmount * _targetQuantity;
     public int RobbedVaultsCounter => _robbedVaultsCounter;
 
     private void OnEnable()
@@ -48,11 +48,12 @@ public class Robbery : MonoBehaviour
         if (IsTargetReached(_robbedVaultsCounter))
         {
             BankRobbed?.Invoke();
+            Debug.Log("BankRobbed_invoked");
         }
     }
 
     private bool IsTargetReached(int currentQuantity)
     {
-        return currentQuantity >= _targetQuantity;
+        return currentQuantity == _targetQuantity;
     }
 }

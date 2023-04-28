@@ -24,5 +24,7 @@ public class ScreenAdaptation : MonoBehaviour
             transform.position = _desktopDistance;
             Debug.Log(Screen.height);
         }
+        
+        Debug.Log(Screen.height);
     }
 }

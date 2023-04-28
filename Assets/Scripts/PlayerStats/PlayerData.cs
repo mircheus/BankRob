@@ -16,6 +16,9 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _moneyAmount;
     [SerializeField] private int _completedLevelsCounter;
     [SerializeField] private int _allMoneyCounter;
+
+    [Header("First level PlayerStats values")] 
+    [SerializeField] private int _initMoney;
     
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -70,7 +73,6 @@ public class PlayerData : MonoBehaviour
 
     private void OnPreparing()
     {
-        Debug.Log("OnPreparing invoked");
         LoadDataFromFile();
         DataLoaded?.Invoke();
     }
@@ -92,10 +94,22 @@ public class PlayerData : MonoBehaviour
 
     private void LoadDataFromFile()
     {
-        Data loadedData = _dataManager.LoadData();
-        _moneyAmount = loadedData.Money;
-        _keysAmount = loadedData.Keys;
-        _completedLevelsCounter = loadedData.CompletedLevelsCounter;
+        if (_dataManager.IsLoadDataPersists())
+        {
+            Data loadedData = _dataManager.LoadData();
+            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter);
+        }
+        else
+        {
+            SetPlayerStats(_initMoney, 0, 0);
+        } 
+    }
+
+    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount)
+    {
+        _moneyAmount = moneyAmount;
+        _keysAmount = keysAmount;
+        _completedLevelsCounter = completedLevelsAmount;
         DataUpdated?.Invoke();
     }
 
