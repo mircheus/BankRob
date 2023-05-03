@@ -6,7 +6,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Agava.YandexGames;
 using UnityEngine.InputSystem.LowLevel;
-
+[ExecuteInEditMode]
 public class LeaderboardWindow : MonoBehaviour
 {
     private const int MaxLeadersRows = 8;
@@ -23,7 +23,8 @@ public class LeaderboardWindow : MonoBehaviour
 
     private void OnEnable()
     {
-        OpenYandexLeaderboard();
+        // OpenYandexLeaderboard();
+        FillDataTesting();
     }
 
     private void FillDataTesting()
