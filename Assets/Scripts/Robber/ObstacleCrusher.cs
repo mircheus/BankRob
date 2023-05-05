@@ -26,6 +26,7 @@ public class ObstacleCrusher : MonoBehaviour
             _obstacleToCrush = obstacle;
             _obstacleToCrush.Destroyed += OnObstacleDestroyed;
             ObstacleCollided?.Invoke();
+            // Attack();
         }
     }
 
@@ -37,7 +38,7 @@ public class ObstacleCrusher : MonoBehaviour
     public void IncreaseDamage(int level)
     {
         _damage += 2;
-        Debug.Log($"currentDamage: {_damage}");
+        // Debug.Log($"currentDamage: {_damage}");
     }
 
     public void OnObstacleDestroyed(Vector3 position)

@@ -18,16 +18,15 @@ public class ScreenAdaptation : MonoBehaviour
     {
         // SetCameraDistance();
         float aspectRatio = (float)Screen.width / (float)Screen.height;
-        Debug.Log(aspectRatio);
-        Debug.Log($"width = {Screen.width}");
-        Debug.Log($"height= {Screen.height}");
+        // Debug.Log(aspectRatio);
+        // Debug.Log($"width = {Screen.width}");
+        // Debug.Log($"height= {Screen.height}");
         SetDistanceBy(aspectRatio);
     }
 
     private void Update()
     {
-        //     SetCameraDistance();
-        // }
+        // SetCameraDistance();
     }
 
     private void SetDistanceBy(float aspectRatio)

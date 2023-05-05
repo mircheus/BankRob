@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Progression : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private Robbery _robbery;
 
     public event UnityAction LevelParametersPrepared;
     
@@ -14,10 +15,12 @@ public class Progression : MonoBehaviour
     private int _floorsQuantity;
     private int _obstaclesLevel;
     private int _keysQuantity;
+    private int _keysFromPreviousLevel;
 
     public int ObstaclesLevel => _obstaclesLevel;
     public int FloorsQuantity => _floorsQuantity;
     public int KeysQuantity => _keysQuantity;
+    public int KeysFromPreviousLevel => _keysFromPreviousLevel;
 
     private void OnEnable()
     {
@@ -41,6 +44,7 @@ public class Progression : MonoBehaviour
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed);
         _obstaclesLevel = SetObstaclesLevel(levelsPassed);
         _keysQuantity = SetKeysQuantity(levelsPassed);
+        _keysFromPreviousLevel = _playerData.KeysAmount;
     }
     
     private int CalculateFloorsQuantity(int levelsPassed) // DRAFT mechanic of progression
@@ -89,10 +93,10 @@ public class Progression : MonoBehaviour
 
     private int SetKeysQuantity(int levelsPassed) // DRAFT mechanic of progression
     {
-        if (levelsPassed >= 3)
-        {
-            return 2;
-        }
+        // if (levelsPassed >= 3)
+        // {
+        //     return 2;
+        // }
 
         return 0;
     }

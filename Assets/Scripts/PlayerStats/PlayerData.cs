@@ -75,6 +75,7 @@ public class PlayerData : MonoBehaviour
     {
         LoadDataFromFile();
         DataLoaded?.Invoke();
+        _keysAmount = 0;
     }
 
     private void OnBankRobbed()

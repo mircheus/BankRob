@@ -5,7 +5,8 @@ public class AnimationSwitcher : MonoBehaviour
    [SerializeField] private ObstacleCrusher obstacleCrusher;
    
    private Animator _animator;
-   private int _attack = Animator.StringToHash("Attack");
+   // private int _attack = Animator.StringToHash("Attack");
+   private int _attack = Animator.StringToHash("axe_attack_overdrive");
    private int _attackingWall = Animator.StringToHash("AttackingWall");
    
    

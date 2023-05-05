@@ -14,19 +14,23 @@ public class RobStarter : MonoBehaviour
     [SerializeField] private GameObject _downCollider;
 
     private Robber _savedRobber;
-
+    
+    [Header("DEBUG")]
+    [SerializeField] private int _howManyRobbers = 0;
+    
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
     
     public void TryStartRob()
     {
-        if (_preparing.GetRobbersQuantity() < _robbery.TargetQuantity)
+        // if (_preparing.GetRobbersQuantity() < _robbery.TargetQuantity)
+        if (_preparing.GetRobbersQuantity() >= _robbery.TargetQuantity)
         {
-            NotEnoughRobbers?.Invoke();
+            StartRob();
         }
         else
         {
-            StartRob();
+            NotEnoughRobbers?.Invoke();
         }
     }
     
@@ -41,6 +45,7 @@ public class RobStarter : MonoBehaviour
                 _savedRobber = slot.Robber;
                 slot.Robber.transform.SetParent(null, true);
                 _downCollider.SetActive(false);
+                _howManyRobbers++;
             }
         }
 
