@@ -24,7 +24,7 @@ public class RobStarter : MonoBehaviour
     public void TryStartRob()
     {
         // if (_preparing.GetRobbersQuantity() < _robbery.TargetQuantity)
-        if (_preparing.GetRobbersQuantity() >= _robbery.TargetQuantity)
+        if (_preparing.GetRobbersQuantity() > 0)
         {
             StartRob();
         }

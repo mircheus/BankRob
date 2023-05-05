@@ -93,10 +93,10 @@ public class Progression : MonoBehaviour
 
     private int SetKeysQuantity(int levelsPassed) // DRAFT mechanic of progression
     {
-        // if (levelsPassed >= 3)
-        // {
-        //     return 2;
-        // }
+        if (levelsPassed >= 3)
+        {
+            return 2;
+        }
 
         return 0;
     }

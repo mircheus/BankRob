@@ -6,24 +6,22 @@ using Scene = UnityEngine.SceneManagement.Scene;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadZeroScene()
+    private const int MainMenuIndex = 0;
+    private const int LoadingIndex = 1;
+    private const int GameLevelIndex = 2;
+
+    public void LoadGameLevelScene()
     {
-        SceneManager.LoadScene(0);
-    }
-    
-    // DEBUG SCENES LIST
-    public void LoadDataSaverScene()
-    {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(GameLevelIndex);
     }
 
-    public void LoadCameraFollowScene()
+    public void LoadLoadingScene()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(LoadingIndex);
     }
 
-    public void LoadFxTestingScene()
+    public void LoadMainMenuScene()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(MainMenuIndex);
     }
 }

@@ -23,8 +23,8 @@ public class LeaderboardWindow : MonoBehaviour
 
     private void OnEnable()
     {
-        // OpenYandexLeaderboard();
-        FillDataTesting();
+        OpenYandexLeaderboard();
+        // FillDataTesting();
     }
 
     private void FillDataTesting()
@@ -44,20 +44,15 @@ public class LeaderboardWindow : MonoBehaviour
 
     private void OpenYandexLeaderboard()
     {
-        Debug.Log("0 point");
         PlayerAccount.RequestPersonalProfileDataPermission();
 
-        Debug.Log("1 point");
         if (PlayerAccount.IsAuthorized == false)
         {
             PlayerAccount.Authorize();
-            Debug.Log("2 point");
         }
 
         Leaderboard.GetEntries(_leaderboardName, (result) =>
         {
-            
-            Debug.Log("3 point");
             int leadersNumber = result.entries.Length >= _names.Length ? _names.Length : result.entries.Length;
 
             for (int i = 0; i < leadersNumber; i++)
@@ -73,7 +68,6 @@ public class LeaderboardWindow : MonoBehaviour
                 _scores[i].text = result.entries[i].formattedScore;
                 _ranks[i].text = result.entries[i].rank.ToString();
             }
-            Debug.Log("4 point");
         });
     }
 

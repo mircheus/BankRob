@@ -6,7 +6,8 @@ using UnityEngine.Events;
 
 public class ObstacleCrusher : MonoBehaviour
 {
-    private int _damage;
+    [Header("DEBUG")]
+    [SerializeField] private int _damage;
     private Obstacle _obstacleToCrush;
 
     public event UnityAction ObstacleCollided;
