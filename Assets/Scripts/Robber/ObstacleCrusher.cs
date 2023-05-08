@@ -13,8 +13,6 @@ public class ObstacleCrusher : MonoBehaviour
     public event UnityAction ObstacleCollided;
     public event UnityAction ObstacleDestroyed;
 
-    // public Wall WallToCrush => _wallToCrush;
-    
     private void Start()
     {
         _damage = GetComponent<Robber>().Level;

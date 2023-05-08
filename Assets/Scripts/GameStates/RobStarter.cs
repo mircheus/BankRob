@@ -23,7 +23,6 @@ public class RobStarter : MonoBehaviour
     
     public void TryStartRob()
     {
-        // if (_preparing.GetRobbersQuantity() < _robbery.TargetQuantity)
         if (_preparing.GetRobbersQuantity() > 0)
         {
             StartRob();
@@ -53,7 +52,7 @@ public class RobStarter : MonoBehaviour
         Started?.Invoke();
     }
 
-    public Robber PickRobber()
+    public Robber PickRobber() // WORKAROUND FOR CAMERA FOLLOW TARGET
     {
         return _savedRobber;
     }

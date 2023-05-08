@@ -55,7 +55,6 @@ public class RobberMovement : MonoBehaviour
     private void StopMoving()
     {
         _currentSpeed = 0f;
-        // _currentWall = wall;
         _obstacleCrusher.ObstacleDestroyed += StartMoving;
     }
 

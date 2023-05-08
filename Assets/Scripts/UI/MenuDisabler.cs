@@ -49,4 +49,9 @@ public class MenuDisabler : MonoBehaviour
     {
         _leaderboard.SetActive(false);
     }
+
+    public void DisablePerkPanel()
+    {
+        
+    }
 }

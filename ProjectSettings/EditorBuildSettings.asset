@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: 4ade10274fb355f4f81a8ae968fed0ba
   - enabled: 1
+    path: Assets/Scenes/06_Perks.unity
+    guid: 6be84b5067de14c4bb31420308c47e41
+  - enabled: 0
     path: Assets/Scenes/05_Leaderboard.unity
     guid: d35fdbe0600a143449ceb2ab0554a39e
   m_configObjects: {}

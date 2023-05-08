@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Agava.YandexGames;
 using UnityEngine;
 
 public class SDK_testing : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void OnShowInterstitialButtonClick()
     {
-        
+        InterstitialAd.Show();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnShowVideoButtonClick()
     {
-        
+        VideoAd.Show();
     }
 }

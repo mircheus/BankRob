@@ -17,11 +17,13 @@ public class MenuEnabler : MonoBehaviour
     [SerializeField] private GameObject _allSlotsBusyPanel;
     [SerializeField] private GameObject _leaderboard;
     [SerializeField] private GameObject _debugPanel;
+    [SerializeField] private GameObject _perkPanel;
 
     private void OnEnable()
     {
         _robbery.BankRobbed += ShowWinPanel;
         _robStarter.NotEnoughRobbers += ShowWarningPanel;
+        _robStarter.Started += ShowPerkPanel;
         _shop.NotEnoughMoney += ShowNotEnoughMoneyMenu;
         _shop.AllSlotsBusy += ShowAllSlotsBusy;
     }
@@ -30,6 +32,7 @@ public class MenuEnabler : MonoBehaviour
     {
         _robbery.BankRobbed -= ShowWinPanel;
         _robStarter.NotEnoughRobbers -= ShowWarningPanel;
+        _robStarter.Started -= ShowPerkPanel;
         _shop.NotEnoughMoney -= ShowNotEnoughMoneyMenu;
         _shop.AllSlotsBusy -= ShowAllSlotsBusy;
     }
@@ -78,5 +81,10 @@ public class MenuEnabler : MonoBehaviour
     {
         bool switcher = !_debugPanel.activeSelf;
         _debugPanel.SetActive(switcher);
+    }
+
+    public void ShowPerkPanel()
+    {
+        _perkPanel.SetActive(true);
     }
 }
