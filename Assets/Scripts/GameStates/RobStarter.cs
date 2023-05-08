@@ -39,12 +39,14 @@ public class RobStarter : MonoBehaviour
         {
             if (slot.IsFilled)
             {
+                slot.Robber.SetColumnIndex(slot.ColumnIndex);
                 slot.Robber.ActivateMovement();
                 _playerData.SubscribeToKeyCollector(slot.Robber);
                 _savedRobber = slot.Robber;
                 slot.Robber.transform.SetParent(null, true);
                 _downCollider.SetActive(false);
                 _howManyRobbers++;
+                _robbery.AddActiveRobber(slot.Robber);
             }
         }
 

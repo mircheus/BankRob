@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Slot : MonoBehaviour
 {
     [SerializeField] private Transform _downTarget;
+    [SerializeField] private int _columnIndex;
 
     private Image _image;
     private RobberDragger _robberDragger;
@@ -18,6 +19,7 @@ public class Slot : MonoBehaviour
     
     public bool IsFilled => _isFilled;
     public Robber Robber => _robber;
+    public int ColumnIndex => _columnIndex;
 
     public event UnityAction RobbersCombined;
     

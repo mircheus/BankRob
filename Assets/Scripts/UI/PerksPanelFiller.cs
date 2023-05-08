@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PerksPanelFiller : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PerksPanelFiller : MonoBehaviour
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private GameObject[] _perkSlots; // WORKAROUND
     [SerializeField] private GameObject _perkPrefab;
+
+    private List<GameObject> _perkButtons = new List<GameObject>();
+
+    public event UnityAction<int> PerkActivated; 
 
     private void OnEnable()
     {
@@ -18,11 +23,15 @@ public class PerksPanelFiller : MonoBehaviour
     private void OnDisable()
     {
         _robStarter.Started -= OnStarted;
+
+        foreach (var perkButton in _perkButtons)
+        {
+            perkButton.GetComponent<PerkActivator>().PerkActivated -= OnPerkActivated;
+        }
     }
 
     private void OnStarted()
     {
-        Debug.Log("OnStarted");
         FillPerkSlots();
     }
 
@@ -34,15 +43,23 @@ public class PerksPanelFiller : MonoBehaviour
         {
             if (indexes[i])
             {
-                PlacePerkToSlotWithFollowing(i);
-                Debug.Log($"Placed to {i}");
+                PlacePerkToSlotWithIndex(i);
             }
         }
     }
 
-    private void PlacePerkToSlotWithFollowing(int slotIndex)
+    private void PlacePerkToSlotWithIndex(int slotIndex)
     {
-        Instantiate(_perkPrefab, _perkSlots[slotIndex].transform);
+        GameObject perkButton = Instantiate(_perkPrefab, _perkSlots[slotIndex].transform);
+        perkButton.GetComponent<PerkActivator>().SetColumnIndex(slotIndex);
+        perkButton.GetComponent<PerkActivator>().PerkActivated += OnPerkActivated;
+        _perkButtons.Add(perkButton);
+    }
+
+    private void OnPerkActivated(int index)
+    {
+        Debug.Log($"perk with index {index} activated");
+        PerkActivated?.Invoke(index);
     }
 
     private bool[] GetFilledSlotsIndex()

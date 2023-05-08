@@ -11,6 +11,10 @@ public class Robbery : MonoBehaviour
     [SerializeField] private int _moneyRewardAmount;
     [SerializeField] private Progression _progression;
     [SerializeField] private List<Vault> _vaults = new List<Vault>();
+    [SerializeField] private PerksPanelFiller _perksPanelFiller;
+    
+    [Header("Debug")]
+    [SerializeField] private List<Robber> _robbers;
     
     private int _robbedVaultsCounter;
 
@@ -29,6 +33,8 @@ public class Robbery : MonoBehaviour
         {
             vault.Robbed += CountRobbedVaults;
         }
+
+        _perksPanelFiller.PerkActivated += OnPerkActivated;
     }
 
     private void OnDisable()
@@ -37,12 +43,19 @@ public class Robbery : MonoBehaviour
         {
             vault.Robbed -= CountRobbedVaults;
         }
+        
+        _perksPanelFiller.PerkActivated -= OnPerkActivated;
     }
 
     private void Start()
     {
         _robbedVaultsCounter = 0;
         SetTargetsQuantity(_progression.KeysFromPreviousLevel);
+    }
+
+    public void AddActiveRobber(Robber robber)
+    {
+        _robbers.Add(robber);
     }
 
     private void SetTargetsQuantity(int keysFromPreviousLevel)
@@ -74,5 +87,17 @@ public class Robbery : MonoBehaviour
     private bool IsTargetReached(int currentQuantity)
     {
         return currentQuantity == _targetQuantity;
+    }
+
+    private void OnPerkActivated(int index)
+    {
+        foreach (Robber robber in _robbers)
+        {
+            if (robber.ColumnIndex == index)
+            {
+                robber.ActivatePerk();
+                break;
+            }
+        }
     }
 }
