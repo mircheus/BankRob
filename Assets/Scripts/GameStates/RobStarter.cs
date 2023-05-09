@@ -41,6 +41,7 @@ public class RobStarter : MonoBehaviour
             {
                 slot.Robber.SetColumnIndex(slot.ColumnIndex);
                 slot.Robber.ActivateMovement();
+                slot.Robber.GetComponent<AnimationSwitcher>().PlayFirstAttack();
                 _playerData.SubscribeToKeyCollector(slot.Robber);
                 _savedRobber = slot.Robber;
                 slot.Robber.transform.SetParent(null, true);

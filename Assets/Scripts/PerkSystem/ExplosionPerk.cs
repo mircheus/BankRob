@@ -7,6 +7,8 @@ using UnityEngine.WSA;
 
 public class ExplosionPerk : Perk
 {
+    private const float DeactivationTime = .7f;
+    
     [SerializeField] private int _explosionDamage;
     
     private void OnEnable()
@@ -30,11 +32,16 @@ public class ExplosionPerk : Perk
         {
             roof.DestroyRoof();
         }
+
+        if (other.TryGetComponent(out Dynamite dynamite))
+        {
+            dynamite.GetDestroyedByPerk();
+        }
     }
 
     private IEnumerator DeactivateAfterExecution()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(DeactivationTime);
         gameObject.SetActive(false);
     }
 }

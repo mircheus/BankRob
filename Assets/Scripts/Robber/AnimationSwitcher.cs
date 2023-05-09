@@ -8,7 +8,7 @@ public class AnimationSwitcher : MonoBehaviour
    // private int _attack = Animator.StringToHash("Attack");
    private int _attack = Animator.StringToHash("axe_attack_overdrive");
    private int _attackingWall = Animator.StringToHash("AttackingWall");
-   
+   private int _firstAttack = Animator.StringToHash("first_attack");
    
    private void OnEnable()
    {
@@ -32,6 +32,11 @@ public class AnimationSwitcher : MonoBehaviour
    public void PlayAttackAnimation()
    {
       _animator.Play(_attack);
+   }
+
+   public void PlayFirstAttack()
+   {
+      _animator.Play(_firstAttack);
    }
 
    private void SwitchToAttackState()

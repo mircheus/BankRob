@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Dynamite : Trap
 {
-    [SerializeField] private ParticleSystem _explosionFx;
     [SerializeField] private ParticleSystem _fuseFx;
     [SerializeField] private GameObject _dynamiteModel;
     
@@ -13,13 +13,20 @@ public class Dynamite : Trap
     {
         if (other.TryGetComponent(out Robber robber))
         {
-            DestroySelf();
+            PlayDestroyFx();
+            robber.GetComponent<RobberMovement>().GetTrapped();
         }
-    }
-
-    private void DestroySelf()
+    }   
+    
+    public override void GetDestroyedByPerk()
     {
-        _explosionFx.Play();
+        PlayDestroyFx();
+        StartCoroutine(DeactivateGameObject());
+    }
+    
+    protected override void PlayDestroyFx()
+    {
+        base.PlayDestroyFx();
         _fuseFx.gameObject.SetActive(false);
         _dynamiteModel.SetActive(false);
     }

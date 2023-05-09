@@ -21,13 +21,15 @@ public class RobberMovement : MonoBehaviour
     private void OnEnable()
     {
         _obstacleCrusher.ObstacleCollided += StopMoving;
-        GetStopped += OnGetStopped;
+        _obstacleCrusher.ObstacleDestroyed += StartMoving;
+        GetStopped += StopMoving;
     }
 
     private void OnDisable()
     {
         _obstacleCrusher.ObstacleCollided -= StopMoving;
-        GetStopped -= OnGetStopped;
+        _obstacleCrusher.ObstacleDestroyed -= StartMoving;
+        GetStopped -= StopMoving;
     }
 
     private void Start()
@@ -43,23 +45,28 @@ public class RobberMovement : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInParent<Cage>())
-        {
-            GetStopped?.Invoke();
-            Debug.Log("Get caught");
-        }
+        // if (other.GetComponentInParent<Cage>())
+        // {
+        //     GetStopped?.Invoke();
+        //     Debug.Log("Get caught");
+        // }
 
-        if (other.TryGetComponent(out Dynamite dynamite))
-        {
-            GetStopped?.Invoke();
-            Debug.Log("Stopped by dynamite");
-        }
+        // if (other.TryGetComponent(out Dynamite dynamite))
+        // {
+        //     GetStopped?.Invoke();
+        //     Debug.Log("Stopped by dynamite");
+        // }
     }
 
     public void SetDownTarget(Transform target)
     {
         _downTarget = target;
         _currentTarget = target.position;
+    }
+
+    public void GetTrapped()
+    {
+        GetStopped?.Invoke();
     }
     
     private void MoveTo(Vector3 target)
@@ -75,17 +82,10 @@ public class RobberMovement : MonoBehaviour
     private void StopMoving()
     {
         _currentSpeed = 0f;
-        _obstacleCrusher.ObstacleDestroyed += StartMoving;
     }
 
     private void StartMoving()
     {
         _currentSpeed = _fallingSpeed;
-        _obstacleCrusher.ObstacleDestroyed -= StartMoving;
-    }
-
-    private void OnGetStopped()
-    {
-        _currentSpeed = 0f;
     }
 }

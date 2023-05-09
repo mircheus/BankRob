@@ -30,6 +30,9 @@ public class Robbery : MonoBehaviour
 
     private void OnEnable()
     {
+        BankRobbed += OnBankRobbed;
+        BankNotRobbed += OnBankNotRobbed;
+        
         foreach (var vault in _vaults)
         {
             vault.Robbed += CountRobbedVaults;
@@ -40,17 +43,20 @@ public class Robbery : MonoBehaviour
 
     private void OnDisable()
     {
+        BankRobbed -= OnBankRobbed;
+        BankNotRobbed -= OnBankNotRobbed;
+        
         foreach (var vault in _vaults)
         {
             vault.Robbed -= CountRobbedVaults;
         }
 
-        foreach (var robber in _robbers)
-        {
-            robber.GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
-        }
-        
-        _perksPanelFiller.PerkActivated -= OnPerkActivated;
+        // foreach (var robber in _robbers)
+        // {
+        //     robber.GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
+        // }
+        //
+        // _perksPanelFiller.PerkActivated -= OnPerkActivated;
         
     }
 
@@ -118,5 +124,25 @@ public class Robbery : MonoBehaviour
         {
             BankNotRobbed?.Invoke();
         }
+    }
+
+    private void OnBankRobbed()
+    {
+        UnsubscribeFromObjects();
+    }
+
+    private void OnBankNotRobbed()
+    {
+        UnsubscribeFromObjects();   
+    }
+
+    private void UnsubscribeFromObjects()
+    {
+        foreach (var robber in _robbers)
+        {
+            robber.GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
+        }
+        
+        _perksPanelFiller.PerkActivated -= OnPerkActivated;
     }
 }

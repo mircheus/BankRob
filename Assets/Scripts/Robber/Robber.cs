@@ -63,7 +63,6 @@ public class Robber : MonoBehaviour
     {
         _robberMovement.enabled = true;
         _axe.SetActive(true);
-        _animationSwitcher.PlayAttackAnimation();
     }
 
     public void ActivatePerk()
