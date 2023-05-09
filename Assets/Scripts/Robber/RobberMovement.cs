@@ -16,18 +16,18 @@ public class RobberMovement : MonoBehaviour
     private Obstacle _currentObstacle;
     private float _currentSpeed;
 
-    public event UnityAction GetCaught;
+    public event UnityAction GetStopped;
 
     private void OnEnable()
     {
         _obstacleCrusher.ObstacleCollided += StopMoving;
-        GetCaught += OnGetCaught;
+        GetStopped += OnGetStopped;
     }
 
     private void OnDisable()
     {
         _obstacleCrusher.ObstacleCollided -= StopMoving;
-        GetCaught -= OnGetCaught;
+        GetStopped -= OnGetStopped;
     }
 
     private void Start()
@@ -45,8 +45,14 @@ public class RobberMovement : MonoBehaviour
     {
         if (other.GetComponentInParent<Cage>())
         {
-            GetCaught?.Invoke();
+            GetStopped?.Invoke();
             Debug.Log("Get caught");
+        }
+
+        if (other.TryGetComponent(out Dynamite dynamite))
+        {
+            GetStopped?.Invoke();
+            Debug.Log("Stopped by dynamite");
         }
     }
 
@@ -78,7 +84,7 @@ public class RobberMovement : MonoBehaviour
         _obstacleCrusher.ObstacleDestroyed -= StartMoving;
     }
 
-    private void OnGetCaught()
+    private void OnGetStopped()
     {
         _currentSpeed = 0f;
     }

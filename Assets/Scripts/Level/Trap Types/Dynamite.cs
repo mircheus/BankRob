@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dynamite : MonoBehaviour
+public class Dynamite : Trap
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private ParticleSystem _explosionFx;
+    [SerializeField] private ParticleSystem _fuseFx;
+    [SerializeField] private GameObject _dynamiteModel;
+    
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.TryGetComponent(out Robber robber))
+        {
+            DestroySelf();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void DestroySelf()
     {
-        
+        _explosionFx.Play();
+        _fuseFx.gameObject.SetActive(false);
+        _dynamiteModel.SetActive(false);
     }
 }

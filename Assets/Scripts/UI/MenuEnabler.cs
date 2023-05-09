@@ -22,6 +22,7 @@ public class MenuEnabler : MonoBehaviour
     private void OnEnable()
     {
         _robbery.BankRobbed += ShowWinPanel;
+        _robbery.BankNotRobbed += ShowLosePanel;
         _robStarter.NotEnoughRobbers += ShowWarningPanel;
         _robStarter.Started += ShowPerkPanel;
         _shop.NotEnoughMoney += ShowNotEnoughMoneyMenu;

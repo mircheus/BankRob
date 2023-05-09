@@ -12,9 +12,10 @@ public class Robbery : MonoBehaviour
     [SerializeField] private Progression _progression;
     [SerializeField] private List<Vault> _vaults = new List<Vault>();
     [SerializeField] private PerksPanelFiller _perksPanelFiller;
-    
+
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
+    [SerializeField] private int _aliveRobbersCounter;
     
     private int _robbedVaultsCounter;
 
@@ -43,8 +44,14 @@ public class Robbery : MonoBehaviour
         {
             vault.Robbed -= CountRobbedVaults;
         }
+
+        foreach (var robber in _robbers)
+        {
+            robber.GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
+        }
         
         _perksPanelFiller.PerkActivated -= OnPerkActivated;
+        
     }
 
     private void Start()
@@ -56,6 +63,8 @@ public class Robbery : MonoBehaviour
     public void AddActiveRobber(Robber robber)
     {
         _robbers.Add(robber);
+        robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
+        _aliveRobbersCounter++;
     }
 
     private void SetTargetsQuantity(int keysFromPreviousLevel)
@@ -71,7 +80,7 @@ public class Robbery : MonoBehaviour
         
         TargetQuantitySet?.Invoke();
     }
-
+    
     private void CountRobbedVaults()
     {
         _robbedVaultsCounter++;
@@ -98,6 +107,16 @@ public class Robbery : MonoBehaviour
                 robber.ActivatePerk();
                 break;
             }
+        }
+    }
+
+    private void OnGetStopped()
+    {
+        _aliveRobbersCounter--;
+
+        if (_aliveRobbersCounter == 0)
+        {
+            BankNotRobbed?.Invoke();
         }
     }
 }
