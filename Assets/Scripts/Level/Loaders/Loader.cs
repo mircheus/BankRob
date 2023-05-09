@@ -49,9 +49,4 @@ public class Loader : MonoBehaviour
         return true;
     }
     
-    // protected virtual void GenerateObjectInPosition(Vector3 position, Transform parent)
-    // {
-    //     Instantiate(_obstacle, position, Quaternion.identity, parent);
-    //     // return true;
-    // }
 }

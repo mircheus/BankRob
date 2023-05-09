@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private Progression _progression;
     [SerializeField] private RoofsLoader _roofsLoader;
     [SerializeField] private ObstacleLoader _obstacleLoader;
+    [SerializeField] private TrapsLoader _trapsLoader;
     [SerializeField] private KeyLoader _keyLoader;
     
     [Header("DEBUG")]
@@ -51,8 +52,10 @@ public class LevelGenerator : MonoBehaviour
         _obstacleLoader.SetObstaclesLevel(_obstaclesLevel);
         _obstacleLoader.ArrangeObjects(_floorsQuantity);
         List<Vector3> keyPositions = _obstacleLoader.PossibleKeyPositions;
-
-        _keyLoader.SetKeysQuantity(_progression.KeysQuantity);
-        _keyLoader.ArrangeKeys(keyPositions);
+        
+        _trapsLoader.ArrangeTraps(keyPositions);
+        // KEYS TEMPORARILY DISABLED
+        // _keyLoader.SetKeysQuantity(_progression.KeysQuantity);
+        // _keyLoader.ArrangeKeys(keyPositions);
     }
 }

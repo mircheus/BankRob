@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class RobberMovement : MonoBehaviour
 {
@@ -15,14 +16,18 @@ public class RobberMovement : MonoBehaviour
     private Obstacle _currentObstacle;
     private float _currentSpeed;
 
+    public event UnityAction GetCaught;
+
     private void OnEnable()
     {
         _obstacleCrusher.ObstacleCollided += StopMoving;
+        GetCaught += OnGetCaught;
     }
 
     private void OnDisable()
     {
         _obstacleCrusher.ObstacleCollided -= StopMoving;
+        GetCaught -= OnGetCaught;
     }
 
     private void Start()
@@ -34,6 +39,15 @@ public class RobberMovement : MonoBehaviour
     private void Update()
     {
         MoveTo(_currentTarget);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponentInParent<Cage>())
+        {
+            GetCaught?.Invoke();
+            Debug.Log("Get caught");
+        }
     }
 
     public void SetDownTarget(Transform target)
@@ -62,5 +76,10 @@ public class RobberMovement : MonoBehaviour
     {
         _currentSpeed = _fallingSpeed;
         _obstacleCrusher.ObstacleDestroyed -= StartMoving;
+    }
+
+    private void OnGetCaught()
+    {
+        _currentSpeed = 0f;
     }
 }
