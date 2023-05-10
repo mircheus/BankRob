@@ -37,6 +37,11 @@ public class ExplosionPerk : Perk
         {
             dynamite.GetDestroyedByPerk();
         }
+
+        if (other.TryGetComponent(out Cage cage))
+        {
+            cage.GetDestroyedByPerk();
+        }
     }
 
     private IEnumerator DeactivateAfterExecution()
