@@ -16,6 +16,8 @@ public class ObstacleCrusher : MonoBehaviour
     public event UnityAction ObstacleCollided;
     public event UnityAction ObstacleDestroyed;
 
+    public Obstacle ObstacleToCrush => _obstacleToCrush;
+    
     private void Start()
     {
         _defaultDamage = GetComponent<Robber>().Level;
@@ -29,6 +31,7 @@ public class ObstacleCrusher : MonoBehaviour
             _obstacleToCrush = obstacle;
             _obstacleToCrush.Destroyed += OnObstacleDestroyed;
             ObstacleCollided?.Invoke();
+            Attack();
             // Attack();
         }
     }
@@ -49,6 +52,7 @@ public class ObstacleCrusher : MonoBehaviour
     {
         ObstacleDestroyed?.Invoke();
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;
+        _obstacleToCrush = null;
     }
 
     public void IncreaseDamageBySpeedPerk(SpeedPerk perk, int increasedDamage)

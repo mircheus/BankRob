@@ -70,7 +70,8 @@ public class Robber : MonoBehaviour
 
     public void ActivatePerk()
     {
-        _explosionPerk.Activate();
+        // _explosionPerk.Activate();
+        _perks[_level - 1].Activate();
     }
 
     public void SetColumnIndex(int index)

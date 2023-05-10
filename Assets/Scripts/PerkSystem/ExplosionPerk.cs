@@ -11,16 +11,6 @@ public class ExplosionPerk : Perk
     
     [SerializeField] private int _explosionDamage;
     
-    private void OnEnable()
-    {
-        StartCoroutine(DeactivateAfterExecution());
-    }
-
-    public void Activate()
-    {
-        gameObject.SetActive(true);
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.TryGetComponent(out Obstacle obstacle))
@@ -43,10 +33,11 @@ public class ExplosionPerk : Perk
             cage.GetDestroyedByPerk();
         }
     }
+    
 
-    private IEnumerator DeactivateAfterExecution()
+    protected override void Deactivate()
     {
-        yield return new WaitForSeconds(DeactivationTime);
-        gameObject.SetActive(false);
+        base.Deactivate();
+        Debug.Log("ExplosionPerk Deactivated");
     }
 }

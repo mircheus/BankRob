@@ -7,14 +7,15 @@ using UnityEngine.Events;
 public class RobberMovement : MonoBehaviour
 {
     [SerializeField] private ObstacleCrusher _obstacleCrusher;
-    [SerializeField] float _fallingSpeed = 5f;
+    [SerializeField] float _defaultSpeed = 5f;
     
     [Header("Debug")]
     [SerializeField] private Vector3 _currentTarget;
-    
+    [SerializeField] private float _currentSpeed;
+    [SerializeField] private float _tweakableSpeed;
+
     private Transform _downTarget;
     private Obstacle _currentObstacle;
-    private float _currentSpeed;
 
     public event UnityAction GetStopped;
 
@@ -35,29 +36,14 @@ public class RobberMovement : MonoBehaviour
     private void Start()
     {
         _currentTarget = _downTarget.position;
-        _currentSpeed = _fallingSpeed;
+        _currentSpeed = _defaultSpeed;
     }
     
     private void Update()
     {
         MoveTo(_currentTarget);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        // if (other.GetComponentInParent<Cage>())
-        // {
-        //     GetStopped?.Invoke();
-        //     Debug.Log("Get caught");
-        // }
-
-        // if (other.TryGetComponent(out Dynamite dynamite))
-        // {
-        //     GetStopped?.Invoke();
-        //     Debug.Log("Stopped by dynamite");
-        // }
-    }
-
+    
     public void SetDownTarget(Transform target)
     {
         _downTarget = target;
@@ -76,7 +62,7 @@ public class RobberMovement : MonoBehaviour
 
     public void SetDefaultSpeedByPerk(SpeedPerk perk)
     {
-        _currentSpeed = _fallingSpeed;
+        _currentSpeed = _defaultSpeed;
     }
     
     private void MoveTo(Vector3 target)
@@ -96,6 +82,6 @@ public class RobberMovement : MonoBehaviour
 
     private void StartMoving()
     {
-        _currentSpeed = _fallingSpeed;
+        _currentSpeed = _defaultSpeed;
     }
 }

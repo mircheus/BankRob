@@ -5,28 +5,29 @@ using UnityEngine;
 
 public class SpeedPerk : Perk
 {
+    [Header("Unique")]
     [SerializeField] private RobberMovement _robberMovement;
     [SerializeField] private ObstacleCrusher _obstacleCrusher;
-    [SerializeField] private float _actionTime;
+    [SerializeField] private ParticleSystem _speedFx;
     [SerializeField] private float _increasedSpeed;
     [SerializeField] private int _increasedDamage;
-
-    public void Activate()
+    
+    public override void Activate()
     {
+        base.Activate();
         _robberMovement.SetIncreasedSpeedBySpeedPerk(this, _increasedSpeed);
         _obstacleCrusher.IncreaseDamageBySpeedPerk(this, _increasedDamage);
-        StartCoroutine(DeactivateAfterExecution());
+            
+        if (_obstacleCrusher.ObstacleToCrush != null)
+        {
+            _obstacleCrusher.ObstacleToCrush.ApplyDamage(_increasedDamage);
+        }
     }
 
-    private IEnumerator DeactivateAfterExecution()
-    {
-        yield return new WaitForSeconds(_actionTime);
-        DeactivatePerk();
-    }
-
-    private void DeactivatePerk()
+    protected override void Deactivate()
     {
         _robberMovement.SetDefaultSpeedByPerk(this);
         _obstacleCrusher.SetDefaultDamageBySpeedPerk(this);
+        gameObject.SetActive(false);
     }
 }
