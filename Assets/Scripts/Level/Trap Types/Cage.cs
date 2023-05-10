@@ -22,7 +22,6 @@ public class Cage : Trap
     public override void GetDestroyedByPerk()
     {
         StartCoroutine(DeactivateGameObject());
-        
     }
     
     private void PlayTrappedFx()
