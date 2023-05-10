@@ -44,25 +44,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52720e7f48e4ebd40a20ad1bc0f25c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mouseClick:
-    m_Name: Mouse Click
+  _press:
+    m_Name: Press
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 59938e03-3df7-4971-adaa-f0a0146ead11
+    m_Id: 914128b1-cfc2-4554-a02b-b7eed7a7d91c
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: eb278382-1660-4576-8ed6-d363b612c6b9
-      m_Path: <Mouse>/leftButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Mouse Click
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
-  _mouseDragPhysicsSpeed: 10
-  _mouseDragSpeed: 0.05
+  _screenPosition:
+    m_Name: Screen Position
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: ad34fb66-1eb9-40b1-a0d5-4d3ed7ea2d76
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _dragPhysicsSpeed: 10
+  _dragSpeed: 0
   _draggableLayer:
     serializedVersion: 2
     m_Bits: 64
+  _offsetY: 0
+  _offsetVector: {x: 0, y: 0, z: 0}

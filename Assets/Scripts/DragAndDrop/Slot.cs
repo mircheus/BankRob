@@ -10,6 +10,7 @@ public class Slot : MonoBehaviour
 {
     [SerializeField] private Transform _downTarget;
     [SerializeField] private int _columnIndex;
+    [SerializeField] private ParticleSystem _combineFx;
 
     private Image _image;
     private RobberDragger _robberDragger;
@@ -83,6 +84,7 @@ public class Slot : MonoBehaviour
         externalRobberDragger.gameObject.SetActive(false);
         _robber.UpgradeLevel();
         RobbersCombined?.Invoke();
+        _combineFx.Play();
     }
 
     private void SetDownTargetForRobber(Robber robber)
