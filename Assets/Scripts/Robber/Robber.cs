@@ -49,7 +49,7 @@ public class Robber : MonoBehaviour
         SetColor(_level);
     }
     
-    public void UpgradeLevel()
+    public int UpgradeLevel()
     {
         if (_level < _levelColors.Length)
         {
@@ -57,6 +57,8 @@ public class Robber : MonoBehaviour
             SetColor(_level);
             _obstacleCrusher.IncreaseDamage(_level);
         }
+
+        return _level;
     }
 
     public void ActivateMovement()

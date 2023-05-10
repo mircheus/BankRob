@@ -11,6 +11,8 @@ public class Slot : MonoBehaviour
     [SerializeField] private Transform _downTarget;
     [SerializeField] private int _columnIndex;
     [SerializeField] private ParticleSystem _combineFx;
+    // [SerializeField] private ParticleSystemRenderer _combineFxRenderer;
+    [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
 
     private Image _image;
     private RobberDragger _robberDragger;
@@ -82,13 +84,21 @@ public class Slot : MonoBehaviour
     private void CombineRobbers(Robber externalRobberDragger)
     {
         externalRobberDragger.gameObject.SetActive(false);
-        _robber.UpgradeLevel();
+        int level = _robber.UpgradeLevel();
         RobbersCombined?.Invoke();
-        _combineFx.Play();
+        PlayCombineFx(level);
     }
 
     private void SetDownTargetForRobber(Robber robber)
     {
         robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget);
+    }
+
+    private void PlayCombineFx(int level)
+    {
+        level--;
+        var main = _combineFx.main;
+        main.startColor = _levelColors[level];
+        _combineFx.Play();
     }
 }
