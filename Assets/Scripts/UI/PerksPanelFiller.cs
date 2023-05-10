@@ -10,6 +10,7 @@ public class PerksPanelFiller : MonoBehaviour
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private GameObject[] _perkSlots; // WORKAROUND
     [SerializeField] private GameObject _perkPrefab;
+    [SerializeField] private GameObject[] _perkButtonPrefabs;
 
     private List<GameObject> _perkButtons = new List<GameObject>();
 
@@ -37,20 +38,20 @@ public class PerksPanelFiller : MonoBehaviour
 
     private void FillPerkSlots()
     {
-        bool[] indexes = GetFilledSlotsIndex();
+        int[] indexes = GetFilledSlotsIndex();
 
         for (int i = 0; i < _perkSlots.Length; i++)
         {
-            if (indexes[i])
+            if (indexes[i] != -1)
             {
-                PlacePerkToSlotWithIndex(i);
+                PlacePerkToSlotWithIndex(i, indexes[i]);
             }
         }
     }
 
-    private void PlacePerkToSlotWithIndex(int slotIndex)
+    private void PlacePerkToSlotWithIndex(int slotIndex, int perkLevel)
     {
-        GameObject perkButton = Instantiate(_perkPrefab, _perkSlots[slotIndex].transform);
+        GameObject perkButton = Instantiate(_perkButtonPrefabs[perkLevel], _perkSlots[slotIndex].transform);
         perkButton.GetComponent<PerkActivator>().SetColumnIndex(slotIndex);
         perkButton.GetComponent<PerkActivator>().PerkActivated += OnPerkActivated;
         _perkButtons.Add(perkButton);
@@ -62,19 +63,19 @@ public class PerksPanelFiller : MonoBehaviour
         PerkActivated?.Invoke(index);
     }
 
-    private bool[] GetFilledSlotsIndex()
+    private int[] GetFilledSlotsIndex()
     {
-        bool[] filledIndexes = new bool[4];
+        int[] filledIndexes = new int[4];
         
         for (int i = 0; i < _slots.Length; i++)
         {
             if (_slots[i].IsFilled)
             {
-                filledIndexes[i] = true;
+                filledIndexes[i] = _slots[i].Robber.Level - 1;
             }
             else
             {
-                filledIndexes[i] = false;
+                filledIndexes[i] = -1;
             }
         }
 
