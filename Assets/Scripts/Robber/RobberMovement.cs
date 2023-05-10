@@ -69,6 +69,16 @@ public class RobberMovement : MonoBehaviour
         GetStopped?.Invoke();
     }
     
+    public void SetIncreasedSpeedBySpeedPerk(SpeedPerk perk, float increasedSpeed)
+    {
+        _currentSpeed = increasedSpeed;
+    }
+
+    public void SetDefaultSpeedByPerk(SpeedPerk perk)
+    {
+        _currentSpeed = _fallingSpeed;
+    }
+    
     private void MoveTo(Vector3 target)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, _currentSpeed * Time.deltaTime);

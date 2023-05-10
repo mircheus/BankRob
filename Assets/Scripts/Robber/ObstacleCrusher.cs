@@ -1,13 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ObstacleCrusher : MonoBehaviour
 {
     [Header("DEBUG")]
-    [SerializeField] private int _damage;
+    [SerializeField] private int _defaultDamage;
+
+    private int _currentDamage;
     private Obstacle _obstacleToCrush;
 
     public event UnityAction ObstacleCollided;
@@ -15,7 +18,8 @@ public class ObstacleCrusher : MonoBehaviour
 
     private void Start()
     {
-        _damage = GetComponent<Robber>().Level;
+        _defaultDamage = GetComponent<Robber>().Level;
+        _currentDamage = _defaultDamage;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -31,12 +35,13 @@ public class ObstacleCrusher : MonoBehaviour
 
     public void Attack()
     {
-        _obstacleToCrush.ApplyDamage(_damage);
+        _obstacleToCrush.ApplyDamage(_currentDamage);
     }
 
     public void IncreaseDamage(int level)
     {
-        _damage += 2;
+        _defaultDamage += 2;
+        _currentDamage = _defaultDamage;
         // Debug.Log($"currentDamage: {_damage}");
     }
 
@@ -44,5 +49,15 @@ public class ObstacleCrusher : MonoBehaviour
     {
         ObstacleDestroyed?.Invoke();
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;
+    }
+
+    public void IncreaseDamageBySpeedPerk(SpeedPerk perk, int increasedDamage)
+    {
+        _currentDamage = increasedDamage;
+    }
+
+    public void SetDefaultDamageBySpeedPerk(SpeedPerk perk)
+    {
+        _currentDamage = _defaultDamage;
     }
 }
