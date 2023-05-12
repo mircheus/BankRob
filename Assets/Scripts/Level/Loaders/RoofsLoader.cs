@@ -24,7 +24,7 @@ public class RoofsLoader : Loader
     
     private void CalculateFloorOffset()
     {
-        _groundOffset = _verticalStep * (_floorQuantity - 1);
+        _groundOffset = _verticalStep * (_floorQuantity - 1); // roofs loader
     }
 
     private void SetFloor()

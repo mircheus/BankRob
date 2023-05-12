@@ -23,11 +23,14 @@ public class LevelGenerator : MonoBehaviour
     // private Vector3[] _obstaclesPositions;
     // private List<Obstacle> _obstacles;
     private int _floorsQuantity;
+    private int _obstaclesQuantity;
     private int _obstaclesLevel;
+    private int _trapsQuantity;
     private int _trapsLevel;
 
     public int FloorsQuantity => _floorsQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
+    public int ObstaclesQuantity => _obstaclesQuantity;
     // public bool[,] ObstaclesGrid => _obstaclesGrid;
     // public List<Obstacle> Obstacles => _obstacles;
 
@@ -43,18 +46,20 @@ public class LevelGenerator : MonoBehaviour
 
     private void OnLevelParametersPrepared()
     {
+        // for DataReflector.cs
         _floorsQuantity = _progression.FloorsQuantity;
-        _obstaclesLevel = _progression.ObstaclesLevel;
-        // _trapsLevel = _progression.
-        
-        _roofsLoader.ArrangeObjects(_floorsQuantity);
+        _obstaclesQuantity = _progression.ObstaclesQuantity;
+        // _obstaclesQuantity = _progression.ObstaclesQuantity;
+        // _obstaclesLevel = _progression.ObstaclesLevel;
+        _roofsLoader.ArrangeObjects(_progression.FloorsQuantity);
         _roofsLoader.GenerateFloor();
+        _obstacleLoader.SetObstaclesAmount(_progression.ObstaclesQuantity);
+        _obstacleLoader.SetObstaclesLevel(_progression.ObstaclesLevel);
+        _trapsLoader.SetTrapsAmount(_progression.TrapsQuantity);
+        _trapsLoader.SetTrapsLevel(_progression.TrapsLevel);
         
-        // _obstaclesGrid = new bool[_floorsQuantity, ColumnsQuantity];
-        _obstacleLoader.SetObstaclesLevel(_obstaclesLevel);
-        _obstacleLoader.ArrangeObjects(_floorsQuantity);
+        _obstacleLoader.ArrangeObjects(_progression.FloorsQuantity);
         List<Vector3> availableCells = _obstacleLoader.AvailableCells;
-        
         _trapsLoader.ArrangeTraps(availableCells);
         // KEYS TEMPORARILY DISABLED
         // _keyLoader.SetKeysQuantity(_progression.KeysQuantity);

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.ResourceManagement.Util;
 
 public class DataReflector : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class DataReflector : MonoBehaviour
     [SerializeField] private TMP_Text _levelCounterField;
     [SerializeField] private TMP_Text _floors;
     [SerializeField] private TMP_Text _obstaclesLevel;
+    [SerializeField] private TMP_Text _obstaclesQuantity;
 
     [Header("Data Sources")]
     [SerializeField] private DataManager _dataManager;
@@ -43,5 +45,6 @@ public class DataReflector : MonoBehaviour
         _levelCounterField.text = Convert.ToString(_playerData.CompletedLevelsCounter);
         _floors.text = Convert.ToString(_levelGenerator.FloorsQuantity - 1);
         _obstaclesLevel.text = Convert.ToString(_levelGenerator.ObstaclesLevel);
+        _obstaclesQuantity.text = Convert.ToString(_levelGenerator.ObstaclesQuantity);
     }
 }
