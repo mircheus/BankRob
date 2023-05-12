@@ -8,7 +8,12 @@ public class Progression : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
-    
+
+    [Header("Progression settings")] 
+    [SerializeField] private int _difficultyFactor;
+    [SerializeField] private int _obstaclesReducer;
+    [SerializeField] private int _trapsAppearsOnLevel;
+
     [Header("First level values")] 
     [Header("Player settings")]
     [SerializeField] private int _initMoney;
@@ -19,7 +24,7 @@ public class Progression : MonoBehaviour
     
     private int _levelsCounter;
     private int _floorsQuantity;
-    private int _availableFloorsQuantity;
+    private int _obstaclesQuantity;
     private int _obstaclesLevel;
     private int _keysQuantity;
     private int _keysFromPreviousLevel;
@@ -27,7 +32,7 @@ public class Progression : MonoBehaviour
     private int _trapsQuantity;
 
     public int FloorsQuantity => _floorsQuantity;
-    // public int AvailableFloorsQuantity => _availableFloorsQuantity;
+    public int ObstaclesQuantity => _obstaclesQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
     public int KeysQuantity => _keysQuantity;
     public int KeysFromPreviousLevel => _keysFromPreviousLevel;
@@ -56,15 +61,13 @@ public class Progression : MonoBehaviour
     {
         int levelsPassed = _playerData.CompletedLevelsCounter;
         int floorsAmountFromPreviousLevel = _playerData.FloorsAmountFromPreviousLevel;
+        
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed, floorsAmountFromPreviousLevel);
-        _obstaclesLevel = SetObstaclesLevel(levelsPassed);
-        _keysQuantity = SetKeysQuantity(levelsPassed);
-        _trapsLevel = SetTrapsLevel(levelsPassed);
-        _trapsQuantity = SetTrapsQuantity(levelsPassed);
-        _keysFromPreviousLevel = _playerData.KeysAmount;
+        _trapsQuantity = CalculateTrapsQuantity(levelsPassed, _floorsQuantity);
+        _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
     }
     
-    private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) // DRAFT mechanic of progression
+    private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 
     {
         if (levelsPassed % 2 == 0)
         {
@@ -73,6 +76,11 @@ public class Progression : MonoBehaviour
         }
 
         return floorsAmountFromPreviousLevel;
+    }
+
+    private int CalculateObstaclesQuantity(int currentFloorsAmount, int trapsAmount)
+    {
+        return (currentFloorsAmount - 1) * _difficultyFactor - trapsAmount - _obstaclesReducer; // refer to RoofsLoader 
     }
 
     private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of progression
@@ -107,11 +115,11 @@ public class Progression : MonoBehaviour
         return 0;
     }
 
-    private int SetTrapsQuantity(int levelsPassed)
+    private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount)
     {
-        if (levelsPassed >= 3)
+        if (levelsPassed >= _trapsAppearsOnLevel)
         {
-            return 2;
+            return currentFloorsAmount - 2;
         }
 
         return 0;
