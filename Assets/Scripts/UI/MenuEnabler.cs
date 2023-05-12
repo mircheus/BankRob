@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class MenuEnabler : MonoBehaviour
 {
+    private const bool True = true;
+    
     [SerializeField] private Robbery _robbery;
     [SerializeField] private Shop _shop;
     [SerializeField] private RobStarter _robStarter;
@@ -18,6 +20,7 @@ public class MenuEnabler : MonoBehaviour
     [SerializeField] private GameObject _leaderboard;
     [SerializeField] private GameObject _debugPanel;
     [SerializeField] private GameObject _perkPanel;
+    [SerializeField] private GameObject _settingsMenu;
 
     private void OnEnable()
     {
@@ -45,7 +48,7 @@ public class MenuEnabler : MonoBehaviour
 
     private void ShowPrepareMenu()
     {
-        _prepareMenu.SetActive(true);
+        _prepareMenu.SetActive(True);
     }
 
     private void ShowWinPanel()
@@ -87,5 +90,10 @@ public class MenuEnabler : MonoBehaviour
     public void ShowPerkPanel()
     {
         _perkPanel.SetActive(true);
+    }
+
+    public void EnableSettingsMenu()
+    {
+        _settingsMenu.SetActive(True);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ public class MenuDisabler : MonoBehaviour
     [SerializeField] private GameObject _allSlotsBusyPanel;
     [SerializeField] private GameObject _robbersGrid;
     [SerializeField] private GameObject _leaderboard;
+    [SerializeField] private GameObject _settingsMenu;
     
     private void OnEnable()
     {
@@ -53,5 +55,10 @@ public class MenuDisabler : MonoBehaviour
     public void DisablePerkPanel()
     {
         
+    }
+
+    public void DisableSettingsMenu()
+    {
+        _settingsMenu.SetActive(false);
     }
 }
