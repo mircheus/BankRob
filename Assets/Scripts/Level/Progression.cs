@@ -16,11 +16,15 @@ public class Progression : MonoBehaviour
     private int _obstaclesLevel;
     private int _keysQuantity;
     private int _keysFromPreviousLevel;
+    private int _trapsLevel;
+    private int _trapsQuantity;
 
-    public int ObstaclesLevel => _obstaclesLevel;
     public int FloorsQuantity => _floorsQuantity;
+    public int ObstaclesLevel => _obstaclesLevel;
     public int KeysQuantity => _keysQuantity;
     public int KeysFromPreviousLevel => _keysFromPreviousLevel;
+    public int TrapsQuantity => _trapsQuantity;
+    public int TrapsLevel => _trapsLevel;
 
     private void OnEnable()
     {
@@ -44,6 +48,8 @@ public class Progression : MonoBehaviour
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed);
         _obstaclesLevel = SetObstaclesLevel(levelsPassed);
         _keysQuantity = SetKeysQuantity(levelsPassed);
+        _trapsLevel = SetTrapsLevel(levelsPassed);
+        _trapsQuantity = SetTrapsQuantity(levelsPassed);
         _keysFromPreviousLevel = _playerData.KeysAmount;
     }
     
@@ -96,6 +102,31 @@ public class Progression : MonoBehaviour
         if (levelsPassed >= 3)
         {
             return 2;
+        }
+
+        return 0;
+    }
+
+    private int SetTrapsQuantity(int levelsPassed)
+    {
+        if (levelsPassed >= 3)
+        {
+            return 2;
+        }
+
+        return 0;
+    }
+
+    private int SetTrapsLevel(int levelsPassed)
+    {
+        if (levelsPassed < 3)
+        {
+            return 0;
+        }
+
+        if (levelsPassed >= 3 && levelsPassed <= 10)
+        {
+            return 1;
         }
 
         return 0;

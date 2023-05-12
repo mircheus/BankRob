@@ -7,11 +7,11 @@ public class ObstacleLoader : Loader
 {
     [SerializeField] private protected Obstacle[] _obstacles;
     
-    private readonly List<Vector3> _possibleKeyPositions = new List<Vector3>();
+    private readonly List<Vector3> _availableCells = new List<Vector3>();
     private List<Obstacle> _obstaclesList = new List<Obstacle>();
     private int _obstaclesLevel;
     
-    public List<Vector3> PossibleKeyPositions => _possibleKeyPositions;
+    public List<Vector3> AvailableCells => _availableCells;
 
     protected override void SetFloorQuantity(int floorQuantity)
     {
@@ -22,7 +22,7 @@ public class ObstacleLoader : Loader
     {
         if (TryGenerateObjectInPosition(position, parent) == false)
         {
-            _possibleKeyPositions.Add(position);
+            _availableCells.Add(position);
         }
     }
 

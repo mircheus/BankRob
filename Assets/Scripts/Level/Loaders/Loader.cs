@@ -31,7 +31,7 @@ public class Loader : MonoBehaviour
             }
         }
     }
-
+    
     protected virtual void SetCursorIn(Vector3 position, Transform parent) // WORKAROUND METHOD NAME
     {
         TryGenerateObjectInPosition(position, parent);

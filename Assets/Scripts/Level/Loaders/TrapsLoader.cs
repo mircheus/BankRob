@@ -6,6 +6,7 @@ public class TrapsLoader : Loader
 {
     [SerializeField] private protected Trap[] _trapPrefabs; // Replace "GameObject" with class Trap
     [SerializeField] private int _trapsAmount;
+    [SerializeField] private int _probability;
 
     private int _trapsLevel;
 
@@ -21,13 +22,24 @@ public class TrapsLoader : Loader
 
     protected override bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
     {
-        int randomIndex = Random.Range(0, _trapPrefabs.Length); // WORKAROUND length must be replaced with trapsLevel
-        Instantiate(_trapPrefabs[randomIndex], position, Quaternion.identity, parent);
-        return true;
+        if (Random.Range(0, 10) > _probability && _trapsAmount > 0)
+        {
+            _trapsAmount--;
+            int randomIndex = Random.Range(0, _trapPrefabs.Length); // WORKAROUND length must be replaced with trapsLevel
+            Instantiate(_trapPrefabs[randomIndex], position, Quaternion.identity, parent);
+            return true;
+        }
+
+        return false;
     }
 
     public void SetTrapsLevel(int trapsLevel)
     {
         _trapsLevel = trapsLevel;
+    }
+
+    public void SetTrapsAmount(int amount)
+    {
+        _trapsAmount = amount;
     }
 }
