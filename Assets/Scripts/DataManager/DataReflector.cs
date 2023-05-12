@@ -41,7 +41,7 @@ public class DataReflector : MonoBehaviour
         _keysField.text = Convert.ToString(_playerData.KeysAmount);
         _moneyField.text = Convert.ToString(_playerData.MoneyAmount);
         _levelCounterField.text = Convert.ToString(_playerData.CompletedLevelsCounter);
-        _floors.text = Convert.ToString(_levelGenerator.FloorsQuantity);
+        _floors.text = Convert.ToString(_levelGenerator.FloorsQuantity - 1);
         _obstaclesLevel.text = Convert.ToString(_levelGenerator.ObstaclesLevel);
     }
 }

@@ -14,8 +14,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private TrapsLoader _trapsLoader;
     [SerializeField] private KeyLoader _keyLoader;
     
-    [Header("DEBUG")]
-    [SerializeField] private int _floorsQuantity;
+    // [Header("DEBUG")]
 
     // [Header("TESTING")] 
     // [SerializeField] private PlayerData _playerData;
@@ -23,6 +22,7 @@ public class LevelGenerator : MonoBehaviour
     // private bool[,] _obstaclesGrid; // может через неё сделать 
     // private Vector3[] _obstaclesPositions;
     // private List<Obstacle> _obstacles;
+    private int _floorsQuantity;
     private int _obstaclesLevel;
     private int _trapsLevel;
 

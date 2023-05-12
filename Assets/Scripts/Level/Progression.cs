@@ -8,11 +8,18 @@ public class Progression : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
+    
+    [Header("First level values")] 
+    [Header("Player settings")]
+    [SerializeField] private int _initMoney;
+    [Header("Level settings")]
+    [SerializeField] private int _firstLevelFloorsAmount;
 
     public event UnityAction LevelParametersPrepared;
     
     private int _levelsCounter;
     private int _floorsQuantity;
+    private int _availableFloorsQuantity;
     private int _obstaclesLevel;
     private int _keysQuantity;
     private int _keysFromPreviousLevel;
@@ -20,11 +27,14 @@ public class Progression : MonoBehaviour
     private int _trapsQuantity;
 
     public int FloorsQuantity => _floorsQuantity;
+    // public int AvailableFloorsQuantity => _availableFloorsQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
     public int KeysQuantity => _keysQuantity;
     public int KeysFromPreviousLevel => _keysFromPreviousLevel;
     public int TrapsQuantity => _trapsQuantity;
     public int TrapsLevel => _trapsLevel;
+    public int InitMoney => _initMoney;
+    public int FirstLevelFloorsAmount => _firstLevelFloorsAmount;
 
     private void OnEnable()
     {
@@ -45,7 +55,8 @@ public class Progression : MonoBehaviour
     private void PrepareLevelParameters()
     {
         int levelsPassed = _playerData.CompletedLevelsCounter;
-        _floorsQuantity = CalculateFloorsQuantity(levelsPassed);
+        int floorsAmountFromPreviousLevel = _playerData.FloorsAmountFromPreviousLevel;
+        _floorsQuantity = CalculateFloorsQuantity(levelsPassed, floorsAmountFromPreviousLevel);
         _obstaclesLevel = SetObstaclesLevel(levelsPassed);
         _keysQuantity = SetKeysQuantity(levelsPassed);
         _trapsLevel = SetTrapsLevel(levelsPassed);
@@ -53,26 +64,15 @@ public class Progression : MonoBehaviour
         _keysFromPreviousLevel = _playerData.KeysAmount;
     }
     
-    private int CalculateFloorsQuantity(int levelsPassed) // DRAFT mechanic of progression
+    private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) // DRAFT mechanic of progression
     {
-        if (levelsPassed < 3)
+        if (levelsPassed % 2 == 0)
         {
-            return 3;
-        }
-        else if (levelsPassed >= 3 && levelsPassed < 6 )
-        {
-            return 4;
-        }
-        else if (levelsPassed >= 6 && levelsPassed < 10)
-        {
-            return 5;
-        }
-        else if (levelsPassed >= 10)
-        {
-            return 6;
+            int increasedFloorsAmount = floorsAmountFromPreviousLevel + 1;
+            return increasedFloorsAmount;
         }
 
-        return 404;
+        return floorsAmountFromPreviousLevel;
     }
 
     private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of progression

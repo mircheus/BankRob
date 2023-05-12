@@ -8,15 +8,18 @@ public class Data
     private int _money;
     private int _keys;
     private int _completedLevelsCounter;
+    private int _previousLevelFloorsAmount;
 
     public int Money => _money;
     public int Keys => _keys;
     public int CompletedLevelsCounter => _completedLevelsCounter;
+    public int PreviousLevelFloorsAmount => _previousLevelFloorsAmount;
 
-    public Data(int money, int keys, int completedLevelsCounter)
+    public Data(int money, int keys, int completedLevelsCounter, int previousLevelFloorsAmount)
     {
         _money = money;
         _keys = keys;
         _completedLevelsCounter = completedLevelsCounter;
+        _previousLevelFloorsAmount = previousLevelFloorsAmount;
     }
 }

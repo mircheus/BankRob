@@ -4,28 +4,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Agava.YandexGames;
+using TMPro.EditorUtilities;
 
 public class PlayerData : MonoBehaviour
 {
     [SerializeField] private Robbery _robbery;
     [SerializeField] private Preparing _preparing;
     [SerializeField] private DataManager _dataManager;
+    [SerializeField] private Progression _progression;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
     [SerializeField] private int _moneyAmount;
     [SerializeField] private int _completedLevelsCounter;
+    [SerializeField] private int _floorsAmountFromPreviousLevel;
     [SerializeField] private int _allMoneyCounter;
 
-    [Header("First level PlayerStats values")] 
-    [SerializeField] private int _initMoney;
-    
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
     
     public int KeysAmount => _keysAmount;
     public int MoneyAmount => _moneyAmount;
     public int CompletedLevelsCounter => _completedLevelsCounter;
+    public int FloorsAmountFromPreviousLevel => _floorsAmountFromPreviousLevel;
 
     private void OnEnable()
     {
@@ -57,11 +58,7 @@ public class PlayerData : MonoBehaviour
 
     public void ResetPlayerData()
     {
-        _keysAmount = 0;
-        _moneyAmount = 100;
-        _completedLevelsCounter = 0;
-        _allMoneyCounter = 0;
-        SavePlayerStats();
+        SavePlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount);
         DataUpdated?.Invoke();
     }
 
@@ -90,7 +87,7 @@ public class PlayerData : MonoBehaviour
         }
 #endif
         
-        SavePlayerStats();
+        SavePlayerStats(_moneyAmount, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity);
     }
 
     private void LoadDataFromFile()
@@ -98,26 +95,28 @@ public class PlayerData : MonoBehaviour
         if (_dataManager.IsLoadDataPersists())
         {
             Data loadedData = _dataManager.LoadData();
-            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter);
+            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount);
         }
         else
         {
-            SetPlayerStats(_initMoney, 0, 0);
+            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount);
         } 
     }
 
-    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount)
+    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount)
     {
         _moneyAmount = moneyAmount;
         _keysAmount = keysAmount;
         _completedLevelsCounter = completedLevelsAmount;
+        _floorsAmountFromPreviousLevel = floorsAmount;
         DataUpdated?.Invoke();
     }
 
-    private void SavePlayerStats()
+    private void SavePlayerStats(int moneyAmount, int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount)
     {
-        _completedLevelsCounter++;
-        Data dataToSave = new Data(_moneyAmount, _keysAmount, _completedLevelsCounter); 
+        // completedLevelsCounter++;
+
+        Data dataToSave = new Data(moneyAmount, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount); 
         _dataManager.SaveData(dataToSave);
     }
 }
