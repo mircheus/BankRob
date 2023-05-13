@@ -11,7 +11,6 @@ public class Loader : MonoBehaviour
     private protected int _floorQuantity;
     private protected float _horizontalStep = -7.5f;
     private protected int _verticalStep = -9;
-    private bool[,] _buildingGrid;
 
     public void ArrangeObjects(int floorQuantity)
     {
