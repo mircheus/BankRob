@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BarriersLoader : Loader
 {
+    private const int Horizontal = 4;
+    private Vector3 offset = new Vector3(0, Horizontal, 0);
+    
     public void ArrangeBarriers(Barrier[,] levelMap)
     {
         Vector3 position = transform.position;
@@ -17,6 +20,7 @@ public class BarriersLoader : Loader
             for (int j = 0; j < levelMap.GetLength(1); j++)
             {
                 currentOffset = parent.position + horizontalOffset * j + verticalOffset * i;
+                
                 if (levelMap[i, j] != null)
                 {
                     Instantiate(levelMap[i, j], currentOffset, Quaternion.identity, parent);

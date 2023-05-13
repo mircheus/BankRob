@@ -1,11 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 public class Progression : MonoBehaviour
 {
+    private const int ColumnsAmount = 4;
+    
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
 
@@ -80,14 +86,17 @@ public class Progression : MonoBehaviour
         int levelsPassed = _playerData.CompletedLevelsCounter;
         int floorsAmountFromPreviousLevel = _playerData.FloorsAmountFromPreviousLevel;
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed, floorsAmountFromPreviousLevel);
-        Barrier[,] levelMap = new Barrier[_floorsQuantity - 1, 4]; // magic number // important to keep minus one for correct size
-        levelMap = FillLevelWithBarriers(levelMap, 7); // magic number for test
+        Barrier[,] levelMap = new Barrier[_floorsQuantity - 1, ColumnsAmount]; // magic number // important to keep minus one for correct size
 
+        List<string> randomCellsIndexes = GenerateRandomCells(6, _floorsQuantity);
+        levelMap = FillLevelInRandomCells(levelMap, randomCellsIndexes, 6, 0, 0, 0);
+        // levelMap = FillLevelWithBarriers(levelMap, 6, 0, 7, 0);
+        
         return levelMap;
     }
 
     // private Barrier[,] FillLevelWithBarriers(Barrier[,] barriers, int trapsQuantity, int trapsLevel, int obstaclesQuantity, int obstaclesLevel)
-    private Barrier[,] FillLevelWithBarriers(Barrier[,] barriers, int obstaclesQuantity)
+    private Barrier[,] FillLevelWithBarriersTEST(Barrier[,] barriers, int obstaclesQuantity)
     {
         for (int i = 0; i < barriers.GetLength(0); i++)
         {
@@ -106,6 +115,89 @@ public class Progression : MonoBehaviour
         }
 
         return barriers;
+    }
+    
+    private Barrier[,] FillLevelWithBarriers(Barrier[,] barriers, int obstaclesQuantity, int obstaclesLevel, int trapsQuantity, int trapsLevel)
+    {
+        for (int i = 0; i < barriers.GetLength(0); i++)
+        {
+            for (int j = 0; j < barriers.GetLength(1); j++)
+            {
+                if (obstaclesQuantity > 0)
+                {
+                    barriers[i, j] = _obstacles[obstaclesLevel];
+                    obstaclesQuantity--;
+                }
+                else if (trapsQuantity > 0)
+                {
+                    barriers[i, j] = _traps[trapsLevel];
+                    trapsQuantity--;
+                }
+            }
+        }
+
+        return barriers;
+    }
+
+    private Barrier[,] FillLevelInRandomCells(Barrier[,] availableCells, List<string> cellsIndexes,int obstaclesQuantity, int obstaclesLevel, int trapsQuantity, int trapsLevel)
+    {
+        int i = 0;
+        int j = 0;
+
+        for (int k = 0; k < obstaclesQuantity; k++)
+        {
+            GetNewRandomIndex(ref i, ref j, cellsIndexes);
+            // Debug.Log($"{i} - {j} : obstaclesLevel[{obstaclesLevel}]");
+            availableCells[i, j] = _obstacles[obstaclesLevel];
+        }
+
+        return availableCells;
+    }
+
+    private Barrier GetRandomObstacle(int maxLevelObstacle)
+    {
+        return _obstacles[GenerateRandomIndex(maxLevelObstacle)];
+    }
+
+    private Barrier GetRandomTrap(int maxLevelTrap)
+    {
+        return _traps[GenerateRandomIndex(maxLevelTrap)];
+    }
+
+    private List<string> GenerateRandomCells(int cellsAmount, int rowsAmount)
+    {
+        List<string> randomCells = new List<string>();
+        int i = -1;
+        int j = -1;
+        string result; 
+        
+        for (int k = 0; k < cellsAmount; k++)
+        {
+            do
+            {
+                i = Random.Range(0, rowsAmount - 1);
+                j = Random.Range(0, ColumnsAmount);
+                result = Convert.ToString(i) + Convert.ToString(j);
+                Debug.Log(result);
+            } while (randomCells.Contains(result));
+
+            randomCells.Add(result);
+        }
+
+        return randomCells;
+    }
+
+    private void GetNewRandomIndex(ref int i, ref int j, List<string> randomCellsIndexes)
+    {
+        string index = randomCellsIndexes[0];
+        randomCellsIndexes.RemoveAt(0);
+        i = (int)char.GetNumericValue(index[0]);
+        j = (int)char.GetNumericValue(index[1]);
+    }
+    
+    private int GenerateRandomIndex(int maxLevel)
+    {
+        return Random.Range(0, maxLevel);
     }
     
     private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 
