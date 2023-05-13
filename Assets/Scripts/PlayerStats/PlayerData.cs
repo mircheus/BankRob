@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Agava.YandexGames;
-using TMPro.EditorUtilities;
 
 public class PlayerData : MonoBehaviour
 {
