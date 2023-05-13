@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : Barrier
 {
     [SerializeField] private int _health;
     // [SerializeField] private GameObject _undamagedForm;

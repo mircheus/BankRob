@@ -9,7 +9,7 @@ public class Loader : MonoBehaviour
     
     [SerializeField] private protected GameObject _obstaclePrefab; // переименовать 
     private protected int _floorQuantity;
-    private float _horizontalStep = -7.5f;
+    private protected float _horizontalStep = -7.5f;
     private protected int _verticalStep = -9;
     private bool[,] _buildingGrid;
 

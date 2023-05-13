@@ -13,6 +13,7 @@ public class LevelGenerator : MonoBehaviour
     [SerializeField] private ObstacleLoader _obstacleLoader;
     [SerializeField] private TrapsLoader _trapsLoader;
     [SerializeField] private KeyLoader _keyLoader;
+    [SerializeField] private BarriersLoader _barriersLoader;
     
     // [Header("DEBUG")]
 
@@ -23,32 +24,34 @@ public class LevelGenerator : MonoBehaviour
     // private Vector3[] _obstaclesPositions;
     // private List<Obstacle> _obstacles;
     private int _floorsQuantity;
-    private int _obstaclesQuantity;
-    private int _obstaclesLevel;
-    private int _trapsQuantity;
-    private int _trapsLevel;
-
-    public int FloorsQuantity => _floorsQuantity;
-    public int ObstaclesLevel => _obstaclesLevel;
-    public int ObstaclesQuantity => _obstaclesQuantity;
+    // private int _obstaclesQuantity;
+    // private int _obstaclesLevel;
+    // private int _trapsQuantity;
+    // private int _trapsLevel;
+    //
+    // public int FloorsQuantity => _floorsQuantity;
+    // public int ObstaclesLevel => _obstaclesLevel;
+    // public int ObstaclesQuantity => _obstaclesQuantity;
     // public bool[,] ObstaclesGrid => _obstaclesGrid;
     // public List<Obstacle> Obstacles => _obstacles;
 
     private void OnEnable()
     {
-        _progression.LevelParametersPrepared += OnLevelParametersPrepared;
+        // _progression.LevelParametersPrepared += OnLevelParametersPrepared;
+        _progression.LevelMapPrepared += OnLevelMapPrepared;
     }
 
     private void OnDisable()
     {
-        _progression.LevelParametersPrepared -= OnLevelParametersPrepared;
+        // _progression.LevelParametersPrepared -= OnLevelParametersPrepared;
+        _progression.LevelMapPrepared += OnLevelMapPrepared;
     }
 
     private void OnLevelParametersPrepared()
     {
         // for DataReflector.cs
         _floorsQuantity = _progression.FloorsQuantity;
-        _obstaclesQuantity = _progression.ObstaclesQuantity;
+        // _obstaclesQuantity = _progression.ObstaclesQuantity;
         // _obstaclesQuantity = _progression.ObstaclesQuantity;
         // _obstaclesLevel = _progression.ObstaclesLevel;
         _roofsLoader.ArrangeObjects(_progression.FloorsQuantity);
@@ -64,5 +67,18 @@ public class LevelGenerator : MonoBehaviour
         // KEYS TEMPORARILY DISABLED
         // _keyLoader.SetKeysQuantity(_progression.KeysQuantity);
         // _keyLoader.ArrangeKeys(keyPositions);
+    }
+
+    private void OnLevelMapPrepared(Barrier[,] levelMap)
+    {
+        PrepareRoofsWithGround();
+        _barriersLoader.ArrangeBarriers(levelMap);
+    }
+
+    private void PrepareRoofsWithGround()
+    {
+        _floorsQuantity = _progression.FloorsQuantity;
+        _roofsLoader.ArrangeObjects(_progression.FloorsQuantity);
+        _roofsLoader.GenerateFloor();
     }
 }

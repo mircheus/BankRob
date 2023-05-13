@@ -14,6 +14,12 @@ public class Progression : MonoBehaviour
     [SerializeField] private int _obstaclesReducer;
     [SerializeField] private int _trapsAppearsOnLevel;
 
+    [Header("Obstacles")] 
+    [SerializeField] private Barrier[] _obstacles;
+
+    [Header("Traps")] 
+    [SerializeField] private Barrier[] _traps;
+
     [Header("First level values")] 
     [Header("Player settings")]
     [SerializeField] private int _initMoney;
@@ -21,6 +27,7 @@ public class Progression : MonoBehaviour
     [SerializeField] private int _firstLevelFloorsAmount;
 
     public event UnityAction LevelParametersPrepared;
+    public event UnityAction<Barrier[,]> LevelMapPrepared; 
     
     private int _levelsCounter;
     private int _floorsQuantity;
@@ -53,8 +60,9 @@ public class Progression : MonoBehaviour
 
     private void OnDataLoaded()
     {
-        PrepareLevelParameters();
-        LevelParametersPrepared?.Invoke();
+        // PrepareLevelParameters();
+        // LevelParametersPrepared?.Invoke();
+        LevelMapPrepared?.Invoke(GetLevelMap());
     }
 
     private void PrepareLevelParameters()
@@ -65,6 +73,39 @@ public class Progression : MonoBehaviour
         _floorsQuantity = CalculateFloorsQuantity(levelsPassed, floorsAmountFromPreviousLevel);
         _trapsQuantity = CalculateTrapsQuantity(levelsPassed, _floorsQuantity);
         _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
+    }
+    
+    private Barrier[,] GetLevelMap() 
+    {
+        int levelsPassed = _playerData.CompletedLevelsCounter;
+        int floorsAmountFromPreviousLevel = _playerData.FloorsAmountFromPreviousLevel;
+        _floorsQuantity = CalculateFloorsQuantity(levelsPassed, floorsAmountFromPreviousLevel);
+        Barrier[,] levelMap = new Barrier[_floorsQuantity - 1, 4]; // magic number // important to keep minus one for correct size
+        levelMap = FillLevelWithBarriers(levelMap, 7); // magic number for test
+
+        return levelMap;
+    }
+
+    // private Barrier[,] FillLevelWithBarriers(Barrier[,] barriers, int trapsQuantity, int trapsLevel, int obstaclesQuantity, int obstaclesLevel)
+    private Barrier[,] FillLevelWithBarriers(Barrier[,] barriers, int obstaclesQuantity)
+    {
+        for (int i = 0; i < barriers.GetLength(0); i++)
+        {
+            for (int j = 0; j < barriers.GetLength(1); j++)
+            {
+                if (obstaclesQuantity > 0)
+                {
+                    barriers[i, j] = _obstacles[0];
+                    obstaclesQuantity--;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        return barriers;
     }
     
     private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 
