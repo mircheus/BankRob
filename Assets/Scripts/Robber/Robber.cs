@@ -26,6 +26,7 @@ public class Robber : MonoBehaviour
     
     public int Level => _level;
     public int ColumnIndex => _columnIndex;
+    public Color[] LevelColors => _levelColors;
 
     private void OnEnable()
     {

@@ -22,6 +22,7 @@ public class Cage : Trap
             else
             {
                 GetDestroyedBy();
+                Debug.Log("GetDestroyedByDash");
             }
         }
     }

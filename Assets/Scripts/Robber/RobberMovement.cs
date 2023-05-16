@@ -54,7 +54,7 @@ public class RobberMovement : MonoBehaviour
         _currentTarget = target.position;
     }
 
-    public void GetTrappedBy(Trap trap) 
+    public void GetTrappedBy(Trap trap) // maybe need new script separetely
     {
         if (trap.gameObject.TryGetComponent(out Cage cage))
         {
@@ -64,15 +64,16 @@ public class RobberMovement : MonoBehaviour
                 Debug.Log("Stopped by cage");
             }
         }
-        
-        if (_isShieldActive == false)
+
+        if (trap.gameObject.TryGetComponent(out Dynamite dynamite))
         {
-            GetStopped?.Invoke();
-            Debug.Log("Get Trapped");
+            if (_isShieldActive == false)
+            {
+                GetStopped?.Invoke();
+                Debug.Log("Get Trapped");
+            }
         }
     }
-    
-    
     
     public void SetIncreasedSpeedBy(DashPerk perk, float increasedSpeed)
     {
