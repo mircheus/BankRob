@@ -14,7 +14,7 @@ public class Dynamite : Trap
         if (other.TryGetComponent(out Robber robber))
         {
             PlayDestroyFx();
-            robber.GetComponent<RobberMovement>().GetTrapped();
+            robber.GetComponent<RobberMovement>().GetTrappedBy(this);
         }
     }   
     

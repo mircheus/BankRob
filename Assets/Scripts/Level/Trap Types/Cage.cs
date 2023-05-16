@@ -14,8 +14,7 @@ public class Cage : Trap
         if (other.TryGetComponent(out RobberMovement robberMovement))
         {
             _animator.Play(_close);
-            Debug.Log("Caged");
-            robberMovement.GetTrapped();
+            robberMovement.GetTrappedBy(this);
         }
     }
     

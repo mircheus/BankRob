@@ -10,7 +10,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _sweaterMesh;
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
     [SerializeField] private GameObject _axe;
-    [SerializeField] private ExplosionPerk _explosionPerk;
+    // [SerializeField] private ExplosionPerk _explosionPerk;
     [SerializeField] private Perk[] _perks; 
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
     
@@ -72,6 +72,11 @@ public class Robber : MonoBehaviour
     {
         // _explosionPerk.Activate();
         _perks[_level - 1].Activate();
+    }
+
+    public void ActivatePerkTEST(int index)
+    {
+        _perks[index].Activate();
     }
 
     public void SetColumnIndex(int index)

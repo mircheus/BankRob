@@ -16,7 +16,8 @@ public class RobberMovement : MonoBehaviour
 
     private Transform _downTarget;
     private Obstacle _currentObstacle;
-
+    private bool _isShieldActive = false;
+    
     public event UnityAction GetStopped;
 
     private void OnEnable()
@@ -50,10 +51,22 @@ public class RobberMovement : MonoBehaviour
         _currentTarget = target.position;
     }
 
-    public void GetTrapped()
+    public void GetTrappedBy(Trap trap) 
     {
-        GetStopped?.Invoke();
+        if (trap.gameObject.TryGetComponent(out Cage cage))
+        {
+            GetStopped?.Invoke();
+            Debug.Log("Stopped by cage");
+        }
+        
+        if (_isShieldActive == false)
+        {
+            GetStopped?.Invoke();
+            Debug.Log("Get Trapped");
+        }
     }
+    
+    
     
     public void SetIncreasedSpeedBySpeedPerk(SpeedPerk perk, float increasedSpeed)
     {
@@ -63,6 +76,11 @@ public class RobberMovement : MonoBehaviour
     public void SetDefaultSpeedByPerk(SpeedPerk perk)
     {
         _currentSpeed = _defaultSpeed;
+    }
+
+    public void SetShieldActive(bool value)
+    {
+        _isShieldActive = value;
     }
     
     private void MoveTo(Vector3 target)
