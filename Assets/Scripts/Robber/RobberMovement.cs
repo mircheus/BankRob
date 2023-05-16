@@ -17,6 +17,9 @@ public class RobberMovement : MonoBehaviour
     private Transform _downTarget;
     private Obstacle _currentObstacle;
     private bool _isShieldActive = false;
+    private bool _isDashActive = false;
+
+    public bool IsDashActive => _isDashActive;
     
     public event UnityAction GetStopped;
 
@@ -55,8 +58,11 @@ public class RobberMovement : MonoBehaviour
     {
         if (trap.gameObject.TryGetComponent(out Cage cage))
         {
-            GetStopped?.Invoke();
-            Debug.Log("Stopped by cage");
+            if (_isDashActive == false)
+            {
+                GetStopped?.Invoke();
+                Debug.Log("Stopped by cage");
+            }
         }
         
         if (_isShieldActive == false)
@@ -68,14 +74,16 @@ public class RobberMovement : MonoBehaviour
     
     
     
-    public void SetIncreasedSpeedBySpeedPerk(SpeedPerk perk, float increasedSpeed)
+    public void SetIncreasedSpeedBy(DashPerk perk, float increasedSpeed)
     {
         _currentSpeed = increasedSpeed;
+        _isDashActive = true;
     }
 
-    public void SetDefaultSpeedByPerk(SpeedPerk perk)
+    public void SetDefaultSpeedBy(DashPerk perk)
     {
         _currentSpeed = _defaultSpeed;
+        _isDashActive = false;
     }
 
     public void SetShieldActive(bool value)

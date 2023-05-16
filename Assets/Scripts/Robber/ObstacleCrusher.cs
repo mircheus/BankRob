@@ -55,12 +55,12 @@ public class ObstacleCrusher : MonoBehaviour
         _obstacleToCrush = null;
     }
 
-    public void IncreaseDamageBySpeedPerk(SpeedPerk perk, int increasedDamage)
+    public void IncreaseDamageBySpeedPerk(DashPerk perk, int increasedDamage)
     {
         _currentDamage = increasedDamage;
     }
 
-    public void SetDefaultDamageBySpeedPerk(SpeedPerk perk)
+    public void SetDefaultDamageBySpeedPerk(DashPerk perk)
     {
         _currentDamage = _defaultDamage;
     }

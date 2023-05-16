@@ -8,7 +8,7 @@ public class Trap : Barrier
     
     private const float Seconds = .3f;
     
-    public virtual void GetDestroyedByPerk()
+    public virtual void GetDestroyedBy()
     {
         gameObject.SetActive(false);
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SpeedPerk : Perk
+public class DashPerk : Perk
 {
     [Header("Unique")]
     [SerializeField] private RobberMovement _robberMovement;
@@ -15,7 +15,7 @@ public class SpeedPerk : Perk
     public override void Activate()
     {
         base.Activate();
-        _robberMovement.SetIncreasedSpeedBySpeedPerk(this, _increasedSpeed);
+        _robberMovement.SetIncreasedSpeedBy(this, _increasedSpeed);
         _obstacleCrusher.IncreaseDamageBySpeedPerk(this, _increasedDamage);
             
         if (_obstacleCrusher.ObstacleToCrush != null)
@@ -26,7 +26,7 @@ public class SpeedPerk : Perk
 
     protected override void Deactivate()
     {
-        _robberMovement.SetDefaultSpeedByPerk(this);
+        _robberMovement.SetDefaultSpeedBy(this);
         _obstacleCrusher.SetDefaultDamageBySpeedPerk(this);
         gameObject.SetActive(false);
     }

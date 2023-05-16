@@ -6,6 +6,7 @@ public class Cage : Trap
 {
     [SerializeField] private ParticleSystem _crackFx;
     [SerializeField] private Animator _animator;
+    [SerializeField] private GameObject[] _forms;
 
     private int _close = Animator.StringToHash("Close");
     
@@ -13,18 +14,24 @@ public class Cage : Trap
     {
         if (other.TryGetComponent(out RobberMovement robberMovement))
         {
-            _animator.Play(_close);
-            robberMovement.GetTrappedBy(this);
+            if (robberMovement.IsDashActive == false)
+            {
+                _animator.Play(_close);
+                robberMovement.GetTrappedBy(this);
+            }
+            else
+            {
+                GetDestroyedBy();
+            }
         }
     }
     
-    public override void GetDestroyedByPerk()
+    public override void GetDestroyedBy()
     {
-        StartCoroutine(DeactivateGameObject());
-    }
-    
-    private void PlayTrappedFx()
-    {
-        _crackFx.Play();
+        // StartCoroutine(DeactivateGameObject());
+        PlayDestroyFx();
+        
+        _forms[0].SetActive(false);
+        _forms[1].SetActive(true);
     }
 }

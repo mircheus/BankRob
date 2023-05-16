@@ -18,7 +18,7 @@ public class Dynamite : Trap
         }
     }   
     
-    public override void GetDestroyedByPerk()
+    public override void GetDestroyedBy()
     {
         PlayDestroyFx();
         StartCoroutine(DeactivateGameObject());
