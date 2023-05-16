@@ -9,7 +9,7 @@ public class Trap : Barrier
     
     private const float Seconds = 5f;
     
-    public virtual void GetDestroyedBy()
+    public virtual void GetDestroyed()
     {
         gameObject.SetActive(false);
     }
@@ -17,7 +17,7 @@ public class Trap : Barrier
     public virtual void GetFreezedBy(FreezePerk freezePerk)
     {
         _iceCube.gameObject.SetActive(true);
-        _iceCube.Destroyed += GetDestroyedBy;
+        _iceCube.Destroyed += GetDestroyed;
     }
     
     protected virtual void PlayDestroyFx()
@@ -28,7 +28,7 @@ public class Trap : Barrier
     protected IEnumerator DeactivateGameObject()
     {
         yield return new WaitForSeconds(Seconds);
-        _iceCube.Destroyed -= GetDestroyedBy;
+        _iceCube.Destroyed -= GetDestroyed;
         gameObject.SetActive(false);
     }
 }

@@ -63,6 +63,11 @@ public class Obstacle : Barrier
     private void InitializeUndamagedForm()
     {
         _damagedForms[0].SetActive(true);
+
+        if (_damagedForms.Length == 0)
+        {
+            return;
+        }
         // Debug.Log("point");
 
         for (int i = 1; i < _damagedForms.Length; i++)

@@ -25,12 +25,12 @@ public class ExplosionPerk : Perk
 
         if (other.TryGetComponent(out Dynamite dynamite))
         {
-            dynamite.GetDestroyedBy();
+            dynamite.GetDestroyed();
         }
 
         if (other.TryGetComponent(out Cage cage))
         {
-            cage.GetDestroyedBy();
+            cage.GetDestroyed();
         }
     }
     

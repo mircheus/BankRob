@@ -21,13 +21,13 @@ public class Cage : Trap
             }
             else
             {
-                GetDestroyedBy();
+                GetDestroyed();
                 Debug.Log("GetDestroyedByDash");
             }
         }
     }
     
-    public override void GetDestroyedBy()
+    public override void GetDestroyed()
     {
         // StartCoroutine(DeactivateGameObject());
         PlayDestroyFx();

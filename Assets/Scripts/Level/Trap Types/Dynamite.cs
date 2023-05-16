@@ -23,7 +23,7 @@ public class Dynamite : Trap
         }
     }   
     
-    public override void GetDestroyedBy()
+    public override void GetDestroyed()
     {
         PlayDestroyFx();
         StartCoroutine(DeactivateGameObject());

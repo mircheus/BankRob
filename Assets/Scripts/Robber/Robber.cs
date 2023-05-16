@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 public class Robber : MonoBehaviour
@@ -31,11 +32,13 @@ public class Robber : MonoBehaviour
     private void OnEnable()
     {
         _keyCollector.KeyCollected += OnKeyCollected;
+        GetComponent<RobberMovement>().GetStopped += OnGetStopped;
     }
 
     private void OnDisable()
     {
         _keyCollector.KeyCollected -= OnKeyCollected;
+        GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
     }
 
     private void Start()
@@ -99,5 +102,10 @@ public class Robber : MonoBehaviour
     private void OnKeyCollected()
     {
         Debug.Log("KeyCollected");
+    }
+
+    private void OnGetStopped()
+    {
+        _robberMovement.enabled = false;
     }
 }
