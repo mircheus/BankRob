@@ -7,7 +7,7 @@ public class Trap : Barrier
     [SerializeField] private ParticleSystem _destroyFx;
     [SerializeField] private Obstacle _iceCube;
     
-    private const float Seconds = .3f;
+    private const float Seconds = 5f;
     
     public virtual void GetDestroyedBy()
     {

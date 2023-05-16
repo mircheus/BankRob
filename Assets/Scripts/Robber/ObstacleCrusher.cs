@@ -48,11 +48,11 @@ public class ObstacleCrusher : MonoBehaviour
         // Debug.Log($"currentDamage: {_damage}");
     }
 
-    public void OnObstacleDestroyed()
+    private void OnObstacleDestroyed()
     {
-        ObstacleDestroyed?.Invoke();
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;
-        _obstacleToCrush = null;
+        ObstacleDestroyed?.Invoke();
+        // _obstacleToCrush = null;
     }
 
     public void IncreaseDamageBySpeedPerk(DashPerk perk, int increasedDamage)
