@@ -59,7 +59,6 @@ public class LevelMapGenerator
                 i = Random.Range(0, rowsAmount);
                 j = Random.Range(0, ColumnsAmount);
                 result = Convert.ToString(i) + Convert.ToString(j);
-                Debug.Log(result);
             } while (randomCells.Contains(result));
 
             randomCells.Add(result);
@@ -70,12 +69,12 @@ public class LevelMapGenerator
     
     private Barrier GetRandomObstacle(int maxLevelObstacle)
     {
-        return _obstacles[GenerateRandomIndex(maxLevelObstacle + 1)]; // Magic Number
+        return _obstacles[GenerateRandomIndex(maxLevelObstacle)]; // Magic Number
     }
 
     private Barrier GetRandomTrap(int maxLevelTrap) 
     {
-        return _traps[GenerateRandomIndex(maxLevelTrap + 1)]; // Magic number 
+        return _traps[GenerateRandomIndex(maxLevelTrap)]; // Magic number 
     }
     
     private int GenerateRandomIndex(int maxLevel)

@@ -23,8 +23,8 @@ public class LeaderboardWindow : MonoBehaviour
 
     private void OnEnable()
     {
-        // OpenYandexLeaderboard();
-        FillDataTesting();
+        OpenYandexLeaderboard();
+        // FillDataTesting();
     }
 
     private void FillDataTesting()

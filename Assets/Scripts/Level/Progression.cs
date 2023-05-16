@@ -89,7 +89,7 @@ public class Progression : MonoBehaviour
 
     private int CalculateObstaclesQuantity(int currentFloorsAmount, int trapsAmount)
     {
-        return (currentFloorsAmount - 1) * _difficultyFactor - trapsAmount - _obstaclesReducer; // refer to RoofsLoader 
+        return (currentFloorsAmount - 1) * _difficultyFactor - trapsAmount - _obstaclesReducer; 
     }
 
     private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of progression
@@ -138,14 +138,14 @@ public class Progression : MonoBehaviour
     {
         if (levelsPassed < 3)
         {
-            return 0;
+            return 1;
         }
 
         if (levelsPassed >= 3)
         {
-            return 1;
+            return 2;
         }
 
-        return 0;
+        return -1;
     }
 }
