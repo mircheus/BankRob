@@ -73,6 +73,11 @@ public class Robbery : MonoBehaviour
         _aliveRobbersCounter++;
     }
 
+    public List<Robber> GetRobbersListTo(TargetMovement targetMovement)
+    {
+        return _robbers;
+    }
+
     private void SetTargetsQuantity(int keysFromPreviousLevel)
     {
         if (keysFromPreviousLevel == 0)

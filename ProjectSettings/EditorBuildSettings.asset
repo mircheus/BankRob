@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/05_Leaderboard.unity
     guid: d35fdbe0600a143449ceb2ab0554a39e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/07_Progression.unity
     guid: 0d20b3d7d86507f408b1c54e7fd4c0f7
+  - enabled: 1
+    path: Assets/Scenes/Testrooms/08_CameraTesting.unity
+    guid: 7997945c5e3f0c14f865fe3957a16d4c
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ff38ab1cd28cf1640b8fdb535578f864, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: a0d7e4f37bd57ad42abb03c6b20be4e3, type: 2}
