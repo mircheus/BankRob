@@ -16,10 +16,10 @@ public class Obstacle : Barrier
     [SerializeField] private float _destroyDelay;
 
     private int _damageFormsAmount;
-    private int _currentDamage = 0;
+    private int _currentDamageForm = 0;
     private BoxCollider _boxCollider;
     
-    public event UnityAction<Vector3> Destroyed;
+    public event UnityAction Destroyed;
 
     private void OnEnable()
     {
@@ -34,7 +34,7 @@ public class Obstacle : Barrier
     private void Start()
     {
         _damageFormsAmount = _damagedForms.Length;
-        _currentDamage = 0;
+        _currentDamageForm = 0;
         InitializeUndamagedForm();
         _boxCollider = GetComponent<BoxCollider>();
     }
@@ -47,22 +47,21 @@ public class Obstacle : Barrier
         
         if (_health <= 0)
         {
-            Destroyed?.Invoke(transform.position);
+            Destroyed?.Invoke();
         }
     }
 
-    private void OnDestroyed(Vector3 position)
+    private void OnDestroyed()
     {
         // gameObject.SetActive(false);
         _destroyFX.Play();
         _boxCollider.isTrigger = true;
-        _damagedForms[_currentDamage].SetActive(false);
+        _damagedForms[_currentDamageForm].SetActive(false);
         StartCoroutine(DisableAfterSomeTime());
     }
 
     private void InitializeUndamagedForm()
     {
-        // _undamagedForm.SetActive(true);
         _damagedForms[0].SetActive(true);
         // Debug.Log("point");
 
@@ -76,11 +75,16 @@ public class Obstacle : Barrier
 
     private void NextDamageForm()
     {
-        if (_currentDamage + 1 < _damageFormsAmount)
+        if (_damagedForms.Length == 1)
         {
-            _damagedForms[_currentDamage].SetActive(false);
-            _currentDamage++;
-            _damagedForms[_currentDamage].SetActive(true);
+            return; 
+        }
+        
+        if (_currentDamageForm + 1 < _damageFormsAmount)
+        {
+            _damagedForms[_currentDamageForm].SetActive(false);
+            _currentDamageForm++;
+            _damagedForms[_currentDamageForm].SetActive(true);
         }
     }
 

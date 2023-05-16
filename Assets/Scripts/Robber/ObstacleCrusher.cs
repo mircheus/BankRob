@@ -48,7 +48,7 @@ public class ObstacleCrusher : MonoBehaviour
         // Debug.Log($"currentDamage: {_damage}");
     }
 
-    public void OnObstacleDestroyed(Vector3 position)
+    public void OnObstacleDestroyed()
     {
         ObstacleDestroyed?.Invoke();
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;

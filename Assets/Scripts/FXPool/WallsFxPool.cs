@@ -9,7 +9,7 @@ public class WallsFxPool : FXPool
     {
         foreach (var obstacle in obstacles)
         {
-            obstacle.Destroyed += EnableFX;
+            // obstacle.Destroyed += EnableFX;
         }
     }
     
@@ -17,7 +17,7 @@ public class WallsFxPool : FXPool
     {
         foreach (var obstacle in obstacles)
         {
-            obstacle.Destroyed -= EnableFX;
+            // obstacle.Destroyed -= EnableFX;
         }
     }
 }
