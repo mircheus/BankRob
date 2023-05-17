@@ -75,8 +75,13 @@ public class TargetMovement : MonoBehaviour
     private void OnRobStarterStarted()
     {
         // _robber = _robStarter.PickRobber();
-        _robbers = _robbery.GetRobbersListTo(this).ToArray();
+        _robbers = _robbery.SendRobbersListTo(this).ToArray();
         _robberToFollow = _robbers[_currentIndex];
+
+        foreach (Robber robber in _robbers)
+        {
+            robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
+        }
     }
 
     private float FindMinY(Robber[] robbers)
@@ -128,5 +133,10 @@ public class TargetMovement : MonoBehaviour
         }
 
         return yCoordinates;
+    }
+
+    private void OnGetStopped()
+    {
+        
     }
 }

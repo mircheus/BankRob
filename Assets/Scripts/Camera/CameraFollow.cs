@@ -16,6 +16,8 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float _zMin;
     [SerializeField] private float _maxFov;
     [SerializeField] private float _minFov;
+    [Header("Debug")]
+    [SerializeField] private float _dividedDelta;
 
     private Vector3 _velocity = Vector3.zero;
     private Transform _followRobber;
@@ -35,6 +37,7 @@ public class CameraFollow : MonoBehaviour
     private void Start()
     {
         _isFollowing = false;
+        _camera.m_Lens.FieldOfView = 40;
     }
 
     private void Update()
@@ -66,37 +69,9 @@ public class CameraFollow : MonoBehaviour
 
     private void KeepCameraOffset(float deltaY)
     {
-        if (deltaY > 10)
-        {
-            // _camera.m_Lens.FieldOfView = 60;
-            DOTween.To(() => _camera.m_Lens.FieldOfView, x => _camera.m_Lens.FieldOfView = x, 50, 1);
-        }
-        
-        if (deltaY < 10)
-        {
-            // _camera.m_Lens.FieldOfView = 60;
-            DOTween.To(() => _camera.m_Lens.FieldOfView, x => _camera.m_Lens.FieldOfView = x, 40, 1);
-        }
-        
-        if (deltaY > 30)
-        {
-            // _camera.m_Lens.FieldOfView = 80;
-            // DOTween.To(()=> myVector, x=> myVector = x, new Vector3(3,4,8), 1);
-            DOTween.To(() => _camera.m_Lens.FieldOfView, x => _camera.m_Lens.FieldOfView = x, 60, 1);
-        }
-        
-        if (deltaY >= 10 && deltaY < 30 )
-        {
-            // _camera.m_Lens.FieldOfView = 80;
-            // DOTween.To(()=> myVector, x=> myVector = x, new Vector3(3,4,8), 1);
-            DOTween.To(() => _camera.m_Lens.FieldOfView, x => _camera.m_Lens.FieldOfView = x, 60, 1);
-        }
-        
-        if (deltaY > 50)
-        {
-            _camera.m_Lens.FieldOfView = 100;
-            DOTween.To(() => _camera.m_Lens.FieldOfView, x => _camera.m_Lens.FieldOfView = x, 70, 1);
-        }
+        deltaY /= 100;
+        _dividedDelta = deltaY;
+        _camera.m_Lens.FieldOfView = Mathf.Lerp(_minFov, _maxFov, deltaY);
     }
 
     private float CalculateOffsetByZ(float z)

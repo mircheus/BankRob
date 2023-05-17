@@ -16,7 +16,7 @@ public class Robbery : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
     [SerializeField] private int _aliveRobbersCounter;
-    
+
     private int _robbedVaultsCounter;
 
     public event UnityAction BankRobbed;
@@ -73,7 +73,7 @@ public class Robbery : MonoBehaviour
         _aliveRobbersCounter++;
     }
 
-    public List<Robber> GetRobbersListTo(TargetMovement targetMovement)
+    public List<Robber> SendRobbersListTo(TargetMovement targetMovement)
     {
         return _robbers;
     }
