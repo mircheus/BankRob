@@ -3,20 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class TargetMovement : MonoBehaviour
 {
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private Robbery _robbery;
     
-    private Robber _robberToFollow;
     private int _currentIndex;
 
     [Header("Debug")]
     [SerializeField] private float _minY;
     [SerializeField] private float _maxY;
     [SerializeField] private float _deltaY;
-    [SerializeField] private Robber[] _robbers;
+    [SerializeField] private List<Robber> _robbers;
+    [SerializeField] private Robber _robberToFollow;
     
     public float DeltaY => _deltaY;
     
@@ -43,25 +44,8 @@ public class TargetMovement : MonoBehaviour
         {
             Follow();
             CalculateDelta();
+            _robberToFollow = FindLowestRobber();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeRobberToFollow();
-        }
-    }
-    
-    public void ChangeRobberToFollow()
-    {
-        Debug.Log("Changed");
-        _currentIndex++;
-
-        if (_currentIndex == _robbers.Length)
-        {
-            _currentIndex = 0;
-        }
-
-        _robberToFollow = _robbers[_currentIndex];
     }
 
     private void Follow()
@@ -75,7 +59,7 @@ public class TargetMovement : MonoBehaviour
     private void OnRobStarterStarted()
     {
         // _robber = _robStarter.PickRobber();
-        _robbers = _robbery.SendRobbersListTo(this).ToArray();
+        _robbers = _robbery.SendRobbersListTo(this);
         _robberToFollow = _robbers[_currentIndex];
 
         foreach (Robber robber in _robbers)
@@ -84,7 +68,14 @@ public class TargetMovement : MonoBehaviour
         }
     }
 
-    private float FindMinY(Robber[] robbers)
+    private void CalculateDelta()
+    {
+        _minY = FindMinY(_robbers);
+        _maxY = FindMaxY(_robbers);
+        _deltaY = Mathf.Abs(_maxY - _minY);
+    }
+    
+    private float FindMinY(List<Robber> robbers)
     {
         float[] yCoordinates = CollectYCoordinatesFrom(robbers);
         float minY = yCoordinates[0];
@@ -97,17 +88,10 @@ public class TargetMovement : MonoBehaviour
             }
         }
 
-        return minY + 1000f;
+        return minY + 1000f; // MAgic number
     }
 
-    private void CalculateDelta()
-    {
-        _minY = FindMinY(_robbers);
-        _maxY = FindMaxY(_robbers);
-        _deltaY = Mathf.Abs(_maxY - _minY);
-    }
-
-    private float FindMaxY(Robber[] robbers)
+    private float FindMaxY(List<Robber> robbers)
     {
         float[] yCoordinates = CollectYCoordinatesFrom(robbers);
         float maxY = yCoordinates[0];
@@ -120,14 +104,14 @@ public class TargetMovement : MonoBehaviour
             }
         }
 
-        return maxY + 1000f;
+        return maxY + 1000f; // Magic Number
     }
 
-    private float[] CollectYCoordinatesFrom(Robber[] robbers)
+    private float[] CollectYCoordinatesFrom(List<Robber> robbers)
     {
-        float[] yCoordinates = new float[robbers.Length];
+        float[] yCoordinates = new float[robbers.Count];
 
-        for (int i = 0; i < robbers.Length; i++)
+        for (int i = 0; i < robbers.Count; i++)
         {
             yCoordinates[i] = robbers[i].transform.position.y;
         }
@@ -137,6 +121,31 @@ public class TargetMovement : MonoBehaviour
 
     private void OnGetStopped()
     {
+        // Debug.Log("OnGetStopped From target movement");
         
+        for (int i = 0; i < _robbers.Count; i++)
+        {
+            if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
+            {
+                _robbers.Remove(_robbers[i]);
+                Debug.Log("Removed");
+                // break;
+            }
+        }
+    }
+
+    private Robber FindLowestRobber()
+    {
+        Robber lowestRobber = _robbers[0];
+        
+        foreach (var robber in _robbers)
+        {
+            if (robber.transform.position.y < lowestRobber.transform.position.y)
+            {
+                lowestRobber = robber;
+            }    
+        }
+
+        return lowestRobber;
     }
 }

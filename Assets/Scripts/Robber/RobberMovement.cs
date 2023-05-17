@@ -18,8 +18,10 @@ public class RobberMovement : MonoBehaviour
     private Obstacle _currentObstacle;
     private bool _isShieldActive = false;
     private bool _isDashActive = false;
+    private bool _isGetStopped = false;
 
     public bool IsDashActive => _isDashActive;
+    public bool IsGetStopped => _isGetStopped;
     
     public event UnityAction GetStopped;
 
@@ -28,6 +30,7 @@ public class RobberMovement : MonoBehaviour
         _obstacleCrusher.ObstacleCollided += StopMoving;
         _obstacleCrusher.ObstacleDestroyed += StartMoving;
         GetStopped += StopMoving;
+        GetStopped += OnGetStopped;
     }
 
     private void OnDisable()
@@ -35,6 +38,7 @@ public class RobberMovement : MonoBehaviour
         _obstacleCrusher.ObstacleCollided -= StopMoving;
         _obstacleCrusher.ObstacleDestroyed -= StartMoving;
         GetStopped -= StopMoving;
+        GetStopped -= OnGetStopped;
     }
 
     private void Start()
@@ -61,7 +65,7 @@ public class RobberMovement : MonoBehaviour
             if (_isDashActive == false)
             {
                 GetStopped?.Invoke();
-                Debug.Log("Stopped by cage");
+                // Debug.Log("Stopped by cage");
             }
         }
 
@@ -70,7 +74,7 @@ public class RobberMovement : MonoBehaviour
             if (_isShieldActive == false)
             {
                 GetStopped?.Invoke();
-                Debug.Log("Get Trapped");
+                // Debug.Log("Get Trapped");
             }
         }
     }
@@ -110,5 +114,10 @@ public class RobberMovement : MonoBehaviour
     private void StartMoving()
     {
         _currentSpeed = _defaultSpeed;
+    }
+    
+    private void OnGetStopped()
+    {
+        _isGetStopped = true;
     }
 }
