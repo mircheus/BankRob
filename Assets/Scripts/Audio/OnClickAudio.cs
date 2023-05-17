@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class OnClickAudio : MonoBehaviour
 {
+    [SerializeField] private AudioClip _buyClick;
+    [SerializeField] private AudioClip _defaultButtonClick;
+    
     private AudioSource _audioSource;
 
     private void Start()

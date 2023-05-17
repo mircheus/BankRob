@@ -15,6 +15,7 @@ public class ObstacleCrusher : MonoBehaviour
 
     public event UnityAction ObstacleCollided;
     public event UnityAction ObstacleDestroyed;
+    public event UnityAction Attacked;
 
     public Obstacle ObstacleToCrush => _obstacleToCrush;
     
@@ -39,6 +40,7 @@ public class ObstacleCrusher : MonoBehaviour
     public void Attack()
     {
         _obstacleToCrush.ApplyDamage(_currentDamage);
+        Attacked?.Invoke();
     }
 
     public void IncreaseDamage(int level)

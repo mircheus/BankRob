@@ -18,7 +18,8 @@ public class Obstacle : Barrier
     private int _damageFormsAmount;
     private int _currentDamageForm = 0;
     private BoxCollider _boxCollider;
-    
+
+    public event UnityAction Damaged;
     public event UnityAction Destroyed;
 
     private void OnEnable()
@@ -44,6 +45,7 @@ public class Obstacle : Barrier
         _health -= damage;
         NextDamageForm();
         _damageFX.Play();
+        Damaged?.Invoke();
         
         if (_health <= 0)
         {
