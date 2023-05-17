@@ -78,6 +78,12 @@ public class TargetMovement : MonoBehaviour
     private float FindMinY(List<Robber> robbers)
     {
         float[] yCoordinates = CollectYCoordinatesFrom(robbers);
+        
+        if (yCoordinates == null)
+        {
+            return -1;
+        }
+        
         float minY = yCoordinates[0];
 
         foreach (var yCoordinate in yCoordinates)
@@ -94,6 +100,12 @@ public class TargetMovement : MonoBehaviour
     private float FindMaxY(List<Robber> robbers)
     {
         float[] yCoordinates = CollectYCoordinatesFrom(robbers);
+        
+        if (yCoordinates == null)
+        {
+            return -1;
+        }
+        
         float maxY = yCoordinates[0];
 
         foreach (var yCoordinate in yCoordinates)
@@ -109,6 +121,11 @@ public class TargetMovement : MonoBehaviour
 
     private float[] CollectYCoordinatesFrom(List<Robber> robbers)
     {
+        if (robbers.Count == 0)
+        {
+            return null;
+        }
+        
         float[] yCoordinates = new float[robbers.Count];
 
         for (int i = 0; i < robbers.Count; i++)
@@ -136,6 +153,11 @@ public class TargetMovement : MonoBehaviour
 
     private Robber FindLowestRobber()
     {
+        if (_robbers.Count == 0)
+        {
+            return null;
+        }
+        
         Robber lowestRobber = _robbers[0];
         
         foreach (var robber in _robbers)
