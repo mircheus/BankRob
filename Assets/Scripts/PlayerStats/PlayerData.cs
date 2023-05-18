@@ -57,7 +57,7 @@ public class PlayerData : MonoBehaviour
 
     public void ResetPlayerData()
     {
-        SavePlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount);
+        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount);
         DataUpdated?.Invoke();
     }
 
@@ -86,7 +86,7 @@ public class PlayerData : MonoBehaviour
         }
 #endif
         
-        SavePlayerStats(_moneyAmount, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity);
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity);
     }
 
     private void LoadDataFromFile()
@@ -111,11 +111,11 @@ public class PlayerData : MonoBehaviour
         DataUpdated?.Invoke();
     }
 
-    private void SavePlayerStats(int moneyAmount, int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount)
+    private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount)
     {
         // completedLevelsCounter++;
 
-        Data dataToSave = new Data(moneyAmount, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount); 
+        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount); 
         _dataManager.SaveData(dataToSave);
     }
 }
