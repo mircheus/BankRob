@@ -78,7 +78,7 @@ public class PlayerData : MonoBehaviour
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
         _allMoneyCounter += _robbery.MoneyRewardAmount;
-        
+
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
         {

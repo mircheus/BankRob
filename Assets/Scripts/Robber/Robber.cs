@@ -15,7 +15,8 @@ public class Robber : MonoBehaviour
     [SerializeField] private Perk[] _perks; 
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
     
-    private int _level = 1;
+    [Header("Debug")]
+    [SerializeField] private int _level = 1;
     [SerializeField] private int _columnIndex = -1;
     
     private Material _bodyMaterial;

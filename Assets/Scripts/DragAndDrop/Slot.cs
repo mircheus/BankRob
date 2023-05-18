@@ -13,7 +13,8 @@ public class Slot : MonoBehaviour
     [SerializeField] private ParticleSystem _combineFx;
     // [SerializeField] private ParticleSystemRenderer _combineFxRenderer;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
-
+    [SerializeField] private GameObject _robbersPool;
+    
     private Image _image;
     private RobberDragger _robberDragger;
     private Robber _robber;
@@ -67,6 +68,9 @@ public class Slot : MonoBehaviour
     public void Unfill()
     {
         _isFilled = false;
+        _robber.transform.SetParent(_robbersPool.transform);
+        _robber = null;
+        Debug.Log("Unfill");
     }
 
     public void PlaceNewRobber(Robber robber)
