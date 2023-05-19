@@ -10,6 +10,8 @@ public class Grid : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Shop _shop;
 
+    private int[] _robbers;
+
     private void OnEnable()
     {
         _playerData.DataLoaded += OnDataLoaded;
@@ -22,7 +24,7 @@ public class Grid : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerData.DataLoaded += OnDataLoaded;
+        _playerData.DataLoaded -= OnDataLoaded;
         
         foreach (var slot in _slots)
         {
@@ -35,31 +37,23 @@ public class Grid : MonoBehaviour
         FillRobbersFromPreviousLevel(_playerData.AliveRobbers);
     }
 
-    private void FillRobbersFromPreviousLevel(int[] robbers)
+    public void OnClick()
+    {
+        _robbers = _playerData.AliveRobbers;
+        FillRobbersFromPreviousLevel(_robbers);
+    }
+
+    public void FillRobbersFromPreviousLevel(int[] robbers)
     {
         if (robbers != null)
         {
             for (int i = 0; i < robbers.Length; i++)
             {
                 var robber = _shop.Robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
+                robber.SetLevel(robbers[i]);
                 _slots[i].PlaceNewRobber(robber);
                 robber.gameObject.SetActive(true);
             }
-            // for (int i = 0; i < robbers.Length; i++)
-            // { 
-                // var robber = _shop.GetInitRobber();
-                // Debug.Log($"robber level = {robber.Level}");
-                // if (robber.Level != robbers[i])
-                // {
-                //     do
-                //     {
-                //         robber.UpgradeLevel();
-                //     } while (robber.Level != robbers[i]);
-                // }
-                //
-                // _slots[i].PlaceNewRobber(robber);
-                // Debug.Log($"RobberPlaced");
-                // }
         }
     }
 

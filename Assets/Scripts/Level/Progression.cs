@@ -13,6 +13,7 @@ public class Progression : MonoBehaviour
     
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
+    [SerializeField] private Grid _grid;
 
     [Header("Progression settings")] 
     [SerializeField] private int _difficultyFactor;
@@ -24,6 +25,7 @@ public class Progression : MonoBehaviour
 
     [Header("Traps")] 
     [SerializeField] private Barrier[] _traps;
+    
 
     [Header("First level values")] 
     [Header("Player settings")]
@@ -74,6 +76,7 @@ public class Progression : MonoBehaviour
         LevelMapGenerator levelMapGenerator = new LevelMapGenerator(_obstacles, _traps);
         Barrier[,] levelMap = levelMapGenerator.GetLevelMap(_floorsQuantity, _obstaclesQuantity, _obstaclesLevel, _trapsQuantity, _trapsLevel);
         LevelMapPrepared?.Invoke(levelMap);
+        // _grid.FillRobbersFromPreviousLevel(_playerData.AliveRobbers);
     }
 
     private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 

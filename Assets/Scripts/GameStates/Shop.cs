@@ -75,8 +75,8 @@ public class Shop : MonoBehaviour
         {
             if (_slots[i].IsFilled == false)
             {
-                _slots[i].PlaceNewRobber(robber);
                 robber.gameObject.SetActive(true);
+                _slots[i].PlaceNewRobber(robber);
                 break;
             }
         }
