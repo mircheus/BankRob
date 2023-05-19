@@ -16,8 +16,9 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _keysAmount;
     [SerializeField] private int _moneyAmount;
     [SerializeField] private int _completedLevelsCounter;
-    [SerializeField] private int _floorsAmountFromPreviousLevel;
+    [SerializeField] private int _previousLevelFloorsAmount;
     [SerializeField] private int _allMoneyCounter;
+    [SerializeField] private int[] _aliveRobbers;
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -25,7 +26,8 @@ public class PlayerData : MonoBehaviour
     public int KeysAmount => _keysAmount;
     public int MoneyAmount => _moneyAmount;
     public int CompletedLevelsCounter => _completedLevelsCounter;
-    public int FloorsAmountFromPreviousLevel => _floorsAmountFromPreviousLevel;
+    public int PreviousLevelFloorsAmount => _previousLevelFloorsAmount;
+    public int[] AliveRobbers => _aliveRobbers;
 
     private void OnEnable()
     {
@@ -57,7 +59,7 @@ public class PlayerData : MonoBehaviour
 
     public void ResetPlayerData()
     {
-        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount);
+        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null);
         DataUpdated?.Invoke();
     }
 
@@ -78,6 +80,7 @@ public class PlayerData : MonoBehaviour
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
         _allMoneyCounter += _robbery.MoneyRewardAmount;
+        _aliveRobbers = _robbery.CountAliveRobbers();
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
@@ -86,7 +89,7 @@ public class PlayerData : MonoBehaviour
         }
 #endif
         
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity);
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
     }
 
     private void LoadDataFromFile()
@@ -94,28 +97,27 @@ public class PlayerData : MonoBehaviour
         if (_dataManager.IsLoadDataPersists())
         {
             Data loadedData = _dataManager.LoadData();
-            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount);
+            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.RobbersRemained);
         }
         else
         {
-            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount);
+            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount, null); // Workaround null
         } 
     }
 
-    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount)
+    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] robbersFromPreviousLevel)
     {
         _moneyAmount = moneyAmount;
         _keysAmount = keysAmount;
         _completedLevelsCounter = completedLevelsAmount;
-        _floorsAmountFromPreviousLevel = floorsAmount;
+        _previousLevelFloorsAmount = floorsAmount;
+        _aliveRobbers = robbersFromPreviousLevel;
         DataUpdated?.Invoke();
     }
 
-    private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount)
+    private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount, int[] aliveRobbers)
     {
-        // completedLevelsCounter++;
-
-        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount); 
+        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers); 
         _dataManager.SaveData(dataToSave);
     }
 }

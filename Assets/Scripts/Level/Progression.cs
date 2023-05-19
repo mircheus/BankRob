@@ -66,7 +66,7 @@ public class Progression : MonoBehaviour
     private void OnDataLoaded()
     {
         _levelsCounter = _playerData.CompletedLevelsCounter;
-        _floorsQuantity = CalculateFloorsQuantity(_levelsCounter, _playerData.FloorsAmountFromPreviousLevel);
+        _floorsQuantity = CalculateFloorsQuantity(_levelsCounter, _playerData.PreviousLevelFloorsAmount);
         _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
         _trapsQuantity = CalculateTrapsQuantity(_levelsCounter, _floorsQuantity);
         _obstaclesLevel = SetObstaclesLevel(_levelsCounter);
