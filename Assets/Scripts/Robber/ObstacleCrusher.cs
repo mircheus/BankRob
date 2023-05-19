@@ -7,9 +7,9 @@ using UnityEngine.Events;
 
 public class ObstacleCrusher : MonoBehaviour
 {
-    [Header("DEBUG")]
+    [Header("Debug")]
     [SerializeField] private int _defaultDamage;
-
+    
     private int _currentDamage;
     private Obstacle _obstacleToCrush;
 
@@ -43,11 +43,10 @@ public class ObstacleCrusher : MonoBehaviour
         Attacked?.Invoke();
     }
 
-    public void IncreaseDamage(int level)
+    public void IncreaseDamage(int damageIncrement)
     {
-        _defaultDamage += 2;
+        _defaultDamage += damageIncrement;
         _currentDamage = _defaultDamage;
-        // Debug.Log($"currentDamage: {_damage}");
     }
 
     private void OnObstacleDestroyed()

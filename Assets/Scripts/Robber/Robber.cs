@@ -14,6 +14,7 @@ public class Robber : MonoBehaviour
     // [SerializeField] private ExplosionPerk _explosionPerk;
     [SerializeField] private Perk[] _perks; 
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
+    [SerializeField] private int _damageIncrement;
     
     [Header("Debug")]
     [SerializeField] private int _level = 1;
@@ -61,7 +62,7 @@ public class Robber : MonoBehaviour
         {
             _level++;
             SetColor(_level);
-            _obstacleCrusher.IncreaseDamage(_level);
+            _obstacleCrusher.IncreaseDamage(_damageIncrement);
         }
 
         return _level;
