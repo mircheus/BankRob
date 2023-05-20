@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +16,6 @@ public class Robbery : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
     [SerializeField] private int _aliveRobbersCounter;
-    // [SerializeField] private int[] _robbersRemained;
 
     private int _robbedVaultsCounter;
 
@@ -78,18 +76,6 @@ public class Robbery : MonoBehaviour
     public List<Robber> SendRobbersListTo(TargetMovement targetMovement)
     {
         return _robbers;
-    }
-
-    public int[] CountAliveRobbers()
-    {
-        int[] robbersRemained = new int[_robbers.Count];
-
-        for (int i = 0; i < _robbers.Count; i++)
-        {
-            robbersRemained[i] = _robbers[i].Level;
-        }
-
-        return robbersRemained;
     }
 
     private void SetTargetsQuantity(int keysFromPreviousLevel)
@@ -164,6 +150,4 @@ public class Robbery : MonoBehaviour
         
         _perksPanelFiller.PerkActivated -= OnPerkActivated;
     }
-
-
 }

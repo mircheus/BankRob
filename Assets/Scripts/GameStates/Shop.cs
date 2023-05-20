@@ -21,25 +21,12 @@ public class Shop : MonoBehaviour
     private List<Robber> _robbers = new List<Robber>();
     private bool IsEnoughMoney => _playerData.MoneyAmount >= _robberPrice;
 
-    public List<Robber> Robbers => _robbers;
-
     public event UnityAction NotEnoughMoney;
     public event UnityAction AllSlotsBusy;
-
-    private void OnEnable()
-    {
-        // _playerData.DataLoaded += OnDataLoaded;
-    }
-
-    private void OnDisable()
-    {
-        // _playerData.DataLoaded -= OnDataLoaded;
-    }
-
+    
     private void Start()
     {
         InstantiateRobbers(_poolCapacity);
-        // OnDataLoaded();
     }
 
     public void TryBuyRobber()
@@ -61,13 +48,8 @@ public class Shop : MonoBehaviour
             NotEnoughMoney?.Invoke();
         }
     }
-
-    public Robber GetInitRobber()
-    {
-        return _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
-    }
     
-    public void PlaceRobber()
+    private void PlaceRobber()
     {
         var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
         
@@ -75,8 +57,8 @@ public class Shop : MonoBehaviour
         {
             if (_slots[i].IsFilled == false)
             {
-                _slots[i].PlaceNewRobber(robber);
                 robber.gameObject.SetActive(true);
+                _slots[i].PlaceNewRobber(robber);
                 break;
             }
         }
@@ -84,7 +66,6 @@ public class Shop : MonoBehaviour
 
     private void InstantiateRobbers(int amount)
     {
-        Debug.Log("RobbersInstantiate");
         for (int i = 0; i < amount; i++)
         {
             var robber = Instantiate(_robberPrefab, _robbersPool.transform);
@@ -104,17 +85,5 @@ public class Shop : MonoBehaviour
         }
 
         return false;
-    }
-
-    private void OnDataLoaded()
-    {
-        Debug.Log("DataLoaded");
-        if (_playerData.AliveRobbers != null)
-        {
-            for (int i = 0; i < _playerData.AliveRobbers.Length; i++)
-            {
-                PlaceRobber();
-            }
-        }
     }
 }
