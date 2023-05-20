@@ -18,7 +18,8 @@ public class Progression : MonoBehaviour
     [Header("Progression settings")] 
     [SerializeField] private int _difficultyFactor;
     [SerializeField] private int _obstaclesReducer;
-    [SerializeField] private int _trapsAppearsOnLevel;
+    [SerializeField] private int _level1TrapsAppearsOnLevel;
+    [SerializeField] private int _level2TrapsAppearsOnLevel;
     [SerializeField] private int _trapsReducer;
 
     [Header("Obstacles")] 
@@ -48,7 +49,7 @@ public class Progression : MonoBehaviour
     private int _keysFromPreviousLevel;
     private int _trapsLevel;
     private int _trapsQuantity;
-
+    
     public int FloorsQuantity => _floorsQuantity;
     public int ObstaclesQuantity => _obstaclesQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
@@ -73,7 +74,6 @@ public class Progression : MonoBehaviour
     {
         _levelsCounter = _playerData.CompletedLevelsCounter;
         _floorsQuantity = CalculateFloorsQuantity(_levelsCounter, _playerData.PreviousLevelFloorsAmount);
-        Debug.Log(_floorsQuantity);
         _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
         _trapsQuantity = CalculateTrapsQuantity(_levelsCounter, _floorsQuantity);
         _obstaclesLevel = SetObstaclesLevel(_levelsCounter);
@@ -135,7 +135,7 @@ public class Progression : MonoBehaviour
 
     private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount)
     {
-        if (levelsPassed >= _trapsAppearsOnLevel)
+        if (levelsPassed >= _level1TrapsAppearsOnLevel)
         {
             return currentFloorsAmount - _trapsReducer;
         }
@@ -145,7 +145,12 @@ public class Progression : MonoBehaviour
 
     private int SetTrapsLevel(int levelsPassed)
     {
-        if (levelsPassed >= _trapsAppearsOnLevel)
+        if (levelsPassed >= _level2TrapsAppearsOnLevel)
+        {
+            return 2;
+        }
+        
+        if (levelsPassed >= _level1TrapsAppearsOnLevel)
         {
             return 1;
         }

@@ -48,24 +48,56 @@ MonoBehaviour:
     m_Name: Press
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 914128b1-cfc2-4554-a02b-b7eed7a7d91c
+    m_Id: 1c36bde1-217d-4b7f-8532-2cbff41f5b3a
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bb969c5b-66c1-43c9-a61e-59d45923b63f
+      m_Path: <Touchscreen>/Press
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Press
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 6aedcfdb-3ae0-4cea-982c-ab927f0e42e4
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Press
+      m_Flags: 0
     m_Flags: 0
   _screenPosition:
     m_Name: Screen Position
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: ad34fb66-1eb9-40b1-a0d5-4d3ed7ea2d76
+    m_Id: 34b3138e-cd4e-4d98-91b5-c2c4e6eb234f
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings: []
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 419c7e58-25ca-408f-a72c-8564cea497ea
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Screen Position
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 6e8ccd68-f45b-48a1-8012-bfc2c96478ea
+      m_Path: <Mouse>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Screen Position
+      m_Flags: 0
     m_Flags: 0
   _dragPhysicsSpeed: 10
-  _dragSpeed: 0
+  _dragSpeed: 0.05
   _draggableLayer:
     serializedVersion: 2
     m_Bits: 64
   _offsetY: 0
-  _offsetVector: {x: 0, y: 0, z: 0}
+  _offsetVector: {x: 0, y: 5, z: 0}
