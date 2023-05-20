@@ -75,8 +75,8 @@ public class Shop : MonoBehaviour
         {
             if (_slots[i].IsFilled == false)
             {
-                robber.gameObject.SetActive(true);
                 _slots[i].PlaceNewRobber(robber);
+                robber.gameObject.SetActive(true);
                 break;
             }
         }
@@ -84,6 +84,7 @@ public class Shop : MonoBehaviour
 
     private void InstantiateRobbers(int amount)
     {
+        Debug.Log("RobbersInstantiate");
         for (int i = 0; i < amount; i++)
         {
             var robber = Instantiate(_robberPrefab, _robbersPool.transform);

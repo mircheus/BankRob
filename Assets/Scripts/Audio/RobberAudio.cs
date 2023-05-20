@@ -28,5 +28,6 @@ public class RobberAudio : MonoBehaviour
     public void OnAttacked()
     {
         _audioSource.Play();
+        Debug.Log("PickaxePunch");
     }
 }

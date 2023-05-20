@@ -13,30 +13,23 @@ public class Progression : MonoBehaviour
     
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Robbery _robbery;
-    [SerializeField] private Grid _grid;
 
     [Header("Progression settings")] 
     [SerializeField] private int _difficultyFactor;
     [SerializeField] private int _obstaclesReducer;
-    [SerializeField] private int _level1TrapsAppearsOnLevel;
-    [SerializeField] private int _level2TrapsAppearsOnLevel;
-    [SerializeField] private int _trapsReducer;
+    [SerializeField] private int _trapsAppearsOnLevel;
 
     [Header("Obstacles")] 
     [SerializeField] private Barrier[] _obstacles;
 
     [Header("Traps")] 
     [SerializeField] private Barrier[] _traps;
-    
 
     [Header("First level values")] 
     [Header("Player settings")]
     [SerializeField] private int _initMoney;
     [Header("Level settings")]
     [SerializeField] private int _firstLevelFloorsAmount;
-
-    [Header("DEBUG")] 
-    [SerializeField] private Barrier[] _generatedTraps;
 
     public event UnityAction LevelParametersPrepared;
     public event UnityAction<Barrier[,]> LevelMapPrepared; 
@@ -49,7 +42,7 @@ public class Progression : MonoBehaviour
     private int _keysFromPreviousLevel;
     private int _trapsLevel;
     private int _trapsQuantity;
-    
+
     public int FloorsQuantity => _floorsQuantity;
     public int ObstaclesQuantity => _obstaclesQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
@@ -81,8 +74,6 @@ public class Progression : MonoBehaviour
         LevelMapGenerator levelMapGenerator = new LevelMapGenerator(_obstacles, _traps);
         Barrier[,] levelMap = levelMapGenerator.GetLevelMap(_floorsQuantity, _obstaclesQuantity, _obstaclesLevel, _trapsQuantity, _trapsLevel);
         LevelMapPrepared?.Invoke(levelMap);
-        _generatedTraps = EachTrapGeneratorTEST(levelMapGenerator);
-        // _grid.FillRobbersFromPreviousLevel(_playerData.AliveRobbers);
     }
 
     private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 
@@ -92,7 +83,7 @@ public class Progression : MonoBehaviour
             int increasedFloorsAmount = floorsAmountFromPreviousLevel + 1;
             return increasedFloorsAmount;
         }
-        
+
         return floorsAmountFromPreviousLevel;
     }
 
@@ -135,9 +126,9 @@ public class Progression : MonoBehaviour
 
     private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount)
     {
-        if (levelsPassed >= _level1TrapsAppearsOnLevel)
+        if (levelsPassed >= _trapsAppearsOnLevel)
         {
-            return currentFloorsAmount - _trapsReducer;
+            return currentFloorsAmount - 2;
         }
 
         return 0;
@@ -145,25 +136,16 @@ public class Progression : MonoBehaviour
 
     private int SetTrapsLevel(int levelsPassed)
     {
-        if (levelsPassed >= _level2TrapsAppearsOnLevel)
-        {
-            return 2;
-        }
-        
-        if (levelsPassed >= _level1TrapsAppearsOnLevel)
+        if (levelsPassed < 3)
         {
             return 1;
         }
 
-        return 0;
-    }
+        if (levelsPassed >= 3)
+        {
+            return 2;
+        }
 
-    private Barrier[] EachTrapGeneratorTEST(LevelMapGenerator generator)
-    {
-        int[] trapsMatrix = new[] { 5, 1 };
-        
-        Barrier[] trapsArray = generator.GetEachTrapsAmount(trapsMatrix);
-
-        return trapsArray;
+        return -1;
     }
 }

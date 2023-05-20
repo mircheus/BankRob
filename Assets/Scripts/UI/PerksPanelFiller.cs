@@ -8,7 +8,7 @@ public class PerksPanelFiller : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
     [SerializeField] private RobStarter _robStarter;
-    [SerializeField] private GameObject[] _perkSlots; 
+    [SerializeField] private GameObject[] _perkSlots; // WORKAROUND
     [SerializeField] private GameObject _perkPrefab;
     [SerializeField] private GameObject[] _perkButtonPrefabs;
 
