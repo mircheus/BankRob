@@ -32,7 +32,6 @@ public class Slot : MonoBehaviour
         if(other.gameObject.TryGetComponent(out RobberDragger robberDragger) && _isFilled == false)
         {
             robberDragger.SetLastParentTransform(transform);
-            Debug.Log("stay");
 
             if (robberDragger.IsDraggingNow == false)
             {

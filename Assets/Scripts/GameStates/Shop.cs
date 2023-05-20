@@ -84,7 +84,6 @@ public class Shop : MonoBehaviour
 
     private void InstantiateRobbers(int amount)
     {
-        Debug.Log("RobbersInstantiate");
         for (int i = 0; i < amount; i++)
         {
             var robber = Instantiate(_robberPrefab, _robbersPool.transform);
