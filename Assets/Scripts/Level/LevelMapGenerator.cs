@@ -74,20 +74,44 @@ public class LevelMapGenerator
 
     private Barrier GetRandomTrap(int maxLevelTrap) 
     {
-        return _traps[GenerateRandomIndex(maxLevelTrap)]; // Magic number 
+        return _traps[GenerateRandomIndex(maxLevelTrap)];
     }
     
     private int GenerateRandomIndex(int maxLevel)
     {
         return Random.Range(0, maxLevel);
     }
-    
+
     private void GetNewRandomIndex(ref int i, ref int j, List<string> randomCellsIndexes)
     {
         string index = randomCellsIndexes[0];
         randomCellsIndexes.RemoveAt(0);
         i = (int)char.GetNumericValue(index[0]);
         j = (int)char.GetNumericValue(index[1]);
+    }
+
+    public Barrier[] GetEachTrapsAmount(int[] eachTrapQuantity)
+    {
+        int allTrapsQuantity = 0;
+
+        foreach (var trapQuantityTypeOf in eachTrapQuantity)
+        {
+            allTrapsQuantity += trapQuantityTypeOf;
+        }
+
+        Barrier[] allTraps = new Barrier[allTrapsQuantity];
+        int allTrapsCounter = 0;
+        
+        for (int k = 0; k < eachTrapQuantity.Length; k++)
+        {
+            for (int i = 0; i < eachTrapQuantity[k]; i++)
+            {
+                allTraps[allTrapsCounter] = _traps[k];
+                allTrapsCounter++;
+            }
+        }
+
+        return allTraps;
     }
 }
     
