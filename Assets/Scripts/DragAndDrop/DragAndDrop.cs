@@ -12,7 +12,6 @@ public class DragAndDrop : MonoBehaviour
        [SerializeField] private float _dragPhysicsSpeed = 10;
        [SerializeField] private float _dragSpeed;
        [SerializeField] private LayerMask _draggableLayer;
-       [SerializeField] private float _offsetY;
        [SerializeField] private Vector3 _offsetVector;
 
        private WaitForFixedUpdate _waitForFixedUpdate = new WaitForFixedUpdate();
