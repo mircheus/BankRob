@@ -19,6 +19,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _previousLevelFloorsAmount;
     [SerializeField] private int _allMoneyCounter;
     [SerializeField] private int[] _aliveRobbers;
+    [SerializeField] private int _wastedMoney;
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -32,12 +33,14 @@ public class PlayerData : MonoBehaviour
     private void OnEnable()
     {
         _robbery.BankRobbed += OnBankRobbed;
+        _robbery.BankNotRobbed += OnBankNotRobbed;
         _preparing.PreparingStarted += OnPreparing;
     }
 
     private void OnDisable()
     {
         _robbery.BankRobbed -= OnBankRobbed;
+        _robbery.BankNotRobbed -= OnBankNotRobbed;
         _preparing.PreparingStarted -= OnPreparing;
     }
 
@@ -90,6 +93,16 @@ public class PlayerData : MonoBehaviour
 #endif
         
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+    }
+
+    private void OnBankNotRobbed()
+    {
+        _aliveRobbers = _robbery.CountAliveRobbers();
+
+        if (_moneyAmount == 0)
+        {
+            _moneyAmount = 100;
+        }
     }
 
     private void LoadDataFromFile()

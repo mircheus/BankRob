@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -164,6 +162,8 @@ public class Robbery : MonoBehaviour
         
         _perksPanelFiller.PerkActivated -= OnPerkActivated;
     }
+    
+    
 
 
 }
