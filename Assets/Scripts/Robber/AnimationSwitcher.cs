@@ -4,8 +4,8 @@ public class AnimationSwitcher : MonoBehaviour
 {
    [SerializeField] private ObstacleCrusher _obstacleCrusher;
    [SerializeField] private RobberMovement _robberMovement;
+   [SerializeField] private Animator _animator;
    
-   private Animator _animator;
    // private int _attack = Animator.StringToHash("Attack");
    private int _attack = Animator.StringToHash("axe_attack_overdrive");
    private int _attackingWall = Animator.StringToHash("AttackingWall");
@@ -30,7 +30,8 @@ public class AnimationSwitcher : MonoBehaviour
 
    private void Start()
    {
-      _animator = GetComponent<Animator>();
+      // _animator = GetComponentInChildren<Animator>();
+      _animator.Play("Idle");
    }
 
    public void PlayAttackAnimation()
