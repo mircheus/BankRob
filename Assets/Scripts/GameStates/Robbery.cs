@@ -78,6 +78,18 @@ public class Robbery : MonoBehaviour
         return _robbers;
     }
 
+    public int[] CountAliveRobbers()
+    {
+        int[] aliveRobbers = new int[_robbers.Count];
+
+        for (int i = 0; i < _robbers.Count; i++)
+        {
+            aliveRobbers[i] = _robbers[i].Level;
+        }
+
+        return aliveRobbers;
+    }
+
     private void SetTargetsQuantity(int keysFromPreviousLevel)
     {
         if (keysFromPreviousLevel == 0)
