@@ -8,6 +8,7 @@ using UnityEngine;
 public class MenuDisabler : MonoBehaviour
 {
     [SerializeField] private RobStarter _robStarter;
+    [SerializeField] private Robbery _robbery;
     [SerializeField] private GameObject _menu;
     [SerializeField] private GameObject _warningPanel;
     [SerializeField] private GameObject _notEnoughMoneyPanel;
@@ -15,15 +16,20 @@ public class MenuDisabler : MonoBehaviour
     [SerializeField] private GameObject _robbersGrid;
     [SerializeField] private GameObject _leaderboard;
     [SerializeField] private GameObject _settingsMenu;
+    [SerializeField] private GameObject _perkPanel;
     
     private void OnEnable()
     {
         _robStarter.Started += DisablePreparingMenu;
+        _robbery.BankRobbed += DisablePerkPanel;
+        _robbery.BankNotRobbed += DisablePerkPanel;
     }
 
     private void OnDisable()
     {
         _robStarter.Started -= DisablePreparingMenu;
+        _robbery.BankRobbed -= DisablePerkPanel;
+        _robbery.BankNotRobbed -= DisablePerkPanel;
     }
 
     private void DisablePreparingMenu()
@@ -54,7 +60,7 @@ public class MenuDisabler : MonoBehaviour
 
     public void DisablePerkPanel()
     {
-        
+        _perkPanel.SetActive(false);
     }
 
     public void DisableSettingsMenu()
