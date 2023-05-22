@@ -67,6 +67,11 @@ public class Robber : MonoBehaviour
         return _level;
     }
 
+    public void SetLevel(int level)
+    {
+        _level = level;
+    }
+
     public void ActivateMovement()
     {
         _robberMovement.enabled = true;

@@ -27,16 +27,19 @@ public class PlayerData : MonoBehaviour
     public int MoneyAmount => _moneyAmount;
     public int CompletedLevelsCounter => _completedLevelsCounter;
     public int FloorsAmountFromPreviousLevel => _floorsAmountFromPreviousLevel;
+    public int[] AliveRobbers => _aliveRobbers;
 
     private void OnEnable()
     {
         _robbery.BankRobbed += OnBankRobbed;
+        _robbery.BankNotRobbed += OnBankNotRobbed;
         _preparing.PreparingStarted += OnPreparing;
     }
 
     private void OnDisable()
     {
         _robbery.BankRobbed -= OnBankRobbed;
+        _robbery.BankNotRobbed -= OnBankNotRobbed;
         _preparing.PreparingStarted -= OnPreparing;
     }
 
@@ -89,6 +92,13 @@ public class PlayerData : MonoBehaviour
 
         _aliveRobbers = _robbery.CountAliveRobbers();
         
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+    }
+
+    private void OnBankNotRobbed()
+    {
+        _aliveRobbers = null;
+
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
     }
 

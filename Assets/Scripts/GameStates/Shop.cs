@@ -23,7 +23,17 @@ public class Shop : MonoBehaviour
 
     public event UnityAction NotEnoughMoney;
     public event UnityAction AllSlotsBusy;
-    
+
+    private void OnEnable()
+    {
+        _playerData.DataLoaded += OnDataLoaded;
+    }
+
+    private void OnDisable()
+    {
+        _playerData.DataLoaded -= OnDataLoaded;
+    }
+
     private void Start()
     {
         InstantiateRobbers(_poolCapacity);
@@ -35,7 +45,8 @@ public class Shop : MonoBehaviour
         {
             if (IsAnySlotAvailable())
             {
-                PlaceRobber();
+                var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
+                PlaceToGrid(robber);
                 _playerData.PayForRobber(_robberPrice);
             }
             else
@@ -49,10 +60,8 @@ public class Shop : MonoBehaviour
         }
     }
     
-    private void PlaceRobber()
+    private void PlaceToGrid(Robber robber)
     {
-        var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
-        
         for (int i = 0; i < _slots.Length; i++)
         {
             if (_slots[i].IsFilled == false)
@@ -85,5 +94,25 @@ public class Shop : MonoBehaviour
         }
 
         return false;
+    }
+    
+    private void OnDataLoaded()
+    {
+        PlaceRobbersFromPreviousLevel();
+    }
+
+    private void PlaceRobbersFromPreviousLevel()
+    {
+        int[] robbersFromPreviousLevel = _playerData.AliveRobbers;
+
+        if (robbersFromPreviousLevel != null)
+        {
+            for (int i = 0; i < robbersFromPreviousLevel.Length; i++)
+            {
+                var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
+                robber.SetLevel(robbersFromPreviousLevel[i]);
+                PlaceToGrid(robber);
+            } 
+        }
     }
 }

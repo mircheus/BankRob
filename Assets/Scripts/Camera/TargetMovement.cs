@@ -146,7 +146,6 @@ public class TargetMovement : MonoBehaviour
             {
                 _robbers.Remove(_robbers[i]);
                 Debug.Log("Removed");
-                // break;
             }
         }
     }
