@@ -9,7 +9,7 @@ public class Cage : Trap
     [SerializeField] private GameObject[] _forms;
 
     private int _close = Animator.StringToHash("Close");
-    private bool _isTrapActive = true;
+    // private bool _isTrapActive = true;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -29,7 +29,6 @@ public class Cage : Trap
     
     public override void GetDestroyed()
     {
-        // StartCoroutine(DeactivateGameObject());
         _isTrapActive = false;
         PlayDestroyFx();
         _forms[0].SetActive(false);

@@ -8,7 +8,8 @@ public class TimeChanger : MonoBehaviour
     private const float SlowmoScale = .5f;
     
     [SerializeField] private Robbery _robbery;
-
+    [SerializeField] private float _timeScale;
+    
     private void OnEnable()
     {
         _robbery.BankRobbed += OnBankRobbed;
@@ -23,7 +24,7 @@ public class TimeChanger : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1f;
+        Time.timeScale = _timeScale;
     }
 
     private void OnBankRobbed()

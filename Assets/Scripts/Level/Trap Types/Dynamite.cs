@@ -9,13 +9,13 @@ public class Dynamite : Trap
     [SerializeField] private ParticleSystem _fuseFx;
     [SerializeField] private GameObject _dynamiteModel;
 
-    private bool _isFreezed = false;
+    // private bool _isFreezed = false;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
         {
-            if (_isFreezed == false)
+            if (_isTrapActive)
             {
                 PlayDestroyFx();
                 robber.GetComponent<RobberMovement>().GetTrappedBy(this);
@@ -33,12 +33,14 @@ public class Dynamite : Trap
     {
         base.GetFreezedBy(freezePerk);
         _fuseFx.Stop();
-        _isFreezed = true;
+        // _isFreezed = true;
+        _isTrapActive = false;
     }
     
     protected override void PlayDestroyFx()
     {
-        if (_isFreezed == false)
+        // if (_isFreezed == false)
+        if (_isTrapActive)
         {
             base.PlayDestroyFx();
         }
