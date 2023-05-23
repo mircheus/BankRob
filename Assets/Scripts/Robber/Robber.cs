@@ -11,8 +11,9 @@ public class Robber : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _sweaterMesh;
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
     [SerializeField] private GameObject _axe;
+    [SerializeField] private Shield _shield;
     // [SerializeField] private ExplosionPerk _explosionPerk;
-    [SerializeField] private Perk[] _perks; 
+    [SerializeField] private Perk[] _perks;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
     
     [Header("Debug")]
@@ -29,6 +30,7 @@ public class Robber : MonoBehaviour
     public int Level => _level;
     public int ColumnIndex => _columnIndex;
     public Color[] LevelColors => _levelColors;
+    public Shield Shield => _shield;
 
     private void OnEnable()
     {

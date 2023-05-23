@@ -5,17 +5,26 @@ using UnityEngine;
 
 public class ShieldPerk : Perk
 {
-    [SerializeField] private RobberMovement _robberMovement;
-    
-    public override void Activate()
+    [SerializeField] private Robber _thisRobber;
+
+    private void OnEnable()
     {
-        base.Activate();
-        _robberMovement.SetShieldActive(true);
+        _thisRobber.Shield.Activate();
     }
 
-    protected override void Deactivate()
+    private void OnTriggerStay(Collider other)
     {
-        _robberMovement.SetShieldActive(false);
-        base.Deactivate();
+        if (other.TryGetComponent(out Robber robber))
+        {
+            robber.Shield.Activate();
+        }
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if(other.TryGetComponent(out  robber))
+    //     {
+    //         Debug.Log("OnTriggerEnter");
+    //     }
+    // }
 }
