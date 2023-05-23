@@ -13,18 +13,20 @@ public class FreezePerk : Perk
     {
         if (other.TryGetComponent(out Cage cage))
         {
-            // _freezeFx[0].transform.position = cage.transform.position;
-            // _freezeFx[0].Play();
             PlayFxAt(cage.transform.position);
             cage.GetFreezedBy(this);
         }
         
         if (other.TryGetComponent(out Dynamite dynamite))
         {
-            // _freezeFx[1].transform.position = dynamite.transform.position;
-            // _freezeFx[1].Play();
             PlayFxAt(dynamite.transform.position);
             dynamite.GetFreezedBy(this);
+        }
+
+        if (other.TryGetComponent(out Obstacle obstacle))
+        {
+            PlayFxAt(obstacle.transform.position);
+            obstacle.GetFreezedBy(this);
         }
     }
 

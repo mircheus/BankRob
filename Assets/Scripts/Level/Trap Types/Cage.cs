@@ -9,12 +9,13 @@ public class Cage : Trap
     [SerializeField] private GameObject[] _forms;
 
     private int _close = Animator.StringToHash("Close");
+    private bool _isTrapActive = true;
     
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out RobberMovement robberMovement))
         {
-            if (robberMovement.IsDashActive == false)
+            if (robberMovement.IsDashActive == false && _isTrapActive)
             {
                 _animator.Play(_close);
                 robberMovement.GetTrappedBy(this);
@@ -22,7 +23,6 @@ public class Cage : Trap
             else
             {
                 GetDestroyed();
-                Debug.Log("GetDestroyedByDash");
             }
         }
     }
@@ -30,9 +30,10 @@ public class Cage : Trap
     public override void GetDestroyed()
     {
         // StartCoroutine(DeactivateGameObject());
+        _isTrapActive = false;
         PlayDestroyFx();
-        
         _forms[0].SetActive(false);
         _forms[1].SetActive(true);
+        Debug.Log("Cage Destroyed");
     }
 }
