@@ -38,13 +38,13 @@ public class PerksPanelFiller : MonoBehaviour
 
     private void FillPerkSlots()
     {
-        int[] indexes = GetFilledSlotsIndex();
+        int[] perkLevels = GetFilledSlotsIndex();
 
         for (int i = 0; i < _perkSlots.Length; i++)
         {
-            if (indexes[i] != -1)
+            if (perkLevels[i] != -1)
             {
-                PlacePerkToSlotWithIndex(i, indexes[i]);
+                PlacePerkToSlotWithIndex(i, perkLevels[i]);
             }
         }
     }
@@ -59,7 +59,6 @@ public class PerksPanelFiller : MonoBehaviour
 
     private void OnPerkActivated(int index)
     {
-        Debug.Log($"perk with index {index} activated");
         PerkActivated?.Invoke(index);
     }
 

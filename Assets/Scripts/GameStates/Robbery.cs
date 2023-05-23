@@ -77,6 +77,18 @@ public class Robbery : MonoBehaviour
     {
         return _robbers;
     }
+    
+    public Robber[] SendRobbersListTo(PerksPanel perksPanel)
+    {
+        Robber[] robbers = new Robber[4];
+
+        for (int i = 0; i < _robbers.Count; i++)
+        {
+            robbers[_robbers[i].ColumnIndex] = _robbers[i];
+        }
+
+        return robbers;
+    }
 
     public int[] CountAliveRobbers()
     {

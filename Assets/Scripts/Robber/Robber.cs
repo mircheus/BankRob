@@ -26,6 +26,8 @@ public class Robber : MonoBehaviour
     private RobberMovement _robberMovement;
     private ObstacleCrusher _obstacleCrusher;
     private AnimationSwitcher _animationSwitcher;
+
+    public UnityAction<int> Frozen;
     
     public int Level => _level;
     public int ColumnIndex => _columnIndex;
@@ -94,6 +96,11 @@ public class Robber : MonoBehaviour
     public void SetColumnIndex(int index)
     {
         _columnIndex = index;
+    }
+
+    public void GetFrozen()
+    {
+        Frozen?.Invoke(_columnIndex);
     }
 
     private void SetColor(int level)

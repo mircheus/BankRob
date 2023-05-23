@@ -28,12 +28,6 @@ public class AnimationSwitcher : MonoBehaviour
       _robberMovement.GetStopped -= SwitchToDieState;
    }
 
-   private void Start()
-   {
-      // _animator = GetComponentInChildren<Animator>();
-      _animator.Play("Idle");
-   }
-
    public void PlayAttackAnimation()
    {
       _animator.Play(_attack);

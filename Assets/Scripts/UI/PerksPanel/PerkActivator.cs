@@ -16,6 +16,8 @@ public class PerkActivator : MonoBehaviour
 
     public event UnityAction<int> PerkActivated;
 
+    public int ColumnIndex => _columnIndex;
+
     public void SetColumnIndex(int index)
     {
         _columnIndex = index;
