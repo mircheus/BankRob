@@ -24,7 +24,7 @@ public class Slot : MonoBehaviour
     public Robber Robber => _robber;
     public int ColumnIndex => _columnIndex;
 
-    public event UnityAction RobbersCombined;
+    public event UnityAction<int> RobbersCombined;
     
     private void OnTriggerStay(Collider other)
     {
@@ -86,7 +86,7 @@ public class Slot : MonoBehaviour
     {
         externalRobberDragger.gameObject.SetActive(false);
         int level = _robber.UpgradeLevel();
-        RobbersCombined?.Invoke();
+        RobbersCombined?.Invoke(level);
         PlayCombineFx(level);
     }
 

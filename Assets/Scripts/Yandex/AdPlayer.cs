@@ -10,12 +10,14 @@ public class AdPlayer : MonoBehaviour
     [SerializeField] private PlayerData _playerData;
     
     public event UnityAction VideoAdPlayed;
-
+    
+#if UNITY_WEBGL && !UNITY_EDITOR
     private void Start()
     {
         PlayRegularAdIf(ShouldPlayAd());
     }
-
+#endif
+    
     public void OnShowVideoButtonClick()
     {
         VideoAdPlayed?.Invoke();

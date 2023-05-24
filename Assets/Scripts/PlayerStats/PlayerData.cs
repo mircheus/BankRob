@@ -13,6 +13,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Progression _progression;
     [SerializeField] private AdPlayer _adPlayer;
     [SerializeField] private int _adRewardAmount;
+    [SerializeField] private Grid _grid;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
@@ -21,6 +22,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _floorsAmountFromPreviousLevel;
     [SerializeField] private int _allMoneyCounter;
     [SerializeField] private int[] _aliveRobbers;
+    [SerializeField] private int _achievedLevels;
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -37,6 +39,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankNotRobbed += OnBankNotRobbed;
         _preparing.PreparingStarted += OnPreparing;
         _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
+        _grid.RobbersCombined += OnRobbersCombined;
     }
 
     private void OnDisable()
@@ -45,6 +48,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankNotRobbed -= OnBankNotRobbed;
         _preparing.PreparingStarted -= OnPreparing;
         _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
+        _grid.RobbersCombined -= OnRobbersCombined;
     }
 
     public void PayForRobber(int money)
@@ -65,7 +69,7 @@ public class PlayerData : MonoBehaviour
 
     public void ResetPlayerData()
     {
-        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null);
+        ResetPlayerStats();
         DataUpdated?.Invoke();
     }
 
@@ -95,51 +99,67 @@ public class PlayerData : MonoBehaviour
 #endif
 
         _aliveRobbers = _robbery.CountAliveRobbers();
-        
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+        SaveCurrentPlayerStats();
     }
 
     private void OnBankNotRobbed()
     {
         _aliveRobbers = null;
-
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+        SaveCurrentPlayerStats();
     }
 
     private void OnVideoAdPlayed()
     {
         _moneyAmount += _adRewardAmount;
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+        SaveCurrentPlayerStats();
     }
 
+    private void OnRobbersCombined(int level)
+    {
+        if (level > _achievedLevels)
+        {
+            _achievedLevels = level;
+            Debug.Log($"Achieved {_achievedLevels} level!");
+        }
+    }
+    
     private void LoadDataFromFile()
     {
         if (_dataManager.IsLoadDataPersists())
         {
             Data loadedData = _dataManager.LoadData();
-            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers);
+            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers, loadedData.AchievedLevels);
         }
         else
         {
-            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount, null);
+            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount, null, 1);
         } 
     }
+    
+    private void ResetPlayerStats()
+    {
+        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null, 1);
+    }
 
-    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers)
+    private void SaveCurrentPlayerStats()
+    {
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers, _achievedLevels);
+    }
+
+    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels)
     {
         _moneyAmount = moneyAmount;
         _keysAmount = keysAmount;
         _completedLevelsCounter = completedLevelsAmount;
         _floorsAmountFromPreviousLevel = floorsAmount;
         _aliveRobbers = aliveRobbers;
+        _achievedLevels = achievedLevels;
         DataUpdated?.Invoke();
     }
 
-    private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount, int[] aliveRobbers)
+    private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount, int[] aliveRobbers, int achievedLevels)
     {
-        // completedLevelsCounter++;
-
-        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers); 
+        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, ++completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers, achievedLevels); 
         _dataManager.SaveData(dataToSave);
     }
 }

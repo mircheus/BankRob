@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
 
+    public event UnityAction<int> RobbersCombined;
+    
     private void OnEnable()
     {
         foreach (var slot in _slots)
@@ -23,7 +26,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void OnRobbersCombined()
+    private void OnRobbersCombined(int level)
     {
         foreach (var slot in _slots)
         {
@@ -32,5 +35,7 @@ public class Grid : MonoBehaviour
                 slot.Unfill();
             }
         }
+        
+        RobbersCombined?.Invoke(level);
     }
 }
