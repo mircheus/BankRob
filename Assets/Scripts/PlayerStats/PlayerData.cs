@@ -26,6 +26,7 @@ public class PlayerData : MonoBehaviour
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
+    public event UnityAction<int> NewLevelAchieved;
     
     public int KeysAmount => _keysAmount;
     public int MoneyAmount => _moneyAmount;
@@ -119,6 +120,7 @@ public class PlayerData : MonoBehaviour
         if (level > _achievedLevels)
         {
             _achievedLevels = level;
+            NewLevelAchieved?.Invoke(level);
             Debug.Log($"Achieved {_achievedLevels} level!");
         }
     }

@@ -17,7 +17,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private int _maxLevel = 4;
     
     [Header("Debug")]
-    [SerializeField] private int _level = 1;
+    [SerializeField] private int _level = 0;
     [SerializeField] private int _columnIndex = -1;
     
     private Material _bodyMaterial;
@@ -108,7 +108,7 @@ public class Robber : MonoBehaviour
     {
         if (level <= _levelColors.Length)
         {
-            Color color = _levelColors[level - 1];
+            Color color = _levelColors[level];
             _bodyMaterial.color = color;
             _sweaterMaterial.color = color;
             _shoesMaterial.color = color;
