@@ -12,9 +12,9 @@ public class Robber : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
     [SerializeField] private GameObject _axe;
     [SerializeField] private Shield _shield;
-    // [SerializeField] private ExplosionPerk _explosionPerk;
     [SerializeField] private Perk[] _perks;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
+    [SerializeField] private int _maxLevel = 4;
     
     [Header("Debug")]
     [SerializeField] private int _level = 1;
@@ -30,6 +30,7 @@ public class Robber : MonoBehaviour
     public UnityAction<int> Frozen;
     
     public int Level => _level;
+    public int MaxLevel => _maxLevel;
     public int ColumnIndex => _columnIndex;
     public Color[] LevelColors => _levelColors;
     public Shield Shield => _shield;

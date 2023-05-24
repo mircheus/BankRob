@@ -31,7 +31,6 @@ public class Slot : MonoBehaviour
         if(other.gameObject.TryGetComponent(out RobberDragger robberDragger) && _isFilled == false)
         {
             robberDragger.SetLastParentTransform(transform);
-            Debug.Log("stay");
 
             if (robberDragger.IsDraggingNow == false)
             {
@@ -48,7 +47,7 @@ public class Slot : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
-            if (_robber.Level == externalRobber.Level)
+            if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel)
             {
                 CombineRobbers(externalRobber);
             }
