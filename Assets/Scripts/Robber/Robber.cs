@@ -57,6 +57,7 @@ public class Robber : MonoBehaviour
         _robberMovement.enabled = false;
         _obstacleCrusher = GetComponent<ObstacleCrusher>();
         _animationSwitcher = GetComponent<AnimationSwitcher>();
+        _level = 0;
         SetColor(_level);
     }
     

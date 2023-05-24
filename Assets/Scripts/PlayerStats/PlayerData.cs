@@ -140,7 +140,7 @@ public class PlayerData : MonoBehaviour
     
     private void ResetPlayerStats()
     {
-        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null, 1);
+        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null, 0);
     }
 
     private void SaveCurrentPlayerStats()

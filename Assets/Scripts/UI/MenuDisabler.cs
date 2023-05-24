@@ -17,6 +17,7 @@ public class MenuDisabler : MonoBehaviour
     [SerializeField] private GameObject _leaderboard;
     [SerializeField] private GameObject _settingsMenu;
     [SerializeField] private GameObject _perkPanel;
+    [SerializeField] private GameObject _newLevelPopup;
     
     private void OnEnable()
     {
@@ -66,5 +67,10 @@ public class MenuDisabler : MonoBehaviour
     public void DisableSettingsMenu()
     {
         _settingsMenu.SetActive(false);
+    }
+
+    public void DisableNewLevelPopup()
+    {
+        _newLevelPopup.SetActive(false);
     }
 }
