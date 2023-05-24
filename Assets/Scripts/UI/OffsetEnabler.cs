@@ -20,8 +20,8 @@ public class OffsetEnabler : MonoBehaviour
             _preparingMenu.transform.position += new Vector3(0, _yOffset, 0);
         }
     }
-    
-    private float GetAspectRatio()
+
+    public static float GetAspectRatio()
     {
         return Screen.width/ Screen.height;
     }
