@@ -105,7 +105,7 @@ public class Robber : MonoBehaviour
 
     private void SetColor(int level)
     {
-        if (level < _levelColors.Length)
+        if (level <= _levelColors.Length)
         {
             Color color = _levelColors[level - 1];
             _bodyMaterial.color = color;

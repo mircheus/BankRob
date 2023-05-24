@@ -8,9 +8,10 @@ public class PerksPanelFiller : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
     [SerializeField] private RobStarter _robStarter;
-    [SerializeField] private GameObject[] _perkSlots; // WORKAROUND
+    [SerializeField] private GameObject[] _perkSlots;
     [SerializeField] private GameObject _perkPrefab;
     [SerializeField] private GameObject[] _perkButtonPrefabs;
+    [SerializeField] private Robbery _robbery;
 
     private List<GameObject> _perkButtons = new List<GameObject>();
 
@@ -19,16 +20,13 @@ public class PerksPanelFiller : MonoBehaviour
     private void OnEnable()
     {
         _robStarter.Started += OnStarted;
+        _robbery.BankRobbed += OnBankRobbed;
+        _robbery.BankNotRobbed += OnBankNotRobbed;
     }
 
     private void OnDisable()
     {
         _robStarter.Started -= OnStarted;
-
-        foreach (var perkButton in _perkButtons)
-        {
-            perkButton.GetComponent<PerkActivator>().PerkActivated -= OnPerkActivated;
-        }
     }
 
     private void OnStarted()
@@ -79,6 +77,24 @@ public class PerksPanelFiller : MonoBehaviour
         }
 
         return filledIndexes;
+    }
+
+    private void OnBankRobbed()
+    {
+        UnsubscribeFromPerkActivators();
+    }
+
+    private void OnBankNotRobbed()
+    {
+        UnsubscribeFromPerkActivators();
+    }
+    
+    private void UnsubscribeFromPerkActivators()
+    {
+        foreach (var perkButton in _perkButtons)
+        {
+            perkButton.GetComponent<PerkActivator>().PerkActivated -= OnPerkActivated;
+        }
     }
 }
 
