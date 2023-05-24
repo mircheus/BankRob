@@ -10,31 +10,27 @@ public class LayoutSwitcher : MonoBehaviour
     [SerializeField] private GameObject _verticalButtons;
     [SerializeField] private GameObject _horizontalButtons;
 
-    private void Start()
+    private void OnEnable()
     {
         if (OffsetEnabler.GetAspectRatio() < 1)
         {
-            _verticalButtons.SetActive(true);
-            _horizontalButtons.SetActive(false);
+            SwitchToVerticalLayout();
         }
         else
         {
-            _verticalButtons.SetActive(false);
-            _horizontalButtons.SetActive(true);
+            SwitchToHorizontalLayout();
         }
     }
 
-    private void Update()
+    private void SwitchToVerticalLayout()
     {
-        if (OffsetEnabler.GetAspectRatio() < 1)
-        {
-            _verticalButtons.SetActive(true);
-            _horizontalButtons.SetActive(false);
-        }
-        else
-        {
-            _verticalButtons.SetActive(false);
-            _horizontalButtons.SetActive(true);
-        }
+        _verticalButtons.SetActive(true);
+        _horizontalButtons.SetActive(false);
+    }
+
+    private void SwitchToHorizontalLayout()
+    {
+        _verticalButtons.SetActive(false);
+        _horizontalButtons.SetActive(true);
     }
 }
