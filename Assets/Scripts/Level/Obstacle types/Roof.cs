@@ -28,7 +28,6 @@ public class Roof : MonoBehaviour
     private IEnumerator DisableAfterSomeTime(float destroyDelay)
     {
         yield return new WaitForSeconds(destroyDelay);
-        Debug.Log("Waited destroy delay");
         gameObject.SetActive(false);
     }
 
