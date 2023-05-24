@@ -11,6 +11,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Preparing _preparing;
     [SerializeField] private DataManager _dataManager;
     [SerializeField] private Progression _progression;
+    [SerializeField] private AdPlayer _adPlayer;
+    [SerializeField] private int _adRewardAmount;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
@@ -34,6 +36,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankRobbed += OnBankRobbed;
         _robbery.BankNotRobbed += OnBankNotRobbed;
         _preparing.PreparingStarted += OnPreparing;
+        _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
     }
 
     private void OnDisable()
@@ -41,6 +44,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankRobbed -= OnBankRobbed;
         _robbery.BankNotRobbed -= OnBankNotRobbed;
         _preparing.PreparingStarted -= OnPreparing;
+        _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
     }
 
     public void PayForRobber(int money)
@@ -99,6 +103,12 @@ public class PlayerData : MonoBehaviour
     {
         _aliveRobbers = null;
 
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
+    }
+
+    private void OnVideoAdPlayed()
+    {
+        _moneyAmount += _adRewardAmount;
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers);
     }
 
