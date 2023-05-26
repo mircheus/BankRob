@@ -87,7 +87,7 @@ public class Robber : MonoBehaviour
     public void ActivatePerk()
     {
         // _explosionPerk.Activate();
-        _perks[_level - 1].Activate();
+        _perks[_level].Activate();
     }
 
     public void ActivatePerkTEST(int index)

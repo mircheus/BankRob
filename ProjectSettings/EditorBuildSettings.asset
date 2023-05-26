@@ -32,9 +32,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testrooms/11_DragDrop bugfix.unity
     guid: cef4e12e4be183a4fb236d3f7812c5ec
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/09_Advertisement.unity
     guid: 72ccf457749460d42a6e663991778300
+  - enabled: 1
+    path: Assets/Scenes/10_UI_animation.unity
+    guid: 30b0ad41fd145fd48b3113c2ec3b4c7d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ff38ab1cd28cf1640b8fdb535578f864, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: a0d7e4f37bd57ad42abb03c6b20be4e3, type: 2}

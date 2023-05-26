@@ -5,11 +5,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Notificator : MonoBehaviour
+public class NewLevelNotificator : MonoBehaviour
 {
+    [Header("MenuManager")] [SerializeField]
+    private MenuManager _menuManager;
+    [Header("New Level Data")]
     [SerializeField] private PlayerData _playerData;
-    [SerializeField] private GameObject _newLevelPopup;
-    [SerializeField] private GameObject _perkIcon;
+    [SerializeField] private PopUp _newLevelPopup;
+    // [SerializeField] private GameObject _perkIcon;
     [SerializeField] private Image _perkIconImage;
     [SerializeField] private TMP_Text _perkTitle;
     [SerializeField] private TMP_Text _perkInfo;
@@ -31,9 +34,8 @@ public class Notificator : MonoBehaviour
     {
         _perkTitle.text = _perkTitles[level];
         _perkInfo.text = _perkInfos[level];
-        // _perkIcon = Instantiate(_perkIcons[level], _perkIcon.transform.position, Quaternion.identity, _perkIcon.transform);
         _perkIconImage.sprite = _perkIcons[level].sprite;
         _perkIconImage.color = _perkIcons[level].color;
-        _newLevelPopup.SetActive(true);
+        _menuManager.Show(_newLevelPopup);
     }
 }

@@ -68,7 +68,7 @@ public class PerksPanelFiller : MonoBehaviour
         {
             if (_slots[i].IsFilled)
             {
-                filledIndexes[i] = _slots[i].Robber.Level - 1;
+                filledIndexes[i] = _slots[i].Robber.Level;
             }
             else
             {

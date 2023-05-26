@@ -21,7 +21,7 @@ public class ObstacleCrusher : MonoBehaviour
     
     private void Start()
     {
-        _defaultDamage = GetComponent<Robber>().Level;
+        _defaultDamage = GetComponent<Robber>().Level + 1;
         _currentDamage = _defaultDamage;
     }
 
