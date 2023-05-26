@@ -11,6 +11,7 @@ using Vector3 = UnityEngine.Vector3;
 public class MenuAnimator
 {
     public const float AnimationDuration = .5f;
+    public const float PulseDuration = .2f;
     private const int YOffset = 1100;
     private static readonly Vector2 upDrag = new Vector2(0, YOffset);
 
@@ -58,8 +59,8 @@ public class MenuAnimator
         {
             sequence.Pause();
             DOTween.Sequence()
-                .Append(button.DOScale(new Vector3(1.1f, 1.1f, 0), AnimationDuration))
-                .Append(button.DOScale(Vector3.one, AnimationDuration))
+                .Append(button.DOScale(new Vector3(1.1f, 1.1f, 0), PulseDuration))
+                .Append(button.DOScale(Vector3.one, PulseDuration))
                 .SetLoops(-1, LoopType.Restart);
         });
     }

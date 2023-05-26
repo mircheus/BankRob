@@ -36,6 +36,6 @@ public class NewLevelNotificator : MonoBehaviour
         _perkInfo.text = _perkInfos[level];
         _perkIconImage.sprite = _perkIcons[level].sprite;
         _perkIconImage.color = _perkIcons[level].color;
-        _menuManager.ShowWithAnimation(_newLevelPopup);
+        _menuManager.Show(_newLevelPopup);
     }
 }

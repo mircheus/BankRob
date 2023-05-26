@@ -24,8 +24,8 @@ public class MenuEnabler : MonoBehaviour
 
     private void OnEnable()
     {
-        _robbery.BankRobbed += ShowWinPanel;
-        _robbery.BankNotRobbed += ShowLosePanel;
+        // _robbery.BankRobbed += ShowWinPanel;
+        // _robbery.BankNotRobbed += ShowLosePanel;
         _robStarter.NotEnoughRobbers += ShowWarningPanel;
         _robStarter.Started += ShowPerkPanel;
         _shop.NotEnoughMoney += ShowNotEnoughMoneyMenu;
@@ -34,7 +34,7 @@ public class MenuEnabler : MonoBehaviour
 
     private void OnDisable()
     {
-        _robbery.BankRobbed -= ShowWinPanel;
+        // _robbery.BankRobbed -= ShowWinPanel;
         _robStarter.NotEnoughRobbers -= ShowWarningPanel;
         _robStarter.Started -= ShowPerkPanel;
         _shop.NotEnoughMoney -= ShowNotEnoughMoneyMenu;
@@ -51,10 +51,10 @@ public class MenuEnabler : MonoBehaviour
         _prepareMenu.SetActive(True);
     }
 
-    private void ShowWinPanel()
-    {
-        _winPanel.SetActive(true);
-    }
+    // private void ShowWinPanel()
+    // {
+    //     _winPanel.SetActive(true);
+    // }
 
     private void ShowWarningPanel()
     {
