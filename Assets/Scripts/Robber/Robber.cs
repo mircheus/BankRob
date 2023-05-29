@@ -47,7 +47,7 @@ public class Robber : MonoBehaviour
         GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
     }
 
-    private void Start()
+    private void Awake()
     {
         _bodyMaterial = _bodyMesh.material;
         _sweaterMaterial = _sweaterMesh.material;
@@ -105,9 +105,15 @@ public class Robber : MonoBehaviour
         Frozen?.Invoke(_columnIndex);
     }
 
-    private void SetColor(int level)
+    public void InitializeAsNew()
     {
-        if (level <= _levelColors.Length)
+        SetLevel(0);
+        SetColor(_level);
+    }
+
+    public void SetColor(int level)
+    {
+        if (level < _levelColors.Length)
         {
             Color color = _levelColors[level];
             _bodyMaterial.color = color;

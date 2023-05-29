@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,7 +13,7 @@ public class Slot : MonoBehaviour
     [SerializeField] private int _columnIndex;
     [SerializeField] private ParticleSystem _combineFx;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
-    [SerializeField] private GameObject _robbersPool;
+    [SerializeField] private DeactivatedRobbers _deactivatedRobbers;
     
     private Image _image;
     private RobberDragger _robberDragger;
@@ -65,9 +66,10 @@ public class Slot : MonoBehaviour
 
     public void Unfill()
     {
+        Debug.Log("Unfill");
         _isFilled = false;
-        _robber.transform.SetParent(_robbersPool.transform);
-        _robber = null;
+        // _robber.transform.SetParent(_robbersPool.transform);
+        // Debug.Log(_robber.transform.parent);
     }
 
     public void PlaceNewRobber(Robber robber)
@@ -75,7 +77,7 @@ public class Slot : MonoBehaviour
         PlaceRobberInCellCenter(robber.GetComponent<RobberDragger>());
     }
 
-    private void PlaceRobberInCellCenter(RobberDragger robberDragger)
+    public void PlaceRobberInCellCenter(RobberDragger robberDragger)
     {
         Transform robberTransform = robberDragger.transform;
         robberTransform.SetParent(gameObject.transform);
@@ -85,6 +87,8 @@ public class Slot : MonoBehaviour
     private void CombineRobbers(Robber externalRobberDragger)
     {
         externalRobberDragger.gameObject.SetActive(false);
+        externalRobberDragger.gameObject.transform.SetParent(_deactivatedRobbers.transform);
+        Debug.Log(externalRobberDragger.gameObject.transform.parent);
         int level = _robber.UpgradeLevel();
         RobbersCombined?.Invoke(level);
         PlayCombineFx(level);

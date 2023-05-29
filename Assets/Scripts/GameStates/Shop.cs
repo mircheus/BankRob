@@ -10,6 +10,7 @@ using static System.Net.WebUtility;
 public class Shop : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
+    [SerializeField] private Grid _grid;
     [SerializeField] private Robber _robberPrefab;
     [SerializeField] private RobbersPool _robbersPool;
     [SerializeField] private PlayerData _playerData;
@@ -23,6 +24,7 @@ public class Shop : MonoBehaviour
 
     public event UnityAction NotEnoughMoney;
     public event UnityAction AllSlotsBusy;
+    public event UnityAction BuyingRobber;
 
     private void OnEnable()
     {
@@ -46,8 +48,12 @@ public class Shop : MonoBehaviour
             if (IsAnySlotAvailable())
             {
                 var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
+                _robbers.Remove(robber);
+                robber.InitializeAsNew();
                 PlaceToGrid(robber);
+                // if (robber != null) robber.InitializeAsNew();
                 _playerData.PayForRobber(_robberPrice);
+                BuyingRobber?.Invoke();
             }
             else
             {
@@ -104,15 +110,20 @@ public class Shop : MonoBehaviour
     private void PlaceRobbersFromPreviousLevel()
     {
         int[] robbersFromPreviousLevel = _playerData.AliveRobbers;
-
+        
         if (robbersFromPreviousLevel != null)
         {
             for (int i = 0; i < robbersFromPreviousLevel.Length; i++)
             {
                 var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
                 robber.SetLevel(robbersFromPreviousLevel[i]);
+                robber.SetColor(robber.Level);
                 PlaceToGrid(robber);
             } 
+            
+            _grid.SetRobbersCounter(robbersFromPreviousLevel.Length);
         }
+        
+
     }
 }

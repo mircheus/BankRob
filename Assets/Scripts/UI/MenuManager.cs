@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,11 +13,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private WinMenu _winMenu;
     [SerializeField] private LoseMenu _loseMenu;
 
+    [Header("Warnings")] [SerializeField] 
+    private PopUp _notEnoughRobbers;
+
     [Header("Pulsating buttons")]
     [SerializeField] private RectTransform _robButton;
 
     [Header("Events Sources")] 
     [SerializeField] private Robbery _robbery;
+    [SerializeField] private RobStarter _robStarter;
     
     private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
 
@@ -24,12 +29,14 @@ public class MenuManager : MonoBehaviour
     {
         _robbery.BankRobbed += OnBankRobbed;
         _robbery.BankNotRobbed += OnBankNotRobbed;
+        _robStarter.NotEnoughRobbers += OnNotEnoughRobbers;
     }
 
     private void OnDisable()
     {
         _robbery.BankRobbed -= OnBankRobbed;
         _robbery.BankNotRobbed -= OnBankNotRobbed;
+        _robStarter.NotEnoughRobbers -= OnNotEnoughRobbers;
     }
 
     private void Start()
@@ -96,6 +103,11 @@ public class MenuManager : MonoBehaviour
     private void OnBankNotRobbed()
     {
         ShowEndgameMenu(_loseMenu);
+    }
+
+    private void OnNotEnoughRobbers()
+    {
+        Show(_notEnoughRobbers);
     }
 
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -12,6 +13,7 @@ public class RobStarter : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _downCollider;
+    [SerializeField] private Grid _grid;
 
     private Robber _savedRobber;
     
@@ -20,10 +22,18 @@ public class RobStarter : MonoBehaviour
     
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
-    
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TryStartRob();
+        }
+    }
+
     public void TryStartRob()
     {
-        if (_preparing.GetRobbersQuantity() > 0)
+        if (_preparing.GetRobbersQuantity() > 0 && IsNoDraggingActive())
         {
             StartRob();
         }
@@ -40,6 +50,8 @@ public class RobStarter : MonoBehaviour
             if (slot.IsFilled)
             {
                 slot.Robber.SetColumnIndex(slot.ColumnIndex);
+                
+                slot.PlaceRobberInCellCenter(slot.Robber.GetComponent<RobberDragger>());
                 slot.Robber.ActivateMovement();
                 slot.Robber.GetComponent<AnimationSwitcher>().PlayFirstAttack();
                 _playerData.SubscribeToKeyCollector(slot.Robber);
@@ -55,8 +67,16 @@ public class RobStarter : MonoBehaviour
         Started?.Invoke();
     }
 
-    public Robber PickRobber() // WORKAROUND FOR CAMERA FOLLOW TARGET
+    private bool IsNoDraggingActive()
     {
-        return _savedRobber;
+        foreach (var slot in _slots)
+        {
+            if (slot.Robber.GetComponent<RobberDragger>().IsDraggingNow)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

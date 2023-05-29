@@ -7,7 +7,12 @@ using UnityEngine.Events;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
+    [SerializeField] private Shop _shop;
+    
+    private int _totalRobbersCounter = 0;
 
+    public int TotalRobbersCounter => _totalRobbersCounter;
+    
     public event UnityAction<int> RobbersCombined;
     
     private void OnEnable()
@@ -16,6 +21,8 @@ public class Grid : MonoBehaviour
         {
             slot.RobbersCombined += OnRobbersCombined;
         }
+
+        _shop.BuyingRobber += OnBuyingRobber;
     }
 
     private void OnDisable()
@@ -24,6 +31,13 @@ public class Grid : MonoBehaviour
         {
             slot.RobbersCombined -= OnRobbersCombined;
         }
+        
+        _shop.BuyingRobber += OnBuyingRobber;
+    }
+
+    public void SetRobbersCounter(int value)
+    {
+        _totalRobbersCounter = value;
     }
 
     private void OnRobbersCombined(int level)
@@ -33,9 +47,15 @@ public class Grid : MonoBehaviour
             if (slot.IsFilled && slot.Robber.gameObject.activeSelf == false)
             {
                 slot.Unfill();
+                _totalRobbersCounter--;
             }
         }
         
         RobbersCombined?.Invoke(level);
+    }
+
+    private void OnBuyingRobber()
+    {
+        _totalRobbersCounter++;
     }
 }

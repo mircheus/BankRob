@@ -14,7 +14,7 @@ public class MenuEnabler : MonoBehaviour
     [SerializeField] private GameObject _winPanel;
     [SerializeField] private GameObject _loosePanel;
     [SerializeField] private GameObject _prepareMenu;
-    [SerializeField] private GameObject _warningPanel;
+    // [SerializeField] private GameObject _warningPanel;
     [SerializeField] private GameObject _notEnoughMoneyPanel;
     [SerializeField] private GameObject _allSlotsBusyPanel;
     [SerializeField] private GameObject _leaderboard;
@@ -58,7 +58,7 @@ public class MenuEnabler : MonoBehaviour
 
     private void ShowWarningPanel()
     {
-        _warningPanel.SetActive(true);
+        // _warningPanel.SetActive(true);
     }
 
     private void ShowLosePanel()
