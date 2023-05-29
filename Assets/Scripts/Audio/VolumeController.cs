@@ -7,6 +7,9 @@ public class VolumeController : MonoBehaviour
 {
     private const string MasterVolume = "MasterVolume";
     private const string MusicVolume = "MusicVolume";
+    private const int MaxMasterVolume = 0;
+    private const int MaxMusicVolume = -10;
+    private const int ZeroVolume = -80;
     
     [SerializeField] private AudioMixer _audioMixer;
 
@@ -24,11 +27,11 @@ public class VolumeController : MonoBehaviour
 
     public void ChangeMasterVolume(float volume)
     {
-        _audioMixer.SetFloat(MasterVolume, Mathf.Lerp(-80, 0, volume));
+        _audioMixer.SetFloat(MasterVolume, Mathf.Lerp(ZeroVolume, MaxMasterVolume, volume));
     }
 
     public void ChangeMusicVolume(float volume)
     {
-        _audioMixer.SetFloat(MusicVolume, Mathf.Lerp(-70, 0, volume));
+        _audioMixer.SetFloat(MusicVolume, Mathf.Lerp(ZeroVolume, MaxMusicVolume, volume));
     }
 }
