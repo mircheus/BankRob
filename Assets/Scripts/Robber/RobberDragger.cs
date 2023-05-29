@@ -6,7 +6,7 @@ using UnityEngine;
 public class RobberDragger : MonoBehaviour, IDrag
 {
     private Rigidbody _rigidbody;
-    private bool _isDraggingNow = false;
+    private bool _isDraggingNow;
     private Transform _lastParent;
 
     public bool IsDraggingNow => _isDraggingNow;
@@ -14,6 +14,7 @@ public class RobberDragger : MonoBehaviour, IDrag
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _isDraggingNow = false;
     }
 
     public void OnStartDrag()

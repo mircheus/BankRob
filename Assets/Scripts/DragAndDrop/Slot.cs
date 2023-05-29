@@ -88,7 +88,7 @@ public class Slot : MonoBehaviour
     {
         externalRobberDragger.gameObject.SetActive(false);
         externalRobberDragger.gameObject.transform.SetParent(_deactivatedRobbers.transform);
-        Debug.Log(externalRobberDragger.gameObject.transform.parent);
+        // Debug.Log(externalRobberDragger.gameObject.transform.parent);
         int level = _robber.UpgradeLevel();
         RobbersCombined?.Invoke(level);
         PlayCombineFx(level);

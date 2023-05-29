@@ -96,17 +96,13 @@ public class Progression : MonoBehaviour
     {
         if (levelsPassed < 3)
         {
-            return 1;
+            return 2;
         }
         else if (levelsPassed >= 3 && levelsPassed < 6 )
         {
-            return 2;
-        }
-        else if (levelsPassed >= 6 && levelsPassed < 10)
-        {
             return 3;
         }
-        else if (levelsPassed >= 10)
+        else if (levelsPassed >= 6)
         {
             return 4;
         }
@@ -124,7 +120,7 @@ public class Progression : MonoBehaviour
         return 0;
     }
 
-    private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount)
+    private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount) 
     {
         if (levelsPassed >= _trapsAppearsOnLevel)
         {
