@@ -70,15 +70,19 @@ public class RobStarter : MonoBehaviour
 
     private bool IsNoDraggingActive()
     {
+        int counter = 0;
+        
         foreach (var slot in _slots)
         {
             Debug.Log(slot.Robber.GetComponent<RobberDragger>().IsDraggingNow);
-            // if (slot.Robber != null)
-            if (slot.Robber.GetComponent<RobberDragger>().IsDraggingNow)
+            Debug.Log(counter);
+            counter++;
+            
+            if (slot.Robber != null)
             {
-                // return !slot.Robber.GetComponent<RobberDragger>().IsDraggingNow;
-                return false;
+                return !slot.Robber.GetComponent<RobberDragger>().IsDraggingNow;
             }
+
         }
 
         return true;
