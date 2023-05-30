@@ -22,6 +22,7 @@ public class RobberMovement : MonoBehaviour
 
     public bool IsDashActive => _isDashActive;
     public bool IsGetStopped => _isGetStopped;
+    public bool IsShieldActive => _isShieldActive;
     
     public event UnityAction GetStopped;
 
@@ -65,8 +66,6 @@ public class RobberMovement : MonoBehaviour
             if (_isDashActive == false)
             {
                 GetStopped?.Invoke();
-                Debug.Log("Caged####");
-                // Debug.Log("Stopped by cage");
             }
         }
 
@@ -75,7 +74,6 @@ public class RobberMovement : MonoBehaviour
             if (_isShieldActive == false)
             {
                 GetStopped?.Invoke();
-                // Debug.Log("Get Trapped");
             }
         }
     }

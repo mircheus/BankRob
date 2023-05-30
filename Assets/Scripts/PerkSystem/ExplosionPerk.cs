@@ -39,6 +39,12 @@ public class ExplosionPerk : Perk
             cage.GetDestroyed();
             PlayFxAt(cage.transform.position);
         }
+
+        if (other.TryGetComponent(out Fridge fridge))
+        {
+            fridge.GetDestroyed();
+            PlayFxAt(fridge.transform.position);
+        }
     }
 
     protected override void Deactivate()

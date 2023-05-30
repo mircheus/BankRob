@@ -33,6 +33,5 @@ public class Cage : Trap
         PlayDestroyFx();
         _forms[0].SetActive(false);
         _forms[1].SetActive(true);
-        Debug.Log("Cage Destroyed");
     }
 }

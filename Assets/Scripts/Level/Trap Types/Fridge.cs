@@ -8,14 +8,16 @@ public class Fridge : Trap
 {
     [Header("Unique")]
     [SerializeField] private ParticleSystem _frozeFx;
+    [SerializeField] private GameObject _fridgeModel;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
         {
-            Debug.Log("Get Fridged");
             _frozeFx.Play();
             robber.GetFrozen();
+            _fridgeModel.SetActive(false);
+            StartCoroutine(DeactivateGameObject());
         }
     }
 }

@@ -62,15 +62,6 @@ public class Robber : MonoBehaviour
         SetColor(_level);
     }
 
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.TryGetComponent(out Vault vault))
-    //     {
-    //         ReachedVault?.Invoke(this);
-    //         Debug.Log("ReachedVault");
-    //     }
-    // }
-
     public int UpgradeLevel()
     {
         if (_level < _levelColors.Length)
@@ -100,11 +91,6 @@ public class Robber : MonoBehaviour
         _perks[_level].Activate();
     }
 
-    public void ActivatePerkTEST(int index)
-    {
-        _perks[index].Activate();
-    }
-
     public void SetColumnIndex(int index)
     {
         _columnIndex = index;
@@ -112,7 +98,10 @@ public class Robber : MonoBehaviour
 
     public void GetFrozen()
     {
-        Frozen?.Invoke(_columnIndex);
+        if (_robberMovement.IsShieldActive == false)
+        {
+            Frozen?.Invoke(_columnIndex);
+        }
     }
 
     public void InitializeAsNew()
