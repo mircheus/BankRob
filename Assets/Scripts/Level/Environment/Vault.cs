@@ -22,7 +22,7 @@ public class Vault : MonoBehaviour
         {
             Robbed?.Invoke();
             _animator.Play(_openVault);
-            Debug.Log("Vault is robbed!");
+            robber.ReachedVault?.Invoke(robber);
         }
     }
 }

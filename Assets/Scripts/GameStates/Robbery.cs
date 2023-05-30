@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,12 +13,19 @@ public class Robbery : MonoBehaviour
     [SerializeField] private Progression _progression;
     [SerializeField] private List<Vault> _vaults = new List<Vault>();
     [SerializeField] private PerksPanelFiller _perksPanelFiller;
+    [SerializeField] private RobStarter _robStarter;
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
     [SerializeField] private int _aliveRobbersCounter;
-
+    
+    [Header("New Counters")]
+    [SerializeField] private int _totalRobbersCounter;
+    [SerializeField] private int _trappedRobbersCounter;
+    [SerializeField] private int _reachedRobbersCounter;
+    
     private int _robbedVaultsCounter;
+    // private int _finishedRobbersCounter;
 
     public event UnityAction BankRobbed;
     public event UnityAction BankNotRobbed;
@@ -30,6 +38,7 @@ public class Robbery : MonoBehaviour
 
     private void OnEnable()
     {
+        _robStarter.Started += OnStarted;
         BankRobbed += OnBankRobbed;
         BankNotRobbed += OnBankNotRobbed;
         
@@ -43,6 +52,7 @@ public class Robbery : MonoBehaviour
 
     private void OnDisable()
     {
+        _robStarter.Started -= OnStarted;
         BankRobbed -= OnBankRobbed;
         BankNotRobbed -= OnBankNotRobbed;
         
@@ -57,12 +67,12 @@ public class Robbery : MonoBehaviour
         // }
         //
         // _perksPanelFiller.PerkActivated -= OnPerkActivated;
-        
     }
 
     private void Start()
     {
         _robbedVaultsCounter = 0;
+
         SetTargetsQuantity(_progression.KeysFromPreviousLevel);
     }
 
@@ -71,6 +81,7 @@ public class Robbery : MonoBehaviour
         _robbers.Add(robber);
         robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
         _aliveRobbersCounter++;
+        _totalRobbersCounter++;
     }
 
     public List<Robber> SendRobbersListTo(TargetMovement targetMovement)
@@ -123,8 +134,7 @@ public class Robbery : MonoBehaviour
 
         if (IsTargetReached(_robbedVaultsCounter))
         {
-            BankRobbed?.Invoke();
-            Debug.Log("BankRobbed_invoked");
+            // BankRobbed?.Invoke();
         }
     }
 
@@ -147,12 +157,26 @@ public class Robbery : MonoBehaviour
 
     private void OnGetStopped()
     {
-        _aliveRobbersCounter--;
-
-        if (_aliveRobbersCounter == 0)
+        _trappedRobbersCounter++;
+        
+        for (int i = 0; i < _robbers.Count; i++)
         {
-            BankNotRobbed?.Invoke();
+            if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
+            {
+                _robbers[i].ReachedVault -= OnReachedVault;
+                _robbers[i].GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
+                _robbers.Remove(_robbers[i]);
+            }
         }
+        
+        CheckGame();
+        
+        // _aliveRobbersCounter--;
+
+        // if (_aliveRobbersCounter == 0)
+        // {
+        //     BankNotRobbed?.Invoke();
+        // }
     }
 
     private void OnBankRobbed()
@@ -173,5 +197,37 @@ public class Robbery : MonoBehaviour
         }
         
         _perksPanelFiller.PerkActivated -= OnPerkActivated;
+    }
+
+    private void OnStarted()
+    {
+        foreach (var robber in _robbers)
+        {
+            robber.ReachedVault += OnReachedVault;
+        }
+    }
+
+    private void OnReachedVault(Robber robber)
+    {
+        robber.ReachedVault -= OnReachedVault;
+        _robbers.Remove(robber);
+        _reachedRobbersCounter++;
+        
+        CheckGame();
+    }
+
+    private void CheckGame()
+    {
+        if (_trappedRobbersCounter + _reachedRobbersCounter == _totalRobbersCounter)
+        {
+            if (_reachedRobbersCounter > 0)
+            {
+                BankRobbed?.Invoke();
+            }
+            else
+            {
+                BankNotRobbed?.Invoke();
+            }
+        }
     }
 }

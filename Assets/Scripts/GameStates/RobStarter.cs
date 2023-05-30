@@ -51,7 +51,6 @@ public class RobStarter : MonoBehaviour
             if (slot.IsFilled)
             {
                 slot.Robber.SetColumnIndex(slot.ColumnIndex);
-                
                 slot.PlaceRobberInCellCenter(slot.Robber.GetComponent<RobberDragger>());
                 slot.Robber.ActivateMovement();
                 slot.Robber.GetComponent<AnimationSwitcher>().PlayFirstAttack();
@@ -70,19 +69,12 @@ public class RobStarter : MonoBehaviour
 
     private bool IsNoDraggingActive()
     {
-        int counter = 0;
-        
         foreach (var slot in _slots)
         {
-            Debug.Log(slot.Robber.GetComponent<RobberDragger>().IsDraggingNow);
-            Debug.Log(counter);
-            counter++;
-            
             if (slot.Robber != null)
             {
                 return !slot.Robber.GetComponent<RobberDragger>().IsDraggingNow;
             }
-
         }
 
         return true;

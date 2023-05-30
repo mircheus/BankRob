@@ -28,6 +28,7 @@ public class Robber : MonoBehaviour
     private AnimationSwitcher _animationSwitcher;
 
     public UnityAction<int> Frozen;
+    public UnityAction<Robber> ReachedVault;
     
     public int Level => _level;
     public int MaxLevel => _maxLevel;
@@ -60,7 +61,16 @@ public class Robber : MonoBehaviour
         _level = 0;
         SetColor(_level);
     }
-    
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.TryGetComponent(out Vault vault))
+    //     {
+    //         ReachedVault?.Invoke(this);
+    //         Debug.Log("ReachedVault");
+    //     }
+    // }
+
     public int UpgradeLevel()
     {
         if (_level < _levelColors.Length)
@@ -121,7 +131,7 @@ public class Robber : MonoBehaviour
             _shoesMaterial.color = color;
         }
     }
-
+    
     private void OnKeyCollected()
     {
         Debug.Log("KeyCollected");

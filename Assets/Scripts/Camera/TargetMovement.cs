@@ -62,10 +62,10 @@ public class TargetMovement : MonoBehaviour
         _robbers = _robbery.SendRobbersListTo(this);
         _robberToFollow = _robbers[_currentIndex];
 
-        foreach (Robber robber in _robbers)
-        {
-            robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
-        }
+        // foreach (Robber robber in _robbers)
+        // {
+        //     robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
+        // }
     }
 
     private void CalculateDelta()
@@ -139,15 +139,6 @@ public class TargetMovement : MonoBehaviour
     private void OnGetStopped()
     {
         // Debug.Log("OnGetStopped From target movement");
-        
-        for (int i = 0; i < _robbers.Count; i++)
-        {
-            if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
-            {
-                _robbers.Remove(_robbers[i]);
-                Debug.Log("Removed");
-            }
-        }
     }
 
     private Robber FindLowestRobber()
