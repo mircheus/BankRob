@@ -17,30 +17,18 @@ public class VaultsCounter : MonoBehaviour
     private void OnEnable()
     {
         _robberyInfo.RobbedVaultsCounterChanged += OnRobbedVaultsCounterChanged;
-        // _robberyInfo.TargetQuantitySet += OnTargetQuantitySet;
     }
 
     private void OnDisable()
     {
         _robberyInfo.RobbedVaultsCounterChanged -= OnRobbedVaultsCounterChanged;
-        // _robberyInfo.TargetQuantitySet -= OnTargetQuantitySet;
     }
 
     private void Start()
     {
         _counter = GetComponent<TMP_Text>();
         _currentValue = 0;
-        // _currentValue = _robberyInfo.RobbedVaultsCounter;
-        // _targetValue = _robberyInfo.TargetQuantity;
-        // SetCounterString(_currentValue);
     }
-
-    // private void OnTargetQuantitySet()
-    // {
-    //     _currentValue = 0;
-    //     // _targetValue = _robberyInfo.TargetQuantity;
-    //     SetCounterString(_currentValue);
-    // }
 
     private void OnRobbedVaultsCounterChanged()
     {

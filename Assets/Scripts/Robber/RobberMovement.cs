@@ -65,6 +65,7 @@ public class RobberMovement : MonoBehaviour
             if (_isDashActive == false)
             {
                 GetStopped?.Invoke();
+                Debug.Log("Caged####");
                 // Debug.Log("Stopped by cage");
             }
         }
