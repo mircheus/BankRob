@@ -27,6 +27,17 @@ public class TimeChanger : MonoBehaviour
         Time.timeScale = _timeScale;
     }
 
+    public void EnableSlowmo()
+    {
+        Time.timeScale = SlowmoScale;
+    }
+    
+    public void DisableSlowmo()
+    {
+        Time.timeScale = 1;
+        Debug.Log(Time.timeScale);
+    }
+
     private void OnBankRobbed()
     {
         SlowdownTime();

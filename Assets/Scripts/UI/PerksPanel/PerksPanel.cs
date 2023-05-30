@@ -14,6 +14,11 @@ public class PerksPanel : MonoBehaviour
         // Debug.Log("Subscribed to Robbers in PerksPanel");
     }
 
+    public Robber SendRobberForTutorialTo(PerkActivatorTutorial perkActivatorTutorial)
+    {
+        return _robbery.SendRobbersListTo(this)[0];
+    }
+
     private void SubscribeButtonsToRobbers(Robber[] robbers)
     {
         for (int i = 0; i < _perkSlots.Length; i++)
