@@ -7,7 +7,8 @@ using UnityEngine;
 public class VaultsCounter : MonoBehaviour
 {
     [SerializeField] private Robbery _robberyInfo;
-    
+
+    private const int Target = 4;
     private TMP_Text _counter;
     private string _counterString;
     private int _currentValue;
@@ -16,29 +17,30 @@ public class VaultsCounter : MonoBehaviour
     private void OnEnable()
     {
         _robberyInfo.RobbedVaultsCounterChanged += OnRobbedVaultsCounterChanged;
-        _robberyInfo.TargetQuantitySet += OnTargetQuantitySet;
+        // _robberyInfo.TargetQuantitySet += OnTargetQuantitySet;
     }
 
     private void OnDisable()
     {
         _robberyInfo.RobbedVaultsCounterChanged -= OnRobbedVaultsCounterChanged;
-        _robberyInfo.TargetQuantitySet -= OnTargetQuantitySet;
+        // _robberyInfo.TargetQuantitySet -= OnTargetQuantitySet;
     }
 
     private void Start()
     {
         _counter = GetComponent<TMP_Text>();
+        _currentValue = 0;
         // _currentValue = _robberyInfo.RobbedVaultsCounter;
         // _targetValue = _robberyInfo.TargetQuantity;
         // SetCounterString(_currentValue);
     }
 
-    private void OnTargetQuantitySet()
-    {
-        _currentValue = 0;
-        _targetValue = _robberyInfo.TargetQuantity;
-        SetCounterString(_currentValue);
-    }
+    // private void OnTargetQuantitySet()
+    // {
+    //     _currentValue = 0;
+    //     // _targetValue = _robberyInfo.TargetQuantity;
+    //     SetCounterString(_currentValue);
+    // }
 
     private void OnRobbedVaultsCounterChanged()
     {
@@ -48,7 +50,7 @@ public class VaultsCounter : MonoBehaviour
 
     private void SetCounterString(int currentValue)
     {
-        string counter =  $"{currentValue} / {_targetValue}";
+        string counter =  $"{currentValue} / {Target}";
         _counter.text = counter;
     }
 }

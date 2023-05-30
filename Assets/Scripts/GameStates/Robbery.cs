@@ -11,13 +11,13 @@ public class Robbery : MonoBehaviour
     [SerializeField] private int _targetQuantity;
     [SerializeField] private int _moneyRewardAmount;
     [SerializeField] private Progression _progression;
-    [SerializeField] private List<Vault> _vaults = new List<Vault>();
+    // [SerializeField] private List<Vault> _vaults = new List<Vault>();
     [SerializeField] private PerksPanelFiller _perksPanelFiller;
     [SerializeField] private RobStarter _robStarter;
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
-    [SerializeField] private int _aliveRobbersCounter;
+    // [SerializeField] private int _aliveRobbersCounter;
     
     [Header("New Counters")]
     [SerializeField] private int _totalRobbersCounter;
@@ -34,7 +34,7 @@ public class Robbery : MonoBehaviour
 
     public int TargetQuantity => _targetQuantity;
     public int MoneyRewardAmount => _moneyRewardAmount * _targetQuantity;
-    public int RobbedVaultsCounter => _robbedVaultsCounter;
+    // public int RobbedVaultsCounter => _robbedVaultsCounter;
 
     private void OnEnable()
     {
@@ -42,10 +42,10 @@ public class Robbery : MonoBehaviour
         BankRobbed += OnBankRobbed;
         BankNotRobbed += OnBankNotRobbed;
         
-        foreach (var vault in _vaults)
-        {
-            vault.Robbed += CountRobbedVaults;
-        }
+        // foreach (var vault in _vaults)
+        // {
+        //     vault.Robbed += CountRobbedVaults;
+        // }
 
         _perksPanelFiller.PerkActivated += OnPerkActivated;
     }
@@ -56,10 +56,10 @@ public class Robbery : MonoBehaviour
         BankRobbed -= OnBankRobbed;
         BankNotRobbed -= OnBankNotRobbed;
         
-        foreach (var vault in _vaults)
-        {
-            vault.Robbed -= CountRobbedVaults;
-        }
+        // foreach (var vault in _vaults)
+        // {
+        //     vault.Robbed -= CountRobbedVaults;
+        // }
 
         // foreach (var robber in _robbers)
         // {
@@ -71,16 +71,16 @@ public class Robbery : MonoBehaviour
 
     private void Start()
     {
-        _robbedVaultsCounter = 0;
+        // _robbedVaultsCounter = 0;
 
-        SetTargetsQuantity(_progression.KeysFromPreviousLevel);
+        // SetTargetsQuantity(_progression.KeysFromPreviousLevel);
     }
 
     public void AddActiveRobber(Robber robber)
     {
         _robbers.Add(robber);
         robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
-        _aliveRobbersCounter++;
+        // _aliveRobbersCounter++;
         _totalRobbersCounter++;
     }
 
@@ -113,35 +113,35 @@ public class Robbery : MonoBehaviour
         return aliveRobbers;
     }
 
-    private void SetTargetsQuantity(int keysFromPreviousLevel)
-    {
-        if (keysFromPreviousLevel == 0)
-        {
-            _targetQuantity = 1;
-        }
-        else
-        {
-            _targetQuantity = 1 + keysFromPreviousLevel;
-        }
-        
-        TargetQuantitySet?.Invoke();
-    }
+    // private void SetTargetsQuantity(int keysFromPreviousLevel)
+    // {
+    //     if (keysFromPreviousLevel == 0)
+    //     {
+    //         _targetQuantity = 1;
+    //     }
+    //     else
+    //     {
+    //         _targetQuantity = 1 + keysFromPreviousLevel;
+    //     }
+    //     
+    //     TargetQuantitySet?.Invoke();
+    // }
     
-    private void CountRobbedVaults()
-    {
-        _robbedVaultsCounter++;
-        RobbedVaultsCounterChanged?.Invoke();
+    // private void CountRobbedVaults()
+    // {
+    //     _robbedVaultsCounter++;
+    //     RobbedVaultsCounterChanged?.Invoke();
+    //
+    //     if (IsTargetReached(_robbedVaultsCounter))
+    //     {
+    //         // BankRobbed?.Invoke();
+    //     }
+    // }
 
-        if (IsTargetReached(_robbedVaultsCounter))
-        {
-            // BankRobbed?.Invoke();
-        }
-    }
-
-    private bool IsTargetReached(int currentQuantity)
-    {
-        return currentQuantity == _targetQuantity;
-    }
+    // private bool IsTargetReached(int currentQuantity)
+    // {
+    //     return currentQuantity == _targetQuantity;
+    // }
 
     private void OnPerkActivated(int index)
     {
@@ -169,7 +169,7 @@ public class Robbery : MonoBehaviour
             }
         }
         
-        CheckGame();
+        CheckRobberyStatus();
         
         // _aliveRobbersCounter--;
 
@@ -210,13 +210,14 @@ public class Robbery : MonoBehaviour
     private void OnReachedVault(Robber robber)
     {
         robber.ReachedVault -= OnReachedVault;
+        RobbedVaultsCounterChanged?.Invoke();
         _robbers.Remove(robber);
         _reachedRobbersCounter++;
         
-        CheckGame();
+        CheckRobberyStatus();
     }
 
-    private void CheckGame()
+    private void CheckRobberyStatus()
     {
         if (_trappedRobbersCounter + _reachedRobbersCounter == _totalRobbersCounter)
         {
