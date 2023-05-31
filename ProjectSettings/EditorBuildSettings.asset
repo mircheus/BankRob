@@ -11,41 +11,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadingScene.unity
     guid: 4ade10274fb355f4f81a8ae968fed0ba
-  - enabled: 0
-    path: Assets/Scenes/06_Perks.unity
-    guid: 6be84b5067de14c4bb31420308c47e41
-  - enabled: 0
-    path: Assets/Scenes/05_Leaderboard.unity
-    guid: d35fdbe0600a143449ceb2ab0554a39e
-  - enabled: 0
-    path: Assets/Scenes/07_Progression.unity
-    guid: 0d20b3d7d86507f408b1c54e7fd4c0f7
-  - enabled: 0
-    path: Assets/Scenes/Testrooms/08_CameraTesting.unity
-    guid: 7997945c5e3f0c14f865fe3957a16d4c
-  - enabled: 0
-    path: Assets/Scenes/08_Audio.unity
-    guid: bf33042e4e04d0f4ea2807934263442c
-  - enabled: 0
-    path: Assets/Scenes/Testrooms/10_UI_change.unity
-    guid: ea6c7ea75acd3e34cb3875558bc0afec
-  - enabled: 0
-    path: Assets/Scenes/Testrooms/11_DragDrop bugfix.unity
-    guid: cef4e12e4be183a4fb236d3f7812c5ec
-  - enabled: 0
-    path: Assets/Scenes/09_Advertisement.unity
-    guid: 72ccf457749460d42a6e663991778300
-  - enabled: 0
-    path: Assets/Scenes/10_UI_animation.unity
-    guid: 30b0ad41fd145fd48b3113c2ec3b4c7d
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/11_UI_BugClean.unity
     guid: 4fc4690ab99e6d843bddcfdc4ce1b32c
-  - enabled: 0
-    path: Assets/Scenes/12_UI_BugClean_customLevel.unity
-    guid: ea498aff1aebc7248b2af45d537a285b
   - enabled: 1
     path: Assets/Scenes/13_TutorialLevel1.unity
+    guid: dba7fcba6420134478120e03304bcd06
+  - enabled: 1
+    path: Assets/Scenes/14_TutorialLevel2.unity
     guid: b4f1cae3334f7b64b822c7885e0907b3
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ff38ab1cd28cf1640b8fdb535578f864, type: 2}

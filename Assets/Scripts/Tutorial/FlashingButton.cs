@@ -13,6 +13,7 @@ public class FlashingButton : MonoBehaviour
 
     private void OnEnable()
     {
+        _flashingImage.enabled = true;
         StartFlash();
     }
 

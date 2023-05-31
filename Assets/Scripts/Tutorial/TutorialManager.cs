@@ -7,7 +7,11 @@ using UnityEngine.UI;
 
 public class TutorialManager : MonoBehaviour
 {
+    private const int RobbersAmountForCombo = 2;
+    
     [SerializeField] private TutorialPanel[] _tutorialPanels;
+    
+    [Header("Tutorial Level 1")]
     [SerializeField] private PerksPanel _perksPanel;
     [SerializeField] private Button _buyButton;
     [SerializeField] private Button _robButton;
@@ -16,9 +20,16 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TimeChanger _timeChanger;
     [SerializeField] private float _secondsToWait;
     [SerializeField] private Robbery _robbery;
-
-    private int _currentIndex;
     
+    private int _currentIndex;
+
+    [Header("Tutorial Level 2")]
+    [SerializeField] private GameObject _preparePanel;
+    [SerializeField] private Image _dimed3;
+
+    private int _robbersCounter = 0;
+    
+
     private void OnEnable()
     {
         _currentIndex = 0;
@@ -33,6 +44,17 @@ public class TutorialManager : MonoBehaviour
     {
         _robbery.BankRobbed -= OnBankRobbed;
     }
+    
+    // common methods
+    
+    private void ShowNextTutorialPanel()
+    {
+        _tutorialPanels[_currentIndex].gameObject.SetActive(false);
+        _currentIndex++;
+        _tutorialPanels[_currentIndex].gameObject.SetActive(true);
+    }
+    
+    // tutorial Level 1
 
     public void PressBuyButton()
     {
@@ -68,12 +90,25 @@ public class TutorialManager : MonoBehaviour
         _dimed2.gameObject.SetActive(true);
         _perksPanel.gameObject.SetActive(true);
     }
+    
+    // Tutorial Level 2
 
-    private void ShowNextTutorialPanel()
+    public void BuyRobber()
     {
-        _tutorialPanels[_currentIndex].gameObject.SetActive(false);
-        _currentIndex++;
-        _tutorialPanels[_currentIndex].gameObject.SetActive(true);
+        _robbersCounter++;
+
+        if (_robbersCounter == RobbersAmountForCombo)
+        {
+            ShowNextTutorialPanel();
+            _dimed1.gameObject.SetActive(false);
+            _preparePanel.SetActive(false);
+        }
+    }
+
+    public void OnCloseNewRobber()
+    {
+        ShowNextTutorialPanel();
+        _dimed3.gameObject.SetActive(true);
     }
 
     private IEnumerator ShowPerkTutorialWithDelay()

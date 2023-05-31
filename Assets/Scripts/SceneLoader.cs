@@ -9,6 +9,8 @@ public class SceneLoader : MonoBehaviour
     private const int MainMenuIndex = 0;
     private const int LoadingIndex = 1;
     private const int GameLevelIndex = 2;
+    private const int TutorialLevel1Index = 3;
+    private const int TutorialLevel2Index = 4;
 
     public void LoadGameLevelScene()
     {
@@ -23,5 +25,15 @@ public class SceneLoader : MonoBehaviour
     public void LoadMainMenuScene()
     {
         SceneManager.LoadScene(MainMenuIndex);
+    }
+
+    public void LoadTutorialLevel1()
+    {
+        SceneManager.LoadScene(TutorialLevel1Index);
+    }
+
+    public void LoadTutorialLevel2()
+    {
+        SceneManager.LoadScene(TutorialLevel2Index);
     }
 }
