@@ -15,6 +15,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private Image _dimed2;
     [SerializeField] private TimeChanger _timeChanger;
     [SerializeField] private float _secondsToWait;
+    [SerializeField] private Robbery _robbery;
 
     private int _currentIndex;
     
@@ -24,6 +25,13 @@ public class TutorialManager : MonoBehaviour
         _dimed1.gameObject.SetActive(true);
         _robButton.interactable = false;
         _tutorialPanels[_currentIndex].gameObject.SetActive(true);
+
+        _robbery.BankRobbed += OnBankRobbed;
+    }
+
+    private void OnDisable()
+    {
+        _robbery.BankRobbed -= OnBankRobbed;
     }
 
     public void PressBuyButton()
@@ -31,6 +39,7 @@ public class TutorialManager : MonoBehaviour
         ShowNextTutorialPanel();
         _buyButton.interactable = false;
         _robButton.interactable = true;
+        _robButton.GetComponent<FlashingButton>().enabled = true;
     }
 
     public void PressRobButton()
@@ -42,6 +51,12 @@ public class TutorialManager : MonoBehaviour
     public void PressPerkButton()
     {
         _timeChanger.DisableSlowmo();
+        _tutorialPanels[_currentIndex].gameObject.SetActive(false);
+        _dimed2.gameObject.SetActive(false);
+    }
+
+    private void OnBankRobbed()
+    {
         _tutorialPanels[_currentIndex].gameObject.SetActive(false);
         _dimed2.gameObject.SetActive(false);
     }
