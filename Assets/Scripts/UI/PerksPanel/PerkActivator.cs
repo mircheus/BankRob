@@ -11,6 +11,8 @@ public class PerkActivator : MonoBehaviour
     [SerializeField] private Button _button;
     [SerializeField] private float _coolDownTime;
 
+    public float CoolDownTime => _coolDownTime;
+
     private int _columnIndex;
     private Robber _robber;
 
@@ -32,6 +34,7 @@ public class PerkActivator : MonoBehaviour
     {
         PerkActivated?.Invoke(_columnIndex);
         StartCoroutine(CooldownButton());
+        Debug.Log("PerkActivated");
     }
 
     private IEnumerator CooldownButton()
