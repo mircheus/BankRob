@@ -14,9 +14,13 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private LoseMenu _loseMenu;
 
     [Header("UI elements to hide")] 
-    [SerializeField] private RectTransform _moneyPanel;
-    [SerializeField] private RectTransform _perksPanel;
-
+    [SerializeField] private RectTransform[] _elementsToDragUp;
+    [SerializeField] private RectTransform[] _elementsToDragDown;
+    // [SerializeField] private RectTransform _moneyPanel;
+    // [SerializeField] private RectTransform _perksPanel;
+    // [SerializeField] private RectTransform _settings;
+    // [SerializeField] private RectTransform _leaderboard;
+    
     [Header("Warnings")] 
     [SerializeField] private PopUp _notEnoughRobbers;
 
@@ -118,8 +122,18 @@ public class MenuManager : MonoBehaviour
 
     private void HideGameElements()
     {
-        MenuAnimator.MoveElementUp(_moneyPanel);
-        MenuAnimator.MoveElementDown(_perksPanel);
+        foreach (var element in _elementsToDragUp)
+        {
+            MenuAnimator.MoveElementUp(element);
+        }
+
+        foreach (var element in _elementsToDragDown)
+        {
+            MenuAnimator.MoveElementDown(element);
+        }
+
+        // MenuAnimator.MoveElementUp(_moneyPanel);
+        // MenuAnimator.MoveElementDown(_perksPanel);
     }
 
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)
