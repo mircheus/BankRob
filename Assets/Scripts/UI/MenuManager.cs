@@ -13,8 +13,12 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private WinMenu _winMenu;
     [SerializeField] private LoseMenu _loseMenu;
 
-    [Header("Warnings")] [SerializeField] 
-    private PopUp _notEnoughRobbers;
+    [Header("UI elements to hide")] 
+    [SerializeField] private RectTransform _moneyPanel;
+    [SerializeField] private RectTransform _perksPanel;
+
+    [Header("Warnings")] 
+    [SerializeField] private PopUp _notEnoughRobbers;
 
     [Header("Pulsating buttons")]
     [SerializeField] private RectTransform _robButton;
@@ -60,6 +64,7 @@ public class MenuManager : MonoBehaviour
     
     public void ShowEndgameMenu(WinMenu winMenu)
     {
+        HideGameElements();
         winMenu.gameObject.SetActive(true);
         MenuAnimator.FadeIn(winMenu.Dimed);
         MenuAnimator.MoveWinTitle(winMenu.WinPanel, winMenu.WinTitle);
@@ -79,6 +84,7 @@ public class MenuManager : MonoBehaviour
 
     public void ShowEndgameMenu(LoseMenu loseMenu)
     {
+        HideGameElements();
         loseMenu.gameObject.SetActive(true);
         MenuAnimator.FadeIn(loseMenu.Dimed);
         MenuAnimator.MoveWinTitle(loseMenu.LossPanel, loseMenu.LossTitle);
@@ -108,6 +114,12 @@ public class MenuManager : MonoBehaviour
     private void OnNotEnoughRobbers()
     {
         Show(_notEnoughRobbers);
+    }
+
+    private void HideGameElements()
+    {
+        MenuAnimator.MoveElementUp(_moneyPanel);
+        MenuAnimator.MoveElementDown(_perksPanel);
     }
 
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)

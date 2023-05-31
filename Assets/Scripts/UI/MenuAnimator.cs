@@ -14,6 +14,7 @@ public class MenuAnimator
     public const float PulseDuration = .2f;
     private const int YOffset = 1100;
     private static readonly Vector2 upDrag = new Vector2(0, YOffset);
+    private static readonly Vector2 downDrag = new Vector2(0, YOffset);
 
     public static void DragMenuDown(RectTransform menu)
     {
@@ -68,5 +69,15 @@ public class MenuAnimator
     public static void ZoomInElement(RectTransform element)
     {
         Tween tween = element.DOScale(new Vector3(1f, 1f, 0), AnimationDuration);
+    }
+
+    public static void MoveElementUp(RectTransform element)
+    {
+        Tween tween = element.DOAnchorPos(upDrag, AnimationDuration);
+    }
+    
+    public static void MoveElementDown(RectTransform element)
+    {
+        Tween tween = element.DOAnchorPos(downDrag, AnimationDuration);
     }
 }
