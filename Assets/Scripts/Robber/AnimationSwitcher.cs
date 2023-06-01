@@ -9,7 +9,8 @@ public class AnimationSwitcher : MonoBehaviour
    // private int _attack = Animator.StringToHash("Attack");
    private int _attack = Animator.StringToHash("axe_attack_overdrive");
    private int _attackingWall = Animator.StringToHash("AttackingWall");
-   private int _firstAttack = Animator.StringToHash("first_attack");
+   // private int _firstAttack = Animator.StringToHash("first_attack");
+   private int _firstAttackJump = Animator.StringToHash("first_attack_jump");
    private int _died = Animator.StringToHash("Died");
    
    private void OnEnable()
@@ -35,7 +36,7 @@ public class AnimationSwitcher : MonoBehaviour
 
    public void PlayFirstAttack()
    {
-      _animator.Play(_firstAttack);
+      _animator.Play(_firstAttackJump);
    }
 
    private void SwitchToAttackState()
