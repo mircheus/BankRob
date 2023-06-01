@@ -8,6 +8,7 @@ public class RobberDragger : MonoBehaviour, IDrag
     private Rigidbody _rigidbody;
     private bool _isDraggingNow;
     private Transform _lastParent;
+    private Vector3 _offset;
 
     public bool IsDraggingNow => _isDraggingNow;
     
@@ -26,11 +27,16 @@ public class RobberDragger : MonoBehaviour, IDrag
     {
         _isDraggingNow = false;
         _rigidbody.velocity = Vector3.zero;
-        transform.position = _lastParent.transform.position;
+        transform.position = _lastParent.transform.position + _offset;
     }
 
     public void SetLastParentTransform(Transform transform)
     {
         _lastParent = transform;
+    }
+
+    public void SetOffset(Vector3 offsetVector)
+    {
+        _offset = offsetVector;
     }
 }

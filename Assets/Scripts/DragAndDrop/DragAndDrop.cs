@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class DragAndDrop : MonoBehaviour
 {
+       private const float MaxDistance = 10000f;
+       
        [SerializeField] private InputAction _press;
        [SerializeField] private InputAction _screenPosition;
        [SerializeField] private float _dragPhysicsSpeed = 10;
@@ -44,7 +46,7 @@ public class DragAndDrop : MonoBehaviour
        {
               Ray ray = _mainCamera.ScreenPointToRay(_screenPosition.ReadValue<Vector2>());
  
-              if (Physics.Raycast(ray, out RaycastHit hit, 10000f, _draggableLayer))
+              if (Physics.Raycast(ray, out RaycastHit hit, MaxDistance, _draggableLayer))
               {
                      bool isDraggable = hit.transform.gameObject.TryGetComponent(out IDrag iDragComponent);
                      
@@ -77,7 +79,7 @@ public class DragAndDrop : MonoBehaviour
                      
                      if (rigidbody != null)
                      {
-                            Vector3 direction = ray.GetPoint(initialDistance) - clickedObject.transform.position;
+                            Vector3 direction = ray.GetPoint(initialDistance) + _offsetVector - clickedObject.transform.position;
                             rigidbody.velocity = direction * _dragPhysicsSpeed;
                             yield return _waitForFixedUpdate;
                      }

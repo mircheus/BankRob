@@ -37,6 +37,7 @@ public class Slot : MonoBehaviour
             {
                 _robberDragger = robberDragger;
                 _robber = _robberDragger.GetComponent<Robber>();
+                _robberDragger.SetOffset(_offset);
                 SetDownTargetForRobber(_robber);
                 PlaceRobberInCellCenter(robberDragger);
                 _isFilled = true;
@@ -46,6 +47,14 @@ public class Slot : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
+        // {
+        //     if (robberDragger.IsDraggingNow == false)
+        //     {
+        //         PlaceRobberInCellCenter(robberDragger);
+        //     }
+        // }
+        
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
             if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel)
@@ -82,6 +91,10 @@ public class Slot : MonoBehaviour
         Transform robberTransform = robberDragger.transform;
         robberTransform.SetParent(gameObject.transform);
         robberTransform.position = transform.position + _offset;
+        // robberTransform.position = transform.position;
+        // robberTransform.position += _offset;
+        // Debug.Log($"Y: {transform.position.y}");
+        Debug.Log("Placed in cell center");
     }
 
     private void CombineRobbers(Robber externalRobberDragger)
