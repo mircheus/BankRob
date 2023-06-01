@@ -49,7 +49,10 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        MenuAnimator.PulsateButton(_robButton);
+        if (_robButton != null)
+        {
+            MenuAnimator.PulsateButton(_robButton);
+        }
     }
 
     public void Show(PopUp menu)
