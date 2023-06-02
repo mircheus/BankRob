@@ -12,7 +12,7 @@ public class MenuAnimator
 {
     public const float AnimationDuration = .5f;
     public const float PulseDuration = .2f;
-    private const int YOffset = 1100;
+    private const int YOffset = 1500;
     private static readonly Vector2 upDrag = new Vector2(0, YOffset);
     private static readonly Vector2 downDrag = new Vector2(0, YOffset);
 
