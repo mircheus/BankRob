@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Agava.YandexGames;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class LeaderboardLoader : MonoBehaviour
