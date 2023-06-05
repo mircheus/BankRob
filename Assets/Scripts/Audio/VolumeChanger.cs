@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class VolumeController : MonoBehaviour
+public class VolumeChanger : MonoBehaviour
 {
     private const string MasterVolume = "MasterVolume";
     private const string MusicVolume = "MusicVolume";
@@ -12,18 +12,6 @@ public class VolumeController : MonoBehaviour
     private const int ZeroVolume = -80;
     
     [SerializeField] private AudioMixer _audioMixer;
-
-    public void ToggleSound(bool enabled)
-    {
-        if (enabled)
-        {
-            _audioMixer.SetFloat(MasterVolume, 0);
-        }
-        else
-        {
-            _audioMixer.SetFloat(MasterVolume, -80);
-        }
-    }
 
     public void ChangeMasterVolume(float volume)
     {

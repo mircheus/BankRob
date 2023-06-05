@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class TargetMovement : MonoBehaviour
 {
+    private const float ToRemoveMinusSign = 1000f;
+    
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private Robbery _robbery;
     
@@ -94,7 +96,7 @@ public class TargetMovement : MonoBehaviour
             }
         }
 
-        return minY + 1000f; // MAgic number
+        return minY + ToRemoveMinusSign;
     }
 
     private float FindMaxY(List<Robber> robbers)
@@ -116,7 +118,7 @@ public class TargetMovement : MonoBehaviour
             }
         }
 
-        return maxY + 1000f; // Magic Number
+        return maxY + ToRemoveMinusSign;
     }
 
     private float[] CollectYCoordinatesFrom(List<Robber> robbers)
