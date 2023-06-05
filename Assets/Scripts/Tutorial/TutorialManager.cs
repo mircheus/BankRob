@@ -10,6 +10,9 @@ public class TutorialManager : MonoBehaviour
     private const int RobbersAmountForCombo = 2;
     
     [SerializeField] private TutorialPanel[] _tutorialPanels;
+
+    [Header("Common")] 
+    [SerializeField] private PlayerData _playerData;
     
     [Header("Tutorial Level 1")]
     [SerializeField] private PerksPanel _perksPanel;
@@ -36,8 +39,8 @@ public class TutorialManager : MonoBehaviour
         _dimed1.gameObject.SetActive(true);
         _robButton.interactable = false;
         _tutorialPanels[_currentIndex].gameObject.SetActive(true);
-
         _robbery.BankRobbed += OnBankRobbed;
+        _playerData.ResetPlayerData();
     }
 
     private void OnDisable()

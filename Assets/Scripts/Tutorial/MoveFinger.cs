@@ -20,6 +20,7 @@ public class MoveFinger : MonoBehaviour
     {
         var sequence = DOTween.Sequence();
         sequence.Append(_fingerPosition.DOAnchorPos(new Vector2(_xOffset, 0), _duration))
-            .SetLoops(-1, LoopType.Restart);
+            .SetLoops(-1, LoopType.Restart)
+            .SetUpdate(true);
     }
 }

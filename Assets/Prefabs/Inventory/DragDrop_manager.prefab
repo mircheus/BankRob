@@ -99,5 +99,4 @@ MonoBehaviour:
   _draggableLayer:
     serializedVersion: 2
     m_Bits: 64
-  _offsetY: 0
-  _offsetVector: {x: 0, y: 5, z: 0}
+  _offsetVector: {x: 0, y: -5, z: 0}

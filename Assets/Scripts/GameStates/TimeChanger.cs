@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TimeChanger : MonoBehaviour
 {
-    private const float SlowmoScale = .5f;
+    private const float SlowmoScale = .2f;
     
     [SerializeField] private Robbery _robbery;
     [SerializeField] private float _timeScale;

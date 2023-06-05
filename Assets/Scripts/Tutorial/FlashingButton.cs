@@ -27,6 +27,7 @@ public class FlashingButton : MonoBehaviour
         var sequence = DOTween.Sequence();
         sequence.Append(_flashingImage.DOFade(1, _duration))
             .Append(_flashingImage.DOFade(0, _duration))
-            .SetLoops(-1, LoopType.Yoyo);
+            .SetLoops(-1, LoopType.Yoyo)
+            .SetUpdate(true);
     }
 }
