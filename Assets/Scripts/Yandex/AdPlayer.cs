@@ -19,9 +19,11 @@ public class AdPlayer : MonoBehaviour
 #endif
     
     public void OnShowVideoButtonClick()
-    {
+    {   
         VideoAdPlayed?.Invoke();
+#if UNITY_WEBGL && !UNITY_EDITOR
         VideoAd.Show();
+#endif
     }
 
     private void ShowInterstitialAd()

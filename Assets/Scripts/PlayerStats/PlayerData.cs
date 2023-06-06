@@ -7,6 +7,8 @@ using Agava.YandexGames;
 
 public class PlayerData : MonoBehaviour
 {
+    private const string LeaderboardName = "Money";
+    
     [SerializeField] private Robbery _robbery;
     [SerializeField] private Preparing _preparing;
     [SerializeField] private DataManager _dataManager;
@@ -95,7 +97,7 @@ public class PlayerData : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
         {
-            Leaderboard.SetScore("Money", _allMoneyCounter); // Magic STRING
+            Leaderboard.SetScore(LeaderboardName, _allMoneyCounter);
         }
 #endif
 
@@ -121,7 +123,6 @@ public class PlayerData : MonoBehaviour
         {
             _achievedLevels = level;
             NewLevelAchieved?.Invoke(level);
-            Debug.Log($"Achieved {_achievedLevels} level!");
         }
     }
     
