@@ -8,7 +8,7 @@ public class Trap : Barrier
     [SerializeField] private Obstacle _iceCube;
 
     protected bool _isTrapActive = true;
-    private const float Seconds = 5f;
+    protected const float Seconds = 5f;
     
     public virtual void GetDestroyed()
     {
@@ -26,7 +26,7 @@ public class Trap : Barrier
         _destroyFx.Play();
     }
 
-    protected IEnumerator DeactivateGameObject()
+    protected virtual IEnumerator DeactivateGameObject()
     {
         yield return new WaitForSeconds(Seconds);
         _iceCube.Destroyed -= GetDestroyed;

@@ -20,4 +20,14 @@ public class Fridge : Trap
             StartCoroutine(DeactivateGameObject());
         }
     }
+
+    public override void GetFreezedBy(FreezePerk freezePerk)
+    {
+    }
+
+    protected override IEnumerator DeactivateGameObject()
+    {
+        yield return new WaitForSeconds(Seconds);
+        gameObject.SetActive(false);
+    }
 }
