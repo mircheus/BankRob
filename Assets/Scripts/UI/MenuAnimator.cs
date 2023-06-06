@@ -60,6 +60,11 @@ public class MenuAnimator
         sequence.SetLoops(-1, LoopType.Restart);
     }
 
+    public static void KillAllTweens()
+    {
+        DOTween.KillAll();
+    }
+    
     public static void ZoomInAndPulsateButton(RectTransform button)
     {
         var sequence = DOTween.Sequence().Append(button.DOScale(Vector3.one, AnimationDuration)).SetUpdate(true);

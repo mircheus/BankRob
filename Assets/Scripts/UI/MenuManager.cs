@@ -2,8 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security;
+using DG.Tweening;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -28,10 +31,14 @@ public class MenuManager : MonoBehaviour
     [Header("Pulsating buttons")]
     [SerializeField] private RectTransform _robButton;
 
+    [Header("AdButton elements")] 
+    [SerializeField] private TMP_Text _adText;
+    [SerializeField] private Image _adIcon;
+
     [Header("Events Sources")] 
     [SerializeField] private Robbery _robbery;
     [SerializeField] private RobStarter _robStarter;
-    
+
     private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
 
     private void OnEnable()
