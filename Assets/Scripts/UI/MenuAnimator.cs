@@ -11,7 +11,8 @@ using Vector3 = UnityEngine.Vector3;
 public class MenuAnimator
 {
     public const float AnimationDuration = .5f;
-    public const float PulseDuration = .5f;
+    private const float SlowAnimationDuration = 2f;
+    private const float PulseDuration = .5f;
     private const int YOffset = 1500;
     private static readonly Vector2 upDrag = new Vector2(0, YOffset);
     private static readonly Vector2 downDrag = new Vector2(0, YOffset);
@@ -23,7 +24,12 @@ public class MenuAnimator
 
     public static void DragMenuUp(RectTransform menu)
     {
-        menu.DOAnchorPos(upDrag, AnimationDuration).SetUpdate(true);;
+        menu.DOAnchorPos(upDrag, AnimationDuration).SetUpdate(true);
+    }
+
+    public static void DragMenuUpSlowly(RectTransform menu)
+    {
+        menu.DOAnchorPos(upDrag, SlowAnimationDuration).SetUpdate(true);
     }
 
     public static void FadeIn(Image fadeImage)

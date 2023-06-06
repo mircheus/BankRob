@@ -16,6 +16,7 @@ public class MenuManager : MonoBehaviour
     [Header("UI elements to hide")] 
     [SerializeField] private RectTransform[] _elementsToDragUp;
     [SerializeField] private RectTransform[] _elementsToDragDown;
+    [SerializeField] private RectTransform _moneyIndicator;
     // [SerializeField] private RectTransform _moneyPanel;
     // [SerializeField] private RectTransform _perksPanel;
     // [SerializeField] private RectTransform _settings;
@@ -38,6 +39,7 @@ public class MenuManager : MonoBehaviour
         _robbery.BankRobbed += OnBankRobbed;
         _robbery.BankNotRobbed += OnBankNotRobbed;
         _robStarter.NotEnoughRobbers += OnNotEnoughRobbers;
+        _robStarter.Started += OnStarted;
     }
 
     private void OnDisable()
@@ -139,6 +141,11 @@ public class MenuManager : MonoBehaviour
         // MenuAnimator.MoveElementDown(_perksPanel);
     }
 
+    private void OnStarted()
+    {
+        MenuAnimator.DragMenuUpSlowly(_moneyIndicator);
+    }
+    
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)
     {
         yield return waitForSeconds;
