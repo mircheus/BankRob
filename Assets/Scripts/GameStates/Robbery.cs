@@ -15,6 +15,7 @@ public class Robbery : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
+    [SerializeField] private List<Robber> _savedRobbers;
     
     private int _totalRobbersCounter;
     private int _trappedRobbersCounter;
@@ -66,11 +67,11 @@ public class Robbery : MonoBehaviour
 
     public int[] CountAliveRobbers()
     {
-        int[] aliveRobbers = new int[_robbers.Count];
+        int[] aliveRobbers = new int[_savedRobbers.Count];
 
-        for (int i = 0; i < _robbers.Count; i++)
+        for (int i = 0; i < _savedRobbers.Count; i++)
         {
-            aliveRobbers[i] = _robbers[i].Level;
+            aliveRobbers[i] = _savedRobbers[i].Level;
         }
 
         return aliveRobbers;
@@ -80,6 +81,7 @@ public class Robbery : MonoBehaviour
     {
         UnsubscribeFromRobber(robber);
         RobbedVaultsCounterChanged?.Invoke();
+        _savedRobbers.Add(robber);
         _robbers.Remove(robber);
         _reachedRobbersCounter++;
         CheckRobberyStatus();
@@ -94,6 +96,7 @@ public class Robbery : MonoBehaviour
             if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
             {
                 UnsubscribeFromRobber(_robbers[i]);
+                _savedRobbers.Add(_robbers[i]);
                 _robbers.Remove(_robbers[i]);
             }
         }
