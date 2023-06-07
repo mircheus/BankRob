@@ -14,9 +14,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Testrooms/14_UI_adaptiveFix.unity
     guid: 39f63972b4ddca745827bce6ee2a7650
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/16_AudioFixes.unity
     guid: c3b87fc11e3eb244088fdb4bf80aaedb
+  - enabled: 1
+    path: Assets/Scenes/17_progression_update.unity
+    guid: 3a63ba7e585da1a4fb5d9d80dec40a98
   - enabled: 1
     path: Assets/Scenes/13_TutorialLevel1.unity
     guid: dba7fcba6420134478120e03304bcd06
