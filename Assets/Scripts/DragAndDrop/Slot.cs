@@ -93,7 +93,6 @@ public class Slot : MonoBehaviour
         // robberTransform.position = transform.position;
         // robberTransform.position += _offset;
         // Debug.Log($"Y: {transform.position.y}");
-        Debug.Log("Placed in cell center");
     }
 
     private void CombineRobbers(Robber externalRobberDragger)

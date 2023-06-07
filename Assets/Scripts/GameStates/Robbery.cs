@@ -82,7 +82,6 @@ public class Robbery : MonoBehaviour
         RobbedVaultsCounterChanged?.Invoke();
         _robbers.Remove(robber);
         _reachedRobbersCounter++;
-        
         CheckRobberyStatus();
     }
     
@@ -117,6 +116,8 @@ public class Robbery : MonoBehaviour
     private void OnBankRobbed()
     {
         UnsubscribeFromObjects();
+        Debug.Log($"{_economicProgression.CurrentReward} * {_reachedRobbersCounter}");
+        Debug.Log($"{MoneyRewardAmount}");
     }
 
     private void OnBankNotRobbed()

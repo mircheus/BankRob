@@ -12,9 +12,9 @@ public class Data
     private int _allMoneyCounter;
     private int[] _aliveRobbers;
     private int _achievedLevels;
-
-
-
+    private int _currentPrice;
+    private int _currentReward;
+    
     public int Money => _money;
     public int Keys => _keys;
     public int CompletedLevelsCounter => _completedLevelsCounter;
@@ -22,10 +22,12 @@ public class Data
     public int AllMoneyCounter => _allMoneyCounter;
     public int[] AliveRobbers => _aliveRobbers;
     public int AchievedLevels => _achievedLevels;
+    public int CurrentPrice => _currentPrice;
+    public int CurrentReward => _currentReward;
     
 
     public Data(int money, int allMoneyCounter, int keys, int completedLevelsCounter, 
-        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels)
+        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward)
     {
         _money = money;
         _keys = keys;
@@ -34,5 +36,7 @@ public class Data
         _allMoneyCounter = allMoneyCounter;
         _aliveRobbers = aliveRobbers;
         _achievedLevels = achievedLevels;
+        _currentPrice = currentPrice;
+        _currentReward = currentReward;
     }
 }

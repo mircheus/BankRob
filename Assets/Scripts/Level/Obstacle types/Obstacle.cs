@@ -102,7 +102,6 @@ public class Obstacle : Barrier
     private IEnumerator DisableAfterSomeTime()
     {
         yield return new WaitForSeconds(_destroyDelay);
-        Debug.Log("Waited destroy delay");
         gameObject.SetActive(false);
     }
 

@@ -34,7 +34,6 @@ public class PerkActivator : MonoBehaviour
     {
         PerkActivated?.Invoke(_columnIndex);
         StartCoroutine(CooldownButton());
-        Debug.Log("PerkActivated");
     }
 
     private IEnumerator CooldownButton()

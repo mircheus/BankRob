@@ -53,5 +53,7 @@ public class MoneyIndicator : MonoBehaviour
     private void ShowRewardAmount()
     {
         _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount;
+        Debug.Log(_rewardMoney.text);
+        Debug.Log($"from MoneyIndicator: {_robbery.MoneyRewardAmount}");
     }
 }
