@@ -8,18 +8,18 @@ public class LevelGenerator : MonoBehaviour
 {
     // private const int ColumnsQuantity = 4;
     
-    [SerializeField] private Progression _progression;
+    [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private RoofsLoader _roofsLoader;
     [SerializeField] private BarriersLoader _barriersLoader;
 
     private void OnEnable()
     {
-        _progression.LevelMapPrepared += OnLevelMapPrepared;
+        barriersProgression.LevelMapPrepared += OnLevelMapPrepared;
     }
 
     private void OnDisable()
     {
-        _progression.LevelMapPrepared += OnLevelMapPrepared;
+        barriersProgression.LevelMapPrepared += OnLevelMapPrepared;
     }
 
     private void OnLevelMapPrepared(Barrier[,] levelMap)
@@ -30,7 +30,7 @@ public class LevelGenerator : MonoBehaviour
     
     private void PrepareRoofsWithGround()
     {
-        _roofsLoader.ArrangeObjects(_progression.FloorsQuantity);
+        _roofsLoader.ArrangeObjects(barriersProgression.FloorsQuantity);
         _roofsLoader.GenerateFloor();
     }
 }

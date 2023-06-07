@@ -7,7 +7,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class Progression : MonoBehaviour
+public class BarriersProgression : MonoBehaviour
 {
     private const int ColumnsAmount = 4;
     

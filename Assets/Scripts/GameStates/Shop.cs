@@ -14,13 +14,14 @@ public class Shop : MonoBehaviour
     [SerializeField] private Robber _robberPrefab;
     [SerializeField] private RobbersPool _robbersPool;
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private EconomicProgression _economicProgression;
     
     [Header("Shop settings")]
-    [SerializeField] private int _robberPrice;
+    // [SerializeField] private int _robberPrice;
     [SerializeField] private int _poolCapacity;
     
     private List<Robber> _robbers = new List<Robber>();
-    private bool IsEnoughMoney => _playerData.MoneyAmount >= _robberPrice;
+    private bool IsEnoughMoney => _playerData.MoneyAmount >= _economicProgression.CurrentPrice;
 
     public event UnityAction NotEnoughMoney;
     public event UnityAction AllSlotsBusy;
@@ -51,8 +52,7 @@ public class Shop : MonoBehaviour
                 _robbers.Remove(robber);
                 robber.InitializeAsNew();
                 PlaceToGrid(robber);
-                // if (robber != null) robber.InitializeAsNew();
-                _playerData.PayForRobber(_robberPrice);
+                _playerData.PayForRobber(_economicProgression.CurrentPrice);
                 BuyingRobber?.Invoke();
             }
             else

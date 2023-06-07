@@ -12,7 +12,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private Preparing _preparing;
     [SerializeField] private DataManager _dataManager;
-    [SerializeField] private Progression _progression;
+    [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private AdPlayer _adPlayer;
     [SerializeField] private int _adRewardAmount;
     [SerializeField] private Grid _grid;
@@ -135,18 +135,18 @@ public class PlayerData : MonoBehaviour
         }
         else
         {
-            SetPlayerStats(_progression.InitMoney, 0, 0, _progression.FirstLevelFloorsAmount, null, 1);
+            SetPlayerStats(barriersProgression.InitMoney, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 1);
         } 
     }
     
     private void ResetPlayerStats()
     {
-        SavePlayerStats(_progression.InitMoney, 0,0, 0, _progression.FirstLevelFloorsAmount, null, 0);
+        SavePlayerStats(barriersProgression.InitMoney, 0,0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0);
     }
 
     private void SaveCurrentPlayerStats()
     {
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, _progression.FloorsQuantity, _aliveRobbers, _achievedLevels);
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _aliveRobbers, _achievedLevels);
     }
 
     private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels)

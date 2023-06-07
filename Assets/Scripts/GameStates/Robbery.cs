@@ -8,9 +8,10 @@ using UnityEngine.Events;
 
 public class Robbery : MonoBehaviour
 {
-    [SerializeField] private int _moneyRewardAmount;
-    [SerializeField] private Progression _progression;
+    // [SerializeField] private int _moneyRewardAmount;
+    [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private PerksPanelFiller _perksPanelFiller;
+    [SerializeField] private EconomicProgression _economicProgression;
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
@@ -24,7 +25,7 @@ public class Robbery : MonoBehaviour
     public event UnityAction BankNotRobbed;
     public event UnityAction RobbedVaultsCounterChanged;
     
-    public int MoneyRewardAmount => _moneyRewardAmount * _reachedRobbersCounter;
+    public int MoneyRewardAmount => _economicProgression.CurrentReward * _reachedRobbersCounter;
 
     private void OnEnable()
     {
