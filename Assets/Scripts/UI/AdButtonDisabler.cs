@@ -25,6 +25,7 @@ public class AdButtonDisabler : MonoBehaviour
         var textColor = text.color;
         textColor.a = HalfTransparent;
         text.color = textColor;
+        _button.GetComponent<RectTransform>().localScale = Vector3.one;
         MenuAnimator.KillAllTweens();
     }
 }
