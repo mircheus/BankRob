@@ -24,11 +24,6 @@ public class ScreenAdaptation : MonoBehaviour
         SetDistanceBy(aspectRatio);
     }
 
-    private void Update()
-    {
-        // SetCameraDistance();
-    }
-
     private void SetDistanceBy(float aspectRatio)
     {
         if (aspectRatio < 1)
