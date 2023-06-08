@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class RobberDragger : MonoBehaviour, IDrag
 {
+    [SerializeField] private RagdollActivator _ragdollActivator;
+    
     private Rigidbody _rigidbody;
     private bool _isDraggingNow;
     private Transform _lastParent;
@@ -21,10 +23,12 @@ public class RobberDragger : MonoBehaviour, IDrag
     public void OnStartDrag()
     {
         _isDraggingNow = true;
+        _ragdollActivator.ActivateRagdoll();
     }
 
     public void OnEndDrag()
     {
+        _ragdollActivator.DeactivateRagdoll();
         _isDraggingNow = false;
         _rigidbody.velocity = Vector3.zero;
         transform.position = _lastParent.transform.position + _offset;
