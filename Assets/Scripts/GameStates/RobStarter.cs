@@ -51,7 +51,7 @@ public class RobStarter : MonoBehaviour
             if (slot.IsFilled)
             {
                 slot.Robber.SetColumnIndex(slot.ColumnIndex);
-                slot.PlaceRobberInCellCenter(slot.Robber.GetComponent<RobberDragger>());
+                // slot.PlaceRobberInCellCenter(slot.Robber.GetComponent<RobberDragger>());
                 slot.Robber.ActivateMovement();
                 slot.Robber.GetComponent<AnimationSwitcher>().PlayFirstAttack();
                 _playerData.SubscribeToKeyCollector(slot.Robber);

@@ -74,6 +74,9 @@ public class Shop : MonoBehaviour
             {
                 robber.gameObject.SetActive(true);
                 _slots[i].PlaceNewRobber(robber);
+                // _slots[i].SetRobber(robber.GetComponent<RobberDragger>());
+                // _slots[i].Fill();
+                // _slots[i].SetRobber(robber.GetComponent<RobberDragger>());
                 break;
             }
         }
@@ -123,7 +126,5 @@ public class Shop : MonoBehaviour
             
             _grid.SetRobbersCounter(robbersFromPreviousLevel.Length);
         }
-        
-
     }
 }

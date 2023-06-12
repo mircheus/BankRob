@@ -34,12 +34,14 @@ public class Slot : MonoBehaviour
 
             if (robberDragger.IsDraggingNow == false)
             {
+                // SetRobber(robberDragger);
                 _robberDragger = robberDragger;
                 _robber = _robberDragger.GetComponent<Robber>();
                 _robberDragger.SetOffset(_offset);
                 SetDownTargetForRobber(_robber);
-                PlaceRobberInCellCenter(robberDragger);
+                PlaceNewRobber(_robber);
                 _isFilled = true;
+                // PlaceRobberInCellCenter(robberDragger);
             }
         }
     }
@@ -56,6 +58,7 @@ public class Slot : MonoBehaviour
         
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
+            // Debug.Log($"{_robber == null} Robber; ");
             if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel)
             {
                 CombineRobbers(externalRobber);
@@ -74,22 +77,30 @@ public class Slot : MonoBehaviour
 
     public void Unfill()
     {
-        Debug.Log("Unfill");
+        // Debug.Log("Unfill");
         _isFilled = false;
         // _robber.transform.SetParent(_robbersPool.transform);
         // Debug.Log(_robber.transform.parent);
     }
 
-    public void PlaceNewRobber(Robber robber)
+    public void Fill()
     {
-        PlaceRobberInCellCenter(robber.GetComponent<RobberDragger>());
+        _isFilled = true;
     }
 
-    public void PlaceRobberInCellCenter(RobberDragger robberDragger)
+    public void PlaceNewRobber(Robber robber)
+    {
+        SetRobber(robber.GetComponent<RobberDragger>());
+        PlaceRobberInCellCenter(robber.GetComponent<RobberDragger>());
+        // _isFilled = true;
+    }
+
+    private void PlaceRobberInCellCenter(RobberDragger robberDragger)
     {
         Transform robberTransform = robberDragger.transform;
         robberTransform.SetParent(gameObject.transform);
         robberTransform.position = transform.position + _offset;
+        // _isFilled = true;
         // robberTransform.position = transform.position;
         // robberTransform.position += _offset;
         // Debug.Log($"Y: {transform.position.y}");
@@ -108,6 +119,16 @@ public class Slot : MonoBehaviour
     private void SetDownTargetForRobber(Robber robber)
     {
         robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget);
+    }
+
+    public void SetRobber(RobberDragger robberDragger)
+    {
+        // PlaceRobberInCellCenter(robberDragger);
+        _robberDragger = robberDragger;
+        _robber = robberDragger.GetComponent<Robber>();
+        _robberDragger.SetOffset(_offset);
+        SetDownTargetForRobber(_robber);
+        // _isFilled = true;
     }
 
     private void PlayCombineFx(int level)
