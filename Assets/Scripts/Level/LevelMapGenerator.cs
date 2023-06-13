@@ -19,13 +19,13 @@ public class LevelMapGenerator
     public Barrier[,] GetLevelMap(int floorsAmount, int obstaclesQuantity, int obstaclesLevel, int trapsQuantity, int trapsLevel)
     {
         Barrier[,] levelMap = new Barrier[floorsAmount, ColumnsAmount];
-        List<string> randomCellsIndexes = GenerateRandomCells(obstaclesQuantity + trapsQuantity, floorsAmount - 1);
+        List<CellIndex> randomCellsIndexes = GenerateRandomCells(obstaclesQuantity + trapsQuantity, floorsAmount - 1);
         levelMap = FillLevelInRandomCells(levelMap, randomCellsIndexes, obstaclesQuantity, obstaclesLevel, trapsQuantity, trapsLevel);
 
         return levelMap;
     }
     
-    private Barrier[,] FillLevelInRandomCells(Barrier[,] availableCells, List<string> cellsIndexes,int obstaclesQuantity, int obstaclesLevel, int trapsQuantity, int trapsLevel)
+    private Barrier[,] FillLevelInRandomCells(Barrier[,] availableCells, List<CellIndex> cellsIndexes,int obstaclesQuantity, int obstaclesLevel, int trapsQuantity, int trapsLevel)
     {
         int i = 0;
         int j = 0;
@@ -45,26 +45,26 @@ public class LevelMapGenerator
         return availableCells;
     }
 
-    private List<string> GenerateRandomCells(int cellsAmount, int rowsAmount)
+    private List<CellIndex> GenerateRandomCells(int cellsAmount, int rowsAmount)
     {
-        List<string> randomCells = new List<string>();
-        int i = -1;
-        int j = -1;
-        string result; 
-        
-        for (int k = 0; k < cellsAmount; k++)
-        {
-            do
+            List<CellIndex> randomCells = new List<CellIndex>();
+            int i = -1;
+            int j = -1;
+            CellIndex result = new CellIndex(i, j);
+
+            for (int k = 0; k < cellsAmount; k++)
             {
-                i = Random.Range(0, rowsAmount);
-                j = Random.Range(0, ColumnsAmount);
-                result = Convert.ToString(i) + Convert.ToString(j);
-            } while (randomCells.Contains(result));
+                do
+                {
+                    i = Random.Range(0, rowsAmount);
+                    j = Random.Range(0, ColumnsAmount);
+                    result.SetValues(i,j);
+                } while (randomCells.Contains(result));
+                
+                randomCells.Add(result);
+            }
 
-            randomCells.Add(result);
-        }
-
-        return randomCells;
+            return randomCells;
     }
     
     private Barrier GetRandomObstacle(int maxLevelObstacle)
@@ -81,13 +81,13 @@ public class LevelMapGenerator
     {
         return Random.Range(0, maxLevel);
     }
-    
-    private void GetNewRandomIndex(ref int i, ref int j, List<string> randomCellsIndexes)
+
+    private void GetNewRandomIndex(ref int i, ref int j, List<CellIndex> randomCellsIndexes)
     {
-        string index = randomCellsIndexes[0];
+        CellIndex index = randomCellsIndexes[0];
         randomCellsIndexes.RemoveAt(0);
-        i = (int)char.GetNumericValue(index[0]);
-        j = (int)char.GetNumericValue(index[1]);
+        i = index.RowIndex;
+        j = index.ColumnIndex;
     }
 }
     

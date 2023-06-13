@@ -18,6 +18,7 @@ public class BarriersProgression : MonoBehaviour
     [SerializeField] private int _difficultyFactor;
     [SerializeField] private int _obstaclesReducer;
     [SerializeField] private int _trapsAppearsOnLevel;
+    [SerializeField] private int _trapsReducer;
 
     [Header("Obstacles")] 
     [SerializeField] private Barrier[] _obstacles;
@@ -67,8 +68,9 @@ public class BarriersProgression : MonoBehaviour
     {
         _levelsCounter = _playerData.CompletedLevelsCounter;
         _floorsQuantity = CalculateFloorsQuantity(_levelsCounter, _playerData.FloorsAmountFromPreviousLevel);
-        _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
+        Debug.Log($"FloorsAmountFromPreviousLevel = {_playerData.FloorsAmountFromPreviousLevel}");
         _trapsQuantity = CalculateTrapsQuantity(_levelsCounter, _floorsQuantity);
+        _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
         _obstaclesLevel = SetObstaclesLevel(_levelsCounter);
         _trapsLevel = SetTrapsLevel(_levelsCounter);
         LevelMapGenerator levelMapGenerator = new LevelMapGenerator(_obstacles, _traps);
@@ -124,7 +126,7 @@ public class BarriersProgression : MonoBehaviour
     {
         if (levelsPassed >= _trapsAppearsOnLevel)
         {
-            return currentFloorsAmount - 2;
+            return currentFloorsAmount - _trapsReducer;
         }
 
         return 0;
