@@ -34,13 +34,13 @@ public class Slot : MonoBehaviour
 
             if (robberDragger.IsDraggingNow == false)
             {
-                // SetRobber(robberDragger);
-                _robberDragger = robberDragger;
-                _robber = _robberDragger.GetComponent<Robber>();
-                _robberDragger.SetOffset(_offset);
-                SetDownTargetForRobber(_robber);
-                PlaceNewRobber(_robber);
-                _isFilled = true;
+                SetRobber(robberDragger.GetComponent<Robber>());
+                // _robberDragger = robberDragger;
+                // _robber = _robberDragger.GetComponent<Robber>();
+                // _robberDragger.SetOffset(_offset);
+                // SetDownTargetForRobber(_robber);
+                // PlaceNewRobber(_robber);
+                // _isFilled = true;
                 // PlaceRobberInCellCenter(robberDragger);
             }
         }
@@ -58,8 +58,7 @@ public class Slot : MonoBehaviour
         
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
-            // Debug.Log($"{_robber == null} Robber; ");
-            if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel)
+            if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel && externalRobber.GetComponent<RobberDragger>().IsDraggingNow)
             {
                 CombineRobbers(externalRobber);
             }
@@ -83,16 +82,15 @@ public class Slot : MonoBehaviour
         // Debug.Log(_robber.transform.parent);
     }
 
-    public void Fill()
+    public void SetRobber(Robber robber)
     {
+        _robber = robber;
+        _robberDragger = _robber.GetComponent<RobberDragger>();
+        PlaceRobberInCellCenter(_robberDragger);
+        _robberDragger.SetOffset(_offset);
+        SetDownTargetForRobber(_robber);
+        _robber.gameObject.SetActive(true);
         _isFilled = true;
-    }
-
-    public void PlaceNewRobber(Robber robber)
-    {
-        SetRobber(robber.GetComponent<RobberDragger>());
-        PlaceRobberInCellCenter(robber.GetComponent<RobberDragger>());
-        // _isFilled = true;
     }
 
     private void PlaceRobberInCellCenter(RobberDragger robberDragger)
@@ -120,17 +118,7 @@ public class Slot : MonoBehaviour
     {
         robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget);
     }
-
-    public void SetRobber(RobberDragger robberDragger)
-    {
-        // PlaceRobberInCellCenter(robberDragger);
-        _robberDragger = robberDragger;
-        _robber = robberDragger.GetComponent<Robber>();
-        _robberDragger.SetOffset(_offset);
-        SetDownTargetForRobber(_robber);
-        // _isFilled = true;
-    }
-
+    
     private void PlayCombineFx(int level)
     {
         level--;

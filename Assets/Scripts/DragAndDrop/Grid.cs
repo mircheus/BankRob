@@ -40,6 +40,18 @@ public class Grid : MonoBehaviour
         _totalRobbersCounter = value;
     }
 
+    public void PlaceToSlot(Robber robber)
+    {
+        foreach (var slot in _slots)
+        {
+            if (slot.IsFilled == false)
+            {
+                slot.SetRobber(robber);
+                break;
+            }
+        }
+    }
+
     private void OnRobbersCombined(int level)
     {
         foreach (var slot in _slots)

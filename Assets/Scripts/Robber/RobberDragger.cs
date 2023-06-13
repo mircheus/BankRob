@@ -31,7 +31,11 @@ public class RobberDragger : MonoBehaviour, IDrag
         _ragdollActivator.DeactivateRagdoll();
         _isDraggingNow = false;
         _rigidbody.velocity = Vector3.zero;
-        transform.position = _lastParent.transform.position + _offset;
+
+        if (gameObject.activeSelf)
+        {
+            transform.position = _lastParent.transform.position + _offset;
+        }
     }
 
     public void SetLastParentTransform(Transform transform)

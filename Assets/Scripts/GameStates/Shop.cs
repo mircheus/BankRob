@@ -68,18 +68,7 @@ public class Shop : MonoBehaviour
     
     private void PlaceToGrid(Robber robber)
     {
-        for (int i = 0; i < _slots.Length; i++)
-        {
-            if (_slots[i].IsFilled == false)
-            {
-                robber.gameObject.SetActive(true);
-                _slots[i].PlaceNewRobber(robber);
-                // _slots[i].SetRobber(robber.GetComponent<RobberDragger>());
-                // _slots[i].Fill();
-                // _slots[i].SetRobber(robber.GetComponent<RobberDragger>());
-                break;
-            }
-        }
+        _grid.PlaceToSlot(robber);
     }
 
     private void InstantiateRobbers(int amount)
