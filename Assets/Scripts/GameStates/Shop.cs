@@ -9,7 +9,6 @@ using static System.Net.WebUtility;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] private Slot[] _slots;
     [SerializeField] private Grid _grid;
     [SerializeField] private Robber _robberPrefab;
     [SerializeField] private RobbersPool _robbersPool;
@@ -46,7 +45,7 @@ public class Shop : MonoBehaviour
     {
         if (IsEnoughMoney)
         {
-            if (IsAnySlotAvailable())
+            if (_grid.IsAnySlotAvailable())
             {
                 var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
                 _robbers.Remove(robber);
@@ -81,19 +80,6 @@ public class Shop : MonoBehaviour
         }
     }
 
-    private bool IsAnySlotAvailable()
-    {
-        foreach (var slot in _slots)
-        {
-            if (slot.IsFilled == false)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
     private void OnDataLoaded()
     {
         PlaceRobbersFromPreviousLevel();

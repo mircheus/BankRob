@@ -52,6 +52,19 @@ public class Grid : MonoBehaviour
         }
     }
 
+    public bool IsAnySlotAvailable()
+    {
+        foreach (var slot in _slots)
+        {
+            if (slot.IsFilled == false)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private void OnRobbersCombined(int level)
     {
         foreach (var slot in _slots)
