@@ -47,4 +47,9 @@ public class RobberDragger : MonoBehaviour, IDrag
     {
         _offset = offsetVector;
     }
+
+    public void DeleteLastParentTransform()
+    {
+        _lastParent = null;
+    }
 }

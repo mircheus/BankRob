@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -69,6 +70,7 @@ public class Slot : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
         {
+            _robberDragger.DeleteLastParentTransform();
             _robberDragger = null;
             _isFilled = false;
         }
@@ -88,6 +90,7 @@ public class Slot : MonoBehaviour
         _robberDragger = _robber.GetComponent<RobberDragger>();
         PlaceRobberInCellCenter(_robberDragger);
         _robberDragger.SetOffset(_offset);
+        _robberDragger.SetLastParentTransform(gameObject.transform);
         SetDownTargetForRobber(_robber);
         _robber.gameObject.SetActive(true);
         _isFilled = true;
