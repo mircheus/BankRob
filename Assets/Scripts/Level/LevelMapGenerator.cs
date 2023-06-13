@@ -69,15 +69,15 @@ public class LevelMapGenerator
     
     private Barrier GetRandomObstacle(int maxLevelObstacle)
     {
-        return _obstacles[GenerateRandomIndex(maxLevelObstacle)]; 
+        return _obstacles[GenerateRandomLevel(maxLevelObstacle)]; 
     }
 
     private Barrier GetRandomTrap(int maxLevelTrap) 
     {
-        return _traps[GenerateRandomIndex(maxLevelTrap)];
+        return _traps[GenerateRandomLevel(maxLevelTrap)];
     }
     
-    private int GenerateRandomIndex(int maxLevel)
+    private int GenerateRandomLevel(int maxLevel)
     {
         return Random.Range(0, maxLevel);
     }
