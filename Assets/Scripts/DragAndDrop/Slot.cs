@@ -70,7 +70,7 @@ public class Slot : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
         {
-            _robberDragger.DeleteLastParentTransform();
+            // _robberDragger.DeleteLastParentTransform();
             _robberDragger = null;
             _isFilled = false;
         }

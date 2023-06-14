@@ -69,14 +69,6 @@ public class RobStarter : MonoBehaviour
 
     private bool IsNoDraggingActive()
     {
-        foreach (var slot in _slots)
-        {
-            if (slot.Robber != null)
-            {
-                return !slot.Robber.GetComponent<RobberDragger>().IsDraggingNow;
-            }
-        }
-
-        return true;
+        return _dragAndDrop.IsDragging == false;
     }
 }

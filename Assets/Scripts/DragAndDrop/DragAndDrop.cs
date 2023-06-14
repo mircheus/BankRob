@@ -21,6 +21,8 @@ public class DragAndDrop : MonoBehaviour
        private Camera _mainCamera;
        private bool _isDragging = false;
 
+       public bool IsDragging => _isDragging;
+
        private void Awake()
        {
               _mainCamera = Camera.main;
