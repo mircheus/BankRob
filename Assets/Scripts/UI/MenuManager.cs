@@ -36,6 +36,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private RobStarter _robStarter;
 
     private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
+    private Tween _adButtonTween;
 
     private void OnEnable()
     {

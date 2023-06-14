@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
 using UnityEngine.InputSystem.Composites;
 using UnityEngine.UI;
 using Vector2 = UnityEngine.Vector2;
@@ -14,6 +15,7 @@ public class MenuAnimator
     private const float SlowAnimationDuration = 2f;
     private const float PulseDuration = .5f;
     private const int YOffset = 1500;
+    private const float ExtendedSize = 1.1f;
     private static readonly Vector2 upDrag = new Vector2(0, YOffset);
     private static readonly Vector2 downDrag = new Vector2(0, YOffset);
 
@@ -71,8 +73,8 @@ public class MenuAnimator
         sequence.OnComplete(() =>
         {
             sequence.Pause();
-            DOTween.Sequence()
-                .Append(button.DOScale(new Vector3(1.1f, 1.1f, 0), PulseDuration))
+            var pulseSequence = DOTween.Sequence()
+                .Append(button.DOScale(new Vector3(ExtendedSize, ExtendedSize, 0), PulseDuration))
                 .Append(button.DOScale(Vector3.one, PulseDuration))
                 .SetLoops(-1, LoopType.Restart)
                 .SetUpdate(true);
