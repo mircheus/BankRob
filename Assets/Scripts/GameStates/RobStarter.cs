@@ -46,7 +46,7 @@ public class RobStarter : MonoBehaviour
     
     private void StartRob()
     {
-        foreach (var slot in _slots)
+        foreach (var slot in _slots) // перенести в Grid класс
         {
             if (slot.IsFilled)
             {
