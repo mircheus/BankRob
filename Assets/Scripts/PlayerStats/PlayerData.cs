@@ -17,6 +17,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private AdPlayer _adPlayer;
     [SerializeField] private int _adRewardAmount;
     [SerializeField] private Grid _grid;
+    [SerializeField] private RobbersSaver _robbersSaver;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
@@ -24,7 +25,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _completedLevelsCounter;
     [SerializeField] private int _floorsAmountFromPreviousLevel;
     [SerializeField] private int _allMoneyCounter;
-    [SerializeField] private int[] _aliveRobbers;
+    [SerializeField] private int[] _robbersToSave;
     [SerializeField] private int _achievedLevels;
     // [SerializeField] private int _currentPrice;
     // [SerializeField] private int _currentReward;
@@ -37,7 +38,7 @@ public class PlayerData : MonoBehaviour
     public int MoneyAmount => _moneyAmount;
     public int CompletedLevelsCounter => _completedLevelsCounter;
     public int FloorsAmountFromPreviousLevel => _floorsAmountFromPreviousLevel;
-    public int[] AliveRobbers => _aliveRobbers;
+    public int[] RobbersToSave => _robbersToSave;
 
     private void OnEnable()
     {
@@ -104,13 +105,15 @@ public class PlayerData : MonoBehaviour
         }
 #endif
 
-        _aliveRobbers = _robbery.CountAliveRobbers();
+        // _aliveRobbers = _robbery.CountAliveRobbers();
+        _robbersToSave = _robbersSaver.RobbersToSave;
         SaveCurrentPlayerStats();
     }
 
     private void OnBankNotRobbed()
     {
-        _aliveRobbers = null;
+        // _aliveRobbers = null;
+        _robbersToSave = _robbersSaver.RobbersToSave;
         SaveCurrentPlayerStats();
     }
 
@@ -149,7 +152,7 @@ public class PlayerData : MonoBehaviour
 
     private void SaveCurrentPlayerStats()
     {
-        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _aliveRobbers, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel);
+        SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _robbersToSave, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel);
     }
 
     private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward)
@@ -158,7 +161,7 @@ public class PlayerData : MonoBehaviour
         _keysAmount = keysAmount;
         _completedLevelsCounter = completedLevelsAmount;
         _floorsAmountFromPreviousLevel = floorsAmount;
-        _aliveRobbers = aliveRobbers;
+        _robbersToSave = aliveRobbers;
         _achievedLevels = achievedLevels;
         _economicProgression.SetCurrentValues(currentPrice, currentReward);
         DataUpdated?.Invoke();

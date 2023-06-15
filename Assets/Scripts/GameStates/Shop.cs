@@ -87,7 +87,7 @@ public class Shop : MonoBehaviour
 
     private void PlaceRobbersFromPreviousLevel()
     {
-        int[] robbersFromPreviousLevel = _playerData.AliveRobbers;
+        int[] robbersFromPreviousLevel = _playerData.RobbersToSave;
         
         if (robbersFromPreviousLevel != null)
         {

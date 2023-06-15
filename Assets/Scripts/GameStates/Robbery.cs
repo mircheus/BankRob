@@ -15,8 +15,9 @@ public class Robbery : MonoBehaviour
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
-    [SerializeField] private List<Robber> _savedRobbers;
-    
+    // [SerializeField] private List<Robber> _savedRobbers;
+    [SerializeField] private List<Robber> _aliveRobbers;
+
     private int _totalRobbersCounter;
     private int _trappedRobbersCounter;
     private int _reachedRobbersCounter;
@@ -65,13 +66,25 @@ public class Robbery : MonoBehaviour
         return robbers;
     }
 
+    public int[] SendRobbersListTo(RobbersSaver robbersSaver)
+    {
+        int[] array = new int[_robbers.Count];
+
+        for (int i = 0; i < _robbers.Count; i++)
+        {
+            array[i] = _robbers[i].Level;
+        }
+
+        return array;
+    }
+
     public int[] CountAliveRobbers()
     {
-        int[] aliveRobbers = new int[_savedRobbers.Count];
+        int[] aliveRobbers = new int[_aliveRobbers.Count];
 
-        for (int i = 0; i < _savedRobbers.Count; i++)
+        for (int i = 0; i < _aliveRobbers.Count; i++)
         {
-            aliveRobbers[i] = _savedRobbers[i].Level;
+            aliveRobbers[i] = _aliveRobbers[i].Level;
         }
 
         return aliveRobbers;
@@ -81,7 +94,8 @@ public class Robbery : MonoBehaviour
     {
         UnsubscribeFromRobber(robber);
         RobbedVaultsCounterChanged?.Invoke();
-        _savedRobbers.Add(robber);
+        // _savedRobbers.Add(robber);
+        _aliveRobbers.Add(robber);
         _robbers.Remove(robber);
         _reachedRobbersCounter++;
         CheckRobberyStatus();
@@ -96,7 +110,7 @@ public class Robbery : MonoBehaviour
             if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
             {
                 UnsubscribeFromRobber(_robbers[i]);
-                _savedRobbers.Add(_robbers[i]);
+                // _savedRobbers.Add(_robbers[i]);
                 _robbers.Remove(_robbers[i]);
             }
         }
@@ -119,8 +133,6 @@ public class Robbery : MonoBehaviour
     private void OnBankRobbed()
     {
         UnsubscribeFromObjects();
-        Debug.Log($"{_economicProgression.CurrentReward} * {_reachedRobbersCounter}");
-        Debug.Log($"{MoneyRewardAmount}");
     }
 
     private void OnBankNotRobbed()

@@ -30,7 +30,7 @@ public class RobStarter : MonoBehaviour
             TryStartRob();
         }
     }
-
+    
     public void TryStartRob()
     {
         // if (_preparing.GetRobbersQuantity() > 0)
