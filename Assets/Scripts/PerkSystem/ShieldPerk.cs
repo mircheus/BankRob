@@ -19,12 +19,4 @@ public class ShieldPerk : Perk
             robber.Shield.Activate();
         }
     }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if(other.TryGetComponent(out  robber))
-    //     {
-    //         Debug.Log("OnTriggerEnter");
-    //     }
-    // }
 }
