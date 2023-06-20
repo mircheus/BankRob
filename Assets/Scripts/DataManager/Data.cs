@@ -14,7 +14,9 @@ public class Data
     private int _achievedLevels;
     private int _currentPrice;
     private int _currentReward;
-    
+    private bool _isTryAgain;
+
+
     public int Money => _money;
     public int Keys => _keys;
     public int CompletedLevelsCounter => _completedLevelsCounter;
@@ -24,10 +26,12 @@ public class Data
     public int AchievedLevels => _achievedLevels;
     public int CurrentPrice => _currentPrice;
     public int CurrentReward => _currentReward;
+    public bool IsTryAgain => _isTryAgain;
+    
     
 
     public Data(int money, int allMoneyCounter, int keys, int completedLevelsCounter, 
-        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward)
+        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain)
     {
         _money = money;
         _keys = keys;
@@ -38,5 +42,6 @@ public class Data
         _achievedLevels = achievedLevels;
         _currentPrice = currentPrice;
         _currentReward = currentReward;
+        _isTryAgain = isTryAgain;
     }
 }

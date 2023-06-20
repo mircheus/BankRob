@@ -83,6 +83,11 @@ public class BarriersProgression : MonoBehaviour
 
     private int CalculateFloorsQuantity(int levelsPassed, int floorsAmountFromPreviousLevel) 
     {
+        if (_playerData.IsTryAgain)
+        {
+            return floorsAmountFromPreviousLevel;
+        }
+        
         if (levelsPassed % 2 == 0)
         {
             int increasedFloorsAmount = floorsAmountFromPreviousLevel + 1;
