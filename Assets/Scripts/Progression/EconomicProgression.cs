@@ -43,12 +43,14 @@ public class EconomicProgression : MonoBehaviour
     {
         _shop.BuyingRobber += OnBuyingRobber;
         _robbery.BankRobbed += OnBankRobbed;
+        _robbery.BankNotRobbed += OnBankNotRobbed;
     }
 
     private void OnDisable()
     {
         _shop.BuyingRobber -= OnBuyingRobber;
         _robbery.BankRobbed -= OnBankRobbed;
+        _robbery.BankNotRobbed -= OnBankNotRobbed;
     }
 
     public void SetCurrentValues(int currentPrice, int currentReward)
@@ -66,5 +68,10 @@ public class EconomicProgression : MonoBehaviour
     private void OnBankRobbed()
     {
         _rewardToNextLevel = _currentReward + _rewardModifier1 + _rewardModifier2 * Random.Range(0, 1);
+    }
+
+    private void OnBankNotRobbed()
+    {
+        _rewardToNextLevel = _currentReward;
     }
 }
