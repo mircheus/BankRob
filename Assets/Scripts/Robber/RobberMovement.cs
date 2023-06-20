@@ -12,7 +12,7 @@ public class RobberMovement : MonoBehaviour
     [Header("Debug")]
     [SerializeField] private Vector3 _currentTarget;
     [SerializeField] private float _currentSpeed;
-    [SerializeField] private float _tweakableSpeed;
+    [SerializeField] private float _increasedSpeed;
 
     private Transform _downTarget;
     private Obstacle _currentObstacle;
@@ -23,6 +23,7 @@ public class RobberMovement : MonoBehaviour
     public bool IsDashActive => _isDashActive;
     public bool IsGetStopped => _isGetStopped;
     public bool IsShieldActive => _isShieldActive;
+    public float IncreasedSpeed => _increasedSpeed;
     
     public event UnityAction GetStopped;
 
@@ -78,9 +79,9 @@ public class RobberMovement : MonoBehaviour
         }
     }
     
-    public void SetIncreasedSpeedBy(DashPerk perk, float increasedSpeed)
+    public void SetIncreasedSpeedBy(DashPerk perk)
     {
-        _currentSpeed = increasedSpeed;
+        _currentSpeed = _increasedSpeed;
         _isDashActive = true;
     }
 
@@ -113,6 +114,11 @@ public class RobberMovement : MonoBehaviour
     private void StartMoving()
     {
         _currentSpeed = _defaultSpeed;
+        
+        if (_isDashActive)
+        {
+            _currentSpeed = _increasedSpeed;
+        }
     }
     
     private void OnGetStopped()

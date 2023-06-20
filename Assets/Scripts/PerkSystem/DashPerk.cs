@@ -11,16 +11,19 @@ public class DashPerk : Perk
     [SerializeField] private ParticleSystem _speedFx;
     [SerializeField] private float _increasedSpeed;
     [SerializeField] private int _increasedDamage;
+
+    // public float IncreasedSpeed => IncreasedSpeed;
     
     public override void Activate()
     {
         base.Activate();
-        _robberMovement.SetIncreasedSpeedBy(this, _increasedSpeed);
+        _robberMovement.SetIncreasedSpeedBy(this);
         _obstacleCrusher.IncreaseDamageBySpeedPerk(this, _increasedDamage);
             
         if (_obstacleCrusher.ObstacleToCrush != null)
         {
             _obstacleCrusher.ObstacleToCrush.ApplyDamage(_increasedDamage);
+            _robberMovement.SetIncreasedSpeedBy(this);
         }
     }
 
