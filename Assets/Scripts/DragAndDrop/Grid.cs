@@ -8,6 +8,7 @@ public class Grid : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
     [SerializeField] private Shop _shop;
+    [SerializeField] private AudioSource _combineAudioSource;
     
     private int _totalRobbersCounter = 0;
 
@@ -73,6 +74,7 @@ public class Grid : MonoBehaviour
             {
                 slot.Unfill();
                 _totalRobbersCounter--;
+                _combineAudioSource.Play();
             }
         }
         
