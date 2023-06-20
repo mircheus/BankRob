@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class RobberAudio : MonoBehaviour
 {
+    [SerializeField] private AudioSource _audioSource;
     [SerializeField] private AudioClip _pickaxePunch;
     [SerializeField] private ObstacleCrusher _obstacleCrusher;
-        
-    private AudioSource _audioSource;
-
+    
     private void OnEnable()
     {
         _obstacleCrusher.Attacked += OnAttacked;
@@ -20,14 +19,10 @@ public class RobberAudio : MonoBehaviour
         _obstacleCrusher.Attacked -= OnAttacked;
     }
 
-    private void Start()
+    private void OnAttacked()
     {
-        _audioSource = GetComponent<AudioSource>();
+        _audioSource.PlayOneShot(_pickaxePunch);
     }
-
-    public void OnAttacked()
-    {
-        _audioSource.Play();
-        Debug.Log("PickaxePunch");
-    }
+    
+    
 }
