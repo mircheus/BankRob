@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(RoofAudio))]
+[RequireComponent(typeof(AudioOneShot))]
 public class Roof : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _destroyFx;
@@ -23,7 +23,7 @@ public class Roof : MonoBehaviour
     public void DestroyRoof()
     {
         MakeSelfInvisible();
-        GetComponent<RoofAudio>().PlayDestroyAudio();
+        GetComponent<AudioOneShot>().PlayOneShot();
         StartCoroutine(DisableAfterSomeTime(_destroyDelay));
     }
     

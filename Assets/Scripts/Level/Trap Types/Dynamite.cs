@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioOneShot))]
 public class Dynamite : Trap
 {
     [SerializeField] private ParticleSystem _fuseFx;
@@ -18,6 +19,7 @@ public class Dynamite : Trap
             if (_isTrapActive)
             {
                 PlayDestroyFx();
+                PlayExplosionSound();
                 robber.GetComponent<RobberMovement>().GetTrappedBy(this);
             }
         }
@@ -26,6 +28,7 @@ public class Dynamite : Trap
     public override void GetDestroyed()
     {
         PlayDestroyFx();
+        PlayExplosionSound();
         StartCoroutine(DeactivateGameObject());
     }
 
@@ -47,5 +50,10 @@ public class Dynamite : Trap
         
         _fuseFx.gameObject.SetActive(false);
         _dynamiteModel.SetActive(false);
+    }
+
+    private void PlayExplosionSound()
+    {
+        GetComponent<AudioOneShot>().PlayOneShot();
     }
 }

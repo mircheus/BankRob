@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioOneShot))]
 public class Vault : MonoBehaviour
 {
     private Animator _animator;
@@ -22,6 +23,7 @@ public class Vault : MonoBehaviour
         {
             Robbed?.Invoke();
             _animator.Play(_openVault);
+            GetComponent<AudioOneShot>().PlayOneShot();
             robber.ReachedVault?.Invoke(robber);
         }
     }

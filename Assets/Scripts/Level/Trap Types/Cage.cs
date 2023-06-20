@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioOneShot))]
 public class Cage : Trap
 {
     [SerializeField] private ParticleSystem _crackFx;
@@ -31,6 +32,7 @@ public class Cage : Trap
     {
         _isTrapActive = false;
         PlayDestroyFx();
+        GetComponent<AudioOneShot>().PlayOneShot();
         _forms[0].SetActive(false);
         _forms[1].SetActive(true);
     }

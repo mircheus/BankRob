@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoofAudio : MonoBehaviour
+public class AudioOneShot : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
 
-    public void PlayDestroyAudio()
+    public void PlayOneShot()
     {
         _audioSource.Play();
     }

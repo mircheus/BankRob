@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(AudioOneShot))]
 public class Fridge : Trap
 {
     [Header("Unique")]
@@ -17,6 +18,7 @@ public class Fridge : Trap
             _frozeFx.Play();
             robber.GetFrozen();
             _fridgeModel.SetActive(false);
+            GetComponent<AudioOneShot>().PlayOneShot();
             StartCoroutine(DeactivateGameObject());
         }
     }
