@@ -71,7 +71,6 @@ public class BarriersProgression : MonoBehaviour
     {
         _levelsCounter = _playerData.CompletedLevelsCounter;
         _floorsQuantity = CalculateFloorsQuantity(_levelsCounter, _playerData.FloorsAmountFromPreviousLevel);
-        Debug.Log($"FloorsAmountFromPreviousLevel = {_playerData.FloorsAmountFromPreviousLevel}");
         _trapsQuantity = CalculateTrapsQuantity(_levelsCounter, _floorsQuantity);
         _obstaclesQuantity = CalculateObstaclesQuantity(_floorsQuantity, _trapsQuantity);
         _obstaclesLevel = SetObstaclesLevel(_levelsCounter);
