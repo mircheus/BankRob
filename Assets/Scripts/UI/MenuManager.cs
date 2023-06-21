@@ -10,16 +10,18 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    // [SerializeField] private PopUp _newLevelPopup;
-    // [SerializeField] private PopUp _settingsMenu;
     [Header("Menus")]
     [SerializeField] private WinMenu _winMenu;
     [SerializeField] private LoseMenu _loseMenu;
 
+    [Header("PerkPanel")] 
+    [SerializeField] private PerksPanel _perksPanel;
+    
     [Header("UI elements to hide")] 
     [SerializeField] private RectTransform[] _elementsToDragUp;
     [SerializeField] private RectTransform[] _elementsToDragDown;
     [SerializeField] private RectTransform _moneyIndicator;
+    [SerializeField] private RectTransform _preparingMenu;
     // [SerializeField] private RectTransform _moneyPanel;
     // [SerializeField] private RectTransform _perksPanel;
     // [SerializeField] private RectTransform _settings;
@@ -27,6 +29,8 @@ public class MenuManager : MonoBehaviour
     
     [Header("Warnings")] 
     [SerializeField] private PopUp _notEnoughRobbers;
+    [SerializeField] private PopUp _notEnoughMoney;
+    [SerializeField] private PopUp _allSlotsBusy;
 
     [Header("Pulsating buttons")]
     [SerializeField] private RectTransform _robButton;
@@ -34,6 +38,7 @@ public class MenuManager : MonoBehaviour
     [Header("Events Sources")] 
     [SerializeField] private Robbery _robbery;
     [SerializeField] private RobStarter _robStarter;
+    [SerializeField] private Shop _shop;
 
     private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
     private Tween _adButtonTween;
@@ -43,7 +48,9 @@ public class MenuManager : MonoBehaviour
         _robbery.BankRobbed += OnBankRobbed;
         _robbery.BankNotRobbed += OnBankNotRobbed;
         _robStarter.NotEnoughRobbers += OnNotEnoughRobbers;
+        _shop.NotEnoughMoney += OnNotEnoughMoney;
         _robStarter.Started += OnStarted;
+        _shop.AllSlotsBusy += OnAllSlotsBusy;
     }
 
     private void OnDisable()
@@ -51,6 +58,9 @@ public class MenuManager : MonoBehaviour
         _robbery.BankRobbed -= OnBankRobbed;
         _robbery.BankNotRobbed -= OnBankNotRobbed;
         _robStarter.NotEnoughRobbers -= OnNotEnoughRobbers;
+        _shop.NotEnoughMoney -= OnNotEnoughMoney;
+        _robStarter.Started -= OnStarted;
+        _shop.AllSlotsBusy += OnAllSlotsBusy;
     }
 
     private void Start()
@@ -74,7 +84,7 @@ public class MenuManager : MonoBehaviour
         MenuAnimator.FadeOut(menu.Dimed);
         StartCoroutine(DisableIn(_waitForAnimationDuration, menu));
     }
-    
+
     public void ShowEndgameMenu(WinMenu winMenu)
     {
         HideGameElements();
@@ -147,9 +157,21 @@ public class MenuManager : MonoBehaviour
 
     private void OnStarted()
     {
+        _preparingMenu.gameObject.SetActive(false);
+        _perksPanel.gameObject.SetActive(true);
         MenuAnimator.DragMenuUpSlowly(_moneyIndicator);
     }
     
+    private void OnNotEnoughMoney()
+    {
+        Show(_notEnoughMoney);
+    }
+    
+    private void OnAllSlotsBusy()
+    {
+        Show(_allSlotsBusy);
+    }
+
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)
     {
         yield return waitForSeconds;
