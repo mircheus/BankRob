@@ -60,7 +60,7 @@ public class MenuManager : MonoBehaviour
         _robStarter.NotEnoughRobbers -= OnNotEnoughRobbers;
         _shop.NotEnoughMoney -= OnNotEnoughMoney;
         _robStarter.Started -= OnStarted;
-        _shop.AllSlotsBusy += OnAllSlotsBusy;
+        _shop.AllSlotsBusy -= OnAllSlotsBusy;
     }
 
     private void Start()
@@ -150,9 +150,6 @@ public class MenuManager : MonoBehaviour
         {
             MenuAnimator.MoveElementDown(element);
         }
-
-        // MenuAnimator.MoveElementUp(_moneyPanel);
-        // MenuAnimator.MoveElementDown(_perksPanel);
     }
 
     private void OnStarted()

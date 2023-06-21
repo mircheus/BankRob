@@ -18,7 +18,12 @@ public class NewLevelNotificator : MonoBehaviour
     [SerializeField] private TMP_Text _perkInfo;
     [SerializeField] private Image[] _perkIcons;
     [SerializeField] private string[] _perkTitles;
-    [SerializeField] private string[] _perkInfos;
+    [SerializeField] private string[] _perkTitlesEng;
+    [SerializeField] private string[] _perkTitlesRus;
+    [SerializeField] private string[] _perkTitlesTur;
+    [SerializeField] private string[] _perkInfosEng;
+    [SerializeField] private string[] _perkInfosRus;
+    [SerializeField] private string[] _perkInfosTur;
 
     private void OnEnable()
     {
@@ -33,7 +38,7 @@ public class NewLevelNotificator : MonoBehaviour
     private void OnNewLevelAchieved(int level)
     {
         _perkTitle.text = _perkTitles[level];
-        _perkInfo.text = _perkInfos[level];
+        _perkInfo.text = _perkInfosEng[level];
         _perkIconImage.sprite = _perkIcons[level].sprite;
         _perkIconImage.color = _perkIcons[level].color;
         _menuManager.Show(_newLevelPopup);

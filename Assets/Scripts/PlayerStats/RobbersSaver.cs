@@ -50,12 +50,10 @@ public class RobbersSaver : MonoBehaviour
     {
         _aliveRobbers = _robbery.CountAliveRobbers();
         _robbersToSave = _aliveRobbers;
-        Debug.Log("SaveAlive");
     }
 
     private void SaveInitialRobbers()
     {
         _robbersToSave = _initialRobbers;
-        Debug.Log("SaveInitial");
     }
 }
