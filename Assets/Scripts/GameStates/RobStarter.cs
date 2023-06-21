@@ -23,14 +23,6 @@ public class RobStarter : MonoBehaviour
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            TryStartRob();
-        }
-    }
-    
     public void TryStartRob()
     {
         // if (_preparing.GetRobbersQuantity() > 0)
