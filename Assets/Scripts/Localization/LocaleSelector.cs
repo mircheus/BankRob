@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Localization.Settings;
 using UnityEngine.SocialPlatforms;
 
 public class LocaleSelector : MonoBehaviour
 {
     private Coroutine _setLocaleCoroutine;
-    
+
+    public event UnityAction<int> LocaleChanged; 
+
     public void ChangeLocale(int localeId)
     {
         if (_setLocaleCoroutine == null)
@@ -26,6 +29,7 @@ public class LocaleSelector : MonoBehaviour
     {
         yield return LocalizationSettings.InitializationOperation;
         Debug.Log(LocalizationSettings.InitializationOperation);
+        LocaleChanged?.Invoke(localeId);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
     }
 }
