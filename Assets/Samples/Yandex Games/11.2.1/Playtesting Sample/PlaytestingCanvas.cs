@@ -140,6 +140,7 @@ namespace Agava.YandexGames.Samples
         public void OnGetEnvironmentButtonClick()
         {
             Debug.Log($"Environment = {JsonUtility.ToJson(YandexGamesSdk.Environment)}");
+            
         }
     }
 }

@@ -22,15 +22,5 @@ public class SDK_testing : MonoBehaviour
     {
         AudioListener.pause = inBackground;
         AudioListener.volume = inBackground ? 0f : 1f;
-    }
-    
-    // public void OnShowInterstitialButtonClick()
-    // {
-    //     InterstitialAd.Show();
-    // }
-    //
-    // public void OnShowVideoButtonClick()
-    // {
-    //     VideoAd.Show();
-    // }
+    } 
 }
