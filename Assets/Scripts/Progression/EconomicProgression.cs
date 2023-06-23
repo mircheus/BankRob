@@ -28,7 +28,7 @@ public class EconomicProgression : MonoBehaviour
     [SerializeField] private int _currentPrice;
     [SerializeField] private int _currentReward;
     [SerializeField] private int _rewardToNextLevel;
-
+    [SerializeField] private int _adRewardMultiplier;
 
     public event UnityAction PriceUpdated;
     
@@ -38,8 +38,8 @@ public class EconomicProgression : MonoBehaviour
     public int CurrentPrice => _currentPrice;
     public int StarterMoneyAmount => _starterMoneyAmount;
     public int RewardToNextLevel => _rewardToNextLevel;
-    public int AdReward => _currentReward; // Magic number
-    public int TotalReward => _currentReward + AdReward;
+    public int AdRewardMultiplier => _adRewardMultiplier;
+    // public int TotalReward => _currentReward + AdReward;
     
     private void OnEnable()
     {

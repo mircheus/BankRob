@@ -63,6 +63,6 @@ public class MoneyIndicator : MonoBehaviour
     
     private void OnVideoAdPlayed()
     {
-        _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount + _robbery.MoneyRewardAmount;
+        _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount * _economicProgression.AdRewardMultiplier;
     }
 }
