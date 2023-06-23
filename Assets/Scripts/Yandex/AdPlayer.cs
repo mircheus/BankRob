@@ -8,6 +8,10 @@ using UnityEngine.Events;
 public class AdPlayer : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
+
+    private bool _adIsPlaying;
+
+    public bool AdIsPlaying => _adIsPlaying;
     
     public event UnityAction VideoAdPlayed;
     
@@ -20,10 +24,27 @@ public class AdPlayer : MonoBehaviour
     
     public void OnShowVideoButtonClick()
     {   
-        VideoAdPlayed?.Invoke();
+        // VideoAdPlayed?.Invoke();
 #if UNITY_WEBGL && !UNITY_EDITOR
-        VideoAd.Show();
+        VideoAd.Show(OnPlayed, OnRewarded,OnClosed);
 #endif
+    }
+
+    private void OnRewarded()
+    {
+        VideoAdPlayed?.Invoke();
+    }
+
+    private void OnClosed()
+    {
+        AudioListener.volume = 1f;
+        _adIsPlaying = false;
+    }
+
+    private void OnPlayed()
+    {
+        AudioListener.pause = true;
+        _adIsPlaying = true;
     }
 
     private void ShowInterstitialAd()

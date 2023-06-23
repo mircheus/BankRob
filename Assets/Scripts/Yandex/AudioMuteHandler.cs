@@ -6,8 +6,10 @@ using Agava.YandexGames;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SDK_testing : MonoBehaviour
+public class AudioMuteHandler : MonoBehaviour
 {
+    [SerializeField] private AdPlayer _adPlayer;
+    
     private void OnEnable()
     {
         WebApplication.InBackgroundChangeEvent += OnBackgroundChange;
@@ -20,7 +22,10 @@ public class SDK_testing : MonoBehaviour
 
     private void OnBackgroundChange(bool inBackground)
     {
-        AudioListener.pause = inBackground;
-        AudioListener.volume = inBackground ? 0f : 1f;
+        if (_adPlayer.AdIsPlaying == false) 
+        {
+            AudioListener.pause = inBackground;
+            AudioListener.volume = inBackground ? 0f : 1f;
+        }
     } 
 }
