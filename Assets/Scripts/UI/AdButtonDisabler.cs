@@ -9,13 +9,13 @@ using UnityEditor;
 
 public class AdButtonDisabler : MonoBehaviour
 {
+    protected const float HalfTransparent = 0.5f;
+    private const float TwoSeconds = 2f;
+    
     [SerializeField] private Button _button;
     [SerializeField] private Image _adIcon;
     [SerializeField] private TMP_Text _adText;
-    
-    private const float HalfTransparent = 0.5f;
-    private const float TwoSeconds = 2f;
-    
+
     public void DisableButton()
     {
         _button.interactable = false;
@@ -29,7 +29,7 @@ public class AdButtonDisabler : MonoBehaviour
         MakeNotInteractable();
     }
 
-    private void MakeNotInteractable()
+    public virtual void MakeNotInteractable()
     {
         var image = _adIcon;
         var tempColor = image.color;
