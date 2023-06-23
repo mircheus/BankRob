@@ -44,7 +44,6 @@ public class LocaleSelector : MonoBehaviour
     private IEnumerator SetLocale(int localeId)
     {
         yield return LocalizationSettings.InitializationOperation;
-        Debug.Log(LocalizationSettings.InitializationOperation);
         LocaleChanged?.Invoke(localeId);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
     }
@@ -54,15 +53,15 @@ public class LocaleSelector : MonoBehaviour
         switch (code)
         {
             case EnglishCode:
-                SetLocale(EnglishCodeId);
+                StartCoroutine(SetLocale(EnglishCodeId));
                 break;
             
             case RussianCode:
-                SetLocale(RussianCodeId);
+                StartCoroutine(SetLocale(RussianCodeId));
                 break;
             
             case TurkishCode:
-                SetLocale(TurkishCodeId);
+                StartCoroutine(SetLocale(TurkishCodeId));
                 break;
         }
             
