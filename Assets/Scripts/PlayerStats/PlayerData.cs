@@ -125,7 +125,9 @@ public class PlayerData : MonoBehaviour
 
     private void OnVideoAdPlayed()
     {
-        _moneyAmount += _adRewardAmount;
+        _moneyAmount += _robbery.MoneyRewardAmount;
+        Debug.Log($"moneyAmount = {_moneyAmount}");
+        Debug.Log($"robbery.MoneyRewardAmount = {_robbery.MoneyRewardAmount}");
         SaveCurrentPlayerStats();
     }
 

@@ -38,7 +38,9 @@ public class EconomicProgression : MonoBehaviour
     public int CurrentPrice => _currentPrice;
     public int StarterMoneyAmount => _starterMoneyAmount;
     public int RewardToNextLevel => _rewardToNextLevel;
-
+    public int AdReward => _currentReward; // Magic number
+    public int TotalReward => _currentReward + AdReward;
+    
     private void OnEnable()
     {
         _shop.BuyingRobber += OnBuyingRobber;

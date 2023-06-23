@@ -14,6 +14,10 @@ public class MoneyIndicator : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private TMP_Text _rewardMoney;
 
+    [Header("Events sources")] 
+    [SerializeField] private AdPlayer _adPlayer;
+    [SerializeField] private EconomicProgression _economicProgression;
+
     private const string PlusSign = "+";
     
     private void OnEnable()
@@ -21,6 +25,7 @@ public class MoneyIndicator : MonoBehaviour
         _playerData.DataLoaded += OnDataLoaded;
         _playerData.DataUpdated += OnDataUpdated;
         _robbery.BankRobbed += OnBankRobbed;
+        _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
     }
 
     private void OnDisable()
@@ -28,6 +33,7 @@ public class MoneyIndicator : MonoBehaviour
         _playerData.DataLoaded -= OnDataLoaded;
         _playerData.DataUpdated -= OnDataUpdated;
         _robbery.BankRobbed -= OnBankRobbed;
+        _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
     }
 
     private void OnDataLoaded()
@@ -53,5 +59,10 @@ public class MoneyIndicator : MonoBehaviour
     private void ShowRewardAmount()
     {
         _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount;
+    }
+    
+    private void OnVideoAdPlayed()
+    {
+        _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount + _robbery.MoneyRewardAmount;
     }
 }
