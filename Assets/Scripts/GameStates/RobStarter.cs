@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using Screen = UnityEngine.Device.Screen;
 
 public class RobStarter : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class RobStarter : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _downCollider;
+    [SerializeField] private ScreenAdaptation _screenAdaptation;
     // [SerializeField] private Grid _grid;
 
     // private Robber _savedRobber;
@@ -56,6 +58,7 @@ public class RobStarter : MonoBehaviour
         }
 
         _dragAndDrop.enabled = false;
+        _screenAdaptation.enabled = false;
         Started?.Invoke();
     }
 
