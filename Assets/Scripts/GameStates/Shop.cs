@@ -75,9 +75,16 @@ public class Shop : MonoBehaviour
         {
             if (_isBoughtForAd == false)
             {
-                BuyRobberForAd();
-                _buyButton.GetComponent<AdButtonDisabler>().MakeNotInteractable();
-                _buyButton.interactable = false;
+                if (_grid.IsAnySlotAvailable())
+                {
+                    BuyRobberForAd();
+                    _buyButton.GetComponent<AdButtonDisabler>().MakeNotInteractable();
+                    _buyButton.interactable = false;
+                }
+                else
+                {
+                    AllSlotsBusy?.Invoke();
+                }
             }
         }
     }
