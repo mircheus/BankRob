@@ -28,6 +28,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int[] _robbersToSave;
     [SerializeField] private int _achievedLevels;
     [SerializeField] private bool _isTryAgain;
+    [SerializeField] private bool _isAuthorized; // NOT IMPLEMENTED
 
     // [SerializeField] private int _currentPrice;
     // [SerializeField] private int _currentReward;
@@ -42,6 +43,7 @@ public class PlayerData : MonoBehaviour
     public int FloorsAmountFromPreviousLevel => _floorsAmountFromPreviousLevel;
     public int[] RobbersToSave => _robbersToSave;
     public bool IsTryAgain => _isTryAgain;
+    public bool IsAuthorized => _isAuthorized;
 
     private void OnEnable()
     {

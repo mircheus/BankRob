@@ -31,7 +31,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private PopUp _notEnoughRobbers;
     [SerializeField] private PopUp _notEnoughMoney;
     [SerializeField] private PopUp _allSlotsBusy;
-
+    [SerializeField] private PopUp _notAuthorized; 
+        
     [Header("Pulsating buttons")]
     [SerializeField] private RectTransform _robButton;
 
@@ -39,6 +40,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private Shop _shop;
+
+    [Header("PlayerData")] 
+    [SerializeField] private PlayerData _playerData;
 
     private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
     private Tween _adButtonTween;
@@ -121,6 +125,18 @@ public class MenuManager : MonoBehaviour
         {
             MenuAnimator.ZoomInElement(loseMenu.NextButtonDesktop);
             MenuAnimator.ZoomInAndPulsateButton(loseMenu.ADButtonDesktop);
+        }
+    }
+
+    public void TryOpenLeaderboard(PopUp leaderboard)
+    {
+        if (_playerData.IsAuthorized)
+        {
+            Show(leaderboard);
+        }
+        else
+        {
+            Show(_notAuthorized);
         }
     }
 
