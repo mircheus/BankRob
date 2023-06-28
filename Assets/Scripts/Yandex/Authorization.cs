@@ -14,6 +14,7 @@ public class Authorization : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         PlayerAccount.Authorize(OnAuthorizeSuccess, OnAuthorizeError);
 #endif
+        
     }
 
     private void OnAuthorizeSuccess()

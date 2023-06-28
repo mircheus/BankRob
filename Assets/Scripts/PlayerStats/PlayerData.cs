@@ -152,11 +152,11 @@ public class PlayerData : MonoBehaviour
         if (_dataManager.IsLoadDataPersists())
         {
             Data loadedData = _dataManager.LoadData();
-            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers, loadedData.AchievedLevels, loadedData.CurrentPrice, loadedData.CurrentReward, loadedData.IsTryAgain);
+            SetPlayerStats(loadedData.Money, loadedData.Keys, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers, loadedData.AchievedLevels, loadedData.CurrentPrice, loadedData.CurrentReward, loadedData.IsTryAgain, loadedData.IsAuthorized);
         }
         else
         {
-            SetPlayerStats(barriersProgression.InitMoney, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false); // сделать дефолтные значения
+            SetPlayerStats(barriersProgression.InitMoney, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false, false); // сделать дефолтные значения
         } 
     }
     
@@ -170,7 +170,7 @@ public class PlayerData : MonoBehaviour
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _robbersToSave, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel, _isTryAgain, _isAuthorized);
     }
 
-    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain)
+    private void SetPlayerStats(int moneyAmount, int keysAmount, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain, bool isAuthorized)
     {
         _moneyAmount = moneyAmount;
         _keysAmount = keysAmount;
@@ -180,6 +180,7 @@ public class PlayerData : MonoBehaviour
         _achievedLevels = achievedLevels;
         _economicProgression.SetCurrentValues(currentPrice, currentReward);
         _isTryAgain = isTryAgain;
+        _isAuthorized = isAuthorized;
         DataUpdated?.Invoke();
     }
 

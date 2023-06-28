@@ -15,6 +15,7 @@ public class YandexInitializer : MonoBehaviour
         // _sceneLoader.LoadGameLevelScene();
         _sceneLoader.LoadMainMenuScene();
         Debug.Log("YandexSDK initialization skip");
+        
     }
 #endif
     

@@ -6,8 +6,8 @@ using Scene = UnityEngine.SceneManagement.Scene;
 
 public class SceneLoader : MonoBehaviour
 {
-    private const int MainMenuIndex = 0;
-    private const int LoadingIndex = 1;
+    private const int LoadingIndex = 0;
+    private const int MainMenuIndex = 1;
     private const int GameLevelIndex = 2;
     private const int TutorialLevel1Index = 3;
     private const int TutorialLevel2Index = 4;

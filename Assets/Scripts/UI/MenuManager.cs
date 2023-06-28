@@ -133,6 +133,7 @@ public class MenuManager : MonoBehaviour
     {
         if (_playerData.IsAuthorized)
         {
+            Close(_notAuthorized);
             Show(_leaderboard);
         }
         else
