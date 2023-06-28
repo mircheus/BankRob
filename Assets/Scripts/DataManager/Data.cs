@@ -15,6 +15,8 @@ public class Data
     private int _currentPrice;
     private int _currentReward;
     private bool _isTryAgain;
+    private bool _isAuthorized;
+
 
 
     public int Money => _money;
@@ -27,11 +29,12 @@ public class Data
     public int CurrentPrice => _currentPrice;
     public int CurrentReward => _currentReward;
     public bool IsTryAgain => _isTryAgain;
+    public bool IsAuthorized => _isAuthorized;
     
     
 
     public Data(int money, int allMoneyCounter, int keys, int completedLevelsCounter, 
-        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain)
+        int previousLevelFloorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain, bool isAuthorized)
     {
         _money = money;
         _keys = keys;
@@ -43,5 +46,6 @@ public class Data
         _currentPrice = currentPrice;
         _currentReward = currentReward;
         _isTryAgain = isTryAgain;
+        _isAuthorized = isAuthorized;
     }
 }

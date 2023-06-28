@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField] private WinMenu _winMenu;
     [SerializeField] private LoseMenu _loseMenu;
+    [SerializeField] private PopUp _leaderboard;
 
     [Header("PerkPanel")] 
     [SerializeField] private PerksPanel _perksPanel;
@@ -128,11 +129,11 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void TryOpenLeaderboard(PopUp leaderboard)
+    public void TryOpenLeaderboard()
     {
         if (_playerData.IsAuthorized)
         {
-            Show(leaderboard);
+            Show(_leaderboard);
         }
         else
         {
