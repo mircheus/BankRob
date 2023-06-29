@@ -51,5 +51,6 @@ public class PriceIndicator : MonoBehaviour
         _moneyIcon.gameObject.SetActive(false);
         _adIcon.gameObject.SetActive(true);
         _price.text = PlusOne;
+        Debug.Log("AllMpneySpent");
     }
 }

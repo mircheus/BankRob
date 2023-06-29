@@ -45,11 +45,6 @@ public class Shop : MonoBehaviour
     {
         InstantiateRobbers(_poolCapacity);
         _isBoughtForAd = false;
-
-        if (IsAllMoneySpent())
-        {
-            AllMoneySpent?.Invoke();
-        }
     }
 
     public void TryBuyRobber()
@@ -130,6 +125,11 @@ public class Shop : MonoBehaviour
     private void OnDataLoaded()
     {
         PlaceRobbersFromPreviousLevel();
+        
+        if (IsAllMoneySpent())
+        {
+            AllMoneySpent?.Invoke();
+        }
     }
 
     private void PlaceRobbersFromPreviousLevel()
@@ -152,7 +152,8 @@ public class Shop : MonoBehaviour
 
     private bool IsAllMoneySpent()
     {
-        return _economicProgression.CurrentPrice >= _playerData.MoneyAmount;
+        Debug.Log($"CurrentPrice = {_economicProgression.CurrentPrice} MoneyAmount = {_playerData.MoneyAmount}");
+        return _economicProgression.CurrentPrice > _playerData.MoneyAmount;
     }
     
 }
