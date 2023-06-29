@@ -45,6 +45,11 @@ public class Shop : MonoBehaviour
     {
         InstantiateRobbers(_poolCapacity);
         _isBoughtForAd = false;
+
+        if (IsAllMoneySpent())
+        {
+            AllMoneySpent?.Invoke();
+        }
     }
 
     public void TryBuyRobber()
@@ -149,4 +154,5 @@ public class Shop : MonoBehaviour
     {
         return _economicProgression.CurrentPrice >= _playerData.MoneyAmount;
     }
+    
 }
