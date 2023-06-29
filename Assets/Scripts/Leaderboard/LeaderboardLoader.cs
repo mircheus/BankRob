@@ -7,20 +7,21 @@ using UnityEngine;
 public class LeaderboardLoader : MonoBehaviour
 {
     private const int MaxRecordsToShow = 10;
+    private const string Anonymous = "Anonymous";
     
     [SerializeField] private Record[] _records;
+    [SerializeField] private PlayerRecord _playerRecord;
 
     [Header("Debug")] 
     [SerializeField] private int _leadersToShowAmount;
 
     private string _leaderboardName = "Money";
     private int _playerScore = 0;
-
-    
     
     private void Start()
     {
         DisableAllRecords();
+        // LoadPlayerScoreTest();
         // FillLeaderBoardTesting(_leadersToShowAmount);
 #if UNITY_WEBGL && !UNITY_EDITOR
         LoadYandexLeaderboard();
@@ -56,6 +57,7 @@ public class LeaderboardLoader : MonoBehaviour
             PlayerAccount.Authorize();
         }
         
+        LoadPlayerScore();
         Leaderboard.GetEntries(_leaderboardName, (result) =>
             {
                 int recordsToShow =
@@ -67,7 +69,7 @@ public class LeaderboardLoader : MonoBehaviour
 
                     if (string.IsNullOrEmpty(name))
                     {
-                        name = "Anonymous";
+                        name = Anonymous;
                     }
                     
                     _records[i].SetName(name);
@@ -77,7 +79,7 @@ public class LeaderboardLoader : MonoBehaviour
             });
     }
 
-    private void SetLeaderboardScore()
+    private void LoadPlayerScore()
     {
         if (YandexGamesSdk.IsInitialized)
         {
@@ -87,9 +89,28 @@ public class LeaderboardLoader : MonoBehaviour
     
     private void OnSuccessCallback(LeaderboardEntryResponse result)
     {
-        if (result == null || _playerScore > result.score)
+        // if (result == null || _playerScore > result.score)
+        // {
+        //     Leaderboard.SetScore(_leaderboardName, _playerScore);
+        // }
+
+        if (result != null)
         {
-            Leaderboard.SetScore(_leaderboardName, _playerScore);
+            _playerRecord.SetName(result.player.publicName);
+            _playerRecord.SetScore(result.score.ToString());
+            _playerRecord.SetRank(result.rank);
+        }
+        else
+        {
+            Debug.Log("empty");
         }
     }
+
+    private void LoadPlayerScoreTest()
+    {
+        _playerRecord.SetName(Anonymous);
+        _playerRecord.SetScore(1488.ToString());
+        _playerRecord.SetRank(6);
+    }
+
 }
