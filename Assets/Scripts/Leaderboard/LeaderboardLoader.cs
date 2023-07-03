@@ -15,7 +15,7 @@ public class LeaderboardLoader : MonoBehaviour
     [Header("Debug")] 
     [SerializeField] private int _leadersToShowAmount;
 
-    private string _leaderboardName = "TopRobbers";
+    private string _leaderboardName = "Money";
     private int _playerScore = 0;
     
     private void Start()
