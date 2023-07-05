@@ -18,6 +18,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _adRewardAmount;
     [SerializeField] private Grid _grid;
     [SerializeField] private RobbersSaver _robbersSaver;
+    [SerializeField] private LeaderboardLoader _leaderboardLoader;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
@@ -29,6 +30,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _achievedLevels;
     [SerializeField] private bool _isTryAgain;
     [SerializeField] private bool _isAuthorized;
+    
 
     // [SerializeField] private int _currentPrice;
     // [SerializeField] private int _currentReward;
@@ -111,7 +113,7 @@ public class PlayerData : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
         {
-            Leaderboard.SetScore(LeaderboardName, _allMoneyCounter);
+            Leaderboard.SetScore(_leaderboardLoader.LeaderboardName, _allMoneyCounter);
         }
 #endif
 

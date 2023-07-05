@@ -15,8 +15,10 @@ public class LeaderboardLoader : MonoBehaviour
     [Header("Debug")] 
     [SerializeField] private int _leadersToShowAmount;
 
-    private string _leaderboardName = "Money";
+    private string _leaderboardName = "TopRobbers";
     private int _playerScore = 0;
+
+    public string LeaderboardName => _leaderboardName;
     
     private void Start()
     {
@@ -56,8 +58,7 @@ public class LeaderboardLoader : MonoBehaviour
         {
             PlayerAccount.Authorize();
         }
-        
-        LoadPlayerScore();
+        Debug.Log($"LeaderboardName: {_leaderboardName}");
         Leaderboard.GetEntries(_leaderboardName, (result) =>
             {
                 int recordsToShow =
@@ -77,6 +78,8 @@ public class LeaderboardLoader : MonoBehaviour
                     _records[i].gameObject.SetActive(true);
                 }
             });
+        
+        LoadPlayerScore();
     }
 
     private void LoadPlayerScore()
@@ -84,6 +87,7 @@ public class LeaderboardLoader : MonoBehaviour
         if (YandexGamesSdk.IsInitialized)
         {
             Leaderboard.GetPlayerEntry(_leaderboardName, OnSuccessCallback);
+            Debug.Log($"LeaderboardName: {_leaderboardName}");
         }
     }
     
