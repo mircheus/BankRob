@@ -31,7 +31,6 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private bool _isTryAgain;
     [SerializeField] private bool _isAuthorized;
     
-
     // [SerializeField] private int _currentPrice;
     // [SerializeField] private int _currentReward;
 
