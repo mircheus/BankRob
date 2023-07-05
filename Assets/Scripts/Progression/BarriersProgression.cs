@@ -27,11 +27,11 @@ public class BarriersProgression : MonoBehaviour
     [SerializeField] private Barrier[] _traps;
     [SerializeField] private int _firstUpgradeOnLevel;
     [SerializeField] private int _secondUpgradeOnLevel;
-    // [SerializeField] private int _thirdUpgradeOnLevel;
+    [SerializeField] private int _thirdUpgradeOnLevel;
 
     [Header("First level values")] 
-    [Header("Player settings")]
-    [SerializeField] private int _initMoney;
+    // [Header("Player settings")]
+    // [SerializeField] private int _initMoney;
     [Header("Level settings")]
     [SerializeField] private int _firstLevelFloorsAmount;
 
@@ -54,7 +54,7 @@ public class BarriersProgression : MonoBehaviour
     public int KeysFromPreviousLevel => _keysFromPreviousLevel;
     public int TrapsQuantity => _trapsQuantity;
     public int TrapsLevel => _trapsLevel;
-    public int InitMoney => _initMoney;
+    // public int InitMoney => _initMoney;
     public int FirstLevelFloorsAmount => _firstLevelFloorsAmount;
 
     private void OnEnable()
@@ -101,7 +101,7 @@ public class BarriersProgression : MonoBehaviour
         return (currentFloorsAmount - 1) * _difficultyFactor - trapsAmount - _obstaclesReducer; 
     }
 
-    private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of ф
+    private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of 
     {
         if (levelsPassed < 3)
         {
@@ -141,6 +141,11 @@ public class BarriersProgression : MonoBehaviour
 
     private int SetTrapsLevel(int levelsPassed)
     {
+        if (levelsPassed >= _thirdUpgradeOnLevel)
+        {
+            return 3;
+        }
+        
         if (levelsPassed >= _secondUpgradeOnLevel)
         {
             return 2;
