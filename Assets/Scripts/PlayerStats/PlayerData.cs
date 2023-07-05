@@ -158,7 +158,7 @@ public class PlayerData : MonoBehaviour
         }
         else
         {
-            SetPlayerStats(barriersProgression.InitMoney, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false, false);
+            SetPlayerStats(_economicProgression.StarterMoneyAmount, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false, false);
         } 
     }
     
