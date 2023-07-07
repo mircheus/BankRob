@@ -78,6 +78,7 @@ public class MenuManager : MonoBehaviour
 
     public void Show(PopUp menu)
     {
+        StopTime();
         menu.gameObject.SetActive(true);
         MenuAnimator.FadeIn(menu.Dimed);
         MenuAnimator.DragMenuDown(menu.Popup);
@@ -85,6 +86,7 @@ public class MenuManager : MonoBehaviour
 
     public void Close(PopUp menu)
     {
+        ContinueTime();
         MenuAnimator.DragMenuUp(menu.Popup);
         MenuAnimator.FadeOut(menu.Dimed);
         StartCoroutine(DisableIn(_waitForAnimationDuration, menu));
@@ -185,6 +187,16 @@ public class MenuManager : MonoBehaviour
     private void OnAllSlotsBusy()
     {
         Show(_allSlotsBusy);
+    }
+
+    private void StopTime()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void ContinueTime()
+    {
+        Time.timeScale = 1f;
     }
 
     private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)

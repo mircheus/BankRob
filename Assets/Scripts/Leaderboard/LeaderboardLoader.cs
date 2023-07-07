@@ -43,7 +43,9 @@ public class LeaderboardLoader : MonoBehaviour
     }
 
     private void DisableAllRecords()
-    {
+    {   
+        _playerRecord.gameObject.SetActive(false);
+        
         foreach (var record in _records)
         {
             record.gameObject.SetActive(false);
@@ -58,7 +60,7 @@ public class LeaderboardLoader : MonoBehaviour
         {
             PlayerAccount.Authorize();
         }
-        Debug.Log($"LeaderboardName: {_leaderboardName}");
+        // Debug.Log($"LeaderboardName: {_leaderboardName}");
         Leaderboard.GetEntries(_leaderboardName, (result) =>
             {
                 int recordsToShow =
@@ -87,7 +89,7 @@ public class LeaderboardLoader : MonoBehaviour
         if (YandexGamesSdk.IsInitialized)
         {
             Leaderboard.GetPlayerEntry(_leaderboardName, OnSuccessCallback);
-            Debug.Log($"LeaderboardName: {_leaderboardName}");
+            // Debug.Log($"LeaderboardName: {_leaderboardName}");
         }
     }
     
@@ -100,13 +102,14 @@ public class LeaderboardLoader : MonoBehaviour
 
         if (result != null)
         {
+            _playerRecord.gameObject.SetActive(true);
             _playerRecord.SetName(result.player.publicName);
             _playerRecord.SetScore(result.score.ToString());
             _playerRecord.SetRank(result.rank);
         }
         else
         {
-            Debug.Log("empty");
+            _playerRecord.gameObject.SetActive(false);
         }
     }
 
