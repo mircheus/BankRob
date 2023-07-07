@@ -49,7 +49,7 @@ public class AdPlayer : MonoBehaviour
 
     private void ShowInterstitialAd()
     {
-        InterstitialAd.Show();
+        InterstitialAd.Show(OnPlayed, OnClosedInterstitialAd);
     }
 
     private void PlayRegularAdIf(bool value)
@@ -63,5 +63,11 @@ public class AdPlayer : MonoBehaviour
     private bool ShouldPlayAd()
     {
         return _playerData.CompletedLevelsCounter % 2 == 0;
+    }
+
+    private void OnClosedInterstitialAd(bool value)
+    {
+        AudioListener.volume = 1f;
+        _adIsPlaying = false;
     }
 }
