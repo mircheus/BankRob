@@ -29,8 +29,10 @@ public class RoofsLoader : Loader
 
     private void SetFloor()
     {
-        Vector3 offset = new Vector3(0, _groundOffset, 0);
-        _ground.transform.position = offset;
+        var position = _ground.transform.position;
+        Vector3 offset = new Vector3(position.x, _groundOffset, position.z);
+        position = offset;
+        _ground.transform.position = position;
     }
 
     protected override bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
