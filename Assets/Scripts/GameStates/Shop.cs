@@ -152,7 +152,6 @@ public class Shop : MonoBehaviour
 
     private bool IsAllMoneySpent()
     {
-        Debug.Log($"CurrentPrice = {_economicProgression.CurrentPrice} MoneyAmount = {_playerData.MoneyAmount}");
         return _economicProgression.CurrentPrice > _playerData.MoneyAmount;
     }
     

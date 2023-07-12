@@ -40,7 +40,7 @@ public class TutorialManager : MonoBehaviour
         _robButton.interactable = false;
         _tutorialPanels[_currentIndex].gameObject.SetActive(true);
         _robbery.BankRobbed += OnBankRobbed;
-        _playerData.ResetPlayerData();
+        _playerData.ResetPlayerData(); 
     }
 
     private void OnDisable()

@@ -8,6 +8,7 @@ using UnityEngine.Events;
 public class AdPlayer : MonoBehaviour
 {
     [SerializeField] private PlayerData _playerData;
+    [SerializeField] private AudioMuteHandler _audioMuteHandler;
 
     private bool _adIsPlaying;
 
@@ -37,13 +38,13 @@ public class AdPlayer : MonoBehaviour
 
     private void OnClosed()
     {
-        AudioListener.volume = 1f;
+        _audioMuteHandler.UnmuteAudio();
         _adIsPlaying = false;
     }
 
     private void OnPlayed()
     {
-        AudioListener.pause = true;
+        _audioMuteHandler.MuteAudio();
         _adIsPlaying = true;
     }
 
@@ -67,7 +68,7 @@ public class AdPlayer : MonoBehaviour
 
     private void OnClosedInterstitialAd(bool value)
     {
-        AudioListener.volume = 1f;
+        _audioMuteHandler.UnmuteAudio();
         _adIsPlaying = false;
     }
 }

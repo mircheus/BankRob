@@ -35,7 +35,6 @@ public class TimeChanger : MonoBehaviour
     public void DisableSlowmo()
     {
         Time.timeScale = 1;
-        Debug.Log(Time.timeScale);
     }
 
     private void OnBankRobbed()

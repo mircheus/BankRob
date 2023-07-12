@@ -20,10 +20,26 @@ public class AudioMuteHandler : MonoBehaviour
         WebApplication.InBackgroundChangeEvent -= OnBackgroundChange;
     }
 
+    public void MuteAudio()
+    {
+        AudioListener.pause = true;
+        AudioListener.volume = 0f;
+    }
+    
+    public void UnmuteAudio()
+    {
+        AudioListener.pause = false;
+        AudioListener.volume = 1f;
+    }
+
     private void OnBackgroundChange(bool inBackground)
     {
         if (_adPlayer.AdIsPlaying == false) 
         {
+            Debug.Log($"inBackground = {inBackground}" +
+                      $"AudioListener.pause = {AudioListener.pause}" +
+                      $"AudioListener.volume = {AudioListener.volume}");
+
             AudioListener.pause = inBackground;
             AudioListener.volume = inBackground ? 0f : 1f;
         }

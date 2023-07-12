@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Agava.YandexGames;
+using Unity.VisualScripting;
 
 public class PlayerData : MonoBehaviour
 {
     private const string LeaderboardName = "Money";
+    private const string IsAuthorizedPlayerPref = "isAuthorized";
     
     [SerializeField] private Robbery _robbery;
     [SerializeField] private Preparing _preparing;
@@ -120,6 +122,7 @@ public class PlayerData : MonoBehaviour
         _robbersToSave = _robbersSaver.RobbersToSave;
         _completedLevelsCounter++;
         _isTryAgain = false;
+        PlayerPrefs.SetInt(IsAuthorizedPlayerPref, Convert.ToInt32(_isAuthorized));
         SaveCurrentPlayerStats();
     }
 
@@ -153,11 +156,13 @@ public class PlayerData : MonoBehaviour
         if (_dataManager.IsLoadDataPersists())
         {
             Data loadedData = _dataManager.LoadData();
-            SetPlayerStats(loadedData.Money, loadedData.AllMoneyCounter, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers, loadedData.AchievedLevels, loadedData.CurrentPrice, loadedData.CurrentReward, loadedData.IsTryAgain, loadedData.IsAuthorized);
+            SetPlayerStats(loadedData.Money, loadedData.AllMoneyCounter, loadedData.CompletedLevelsCounter, loadedData.PreviousLevelFloorsAmount, loadedData.AliveRobbers, loadedData.AchievedLevels, loadedData.CurrentPrice, loadedData.CurrentReward, loadedData.IsTryAgain);
+            _isAuthorized = Convert.ToBoolean(PlayerPrefs.GetInt(IsAuthorizedPlayerPref));
         }
         else
         {
-            SetPlayerStats(_economicProgression.StarterMoneyAmount, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false, false);
+            SetPlayerStats(_economicProgression.StarterMoneyAmount, 0, 0, barriersProgression.FirstLevelFloorsAmount, null, 0, _economicProgression.StartPrice, _economicProgression.StartReward, false);
+            _isAuthorized = false;
         } 
     }
     
@@ -171,7 +176,7 @@ public class PlayerData : MonoBehaviour
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _robbersToSave, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel, _isTryAgain, _isAuthorized);
     }
 
-    private void SetPlayerStats(int moneyAmount, int allMoneyCounter, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain, bool isAuthorized)
+    private void SetPlayerStats(int moneyAmount, int allMoneyCounter, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain)
     {
         _moneyAmount = moneyAmount;
         _allMoneyCounter = allMoneyCounter;
@@ -181,13 +186,16 @@ public class PlayerData : MonoBehaviour
         _achievedLevels = achievedLevels;
         _economicProgression.SetCurrentValues(currentPrice, currentReward);
         _isTryAgain = isTryAgain;
-        _isAuthorized = isAuthorized;
+        // _isAuthorized = isAuthorized;
         DataUpdated?.Invoke();
     }
 
     private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount, int[] aliveRobbers, int achievedLevels,int currentPrice, int currentReward, bool isTryAgain, bool isAuthorized)
     {
-        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers, achievedLevels, currentPrice, currentReward, isTryAgain, isAuthorized); 
+        // Debug.Log($"Convert to int {Convert.ToInt32(_isAuthorized)}");
+        
+        // PlayerPrefs.SetInt("isAuthorized", Convert.ToInt32(_isAuthorized));
+        Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers, achievedLevels, currentPrice, currentReward, isTryAgain, isAuthorized);
         _dataManager.SaveData(dataToSave);
     }
 }

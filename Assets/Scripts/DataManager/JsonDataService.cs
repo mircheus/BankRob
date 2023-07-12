@@ -15,17 +15,17 @@ public class JsonDataService : IDataService
         {
             if (File.Exists(path))
             {
-                Debug.Log("Data exists. Deleting old file and writing new one!");
+                // Debug.Log("Data exists. Deleting old file and writing new one!");
                 File.Delete(path);
             }
             else
             {
-                Debug.Log("Creating file for the first time!");
+                // Debug.Log("Creating file for the first time!");
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Unable to save data due to: {e.Message} {e.StackTrace}");
+            // Console.WriteLine($"Unable to save data due to: {e.Message} {e.StackTrace}");
             throw;
         }
 
