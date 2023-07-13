@@ -8,20 +8,13 @@ using Screen = UnityEngine.Device.Screen;
 
 public class RobStarter : MonoBehaviour
 {
-    [SerializeField] private Slot[] _slots;
     [SerializeField] private DragAndDrop _dragAndDrop;
     [SerializeField] private Preparing _preparing;
     [SerializeField] private Robbery _robbery;
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private GameObject _downCollider;
     [SerializeField] private ScreenAdaptation _screenAdaptation;
-    // [SerializeField] private Grid _grid;
+    [SerializeField] private Grid _grid;
 
-    // private Robber _savedRobber;
-    
-    [Header("DEBUG")]
-    [SerializeField] private int _howManyRobbers = 0;
-    
     public event UnityAction Started;
     public event UnityAction NotEnoughRobbers;
 
@@ -40,7 +33,7 @@ public class RobStarter : MonoBehaviour
     
     private void StartRob()
     {
-        foreach (var slot in _slots) // перенести в Grid класс
+        foreach (var slot in _grid.Slots)
         {
             if (slot.IsFilled)
             {
@@ -49,7 +42,6 @@ public class RobStarter : MonoBehaviour
                 slot.Robber.GetComponent<AnimationSwitcher>().PlayFirstAttack();
                 slot.Robber.transform.SetParent(null, true);
                 _downCollider.SetActive(false);
-                _howManyRobbers++;
                 _robbery.AddActiveRobber(slot.Robber);
             }
         }

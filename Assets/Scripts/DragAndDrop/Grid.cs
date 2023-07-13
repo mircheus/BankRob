@@ -13,6 +13,7 @@ public class Grid : MonoBehaviour
     private int _totalRobbersCounter = 0;
 
     public int TotalRobbersCounter => _totalRobbersCounter;
+    public Slot[] Slots => _slots;
     
     public event UnityAction<int> RobbersCombined;
     
@@ -73,7 +74,7 @@ public class Grid : MonoBehaviour
             if (slot.IsFilled && slot.Robber.gameObject.activeSelf == false)
             {
                 slot.Unfill();
-                _totalRobbersCounter--;
+                // _totalRobbersCounter--;
                 _combineAudioSource.Play();
             }
         }
