@@ -52,10 +52,6 @@ public class Shop : MonoBehaviour
         {
             if (_grid.IsAnySlotAvailable())
             {
-                // var robber = _robbers.FirstOrDefault(p => p.gameObject.activeSelf == false);
-                // _robbers.Remove(robber);
-                // robber.InitializeAsNew();
-                // PlaceToGrid(robber);
                 GetNewRobber();
                 _playerData.PayForRobber(_economicProgression.CurrentPrice);
                 BuyingRobber?.Invoke();
