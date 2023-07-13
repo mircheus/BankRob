@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DashPerk : Perk
@@ -8,12 +5,8 @@ public class DashPerk : Perk
     [Header("Unique")]
     [SerializeField] private RobberMovement _robberMovement;
     [SerializeField] private ObstacleCrusher _obstacleCrusher;
-    [SerializeField] private ParticleSystem _speedFx;
-    [SerializeField] private float _increasedSpeed;
     [SerializeField] private int _increasedDamage;
 
-    // public float IncreasedSpeed => IncreasedSpeed;
-    
     public override void Activate()
     {
         base.Activate();
