@@ -1,15 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BarriersLoader : Loader
 {
-    private const int Horizontal = 4;
-    private Vector3 offset = new Vector3(0, Horizontal, 0);
-    
     public void ArrangeBarriers(Barrier[,] levelMap)
     {
-        Vector3 position = transform.position;
         Vector3 horizontalOffset = new Vector3(_horizontalStep, 0, 0);
         Vector3 verticalOffset = new Vector3(0, _verticalStep, 0);
         Vector3 currentOffset = new Vector3();
