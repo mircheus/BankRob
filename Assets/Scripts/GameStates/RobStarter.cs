@@ -20,7 +20,6 @@ public class RobStarter : MonoBehaviour
 
     public void TryStartRob()
     {
-        // if (_preparing.GetRobbersQuantity() > 0)
         if (_preparing.GetRobbersQuantity() > 0 && IsNoDraggingActive())
         {
             StartRob();
