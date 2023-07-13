@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Preparing : MonoBehaviour
 {
-    [SerializeField] private Slot[] _slots;
+    [SerializeField] private Grid _grid;
 
     public event UnityAction PreparingStarted;
     
@@ -19,7 +19,7 @@ public class Preparing : MonoBehaviour
     {
         int counter = 0;
         
-        foreach (var slot in _slots)
+        foreach (var slot in _grid.Slots)
         {
             if (slot.IsFilled)
             {
