@@ -8,14 +8,11 @@ using UnityEngine.Events;
 
 public class Robbery : MonoBehaviour
 {
-    // [SerializeField] private int _moneyRewardAmount;
-    [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private PerksPanelFiller _perksPanelFiller;
     [SerializeField] private EconomicProgression _economicProgression;
 
     [Header("Debug")]
     [SerializeField] private List<Robber> _robbers;
-    // [SerializeField] private List<Robber> _savedRobbers;
     [SerializeField] private List<Robber> _aliveRobbers;
 
     private int _totalRobbersCounter;
@@ -94,7 +91,6 @@ public class Robbery : MonoBehaviour
     {
         UnsubscribeFromRobber(robber);
         RobbedVaultsCounterChanged?.Invoke();
-        // _savedRobbers.Add(robber);
         _aliveRobbers.Add(robber);
         _robbers.Remove(robber);
         _reachedRobbersCounter++;
@@ -110,7 +106,6 @@ public class Robbery : MonoBehaviour
             if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
             {
                 UnsubscribeFromRobber(_robbers[i]);
-                // _savedRobbers.Add(_robbers[i]);
                 _robbers.Remove(_robbers[i]);
             }
         }

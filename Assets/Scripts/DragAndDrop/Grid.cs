@@ -7,12 +7,8 @@ using UnityEngine.Events;
 public class Grid : MonoBehaviour
 {
     [SerializeField] private Slot[] _slots;
-    [SerializeField] private Shop _shop;
     [SerializeField] private AudioSource _combineAudioSource;
-    
-    private int _totalRobbersCounter = 0;
 
-    public int TotalRobbersCounter => _totalRobbersCounter;
     public Slot[] Slots => _slots;
     
     public event UnityAction<int> RobbersCombined;
@@ -23,8 +19,6 @@ public class Grid : MonoBehaviour
         {
             slot.RobbersCombined += OnRobbersCombined;
         }
-
-        _shop.BuyingRobber += OnBuyingRobber;
     }
 
     private void OnDisable()
@@ -33,13 +27,6 @@ public class Grid : MonoBehaviour
         {
             slot.RobbersCombined -= OnRobbersCombined;
         }
-        
-        _shop.BuyingRobber += OnBuyingRobber;
-    }
-
-    public void SetRobbersCounter(int value)
-    {
-        _totalRobbersCounter = value;
     }
 
     public void PlaceToSlot(Robber robber)
@@ -74,16 +61,10 @@ public class Grid : MonoBehaviour
             if (slot.IsFilled && slot.Robber.gameObject.activeSelf == false)
             {
                 slot.Unfill();
-                // _totalRobbersCounter--;
                 _combineAudioSource.Play();
             }
         }
         
         RobbersCombined?.Invoke(level);
-    }
-
-    private void OnBuyingRobber()
-    {
-        _totalRobbersCounter++;
     }
 }

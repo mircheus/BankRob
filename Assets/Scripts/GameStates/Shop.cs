@@ -144,9 +144,7 @@ public class Shop : MonoBehaviour
                 robber.SetLevel(robbersFromPreviousLevel[i]);
                 robber.SetColor(robber.Level);
                 PlaceToGrid(robber);
-            } 
-            
-            _grid.SetRobbersCounter(robbersFromPreviousLevel.Length);
+            }
         }
     }
 
@@ -154,5 +152,4 @@ public class Shop : MonoBehaviour
     {
         return _economicProgression.CurrentPrice > _playerData.MoneyAmount;
     }
-    
 }
