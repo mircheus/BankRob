@@ -1,9 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(AudioOneShot))]
 public class Roof : MonoBehaviour
@@ -11,8 +7,6 @@ public class Roof : MonoBehaviour
     [SerializeField] private ParticleSystem _destroyFx;
     [SerializeField] private float _destroyDelay;
 
-    public event UnityAction<Vector3> Destroyed;
-    
     private MeshRenderer _meshRenderer;
 
     private void Start()
