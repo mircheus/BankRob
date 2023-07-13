@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // private const int ColumnsQuantity = 4;
-    
     [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private RoofsLoader _roofsLoader;
     [SerializeField] private BarriersLoader _barriersLoader;
