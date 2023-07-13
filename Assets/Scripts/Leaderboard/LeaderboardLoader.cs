@@ -12,9 +12,6 @@ public class LeaderboardLoader : MonoBehaviour
     [SerializeField] private Record[] _records;
     [SerializeField] private PlayerRecord _playerRecord;
 
-    [Header("Debug")] 
-    [SerializeField] private int _leadersToShowAmount;
-
     private string _leaderboardName = "TopRobbers";
     private int _playerScore = 0;
 
@@ -23,25 +20,11 @@ public class LeaderboardLoader : MonoBehaviour
     private void Start()
     {
         DisableAllRecords();
-        // LoadPlayerScoreTest();
-        // FillLeaderBoardTesting(_leadersToShowAmount);
 #if UNITY_WEBGL && !UNITY_EDITOR
         LoadYandexLeaderboard();
 #endif
     }
-
-    private void FillLeaderBoardTesting(int leadersAmount)
-    {
-        int recordsToShow = leadersAmount <= MaxRecordsToShow ? leadersAmount : MaxRecordsToShow;
-        
-        for (int i = 0; i < recordsToShow; i++)
-        {
-            _records[i].SetName("TEST");
-            _records[i].SetScore("1212");
-            _records[i].gameObject.SetActive(true);
-        }
-    }
-
+    
     private void DisableAllRecords()
     {   
         _playerRecord.gameObject.SetActive(false);
@@ -60,7 +43,7 @@ public class LeaderboardLoader : MonoBehaviour
         {
             PlayerAccount.Authorize();
         }
-        // Debug.Log($"LeaderboardName: {_leaderboardName}");
+
         Leaderboard.GetEntries(_leaderboardName, (result) =>
             {
                 int recordsToShow =
@@ -89,17 +72,11 @@ public class LeaderboardLoader : MonoBehaviour
         if (YandexGamesSdk.IsInitialized)
         {
             Leaderboard.GetPlayerEntry(_leaderboardName, OnSuccessCallback);
-            // Debug.Log($"LeaderboardName: {_leaderboardName}");
         }
     }
     
     private void OnSuccessCallback(LeaderboardEntryResponse result)
     {
-        // if (result == null || _playerScore > result.score)
-        // {
-        //     Leaderboard.SetScore(_leaderboardName, _playerScore);
-        // }
-
         if (result != null)
         {
             _playerRecord.gameObject.SetActive(true);
@@ -112,12 +89,4 @@ public class LeaderboardLoader : MonoBehaviour
             _playerRecord.gameObject.SetActive(false);
         }
     }
-
-    private void LoadPlayerScoreTest()
-    {
-        _playerRecord.SetName(Anonymous);
-        _playerRecord.SetScore(1488.ToString());
-        _playerRecord.SetRank(6);
-    }
-
 }
