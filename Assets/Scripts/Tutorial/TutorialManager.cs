@@ -57,7 +57,7 @@ public class TutorialManager : MonoBehaviour
         _tutorialPanels[_currentIndex].gameObject.SetActive(true);
     }
     
-    // tutorial Level 1
+    // Tutorial Level 1
 
     public void PressBuyButton()
     {
