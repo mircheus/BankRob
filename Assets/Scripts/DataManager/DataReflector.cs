@@ -1,9 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.ResourceManagement.Util;
 
 public class DataReflector : MonoBehaviour
 {
@@ -16,28 +13,19 @@ public class DataReflector : MonoBehaviour
     [SerializeField] private TMP_Text _trapsQuantity;
 
     [Header("Data Sources")]
-    // [SerializeField] private DataManager _dataManager;
     [SerializeField] private PlayerData _playerData;
-    // [SerializeField] private LevelGenerator _levelGenerator;
     [SerializeField] private BarriersProgression _barriersProgression;
     
     private void OnEnable()
     {
-        // _dataManager.DataUpdated += OnDataUpdated;
         _playerData.DataUpdated += OnPlayerDataUpdated;
         _playerData.DataLoaded += RefreshDataReflection;
     }
 
     private void OnDisable()
     {
-        // _dataManager.DataUpdated -= OnDataUpdated;
         _playerData.DataUpdated -= OnPlayerDataUpdated;
         _playerData.DataLoaded -= RefreshDataReflection;
-    }
-
-    private void Start()
-    {
-        // RefreshDataReflection();
     }
 
     private void OnPlayerDataUpdated()
