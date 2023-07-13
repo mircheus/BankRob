@@ -11,37 +11,18 @@ using File = System.IO.File;
 public class DataManager : MonoBehaviour
 {
     private JsonDataService _jsonDataService = new JsonDataService();
-    // private Data _currentData = new Data(0, 0);
     private string _relativePath = "/progression_testing.json";
-    private bool _isEncrypted = false;
     private string _loadedData;
-    
-    // public event UnityAction DataUpdated;
-    
-    // public Data CurrentData => _currentData;
 
-    public void SaveDataToYandex(Data dataToSave)
-    {
-        PlayerAccount.SetPlayerData(JsonConvert.SerializeObject(dataToSave));
-    }
-
-    public void LoadDataFromYandex()
-    {
-        string loadedData;
-        PlayerAccount.GetPlayerData((data) => loadedData = data);
-    }
-    
     public void SaveData(Data dataToSave)
     {
-        // Data dataToSave = new Data(_currentData.Money, _currentData.Keys);
-
-        if (_jsonDataService.SaveData(_relativePath, dataToSave, _isEncrypted))
+        if (_jsonDataService.SaveData(_relativePath, dataToSave))
         {
-            // Debug.Log("Success");
+            Debug.Log("_jsonDataService.SaveData: Success");
         }
         else
         {
-            // Debug.Log("ERROR");
+            Debug.Log("_jsonDataService.SaveData: ERROR");
         }
     }
 
@@ -54,6 +35,6 @@ public class DataManager : MonoBehaviour
 
     public Data LoadData()
     {
-         return _jsonDataService.LoadData<Data>(_relativePath, _isEncrypted);
+         return _jsonDataService.LoadData<Data>(_relativePath);
     }
 } 
