@@ -23,6 +23,4 @@ public class RobberAudio : MonoBehaviour
     {
         _audioSource.PlayOneShot(_pickaxePunch);
     }
-    
-    
 }
