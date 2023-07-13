@@ -1,13 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RobbersSaver : MonoBehaviour
 {   
     [Header("Events sources")]
     [SerializeField] private Robbery _robbery;
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private RobStarter _robStarter;
     
     [Header("Debug")] 
