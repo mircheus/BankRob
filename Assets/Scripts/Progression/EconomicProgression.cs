@@ -39,7 +39,6 @@ public class EconomicProgression : MonoBehaviour
     public int StarterMoneyAmount => _starterMoneyAmount;
     public int RewardToNextLevel => _rewardToNextLevel;
     public int AdRewardMultiplier => _adRewardMultiplier;
-    // public int TotalReward => _currentReward + AdReward;
     
     private void OnEnable()
     {
