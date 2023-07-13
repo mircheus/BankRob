@@ -35,27 +35,12 @@ public class Slot : MonoBehaviour
             if (robberDragger.IsDraggingNow == false)
             {
                 SetRobber(robberDragger.GetComponent<Robber>());
-                // _robberDragger = robberDragger;
-                // _robber = _robberDragger.GetComponent<Robber>();
-                // _robberDragger.SetOffset(_offset);
-                // SetDownTargetForRobber(_robber);
-                // PlaceNewRobber(_robber);
-                // _isFilled = true;
-                // PlaceRobberInCellCenter(robberDragger);
             }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
-        // {
-        //     if (robberDragger.IsDraggingNow == false)
-        //     {
-        //         PlaceRobberInCellCenter(robberDragger);
-        //     }
-        // }
-        
         if (other.gameObject.TryGetComponent(out Robber externalRobber) && _isFilled)
         {
             if (_robber.Level == externalRobber.Level && _robber.Level < _robber.MaxLevel && externalRobber.GetComponent<RobberDragger>().IsDraggingNow)
@@ -69,7 +54,6 @@ public class Slot : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out RobberDragger robberDragger))
         {
-            // _robberDragger.DeleteLastParentTransform();
             _robberDragger = null;
             _isFilled = false;
         }
@@ -77,10 +61,7 @@ public class Slot : MonoBehaviour
 
     public void Unfill()
     {
-        // Debug.Log("Unfill");
         _isFilled = false;
-        // _robber.transform.SetParent(_robbersPool.transform);
-        // Debug.Log(_robber.transform.parent);
     }
 
     public void SetRobber(Robber robber)
@@ -100,17 +81,12 @@ public class Slot : MonoBehaviour
         Transform robberTransform = robberDragger.transform;
         robberTransform.SetParent(gameObject.transform);
         robberTransform.position = transform.position + _offset;
-        // _isFilled = true;
-        // robberTransform.position = transform.position;
-        // robberTransform.position += _offset;
-        // Debug.Log($"Y: {transform.position.y}");
     }
 
     private void CombineRobbers(Robber externalRobberDragger)
     {
         externalRobberDragger.gameObject.SetActive(false);
         externalRobberDragger.gameObject.transform.SetParent(_deactivatedRobbers.transform);
-        // Debug.Log(externalRobberDragger.gameObject.transform.parent);
         int level = _robber.UpgradeLevel();
         RobbersCombined?.Invoke(level);
         PlayCombineFx(level);
