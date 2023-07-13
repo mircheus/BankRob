@@ -60,7 +60,7 @@ public class RobberMovement : MonoBehaviour
         _currentTarget = target.position;
     }
 
-    public void GetTrappedBy(Trap trap) // maybe need new script separetely
+    public void GetTrappedBy(Trap trap)
     {
         if (trap.gameObject.TryGetComponent(out Cage cage))
         {
