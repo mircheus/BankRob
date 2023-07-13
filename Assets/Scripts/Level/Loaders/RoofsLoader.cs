@@ -24,7 +24,7 @@ public class RoofsLoader : Loader
     
     private void CalculateFloorOffset()
     {
-        _groundOffset = _verticalStep * (_floorQuantity - 1); // roofs loader
+        _groundOffset = _verticalStep * (_floorQuantity - 1);
     }
 
     private void SetFloor()
@@ -35,7 +35,7 @@ public class RoofsLoader : Loader
         _ground.transform.position = position;
     }
 
-    protected override bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
+    protected override void GenerateObjectInPosition(Vector3 position, Transform parent)
     {
         if ((_counter % 2) == 0)
         {
@@ -49,7 +49,5 @@ public class RoofsLoader : Loader
             roof.GetComponentInChildren<MeshRenderer>().material = _oddMaterial;
             _counter++;
         }
-        
-        return true;
     }
 }

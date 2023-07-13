@@ -7,7 +7,7 @@ public class Loader : MonoBehaviour
 {
     private const int ColumnsQuantity = 4;
     
-    [SerializeField] private protected GameObject _obstaclePrefab; // переименовать 
+    [SerializeField] private protected GameObject _obstaclePrefab;
     private protected int _floorQuantity;
     private protected float _horizontalStep = -7.5f;
     private protected int _verticalStep = -9;
@@ -15,7 +15,6 @@ public class Loader : MonoBehaviour
     public void ArrangeObjects(int floorQuantity)
     {
         SetFloorQuantity(floorQuantity);
-        Vector3 position = transform.position;
         Vector3 horizontalOffset = new Vector3(_horizontalStep, 0, 0);
         Vector3 verticalOffset = new Vector3(0, _verticalStep, 0);
         Vector3 currentOffset = new Vector3();
@@ -30,22 +29,19 @@ public class Loader : MonoBehaviour
             }
         }
     }
-    
-    protected virtual void SetCursorIn(Vector3 position, Transform parent) // WORKAROUND METHOD NAME
+
+    private void SetCursorIn(Vector3 position, Transform parent)
     {
-        TryGenerateObjectInPosition(position, parent);
+        GenerateObjectInPosition(position, parent);
     }
 
-    protected virtual void SetFloorQuantity(int floorQuantity)
+    private void SetFloorQuantity(int floorQuantity)
     {
         _floorQuantity = floorQuantity;
     }
 
-    protected virtual bool TryGenerateObjectInPosition(Vector3 position, Transform parent)
+    protected virtual void GenerateObjectInPosition(Vector3 position, Transform parent)
     {
-        // _obstacles.Add(Instantiate(_obstaclePrefab, position, Quaternion.identity, parent));
         Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
-        return true;
     }
-    
 }
