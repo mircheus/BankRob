@@ -1,14 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Agava.YandexGames;
-using Unity.VisualScripting;
 
 public class PlayerData : MonoBehaviour
 {
-    private const string LeaderboardName = "Money";
     private const string IsAuthorizedPlayerPref = "isAuthorized";
     
     [SerializeField] private Robbery _robbery;
@@ -115,8 +111,6 @@ public class PlayerData : MonoBehaviour
     private void OnVideoAdPlayed()
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
-        Debug.Log($"moneyAmount = {_moneyAmount}");
-        Debug.Log($"robbery.MoneyRewardAmount = {_robbery.MoneyRewardAmount}");
         SaveCurrentPlayerStats();
     }
 
