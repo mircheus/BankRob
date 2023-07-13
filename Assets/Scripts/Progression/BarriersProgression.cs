@@ -1,18 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class BarriersProgression : MonoBehaviour
 {
-    private const int ColumnsAmount = 4;
-    
     [SerializeField] private PlayerData _playerData;
-    [SerializeField] private Robbery _robbery;
 
     [Header("Progression settings")] 
     [SerializeField] private int _difficultyFactor;
@@ -22,20 +14,19 @@ public class BarriersProgression : MonoBehaviour
 
     [Header("Obstacles")] 
     [SerializeField] private Barrier[] _obstacles;
+    [SerializeField] private int _firstObstacleUpgrade;
+    [SerializeField] private int _secondObstacleUpgrade;
+    [SerializeField] private int _thirdObstacleUpgrade;
 
     [Header("Traps")] 
     [SerializeField] private Barrier[] _traps;
     [SerializeField] private int _firstUpgradeOnLevel;
     [SerializeField] private int _secondUpgradeOnLevel;
     [SerializeField] private int _thirdUpgradeOnLevel;
-
-    [Header("First level values")] 
-    // [Header("Player settings")]
-    // [SerializeField] private int _initMoney;
+    
     [Header("Level settings")]
     [SerializeField] private int _firstLevelFloorsAmount;
 
-    public event UnityAction LevelParametersPrepared;
     public event UnityAction<Barrier[,]> LevelMapPrepared; 
     
     private int _levelsCounter;
@@ -50,11 +41,8 @@ public class BarriersProgression : MonoBehaviour
     public int FloorsQuantity => _floorsQuantity;
     public int ObstaclesQuantity => _obstaclesQuantity;
     public int ObstaclesLevel => _obstaclesLevel;
-    public int KeysQuantity => _keysQuantity;
-    public int KeysFromPreviousLevel => _keysFromPreviousLevel;
     public int TrapsQuantity => _trapsQuantity;
     public int TrapsLevel => _trapsLevel;
-    // public int InitMoney => _initMoney;
     public int FirstLevelFloorsAmount => _firstLevelFloorsAmount;
 
     private void OnEnable()
@@ -101,32 +89,19 @@ public class BarriersProgression : MonoBehaviour
         return (currentFloorsAmount - 1) * _difficultyFactor - trapsAmount - _obstaclesReducer; 
     }
 
-    private int SetObstaclesLevel(int levelsPassed) // DRAFT mechanic of 
+    private int SetObstaclesLevel(int levelsPassed) // workaround
     {
-        if (levelsPassed < 3)
-        {
-            return 2;
-        }
-        else if (levelsPassed >= 3 && levelsPassed < 6 )
-        {
-            return 3;
-        }
-        else if (levelsPassed >= 6)
+        if (levelsPassed >= _thirdObstacleUpgrade)
         {
             return 4;
         }
 
-        return -1;
-    }
-
-    private int SetKeysQuantity(int levelsPassed) // DRAFT mechanic of progression
-    {
-        if (levelsPassed >= 3)
+        if (levelsPassed >= _secondObstacleUpgrade)
         {
-            return 2;
+            return 3;
         }
 
-        return 0;
+        return 2;
     }
 
     private int CalculateTrapsQuantity(int levelsPassed, int currentFloorsAmount) 
@@ -139,7 +114,7 @@ public class BarriersProgression : MonoBehaviour
         return 0;
     }
 
-    private int SetTrapsLevel(int levelsPassed)
+    private int SetTrapsLevel(int levelsPassed) // workaround
     {
         if (levelsPassed >= _thirdUpgradeOnLevel)
         {
