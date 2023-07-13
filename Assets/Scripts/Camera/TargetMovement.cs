@@ -60,14 +60,8 @@ public class TargetMovement : MonoBehaviour
     
     private void OnRobStarterStarted()
     {
-        // _robber = _robStarter.PickRobber();
         _robbers = _robbery.SendRobbersListTo(this);
         _robberToFollow = _robbers[_currentIndex];
-
-        // foreach (Robber robber in _robbers)
-        // {
-        //     robber.GetComponent<RobberMovement>().GetStopped += OnGetStopped;
-        // }
     }
 
     private void CalculateDelta()
@@ -136,11 +130,6 @@ public class TargetMovement : MonoBehaviour
         }
 
         return yCoordinates;
-    }
-
-    private void OnGetStopped()
-    {
-        // Debug.Log("OnGetStopped From target movement");
     }
 
     private Robber FindLowestRobber()
