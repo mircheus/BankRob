@@ -7,8 +7,6 @@ using UnityEngine.Events;
 
 public class ExplosionPerk : Perk
 {
-    private const float DeactivationTime = .7f;
-    
     [SerializeField] private int _explosionDamage;
     [SerializeField] private ParticleSystem[] _explosionFx;
 
@@ -45,12 +43,6 @@ public class ExplosionPerk : Perk
             fridge.GetDestroyed();
             PlayFxAt(fridge.transform.position);
         }
-    }
-
-    protected override void Deactivate()
-    {
-        base.Deactivate();
-        Debug.Log("ExplosionPerk Deactivated");
     }
 
     private void PlayFxAt(Vector3 position)
