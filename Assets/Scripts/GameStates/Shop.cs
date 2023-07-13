@@ -19,7 +19,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button _buyButton;
     
     [Header("Shop settings")]
-    // [SerializeField] private int _robberPrice;
     [SerializeField] private int _poolCapacity;
     
     private List<Robber> _robbers = new List<Robber>();
