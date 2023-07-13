@@ -5,12 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(AudioOneShot))]
 public class Cage : Trap
 {
-    [SerializeField] private ParticleSystem _crackFx;
     [SerializeField] private Animator _animator;
     [SerializeField] private GameObject[] _forms;
 
     private int _close = Animator.StringToHash("Close");
-    // private bool _isTrapActive = true;
     
     private void OnTriggerEnter(Collider other)
     {
