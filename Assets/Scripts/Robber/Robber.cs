@@ -35,13 +35,11 @@ public class Robber : MonoBehaviour
 
     private void OnEnable()
     {
-        // _keyCollector.KeyCollected += OnKeyCollected;
         GetComponent<RobberMovement>().GetStopped += OnGetStopped;
     }
 
     private void OnDisable()
     {
-        // _keyCollector.KeyCollected -= OnKeyCollected;
         GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
     }
 
@@ -51,10 +49,8 @@ public class Robber : MonoBehaviour
         _sweaterMaterial = _sweaterMesh.material;
         _shoesMaterial = _shoesMesh.material;
         _robberMovement = GetComponent<RobberMovement>();
-        // _keyCollector = GetComponent<KeyCollector>();
         _robberMovement.enabled = false;
         _obstacleCrusher = GetComponent<ObstacleCrusher>();
-        // _animationSwitcher = GetComponent<AnimationSwitcher>();
         _level = 0;
         SetColor(_level);
     }
