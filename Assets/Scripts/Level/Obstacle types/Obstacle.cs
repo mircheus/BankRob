@@ -1,15 +1,10 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Obstacle : Barrier
 {
     [SerializeField] private int _health;
-    // [SerializeField] private GameObject _undamagedForm;
-    // [SerializeField] private GameObject _damagedForm;
     [SerializeField] private GameObject[] _damagedForms;
     [SerializeField] private ParticleSystem _damageFX;
     [SerializeField] private ParticleSystem _destroyFX;
@@ -58,7 +53,6 @@ public class Obstacle : Barrier
 
     private void OnDestroyed()
     {
-        // gameObject.SetActive(false);
         _destroyFX.Play();
         _boxCollider.isTrigger = true;
         _damagedForms[_currentDamageForm].SetActive(false);
@@ -74,14 +68,11 @@ public class Obstacle : Barrier
         {
             return;
         }
-        // Debug.Log("point");
 
         for (int i = 1; i < _damagedForms.Length; i++)
         {
             _damagedForms[i].SetActive(false);
         }
-
-        // _damagedForm.SetActive(false); // для одной damage формы
     }
 
     private void NextDamageForm()
