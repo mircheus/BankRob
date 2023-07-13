@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class Robber : MonoBehaviour
 {
-    [SerializeField] private KeyCollector _keyCollector;
     [SerializeField] private SkinnedMeshRenderer _bodyMesh;
     [SerializeField] private SkinnedMeshRenderer _sweaterMesh;
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
@@ -25,7 +24,6 @@ public class Robber : MonoBehaviour
     private Material _shoesMaterial;
     private RobberMovement _robberMovement;
     private ObstacleCrusher _obstacleCrusher;
-    private AnimationSwitcher _animationSwitcher;
 
     public UnityAction<int> Frozen;
     public UnityAction<Robber> ReachedVault;
@@ -33,18 +31,17 @@ public class Robber : MonoBehaviour
     public int Level => _level;
     public int MaxLevel => _maxLevel;
     public int ColumnIndex => _columnIndex;
-    public Color[] LevelColors => _levelColors;
     public Shield Shield => _shield;
 
     private void OnEnable()
     {
-        _keyCollector.KeyCollected += OnKeyCollected;
+        // _keyCollector.KeyCollected += OnKeyCollected;
         GetComponent<RobberMovement>().GetStopped += OnGetStopped;
     }
 
     private void OnDisable()
     {
-        _keyCollector.KeyCollected -= OnKeyCollected;
+        // _keyCollector.KeyCollected -= OnKeyCollected;
         GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
     }
 
@@ -54,10 +51,10 @@ public class Robber : MonoBehaviour
         _sweaterMaterial = _sweaterMesh.material;
         _shoesMaterial = _shoesMesh.material;
         _robberMovement = GetComponent<RobberMovement>();
-        _keyCollector = GetComponent<KeyCollector>();
+        // _keyCollector = GetComponent<KeyCollector>();
         _robberMovement.enabled = false;
         _obstacleCrusher = GetComponent<ObstacleCrusher>();
-        _animationSwitcher = GetComponent<AnimationSwitcher>();
+        // _animationSwitcher = GetComponent<AnimationSwitcher>();
         _level = 0;
         SetColor(_level);
     }
@@ -87,7 +84,6 @@ public class Robber : MonoBehaviour
 
     public void ActivatePerk()
     {
-        // _explosionPerk.Activate();
         _perks[_level].Activate();
     }
 
@@ -119,11 +115,6 @@ public class Robber : MonoBehaviour
             _sweaterMaterial.color = color;
             _shoesMaterial.color = color;
         }
-    }
-    
-    private void OnKeyCollected()
-    {
-        Debug.Log("KeyCollected");
     }
 
     private void OnGetStopped()
