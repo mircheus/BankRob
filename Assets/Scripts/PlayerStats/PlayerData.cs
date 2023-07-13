@@ -17,7 +17,6 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private BarriersProgression barriersProgression;
     [SerializeField] private EconomicProgression _economicProgression;
     [SerializeField] private AdPlayer _adPlayer;
-    [SerializeField] private int _adRewardAmount;
     [SerializeField] private Grid _grid;
     [SerializeField] private RobbersSaver _robbersSaver;
     [SerializeField] private LeaderboardLoader _leaderboardLoader;
@@ -32,9 +31,6 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _achievedLevels;
     [SerializeField] private bool _isTryAgain;
     [SerializeField] private bool _isAuthorized;
-    
-    // [SerializeField] private int _currentPrice;
-    // [SerializeField] private int _currentReward;
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -71,16 +67,6 @@ public class PlayerData : MonoBehaviour
         _moneyAmount -= money;
         DataUpdated?.Invoke();
     }
-    
-    public void SubscribeToKeyCollector(Robber robber)
-    {
-        robber.GetComponent<KeyCollector>().KeyCollected += OnKeyCollected;
-    }
-
-    public void UnsubscribeFromKeyCollector(Robber robber) 
-    {
-        robber.GetComponent<KeyCollector>().KeyCollected -= OnKeyCollected;
-    }
 
     public void ResetPlayerData()
     {
@@ -91,12 +77,6 @@ public class PlayerData : MonoBehaviour
     public void AuthorizeBy(Authorization authorization)
     {
         _isAuthorized = true;
-    }
-
-    private void OnKeyCollected()
-    {
-        _keysAmount++;
-        DataUpdated?.Invoke();
     }
 
     private void OnPreparing()
@@ -117,8 +97,7 @@ public class PlayerData : MonoBehaviour
             Leaderboard.SetScore(_leaderboardLoader.LeaderboardName, _allMoneyCounter);
         }
 #endif
-
-        // _aliveRobbers = _robbery.CountAliveRobbers();
+        
         _robbersToSave = _robbersSaver.RobbersToSave;
         _completedLevelsCounter++;
         _isTryAgain = false;
@@ -128,7 +107,6 @@ public class PlayerData : MonoBehaviour
 
     private void OnBankNotRobbed()
     {
-        // _aliveRobbers = null;
         _robbersToSave = _robbersSaver.RobbersToSave;
         _isTryAgain = true;
         SaveCurrentPlayerStats();
@@ -186,15 +164,11 @@ public class PlayerData : MonoBehaviour
         _achievedLevels = achievedLevels;
         _economicProgression.SetCurrentValues(currentPrice, currentReward);
         _isTryAgain = isTryAgain;
-        // _isAuthorized = isAuthorized;
         DataUpdated?.Invoke();
     }
 
     private void SavePlayerStats(int moneyAmount, int allMoneyCounter,int keysAmount, int completedLevelsCounter, int currentLevelFloorsAmount, int[] aliveRobbers, int achievedLevels,int currentPrice, int currentReward, bool isTryAgain, bool isAuthorized)
     {
-        // Debug.Log($"Convert to int {Convert.ToInt32(_isAuthorized)}");
-        
-        // PlayerPrefs.SetInt("isAuthorized", Convert.ToInt32(_isAuthorized));
         Data dataToSave = new Data(moneyAmount, allMoneyCounter, keysAmount, completedLevelsCounter, currentLevelFloorsAmount, aliveRobbers, achievedLevels, currentPrice, currentReward, isTryAgain, isAuthorized);
         _dataManager.SaveData(dataToSave);
     }

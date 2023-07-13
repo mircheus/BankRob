@@ -11,22 +11,22 @@ public class Win : MonoBehaviour
 
     private void OnEnable()
     {
-        _robbery.BankRobbed += OnBankRobbed;
+        // _robbery.BankRobbed += OnBankRobbed;
     }
 
     private void OnDisable()
     {
-        _robbery.BankRobbed -= OnBankRobbed;
+        // _robbery.BankRobbed -= OnBankRobbed;
     }
 
-    public void OnBankRobbed()
-    {
-        foreach (var slot in _slots)
-        {
-            if (slot.IsFilled)
-            {
-                _playerData.UnsubscribeFromKeyCollector(slot.Robber);
-            }
-        }
-    } 
+    // public void OnBankRobbed()
+    // {
+    //     foreach (var slot in _slots)
+    //     {
+    //         if (slot.IsFilled)
+    //         {
+    //             // _playerData.UnsubscribeFromKeyCollector(slot.Robber);
+    //         }
+    //     }
+    // } 
 }
