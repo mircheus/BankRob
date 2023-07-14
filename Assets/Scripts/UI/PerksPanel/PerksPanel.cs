@@ -11,7 +11,6 @@ public class PerksPanel : MonoBehaviour
     private void OnEnable()
     {
         SubscribeButtonsToRobbers(_robbery.SendRobbersListTo(this));
-        // Debug.Log("Subscribed to Robbers in PerksPanel");
     }
 
     public Robber SendRobberForTutorialTo(PerkActivatorTutorial perkActivatorTutorial)
