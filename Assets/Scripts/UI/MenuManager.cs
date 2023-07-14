@@ -23,11 +23,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private RectTransform[] _elementsToDragDown;
     [SerializeField] private RectTransform _moneyIndicator;
     [SerializeField] private RectTransform _preparingMenu;
-    // [SerializeField] private RectTransform _moneyPanel;
-    // [SerializeField] private RectTransform _perksPanel;
-    // [SerializeField] private RectTransform _settings;
-    // [SerializeField] private RectTransform _leaderboard;
-    
+
     [Header("Warnings")] 
     [SerializeField] private PopUp _notEnoughRobbers;
     [SerializeField] private PopUp _notEnoughMoney;
