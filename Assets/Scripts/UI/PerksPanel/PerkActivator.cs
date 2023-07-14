@@ -7,27 +7,19 @@ using UnityEngine.UI;
 
 public class PerkActivator : MonoBehaviour
 {
-    // [SerializeField] private GameObject _perk;
     [SerializeField] private Button _button;
     [SerializeField] private float _coolDownTime;
-
-    public float CoolDownTime => _coolDownTime;
-
+    
     private int _columnIndex;
-    private Robber _robber;
-
-    public event UnityAction<int> PerkActivated;
 
     public int ColumnIndex => _columnIndex;
+    public float CoolDownTime => _coolDownTime;
+
+    public event UnityAction<int> PerkActivated;
 
     public void SetColumnIndex(int index)
     {
         _columnIndex = index;
-    }
-
-    public void SetRobber(Robber robber)
-    {
-        _robber = robber;
     }
     
     public void OnClick()
