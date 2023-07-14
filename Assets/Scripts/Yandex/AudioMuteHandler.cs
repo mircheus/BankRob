@@ -36,10 +36,6 @@ public class AudioMuteHandler : MonoBehaviour
     {
         if (_adPlayer.AdIsPlaying == false) 
         {
-            Debug.Log($"inBackground = {inBackground}" +
-                      $"AudioListener.pause = {AudioListener.pause}" +
-                      $"AudioListener.volume = {AudioListener.volume}");
-
             AudioListener.pause = inBackground;
             AudioListener.volume = inBackground ? 0f : 1f;
         }

@@ -12,10 +12,7 @@ public class YandexInitializer : MonoBehaviour
 #if UNITY_EDITOR  
     private void Start()
     {
-        // _sceneLoader.LoadGameLevelScene();
         _sceneLoader.LoadMainMenuScene();
-        Debug.Log("YandexSDK initialization skip");
-        
     }
 #endif
     
@@ -33,8 +30,6 @@ public class YandexInitializer : MonoBehaviour
 
     private void OnInitialize()
     {
-        // _sceneLoader.LoadGameLevelScene();
         _sceneLoader.LoadMainMenuScene();
-        Debug.Log("SDK successfully initialized");
     }
 }
