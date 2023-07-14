@@ -28,21 +28,6 @@ public class LayoutSwitcher : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // TESTING
-        // if (OffsetEnabler.GetAspectRatio() < 1)
-        // {
-        //     SwitchToVerticalLayout();
-        //     _isMobileScreen = true;
-        // }
-        // else
-        // {
-        //     SwitchToHorizontalLayout();
-        //     _isMobileScreen = false;
-        // }
-    }
-
     private void SwitchToVerticalLayout()
     {
         _verticalButtons.SetActive(true);
