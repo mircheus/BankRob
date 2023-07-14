@@ -8,7 +8,6 @@ public class LoseMenu : MonoBehaviour
     [SerializeField] private RectTransform _lossPanel;
     [SerializeField] private RectTransform _lossTitle;
     [SerializeField] private Image _dimed;
-    // [SerializeField] private RectTransform _newItem;
     [SerializeField] private RectTransform _nextButtonDesktop;
     [SerializeField] private RectTransform _nextButtonMobile;
     [SerializeField] private RectTransform _adButtonDesktop;
@@ -17,7 +16,6 @@ public class LoseMenu : MonoBehaviour
     public RectTransform LossPanel => _lossPanel;
     public RectTransform LossTitle => _lossTitle;
     public Image Dimed => _dimed;
-    // public RectTransform NewItem => _newItem;
     public bool IsMobileScreen => GetComponent<LayoutSwitcher>().IsMobileScreen;
     public RectTransform NextButtonDesktop => _nextButtonDesktop;
     public RectTransform NextButtonMobile => _nextButtonMobile;
