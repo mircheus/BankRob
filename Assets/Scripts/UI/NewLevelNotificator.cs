@@ -14,19 +14,20 @@ public class NewLevelNotificator : MonoBehaviour
     
     [Header("MenuManager")] [SerializeField]
     private MenuManager _menuManager;
+    
     [Header("New Level Data")]
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private PopUp _newLevelPopup;
-    // [SerializeField] private GameObject _perkIcon;
     [SerializeField] private Image _perkIconImage;
     [SerializeField] private TMP_Text _perkTitle;
     [SerializeField] private TMP_Text _perkInfo;
     [SerializeField] private Image[] _perkIcons;
-    // [SerializeField] private string[] _perkTitles;
+    
     [Header("Perk titles in all languages")]
     [SerializeField] private string[] _perkTitlesEng;
     [SerializeField] private string[] _perkTitlesRus;
     [SerializeField] private string[] _perkTitlesTur;
+    
     [Header("Perk infos in all languages")]
     [SerializeField] private string[] _perkInfosEng;
     [SerializeField] private string[] _perkInfosRus;
