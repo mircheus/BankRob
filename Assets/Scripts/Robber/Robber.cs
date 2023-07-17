@@ -67,7 +67,7 @@ public class Robber : MonoBehaviour
         {
             _level++;
             SetColor(_level);
-            _obstacleCrusher.IncreaseDamage(_level);
+            _obstacleCrusher.IncreaseDamage();
         }
 
         return _level;

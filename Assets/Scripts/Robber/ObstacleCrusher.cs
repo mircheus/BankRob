@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 public class ObstacleCrusher : MonoBehaviour
 {
+    [SerializeField] private int _damageLevelUpgrade;
     [Header("DEBUG")]
     [SerializeField] private int _defaultDamage;
 
@@ -33,7 +34,6 @@ public class ObstacleCrusher : MonoBehaviour
             _obstacleToCrush.Destroyed += OnObstacleDestroyed;
             ObstacleCollided?.Invoke();
             Attack();
-            // Attack();
         }
     }
 
@@ -43,18 +43,16 @@ public class ObstacleCrusher : MonoBehaviour
         Attacked?.Invoke();
     }
 
-    public void IncreaseDamage(int level)
+    public void IncreaseDamage()
     {
-        _defaultDamage += 2;
+        _defaultDamage += _damageLevelUpgrade;
         _currentDamage = _defaultDamage;
-        // Debug.Log($"currentDamage: {_damage}");
     }
 
     private void OnObstacleDestroyed()
     {
         _obstacleToCrush.Destroyed -= OnObstacleDestroyed;
         ObstacleDestroyed?.Invoke();
-        // _obstacleToCrush = null;
     }
 
     public void IncreaseDamageBySpeedPerk(DashPerk perk, int increasedDamage)
