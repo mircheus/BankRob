@@ -9,10 +9,10 @@ public class PerksPanelFiller : MonoBehaviour
     [SerializeField] private Slot[] _slots;
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private GameObject[] _perkSlots;
-    [SerializeField] private GameObject[] _perkButtonPrefabs;
+    [SerializeField] private PerkActivator[] _perkButtonPrefabs;
     [SerializeField] private Robbery _robbery;
 
-    private List<GameObject> _perkButtons = new List<GameObject>();
+    private List<PerkActivator> _perkButtons = new List<PerkActivator>();
 
     public event UnityAction<int> PerkActivated; 
 
@@ -48,10 +48,10 @@ public class PerksPanelFiller : MonoBehaviour
 
     private void PlacePerkToSlotWithIndex(int slotIndex, int perkLevel)
     {
-        GameObject perkButton = Instantiate(_perkButtonPrefabs[perkLevel], _perkSlots[slotIndex].transform);
-        perkButton.GetComponent<PerkActivator>().SetColumnIndex(slotIndex);
-        perkButton.GetComponent<PerkActivator>().PerkActivated += OnPerkActivated;
-        _perkButtons.Add(perkButton);
+        PerkActivator perkActivator = Instantiate(_perkButtonPrefabs[perkLevel], _perkSlots[slotIndex].transform);
+        perkActivator.SetColumnIndex(slotIndex);
+        perkActivator.PerkActivated += OnPerkActivated;
+        _perkButtons.Add(perkActivator);
     }
 
     private void OnPerkActivated(int index)
@@ -92,7 +92,7 @@ public class PerksPanelFiller : MonoBehaviour
     {
         foreach (var perkButton in _perkButtons)
         {
-            perkButton.GetComponent<PerkActivator>().PerkActivated -= OnPerkActivated;
+            perkButton.PerkActivated -= OnPerkActivated;
         }
     }
 }
