@@ -32,7 +32,6 @@ public class PerkSlot : MonoBehaviour
 
     private void OnFrozen(int columnIndex)
     {
-        // SetActiveToTop(_freezedButton);
         _freezedButton.gameObject.transform.SetAsLastSibling();
         _freezedButton.gameObject.SetActive(true);
     }
