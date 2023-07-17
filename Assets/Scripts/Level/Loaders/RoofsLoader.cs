@@ -39,15 +39,19 @@ public class RoofsLoader : Loader
     {
         if ((_counter % 2) == 0)
         {
-            GameObject roof = Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
-            roof.GetComponentInChildren<MeshRenderer>().material = _evenMaterial;
+            GenerateRoofWithMaterial(_evenMaterial, position, parent);
             _counter++;
         }
         else
         {
-            GameObject roof = Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
-            roof.GetComponentInChildren<MeshRenderer>().material = _oddMaterial;
+            GenerateRoofWithMaterial(_oddMaterial, position, parent);
             _counter++;
         }
+    }
+
+    private void GenerateRoofWithMaterial(Material material, Vector3 position, Transform parent)
+    {
+        GameObject roof = Instantiate(_obstaclePrefab, position, Quaternion.identity, parent);
+        roof.GetComponent<Roof>().MeshRendererRenderer.material = material;
     }
 }

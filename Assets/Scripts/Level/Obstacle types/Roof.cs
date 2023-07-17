@@ -9,7 +9,9 @@ public class Roof : MonoBehaviour
 
     private MeshRenderer _meshRenderer;
 
-    private void Start()
+    public MeshRenderer MeshRendererRenderer => _meshRenderer;
+
+    private void Awake()
     {
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
