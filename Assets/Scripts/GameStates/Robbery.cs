@@ -28,15 +28,7 @@ public class Robbery : MonoBehaviour
 
     private void OnEnable()
     {
-        BankRobbed += OnBankRobbed;
-        BankNotRobbed += OnBankNotRobbed;
         _perksPanelFiller.PerkActivated += OnPerkActivated;
-    }
-
-    private void OnDisable()
-    {
-        BankRobbed -= OnBankRobbed;
-        BankNotRobbed -= OnBankNotRobbed;
     }
 
     public void AddActiveRobber(Robber robber)
@@ -124,16 +116,6 @@ public class Robbery : MonoBehaviour
             }
         }
     }
-    
-    private void OnBankRobbed()
-    {
-        UnsubscribeFromObjects();
-    }
-
-    private void OnBankNotRobbed()
-    {
-        UnsubscribeFromObjects();   
-    }
 
     private void UnsubscribeFromObjects()
     {
@@ -159,10 +141,12 @@ public class Robbery : MonoBehaviour
             if (_reachedRobbersCounter > 0)
             {
                 BankRobbed?.Invoke();
+                UnsubscribeFromObjects();
             }
             else
             {
                 BankNotRobbed?.Invoke();
+                UnsubscribeFromObjects();
             }
         }
     }
