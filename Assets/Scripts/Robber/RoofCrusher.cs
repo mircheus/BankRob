@@ -8,7 +8,7 @@ public class RoofCrusher : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent(out Roof roof))
         {
-            roof.DestroyRoof();
+            roof.GetDestroyed();
         }
     }
 }

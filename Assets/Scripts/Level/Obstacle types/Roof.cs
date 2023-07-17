@@ -1,8 +1,9 @@
 using System.Collections;
+using PerkSystem;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioOneShot))]
-public class Roof : MonoBehaviour
+public class Roof : MonoBehaviour, IDestroyable
 {
     [SerializeField] private ParticleSystem _destroyFx;
     [SerializeField] private float _destroyDelay;
@@ -16,12 +17,13 @@ public class Roof : MonoBehaviour
         _meshRenderer = GetComponentInChildren<MeshRenderer>();
     }
 
-    public void DestroyRoof()
+    public void GetDestroyed()
     {
         MakeSelfInvisible();
         GetComponent<AudioOneShot>().PlayOneShot();
         StartCoroutine(DisableAfterSomeTime(_destroyDelay));
     }
+    
     
     private IEnumerator DisableAfterSomeTime(float destroyDelay)
     {
@@ -35,4 +37,6 @@ public class Roof : MonoBehaviour
         _meshRenderer.gameObject.SetActive(false);
         GetComponent<BoxCollider>().isTrigger = true;
     }
+
+
 }

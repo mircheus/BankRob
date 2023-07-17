@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PerkSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,30 +20,36 @@ public class ExplosionPerk : Perk
             obstacle.ApplyDamage(_explosionDamage);
             PlayFxAt(obstacle.transform.position);
         }
-
+        
         if (other.TryGetComponent(out Roof roof))
         {
-            roof.DestroyRoof();
+            roof.GetDestroyed();
             PlayFxAt(roof.transform.position);
         }
-
-        if (other.TryGetComponent(out Dynamite dynamite))
+        
+        if (other.TryGetComponent(out IDestroyable iDestroyableComponent))
         {
-            dynamite.GetDestroyed();
-            PlayFxAt(dynamite.transform.position);
+            iDestroyableComponent.GetDestroyed();
+            // PlayFxAt(iDestroyableComponent);
         }
 
-        if (other.TryGetComponent(out Cage cage))
-        {
-            cage.GetDestroyed();
-            PlayFxAt(cage.transform.position);
-        }
-
-        if (other.TryGetComponent(out Fridge fridge))
-        {
-            fridge.GetDestroyed();
-            PlayFxAt(fridge.transform.position);
-        }
+        // if (other.TryGetComponent(out Dynamite dynamite))
+        // {
+        //     dynamite.GetDestroyed();
+        //     PlayFxAt(dynamite.transform.position);
+        // }
+        //
+        // if (other.TryGetComponent(out Cage cage))
+        // {
+        //     cage.GetDestroyed();
+        //     PlayFxAt(cage.transform.position);
+        // }
+        //
+        // if (other.TryGetComponent(out Fridge fridge))
+        // {
+        //     fridge.GetDestroyed();
+        //     PlayFxAt(fridge.transform.position);
+        // }
     }
 
     private void PlayFxAt(Vector3 position)

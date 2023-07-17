@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using PerkSystem;
 using UnityEngine;
 
-public class Trap : Barrier
+public class Trap : Barrier, IDestroyable
 {
     [SerializeField] private ParticleSystem _destroyFx;
     [SerializeField] private Obstacle _iceCube;
