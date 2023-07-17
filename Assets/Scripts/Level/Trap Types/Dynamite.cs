@@ -9,7 +9,14 @@ public class Dynamite : Trap
 {
     [SerializeField] private ParticleSystem _fuseFx;
     [SerializeField] private GameObject _dynamiteModel;
- 
+
+    private AudioOneShot _audioOneShot;
+
+    private void Start()
+    {
+        _audioOneShot = GetComponent<AudioOneShot>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
@@ -18,7 +25,7 @@ public class Dynamite : Trap
             {
                 PlayDestroyFx();
                 PlayExplosionSound();
-                robber.GetComponent<RobberMovement>().GetTrappedBy(this);
+                robber.RobberMovement.GetTrappedBy(this);
             }
         }
     }   
@@ -50,6 +57,6 @@ public class Dynamite : Trap
 
     private void PlayExplosionSound()
     {
-        GetComponent<AudioOneShot>().PlayOneShot();
+        _audioOneShot.PlayOneShot();
     }
 }
