@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,13 @@ public class Cage : Trap
     [SerializeField] private GameObject[] _forms;
 
     private int _close = Animator.StringToHash("Close");
+    private AudioOneShot _audioOneShot;
     
+    private void Start()
+    {
+        _audioOneShot = GetComponent<AudioOneShot>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out RobberMovement robberMovement))
@@ -30,7 +37,7 @@ public class Cage : Trap
     {
         _isTrapActive = false;
         PlayDestroyFx();
-        GetComponent<AudioOneShot>().PlayOneShot();
+        _audioOneShot.PlayOneShot();
         _forms[0].SetActive(false);
         _forms[1].SetActive(true);
     }
