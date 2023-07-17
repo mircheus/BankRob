@@ -25,14 +25,9 @@ public class Loader : MonoBehaviour
             for (int j = 0; j < ColumnsQuantity; j++)
             {
                 currentOffset = parent.position + horizontalOffset * j + verticalOffset * i;
-                SetCursorIn(currentOffset, parent);
+                GenerateObjectInPosition(currentOffset, parent);
             }
         }
-    }
-
-    private void SetCursorIn(Vector3 position, Transform parent)
-    {
-        GenerateObjectInPosition(position, parent);
     }
 
     private void SetFloorQuantity(int floorQuantity)
