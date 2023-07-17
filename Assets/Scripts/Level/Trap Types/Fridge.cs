@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,6 +9,13 @@ public class Fridge : Trap
     [SerializeField] private ParticleSystem _frozeFx;
     [SerializeField] private GameObject _fridgeModel;
 
+    private AudioOneShot _audioOneShot;
+
+    private void Start()
+    {
+        _audioOneShot = GetComponent<AudioOneShot>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Robber robber))
@@ -15,7 +23,7 @@ public class Fridge : Trap
             _frozeFx.Play();
             robber.GetFrozen();
             _fridgeModel.SetActive(false);
-            GetComponent<AudioOneShot>().PlayOneShot();
+            _audioOneShot.PlayOneShot();
             StartCoroutine(DeactivateGameObject());
         }
     }
