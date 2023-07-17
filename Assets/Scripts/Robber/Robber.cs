@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(RobberMovement))]
 public class Robber : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer _bodyMesh;
@@ -14,7 +15,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private Perk[] _perks;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
     [SerializeField] private int _maxLevel = 4;
-    
+
     [Header("Debug")]
     [SerializeField] private int _level = 0;
     [SerializeField] private int _columnIndex = -1;
@@ -32,16 +33,7 @@ public class Robber : MonoBehaviour
     public int MaxLevel => _maxLevel;
     public int ColumnIndex => _columnIndex;
     public Shield Shield => _shield;
-
-    private void OnEnable()
-    {
-        GetComponent<RobberMovement>().GetStopped += OnGetStopped;
-    }
-
-    private void OnDisable()
-    {
-        GetComponent<RobberMovement>().GetStopped -= OnGetStopped;
-    }
+    public RobberMovement RobberMovement => _robberMovement;
 
     private void Awake()
     {
@@ -54,6 +46,17 @@ public class Robber : MonoBehaviour
         _level = 0;
         SetColor(_level);
     }
+    
+    private void OnEnable()
+    {
+        _robberMovement.GetStopped += OnGetStopped;
+    }
+
+    private void OnDisable()
+    {
+        _robberMovement.GetStopped -= OnGetStopped;
+    }
+
 
     public int UpgradeLevel()
     {

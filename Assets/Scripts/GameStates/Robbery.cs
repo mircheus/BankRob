@@ -95,7 +95,8 @@ public class Robbery : MonoBehaviour
         
         for (int i = 0; i < _robbers.Count; i++)
         {
-            if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
+            // if (_robbers[i].GetComponent<RobberMovement>().IsGetStopped)
+            if (_robbers[i].RobberMovement.IsGetStopped)
             {
                 UnsubscribeFromRobber(_robbers[i]);
                 _robbers.Remove(_robbers[i]);
