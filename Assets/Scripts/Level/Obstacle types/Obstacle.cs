@@ -20,16 +20,6 @@ public class Obstacle : Barrier
     public event UnityAction Damaged;
     public event UnityAction Destroyed;
 
-    private void OnEnable()
-    {
-        Destroyed += OnDestroyed;
-    }
-
-    private void OnDisable()
-    {
-        Destroyed -= OnDestroyed;
-    }
-
     private void Start()
     {
         _damageFormsAmount = _damagedForms.Length;
@@ -48,6 +38,7 @@ public class Obstacle : Barrier
         if (_health <= 0)
         {
             Destroyed?.Invoke();
+            OnDestroyed();
         }
     }
 
