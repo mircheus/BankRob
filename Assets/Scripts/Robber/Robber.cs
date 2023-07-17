@@ -5,6 +5,7 @@ using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(RobberMovement))]
+[RequireComponent(typeof(AnimationSwitcher))]
 public class Robber : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer _bodyMesh;
@@ -25,6 +26,7 @@ public class Robber : MonoBehaviour
     private Material _shoesMaterial;
     private RobberMovement _robberMovement;
     private ObstacleCrusher _obstacleCrusher;
+    private AnimationSwitcher _animationSwitcher;
 
     public UnityAction<int> Frozen;
     public UnityAction<Robber> ReachedVault;
@@ -43,6 +45,7 @@ public class Robber : MonoBehaviour
         _robberMovement = GetComponent<RobberMovement>();
         _robberMovement.enabled = false;
         _obstacleCrusher = GetComponent<ObstacleCrusher>();
+        _animationSwitcher = GetComponent<AnimationSwitcher>();
         _level = 0;
         SetColor(_level);
     }
@@ -79,6 +82,7 @@ public class Robber : MonoBehaviour
     {
         _robberMovement.enabled = true;
         _axe.SetActive(true);
+        _animationSwitcher.PlayFirstAttack();
     }
 
     public void ActivatePerk()
