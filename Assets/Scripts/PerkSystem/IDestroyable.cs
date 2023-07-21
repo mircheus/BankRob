@@ -1,7 +1,4 @@
-namespace PerkSystem
+public interface IDestroyable
 {
-    public interface IDestroyable
-    {
-        void GetDestroyed();
-    }
+    void GetDestroyed();
 }
