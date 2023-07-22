@@ -12,11 +12,12 @@ public class LoseMenu : MonoBehaviour
     [SerializeField] private RectTransform _nextButtonMobile;
     [SerializeField] private RectTransform _adButtonDesktop;
     [SerializeField] private RectTransform _adButtonMobile;
+    [SerializeField] private LayoutSwitcher _layoutSwitcher;
 
     public RectTransform LossPanel => _lossPanel;
     public RectTransform LossTitle => _lossTitle;
     public Image Dimed => _dimed;
-    public bool IsMobileScreen => GetComponent<LayoutSwitcher>().IsMobileScreen;
+    public bool IsMobileScreen => _layoutSwitcher.IsMobileScreen;
     public RectTransform NextButtonDesktop => _nextButtonDesktop;
     public RectTransform NextButtonMobile => _nextButtonMobile;
     public RectTransform ADButtonDesktop => _adButtonDesktop;
