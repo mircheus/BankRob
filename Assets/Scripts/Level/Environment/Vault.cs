@@ -22,4 +22,9 @@ public class Vault : MonoBehaviour
             robber.ReachedVault?.Invoke(robber);
         }
     }
+
+    public void PlayOpenAnimation()
+    {
+        _animator.Play(_openVault);
+    }
 }
