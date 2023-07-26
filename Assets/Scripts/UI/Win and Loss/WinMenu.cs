@@ -13,13 +13,11 @@ public class WinMenu : MonoBehaviour
     [SerializeField] private RectTransform _nextButtonMobile;
     [SerializeField] private RectTransform _adButtonDesktop;
     [SerializeField] private RectTransform _adButtonMobile;
-    [SerializeField] private LayoutSwitcher _layoutSwitcher;
 
     public RectTransform WinPanel => _winPanel;
     public RectTransform WinTitle => _winTitle;
     public RectTransform ADButtonDesktop => _adButtonDesktop;
     public RectTransform ADButtonMobile => _adButtonMobile;
-    public bool IsMobileScreen => _layoutSwitcher.IsMobileScreen;
     public Image Dimed => _dimed;
     public RectTransform NewItem => _newItem;
     public RectTransform NextButtonDesktop => _nextButtonDesktop;

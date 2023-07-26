@@ -9,25 +9,44 @@ public class LayoutSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject _verticalButtons;
     [SerializeField] private GameObject _horizontalButtons;
-
-    private bool _isMobileScreen = false;
-
-    public bool IsMobileScreen => _isMobileScreen;
+    [SerializeField] private AspectRatioChecker _aspectRatioChecker;
 
     private void OnEnable()
     {
-        if (OffsetEnabler.GetAspectRatio() < 1)
+        _aspectRatioChecker.AspectRatioChanged += OnAspectRatioChanged;
+        SetInitialLayout();
+    }
+
+    private void OnDisable()
+    {
+        _aspectRatioChecker.AspectRatioChanged -= OnAspectRatioChanged;
+    }
+
+    private void OnAspectRatioChanged()
+    {
+        if (_aspectRatioChecker.IsMobileScreen)
+        {
+            SwitchToHorizontalLayout();
+        }
+
+        if (_aspectRatioChecker.IsMobileScreen == false)
         {
             SwitchToVerticalLayout();
-            _isMobileScreen = true;
+        }
+    }
+
+    private void SetInitialLayout()
+    {
+        if (_aspectRatioChecker.AspectRatio < 1)
+        {
+            SwitchToVerticalLayout();
         }
         else
         {
             SwitchToHorizontalLayout();
-            _isMobileScreen = false;
         }
     }
-
+    
     private void SwitchToVerticalLayout()
     {
         _verticalButtons.SetActive(true);
@@ -39,4 +58,6 @@ public class LayoutSwitcher : MonoBehaviour
         _verticalButtons.SetActive(false);
         _horizontalButtons.SetActive(true);
     }
+
+
 }

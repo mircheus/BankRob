@@ -37,6 +37,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Robbery _robbery;
     [SerializeField] private RobStarter _robStarter;
     [SerializeField] private Shop _shop;
+    // [SerializeField] private AspectRatioChecker _aspectRatioChecker;
 
     [Header("PlayerData")] 
     [SerializeField] private PlayerData _playerData;
@@ -95,17 +96,11 @@ public class MenuManager : MonoBehaviour
         MenuAnimator.FadeIn(winMenu.Dimed);
         MenuAnimator.MoveWinTitle(winMenu.WinPanel, winMenu.WinTitle);
         MenuAnimator.ZoomInElement(winMenu.NewItem);
-
-        if (winMenu.IsMobileScreen)
-        {
-            MenuAnimator.ZoomInElement(winMenu.NextButtonMobile);
-            MenuAnimator.ZoomInAndPulsateButton(winMenu.ADButtonMobile);
-        }
-        else
-        {
-            MenuAnimator.ZoomInElement(winMenu.NextButtonDesktop);
-            MenuAnimator.ZoomInAndPulsateButton(winMenu.ADButtonDesktop);
-        }
+        
+        MenuAnimator.ZoomInElement(winMenu.NextButtonMobile);
+        MenuAnimator.ZoomInAndPulsateButton(winMenu.ADButtonMobile);
+        MenuAnimator.ZoomInElement(winMenu.NextButtonDesktop);
+        MenuAnimator.ZoomInAndPulsateButton(winMenu.ADButtonDesktop);
     }
 
     public void ShowEndgameMenu(LoseMenu loseMenu)
@@ -114,17 +109,8 @@ public class MenuManager : MonoBehaviour
         loseMenu.gameObject.SetActive(true);
         MenuAnimator.FadeIn(loseMenu.Dimed);
         MenuAnimator.MoveWinTitle(loseMenu.LossPanel, loseMenu.LossTitle);
-
-        if (loseMenu.IsMobileScreen)
-        {
-            MenuAnimator.ZoomInElement(loseMenu.NextButtonMobile);
-            MenuAnimator.ZoomInAndPulsateButton(loseMenu.ADButtonMobile);
-        }
-        else
-        {
-            MenuAnimator.ZoomInElement(loseMenu.NextButtonDesktop);
-            MenuAnimator.ZoomInAndPulsateButton(loseMenu.ADButtonDesktop);
-        }
+        MenuAnimator.ZoomInElement(loseMenu.NextButtonDesktop);
+        MenuAnimator.ZoomInElement(loseMenu.NextButtonMobile);
     }
 
     public void TryOpenLeaderboard()
