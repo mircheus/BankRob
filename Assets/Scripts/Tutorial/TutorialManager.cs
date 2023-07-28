@@ -88,7 +88,8 @@ public class TutorialManager : MonoBehaviour
 
     private void ShowPerkTutorial()
     {
-        _timeChanger.EnableSlowmo();
+        // _timeChanger.EnableSlowmo();
+        _timeChanger.StopTime();
         ShowNextTutorialPanel();
         _dimed2.gameObject.SetActive(true);
         _perksPanel.gameObject.SetActive(true);

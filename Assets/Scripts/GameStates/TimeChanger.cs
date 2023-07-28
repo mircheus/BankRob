@@ -37,6 +37,11 @@ public class TimeChanger : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void StopTime()
+    {
+        Time.timeScale = 0f;
+    }
+
     private void OnBankRobbed()
     {
         SlowdownTime();
