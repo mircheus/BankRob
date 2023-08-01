@@ -21,11 +21,22 @@ public class LocaleSelector : MonoBehaviour
 
     public event UnityAction<int> LocaleChanged;
 
-    private void Start()
+    public void SwitchLanguageTo(string code)
     {
-#if UNITY_WEBGL && !UNITY_EDITOR
-        SwitchLanguageTo(YandexGamesSdk.Environment.i18n.lang);
-#endif
+        switch (code)
+        {
+            case EnglishCode:
+                StartCoroutine(SetLocale(EnglishCodeId));
+                break;
+            
+            case RussianCode:
+                StartCoroutine(SetLocale(RussianCodeId));
+                break;
+            
+            case TurkishCode:
+                StartCoroutine(SetLocale(TurkishCodeId));
+                break;
+        }
     }
 
     public void ChangeLocale(int localeId)
@@ -46,24 +57,5 @@ public class LocaleSelector : MonoBehaviour
         yield return LocalizationSettings.InitializationOperation;
         LocaleChanged?.Invoke(localeId);
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[localeId];
-    }
-
-    private void SwitchLanguageTo(string code)
-    {
-        switch (code)
-        {
-            case EnglishCode:
-                StartCoroutine(SetLocale(EnglishCodeId));
-                break;
-            
-            case RussianCode:
-                StartCoroutine(SetLocale(RussianCodeId));
-                break;
-            
-            case TurkishCode:
-                StartCoroutine(SetLocale(TurkishCodeId));
-                break;
-        }
-            
     }
 }
