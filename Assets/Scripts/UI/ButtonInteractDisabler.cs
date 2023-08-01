@@ -7,45 +7,32 @@ using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEditor;
 
-public class AdButtonDisabler : MonoBehaviour
+public class ButtonInteractDisabler : MonoBehaviour
 {
-    protected const float HalfTransparent = 0.5f;
-    private const float TwoSeconds = 2f;
+    private const float HalfTransparent = 0.5f;
     
     [SerializeField] private Button _button;
-    // [SerializeField] private Image _adIcon;
-    // [SerializeField] private Image _moneyIcon;
     [SerializeField] private Image[] _imagesToGreyOut;
-    [SerializeField] private TMP_Text _adText;
+    [SerializeField] private TMP_Text _text;
 
-    public void DisableButton()
+    public void DisableButtonWithTweens()
     {
-        _button.interactable = false;
-        StartCoroutine(KillTweenWithDelay());
-    }
-
-    private IEnumerator KillTweenWithDelay()
-    {
-        yield return new WaitForSeconds(TwoSeconds);
         MenuAnimator.KillAllTweens();
         MakeNotInteractable();
     }
 
-    public virtual void MakeNotInteractable()
+    public void MakeNotInteractable()
     {
-        // var image = _adIcon;
-        // var tempColor = image.color;
-        // tempColor.a = HalfTransparent;
-        // image.color = tempColor;
         MakeImagesGreyedOut();
-        var text = _adText;
+        var text = _text;
         var textColor = text.color;
         textColor.a = HalfTransparent;
         text.color = textColor;
         _button.GetComponent<RectTransform>().localScale = Vector3.one;
+        _button.interactable = false;
     }
 
-    protected virtual void MakeImagesGreyedOut()
+    private void MakeImagesGreyedOut()
     {
         foreach (var imageToGreyOut in _imagesToGreyOut)
         {

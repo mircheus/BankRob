@@ -8,14 +8,11 @@ using UnityEngine.UI;
 
 public class PriceIndicator : MonoBehaviour
 {
-    private const string PlusOne = "+1";
-    
     [SerializeField] private TMP_Text _price;
     [SerializeField] private EconomicProgression _economicProgression;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Shop _shop;
-    [SerializeField] private Image _moneyIcon;
-    [SerializeField] private Image _adIcon;
+    [SerializeField] private ButtonInteractDisabler _buttonInteractDisabler;
 
     private void OnEnable()
     {
@@ -48,8 +45,6 @@ public class PriceIndicator : MonoBehaviour
     
     private void OnAllMoneySpent()
     {
-        _moneyIcon.gameObject.SetActive(false);
-        _adIcon.gameObject.SetActive(true);
-        _price.text = PlusOne;
+        _buttonInteractDisabler.MakeNotInteractable();
     }
 }

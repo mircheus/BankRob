@@ -15,8 +15,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private RobbersPool _robbersPool;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private EconomicProgression _economicProgression;
-    [SerializeField] private AdPlayer _adPlayer;
-    [SerializeField] private Button _buyButton;
     
     [Header("Shop settings")]
     [SerializeField] private int _poolCapacity;
@@ -65,32 +63,6 @@ public class Shop : MonoBehaviour
             {
                 AllSlotsBusy?.Invoke();
             }
-        }
-        else
-        {
-            if (_isBoughtForAd == false)
-            {
-                if (_grid.IsAnySlotAvailable())
-                {
-                    BuyRobberForAd();
-                    _buyButton.GetComponent<AdButtonDisabler>().MakeNotInteractable();
-                    _buyButton.interactable = false;
-                }
-                else
-                {
-                    AllSlotsBusy?.Invoke();
-                }
-            }
-        }
-    }
-
-    private void BuyRobberForAd()
-    {
-        if (IsAllMoneySpent())
-        {
-            _adPlayer.OnShowVideoButtonClick();
-            GetNewRobber();
-            _isBoughtForAd = true;
         }
     }
 
