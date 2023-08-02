@@ -117,6 +117,7 @@ public class PlayerData : MonoBehaviour
     private void OnVideoAdPlayed()
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
+        DataUpdated?.Invoke();
         SaveCurrentPlayerStats();
         _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
     }
