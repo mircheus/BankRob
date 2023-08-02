@@ -15,7 +15,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private RobbersPool _robbersPool;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private EconomicProgression _economicProgression;
-    
+    [SerializeField] private AdPlayer _adPlayer;
+
     [Header("Shop settings")]
     [SerializeField] private int _poolCapacity;
     
@@ -31,11 +32,13 @@ public class Shop : MonoBehaviour
     private void OnEnable()
     {
         _playerData.DataLoaded += OnDataLoaded;
+        // _adPlayer.ExtraRobberGot += OnExtraRobberGot;
     }
-
+    
     private void OnDisable()
     {
         _playerData.DataLoaded -= OnDataLoaded;
+        // _adPlayer.ExtraRobberGot -= OnExtraRobberGot;
     }
 
     private void Start()
@@ -44,7 +47,7 @@ public class Shop : MonoBehaviour
         _isBoughtForAd = false;
     }
 
-    public void TryBuyRobber()
+    public void TryBuyRobberTEST()
     {
         if (IsEnoughMoney)
         {
@@ -68,6 +71,39 @@ public class Shop : MonoBehaviour
         {
             NotEnoughMoney?.Invoke();
         }
+    }
+    
+    public void TryBuyRobber()
+    {
+        if (_grid.IsAnySlotAvailable())
+        {
+            if (IsEnoughMoney)
+            {
+                GetNewRobber();
+                _playerData.PayForRobber(_economicProgression.CurrentPrice);
+                BuyingRobber?.Invoke();
+            }
+            else
+            {
+                NotEnoughMoney?.Invoke();
+            }
+        }
+        else
+        {
+            AllSlotsBusy?.Invoke();
+        }
+    }
+
+    public void BuyRobberForAd()
+    {
+        _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
+        _adPlayer.ShowVideoAd();
+    }
+
+    private void OnVideoAdPlayed()
+    {
+        GetNewRobber();
+        _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
     }
 
     private void GetNewRobber()
@@ -123,4 +159,10 @@ public class Shop : MonoBehaviour
     {
         return _economicProgression.CurrentPrice > _playerData.MoneyAmount;
     }
+    
+    private void OnExtraRobberGot()
+    {
+        GetNewRobber();
+    }
+
 }

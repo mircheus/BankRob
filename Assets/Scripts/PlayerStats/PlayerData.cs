@@ -45,7 +45,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankRobbed += OnBankRobbed;
         _robbery.BankNotRobbed += OnBankNotRobbed;
         _preparing.PreparingStarted += OnPreparing;
-        _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
+        // _adPlayer.MoneyDoubled += OnMoneyDoubled;
         _grid.RobbersCombined += OnRobbersCombined;
     }
 
@@ -54,7 +54,7 @@ public class PlayerData : MonoBehaviour
         _robbery.BankRobbed -= OnBankRobbed;
         _robbery.BankNotRobbed -= OnBankNotRobbed;
         _preparing.PreparingStarted -= OnPreparing;
-        _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
+        // _adPlayer.MoneyDoubled -= OnMoneyDoubled;
         _grid.RobbersCombined -= OnRobbersCombined;
     }
 
@@ -73,6 +73,12 @@ public class PlayerData : MonoBehaviour
     public void AuthorizeBy(Authorization authorization)
     {
         _isAuthorized = true;
+    }
+
+    public void DoubleMoneyForAd()
+    {
+        _adPlayer.VideoAdPlayed += OnVideoAdPlayed;
+        _adPlayer.ShowVideoAd();
     }
 
     private void OnPreparing()
@@ -112,6 +118,7 @@ public class PlayerData : MonoBehaviour
     {
         _moneyAmount += _robbery.MoneyRewardAmount;
         SaveCurrentPlayerStats();
+        _adPlayer.VideoAdPlayed -= OnVideoAdPlayed;
     }
 
     private void OnRobbersCombined(int level)
