@@ -54,15 +54,19 @@ public class Shop : MonoBehaviour
                 _playerData.PayForRobber(_economicProgression.CurrentPrice);
                 BuyingRobber?.Invoke();
                 
-                if (IsAllMoneySpent())
-                {
-                    AllMoneySpent?.Invoke();
-                }
+                // if (IsAllMoneySpent())
+                // {
+                //     AllMoneySpent?.Invoke();
+                // }
             }
             else
             {
                 AllSlotsBusy?.Invoke();
             }
+        }
+        else
+        {
+            NotEnoughMoney?.Invoke();
         }
     }
 

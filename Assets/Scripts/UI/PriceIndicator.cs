@@ -12,20 +12,20 @@ public class PriceIndicator : MonoBehaviour
     [SerializeField] private EconomicProgression _economicProgression;
     [SerializeField] private PlayerData _playerData;
     [SerializeField] private Shop _shop;
-    [SerializeField] private ButtonInteractDisabler _buttonInteractDisabler;
+    // [SerializeField] private ButtonInteractDisabler _buttonInteractDisabler;
 
     private void OnEnable()
     {
         _economicProgression.PriceUpdated += OnPriceUpdated;
         _playerData.DataLoaded += OnDataLoaded;
-        _shop.AllMoneySpent += OnAllMoneySpent;
+        // _shop.AllMoneySpent += OnAllMoneySpent;
     }
 
     private void OnDisable()
     {
         _economicProgression.PriceUpdated -= OnPriceUpdated;
         _playerData.DataLoaded -= OnDataLoaded;
-        _shop.AllMoneySpent -= OnAllMoneySpent;
+        // _shop.AllMoneySpent -= OnAllMoneySpent;
     }
 
     private void OnPriceUpdated()
@@ -45,6 +45,6 @@ public class PriceIndicator : MonoBehaviour
     
     private void OnAllMoneySpent()
     {
-        _buttonInteractDisabler.MakeNotInteractable();
+        // _buttonInteractDisabler.MakeNotInteractable();
     }
 }
