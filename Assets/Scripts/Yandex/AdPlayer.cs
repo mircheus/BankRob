@@ -14,9 +14,6 @@ public class AdPlayer : MonoBehaviour
 
     public bool AdIsPlaying => _adIsPlaying;
     
-    // public event UnityAction MoneyDoubled;
-    // public event UnityAction ExtraRobberGot;
-    
     public event UnityAction VideoAdPlayed;
     
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -26,43 +23,17 @@ public class AdPlayer : MonoBehaviour
     }
 #endif
     
-//     public void OnDoubleMoney()
-//     {   
-//         MoneyDoubled?.Invoke();
-// #if UNITY_WEBGL && !UNITY_EDITOR
-// #endif
-//         VideoAd.Show(OnPlayed, OnMoneyDouble,OnClosed);
-//     }
-
-//     public void OnGetExtraRobber()
-//     {
-//         ExtraRobberGot?.Invoke();
-// #if UNITY_WEBGL && !UNITY_EDITOR
-// #endif
-//         VideoAd.Show(OnPlayed, OnRewardedRobber,OnClosed);
-//     }
-    
-    public void ShowVideoAd() // TEST
+    public void ShowVideoAd()
     {
-        // OnRewarded(); // TEST
+        // OnRewarded();
 #if UNITY_WEBGL && !UNITY_EDITOR
         VideoAd.Show(OnPlayed, OnRewarded,OnClosed);
 #endif
     }
 
-    // private void OnMoneyDouble()
-    // {
-    //     MoneyDoubled?.Invoke();
-    // }
-    
-    // private void OnRewardedRobber()
-    // {
-    //     ExtraRobberGot?.Invoke();
-    // }
-
     private void OnRewarded()
     {
-        VideoAdPlayed?.Invoke(); // TEST
+        VideoAdPlayed?.Invoke();
     }
 
     private void OnClosed()

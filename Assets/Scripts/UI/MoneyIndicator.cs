@@ -42,6 +42,7 @@ public class MoneyIndicator : MonoBehaviour
     private void OnDataUpdated()
     {
         ShowMoneyAmount();
+        ShowDoubleRewardAmount();
     }
 
     private void OnBankRobbed()
@@ -57,5 +58,12 @@ public class MoneyIndicator : MonoBehaviour
     private void ShowRewardAmount()
     {
         _rewardMoney.text = PlusSign + _robbery.MoneyRewardAmount;
+    }
+    
+    private void ShowDoubleRewardAmount()
+    {
+        int doubleReward = _robbery.MoneyRewardAmount * 2;
+        string doubleRewardString = doubleReward.ToString();
+        _rewardMoney.text = PlusSign + doubleRewardString;
     }
 }
