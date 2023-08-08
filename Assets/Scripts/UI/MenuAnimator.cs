@@ -21,7 +21,7 @@ public class MenuAnimator
 
     public static void DragMenuDown(RectTransform menu)
     {
-        menu.DOAnchorPos(Vector2.zero, AnimationDuration).SetUpdate(true);;
+        menu.DOAnchorPos(Vector2.zero, AnimationDuration).SetUpdate(true);
     }
 
     public static void DragMenuUp(RectTransform menu)
