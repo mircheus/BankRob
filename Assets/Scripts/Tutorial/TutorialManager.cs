@@ -70,6 +70,7 @@ public class TutorialManager : MonoBehaviour
     public void PressRobButton()
     {
         _dimed1.gameObject.SetActive(false);
+        _perksPanel.gameObject.SetActive(false);
         StartCoroutine(ShowPerkTutorialWithDelay());
     }
 
