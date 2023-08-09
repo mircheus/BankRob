@@ -23,6 +23,7 @@ public class RobberMovement : MonoBehaviour
     private bool _isShieldActive = false;
     private bool _isDashActive = false;
     private bool _isGetStopped = false;
+    private bool _isRotated = false;
     private int _runAwayTargetCounter = 0;
 
     public bool IsDashActive => _isDashActive;
@@ -31,6 +32,7 @@ public class RobberMovement : MonoBehaviour
     public float IncreasedSpeed => _increasedSpeed;
     
     public event UnityAction GetStopped;
+    public event UnityAction ReachedVault;
 
     private void OnEnable()
     {
@@ -104,6 +106,7 @@ public class RobberMovement : MonoBehaviour
     public void SetRunAwayTargets(Transform[] runAwayTargets)
     {
         _runAwayTargets = runAwayTargets;
+        ReachedVault?.Invoke();
     }
 
     private void MoveTo(Vector3 target)
@@ -142,6 +145,17 @@ public class RobberMovement : MonoBehaviour
         {
             _currentTarget = _runAwayTargets[_runAwayTargetCounter];
             _runAwayTargetCounter++;
+        }
+    }
+
+    public void RotateRight()
+    {
+        // transform.rotation.SetLookRotation(Vector3.right, Vector3.up);
+        // transform.rotation = Vector3.rot
+        if (_isRotated == false)
+        {
+            transform.Rotate(Vector3.up, 90f);
+            _isRotated = true;
         }
     }
 }

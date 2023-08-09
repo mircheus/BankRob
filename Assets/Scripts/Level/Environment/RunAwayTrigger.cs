@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class RunAwayTrigger : MonoBehaviour
 {
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if (other.TryGetComponent(out Robber robber))
-    //     {
-    //         robber.RobberMovement.TurnRightAndRunAway();
-    //     }
-    // }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Robber robber))
+        {
+            robber.RobberMovement.RotateRight();
+        }
+    }
 }
