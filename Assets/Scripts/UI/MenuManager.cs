@@ -42,7 +42,7 @@ public class MenuManager : MonoBehaviour
     [Header("PlayerData")] 
     [SerializeField] private PlayerData _playerData;
 
-    private WaitForSeconds _waitForAnimationDuration = new WaitForSeconds(MenuAnimator.AnimationDuration);
+    private WaitForSecondsRealtime _waitForAnimationDuration = new WaitForSecondsRealtime(MenuAnimator.AnimationDuration);
     private Tween _adButtonTween;
 
     private void OnEnable()
@@ -181,9 +181,9 @@ public class MenuManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private IEnumerator DisableIn(WaitForSeconds waitForSeconds, PopUp menu)
+    private IEnumerator DisableIn(WaitForSecondsRealtime waitForSecondsRealtime, PopUp menu)
     {
-        yield return waitForSeconds;
+        yield return waitForSecondsRealtime;
         menu.gameObject.SetActive(false);
     }
 }

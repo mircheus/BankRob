@@ -96,7 +96,8 @@ public class PlayerData : MonoBehaviour
 #if UNITY_WEBGL && !UNITY_EDITOR
         if (PlayerAccount.IsAuthorized)
         {
-            Leaderboard.SetScore(_leaderboardLoader.LeaderboardName, _allMoneyCounter);
+            // Leaderboard.SetScore(_leaderboardLoader.LeaderboardName, _allMoneyCounter);
+            TryRegisterNewMaxScore();
         }
 #endif
         
@@ -154,6 +155,22 @@ public class PlayerData : MonoBehaviour
     private void SaveCurrentPlayerStats()
     {
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _robbersToSave, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel, _isTryAgain, _isAuthorized);
+    }
+    
+    private bool TryRegisterNewMaxScore()
+    {
+        // Leaderboard.GetPlayerEntry(_leaderboardLoader.LeaderboardName, RegisterNewMaxScore);
+        bool isCurrentScoreNewMaxScore = false;
+        Leaderboard.GetPlayerEntry(_leaderboardLoader.LeaderboardName, (result =>
+        {
+            if (_allMoneyCounter > result.score)
+            {
+                Leaderboard.SetScore(_leaderboardLoader.LeaderboardName, _allMoneyCounter);
+                isCurrentScoreNewMaxScore = true;
+            }
+        }));
+
+        return isCurrentScoreNewMaxScore;
     }
 
     private void SetPlayerStats(int moneyAmount, int allMoneyCounter, int completedLevelsAmount, int floorsAmount, int[] aliveRobbers, int achievedLevels, int currentPrice, int currentReward, bool isTryAgain)
