@@ -59,8 +59,7 @@ public class Robber : MonoBehaviour
     {
         _robberMovement.GetStopped -= OnGetStopped;
     }
-
-
+    
     public int UpgradeLevel()
     {
         if (_level < _levelColors.Length)

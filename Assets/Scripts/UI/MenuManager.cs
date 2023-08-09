@@ -128,7 +128,8 @@ public class MenuManager : MonoBehaviour
 
     private void OnBankRobbed()
     {
-        ShowEndgameMenu(_winMenu);
+        // ShowEndgameMenu(_winMenu);
+        StartCoroutine(ShowMenuWithDelay());
     }
 
     private void OnBankNotRobbed()
@@ -179,6 +180,12 @@ public class MenuManager : MonoBehaviour
     private void ContinueTime()
     {
         Time.timeScale = 1f;
+    }
+
+    private IEnumerator ShowMenuWithDelay()
+    {
+        yield return new WaitForSecondsRealtime(1.5f); // TESTIN TODO: remove magic number
+        ShowEndgameMenu(_winMenu);
     }
 
     private IEnumerator DisableIn(WaitForSecondsRealtime waitForSecondsRealtime, PopUp menu)

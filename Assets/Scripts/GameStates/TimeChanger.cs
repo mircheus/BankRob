@@ -44,12 +44,12 @@ public class TimeChanger : MonoBehaviour
 
     private void OnBankRobbed()
     {
-        SlowdownTime();
+        // SlowdownTime();
     }
 
     private void OnBankNotRobbed()
     {
-        SlowdownTime();
+        // SlowdownTime();
     }
 
     private void SlowdownTime()

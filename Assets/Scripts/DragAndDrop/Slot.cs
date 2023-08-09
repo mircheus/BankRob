@@ -71,7 +71,7 @@ public class Slot : MonoBehaviour
         PlaceRobberInCellCenter(_robberDragger);
         _robberDragger.SetOffset(_offset);
         _robberDragger.SetLastParentTransform(gameObject.transform);
-        SetDownTargetForRobber(_robber);
+        SetTargetForRobber(_robber);
         _robber.gameObject.SetActive(true);
         _isFilled = true;
     }
@@ -92,9 +92,10 @@ public class Slot : MonoBehaviour
         PlayCombineFx(level);
     }
 
-    private void SetDownTargetForRobber(Robber robber)
+    private void SetTargetForRobber(Robber robber)
     {
-        robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget);
+        robber.RobberMovement.SetTarget(_downTarget);
+        // robber.GetComponent<RobberMovement>().SetDownTarget(_downTarget); // todo: remove comment
     }
     
     private void PlayCombineFx(int level)

@@ -83,7 +83,7 @@ public class MenuAnimator
 
     public static void ZoomInElement(RectTransform element)
     {
-        Tween tween = element.DOScale(new Vector3(1f, 1f, 0), AnimationDuration);
+        Tween tween = element.DOScale(new Vector3(1f, 1f, 1f), AnimationDuration);
         tween.SetUpdate(true);
     }
 

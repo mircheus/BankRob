@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine.Utility;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,7 +11,10 @@ public class RobberMovement : MonoBehaviour
     [SerializeField] float _defaultSpeed = 5f;
     
     [Header("Debug")]
-    [SerializeField] private Vector3 _currentTarget;
+    [SerializeField] private Transform _currentTarget;
+    [SerializeField] private Transform[] _runAwayTargets;
+    [SerializeField] private Transform _runAwayTarget;
+    [SerializeField] private Transform _runAwayTarget2;
     [SerializeField] private float _currentSpeed;
     [SerializeField] private float _increasedSpeed;
 
@@ -19,6 +23,7 @@ public class RobberMovement : MonoBehaviour
     private bool _isShieldActive = false;
     private bool _isDashActive = false;
     private bool _isGetStopped = false;
+    private int _runAwayTargetCounter = 0;
 
     public bool IsDashActive => _isDashActive;
     public bool IsGetStopped => _isGetStopped;
@@ -45,19 +50,19 @@ public class RobberMovement : MonoBehaviour
 
     private void Start()
     {
-        _currentTarget = _downTarget.position;
+        _currentTarget = _downTarget;
         _currentSpeed = _defaultSpeed;
     }
     
     private void Update()
     {
-        MoveTo(_currentTarget);
+        MoveTo(_currentTarget.position);
     }
     
-    public void SetDownTarget(Transform target)
+    public void SetTarget(Transform target)
     {
         _downTarget = target;
-        _currentTarget = target.position;
+        _currentTarget = target;
     }
 
     public void GetTrappedBy(Trap trap)
@@ -95,14 +100,19 @@ public class RobberMovement : MonoBehaviour
     {
         _isShieldActive = value;
     }
-    
+
+    public void SetRunAwayTargets(Transform[] runAwayTargets)
+    {
+        _runAwayTargets = runAwayTargets;
+    }
+
     private void MoveTo(Vector3 target)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, _currentSpeed * Time.deltaTime);
 
         if (Math.Abs(transform.position.y - target.y) < .1f)
         {
-            _currentTarget = _downTarget.position;
+            SetNextRunAwayTarget();
         }
     }
     
@@ -124,5 +134,14 @@ public class RobberMovement : MonoBehaviour
     private void OnGetStopped()
     {
         _isGetStopped = true;
+    }
+
+    private void SetNextRunAwayTarget()
+    {
+        if (_runAwayTargetCounter < _runAwayTargets.Length)
+        {
+            _currentTarget = _runAwayTargets[_runAwayTargetCounter];
+            _runAwayTargetCounter++;
+        }
     }
 }
