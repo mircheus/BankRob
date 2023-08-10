@@ -12,6 +12,7 @@ public class Robber : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer _sweaterMesh;
     [SerializeField] private SkinnedMeshRenderer _shoesMesh;
     [SerializeField] private GameObject _axe;
+    [SerializeField] private MoneyBag _moneyBag;
     [SerializeField] private Shield _shield;
     [SerializeField] private Perk[] _perks;
     [SerializeField] private Color[] _levelColors = new [] { Color.yellow , Color.green, Color.blue, Color.magenta, Color.red, Color.white, };
@@ -53,11 +54,13 @@ public class Robber : MonoBehaviour
     private void OnEnable()
     {
         _robberMovement.GetStopped += OnGetStopped;
+        _robberMovement.ReachedVault += OnReachedVault;
     }
 
     private void OnDisable()
     {
         _robberMovement.GetStopped -= OnGetStopped;
+        _robberMovement.ReachedVault -= OnReachedVault;
     }
     
     public int UpgradeLevel()
@@ -122,5 +125,11 @@ public class Robber : MonoBehaviour
     private void OnGetStopped()
     {
         _robberMovement.enabled = false;
+    }
+    
+    private void OnReachedVault()
+    {
+        _moneyBag.gameObject.SetActive(true);
+        _axe.gameObject.SetActive(false);
     }
 }

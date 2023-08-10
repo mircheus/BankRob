@@ -17,6 +17,7 @@ public class RobberMovement : MonoBehaviour
     [SerializeField] private Transform _runAwayTarget2;
     [SerializeField] private float _currentSpeed;
     [SerializeField] private float _increasedSpeed;
+    [SerializeField] private int _runAwayTargetCounter = 0;
 
     private Transform _downTarget;
     private Obstacle _currentObstacle;
@@ -24,7 +25,6 @@ public class RobberMovement : MonoBehaviour
     private bool _isDashActive = false;
     private bool _isGetStopped = false;
     private bool _isRotated = false;
-    private int _runAwayTargetCounter = 0;
 
     public bool IsDashActive => _isDashActive;
     public bool IsGetStopped => _isGetStopped;
@@ -112,8 +112,8 @@ public class RobberMovement : MonoBehaviour
     private void MoveTo(Vector3 target)
     {
         transform.position = Vector3.MoveTowards(transform.position, target, _currentSpeed * Time.deltaTime);
-
-        if (Math.Abs(transform.position.y - target.y) < .1f)
+            
+        if (Math.Abs(transform.position.y - target.y) < .01f)
         {
             SetNextRunAwayTarget();
         }
@@ -141,6 +141,7 @@ public class RobberMovement : MonoBehaviour
 
     private void SetNextRunAwayTarget()
     {
+        
         if (_runAwayTargetCounter < _runAwayTargets.Length)
         {
             _currentTarget = _runAwayTargets[_runAwayTargetCounter];
