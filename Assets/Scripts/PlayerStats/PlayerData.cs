@@ -16,6 +16,7 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private Grid _grid;
     [SerializeField] private RobbersSaver _robbersSaver;
     [SerializeField] private LeaderboardLoader _leaderboardLoader;
+    [SerializeField] private VolumeChanger _volumeChanger;
 
     [Header("DEBUG data values")]
     [SerializeField] private int _keysAmount;
@@ -27,6 +28,8 @@ public class PlayerData : MonoBehaviour
     [SerializeField] private int _achievedLevels;
     [SerializeField] private bool _isTryAgain;
     [SerializeField] private bool _isAuthorized;
+    // [SerializeField] private float _masterVolume;
+    // [SerializeField] private float _musicVolume;
 
     public event UnityAction DataUpdated;
     public event UnityAction DataLoaded;
@@ -104,7 +107,6 @@ public class PlayerData : MonoBehaviour
         _robbersToSave = _robbersSaver.RobbersToSave;
         _completedLevelsCounter++;
         _isTryAgain = false;
-        PlayerPrefs.SetInt(IsAuthorizedPlayerPref, Convert.ToInt32(_isAuthorized));
         SaveCurrentPlayerStats();
     }
 
@@ -155,6 +157,8 @@ public class PlayerData : MonoBehaviour
     private void SaveCurrentPlayerStats()
     {
         SavePlayerStats(_moneyAmount, _allMoneyCounter, _keysAmount, _completedLevelsCounter, barriersProgression.FloorsQuantity, _robbersToSave, _achievedLevels, _economicProgression.CurrentPrice, _economicProgression.RewardToNextLevel, _isTryAgain, _isAuthorized);
+        PlayerPrefs.SetInt(IsAuthorizedPlayerPref, Convert.ToInt32(_isAuthorized));
+        _volumeChanger.SaveVolumeSettings();
     }
     
     private bool TryRegisterNewMaxScore()

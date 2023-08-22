@@ -12,6 +12,7 @@ public class MenuManager : MonoBehaviour
 {
     [Header("Menus")]
     [SerializeField] private WinMenu _winMenu;
+    [SerializeField] private float _winMenuShowDelay;
     [SerializeField] private LoseMenu _loseMenu;
     [SerializeField] private PopUp _leaderboard;
 
@@ -184,7 +185,7 @@ public class MenuManager : MonoBehaviour
 
     private IEnumerator ShowMenuWithDelay()
     {
-        yield return new WaitForSecondsRealtime(1.5f); // TESTIN TODO: remove magic number
+        yield return new WaitForSecondsRealtime(_winMenuShowDelay); // TESTING TODO: remove magic number
         ShowEndgameMenu(_winMenu);
     }
 
