@@ -9,6 +9,7 @@ public class ScreenAdaptation : MonoBehaviour
 {
     [SerializeField] private Vector3 _mobileDistance;
     [SerializeField] private Vector3 _desktopDistance;
+    [SerializeField] private float _edgeValue;
 
     private void Update()
     {
@@ -19,11 +20,11 @@ public class ScreenAdaptation : MonoBehaviour
     {
         float aspectRatio = (float)Screen.width / (float)Screen.height;
         
-        if (aspectRatio < 1)
+        if (aspectRatio < _edgeValue)
         {
             transform.position = _mobileDistance;
         }
-        else if (aspectRatio > 1)
+        else if (aspectRatio > _edgeValue)
         {
             transform.position = _desktopDistance;
         }

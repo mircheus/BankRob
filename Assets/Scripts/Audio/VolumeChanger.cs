@@ -9,6 +9,7 @@ public class VolumeChanger : MonoBehaviour
 {
     private const string MasterVolume = "MasterVolume";
     private const string MusicVolume = "MusicVolume";
+    private const string IsSettingsSavedByPlayer = "IsSettingsSavedByPlayer";
     private const int MaxMasterVolume = 0;
     private const int MaxMusicVolume = -10;
     private const int ZeroVolume = -80;
@@ -38,13 +39,20 @@ public class VolumeChanger : MonoBehaviour
         // _audioMixer.GetFloat(MusicVolume, out float musicVolume);
         PlayerPrefs.SetFloat(MasterVolume, _masterVolumeSlider.value);
         PlayerPrefs.SetFloat(MusicVolume, _musicVolumeSlider.value);
+        PlayerPrefs.SetInt(IsSettingsSavedByPlayer, 1);
     }
 
     private void SetVolumeSettings()
     {
-        // _audioMixer.SetFloat(MasterVolume, PlayerPrefs.GetFloat(MasterVolume));
-        // _audioMixer.SetFloat(MusicVolume, PlayerPrefs.GetFloat(MusicVolume));
-        _masterVolumeSlider.value = PlayerPrefs.GetFloat(MasterVolume);
-        _musicVolumeSlider.value = PlayerPrefs.GetFloat(MusicVolume);
+        if (PlayerPrefs.GetInt(IsSettingsSavedByPlayer) == 1)
+        {
+            _masterVolumeSlider.value = PlayerPrefs.GetFloat(MasterVolume);
+            _musicVolumeSlider.value = PlayerPrefs.GetFloat(MusicVolume);
+        }
+        else
+        {
+            _masterVolumeSlider.value = 1;
+            _musicVolumeSlider.value = 1;
+        }
     }
 }
